@@ -1,0 +1,89 @@
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.pdb
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.Service1.resources
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.pdb
+c:\users\administrator\documents\visual studio 2010\Projects\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.config
+D:\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.config
+D:\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.manifest
+D:\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.application
+D:\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe
+D:\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.pdb
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ProjectInstaller.resources
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ChargeCardService.resources
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe.manifest
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.application
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe
+D:\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.pdb
+D:\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.dll
+D:\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.xml
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.config
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.pdb
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.manifest
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.application
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.pdb
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.dll
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.xml
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ProjectInstaller.resources
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ChargeCardService.resources
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe.manifest
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.application
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResGen.read.1.tlog
+D:\project\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResGen.write.1.tlog
+D:\desk\苏州测试库更新20130911充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.config
+D:\desk\苏州测试库更新20130911充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe
+D:\desk\苏州测试库更新20130911充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.pdb
+D:\desk\苏州测试库更新20130911充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\desk\苏州测试库更新20130911充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ProjectInstaller.resources
+D:\desk\苏州测试库更新20130911充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ChargeCardService.resources
+D:\desk\苏州测试库更新20130911充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResGen.read.1.tlog
+D:\desk\苏州测试库更新20130911充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResGen.write.1.tlog
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.config
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.pdb
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.dll
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.xml
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ProjectInstaller.resources
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ChargeCardService.resources
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe
+G:\微云网盘\339220061\联创\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.pdb
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.config
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.pdb
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.pdb
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.dll
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.xml
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ProjectInstaller.resources
+E:\需求处理\苏州\苏州充值卡\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ChargeCardService.resources
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.config
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.pdb
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.pdb
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.dll
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.xml
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ProjectInstaller.resources
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ChargeCardService.resources
+E:\charge\充值码\充值卡数据生成程序源代码\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.csproj.GenerateResource.Cache
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe.config
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.exe
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.pdb
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.exe
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\ChargeCardDataProduce.pdb
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.dll
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\bin\Debug\log4net.xml
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ProjectInstaller.resources
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.ChargeCardService.resources
+E:\charge\充值码\充值卡数据生成程序源代码\test\ChargeCardDataProduce\ChargeCardDataProduce\obj\x86\Debug\ChargeCardDataProduce.csproj.GenerateResource.Cache

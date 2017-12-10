@@ -1,0 +1,66 @@
+-- =============================================
+-- AUTHOR:		liuhe
+-- CREATE DATE: 2012-08-31
+-- DESCRIPTION:	礼金卡批量售卡调用，添加批量售卡子表
+-- =============================================
+CREATE OR REPLACE PROCEDURE SP_BatchTradelistADD
+(
+    P_BATCHID		  CHAR, -- 批次号
+    P_CARDNO          CHAR, -- 读卡-卡号-16位卡号
+    P_ASN             CHAR, -- 读卡-ASN
+    P_WALLET1         INT , -- 读卡-电子钱包余额1
+    P_WALLET2         INT , -- 读卡-电子钱包余额2
+    P_STARTDATE       CHAR, -- 读卡-起始有效期(YYYYMMDD)
+    P_ENDDATE         CHAR, -- 读卡-结束有效期(YYYYMMDD)
+    P_ONLINETRADENO   CHAR, -- 读卡-联机交易序号
+    P_OFFLINETRADENO  CHAR, -- 读卡-联机交易序号
+	P_TRADETYPECODE	  CHAR, -- 业务类型，参照业务台账主表
+	P_OPERATETYPECODE  CHAR, -- 操作类型，01写卡前，02写卡后
+	P_ERRMSG		  CHAR, -- 错误消息
+	P_SUCCTAG		  CHAR, -- 成功标识
+	P_REMARK		  CHAR, -- 备注
+	P_TRADEID		  CHAR, -- 台账ID
+
+    P_CURROPER        CHAR,
+    P_CURRDEPT        CHAR,
+    P_RETCODE     OUT CHAR,
+    P_RETMSG      OUT VARCHAR2
+)
+AS
+    V_TODAY           DATE := SYSDATE;
+    V_SEQ             CHAR(16);
+BEGIN
+    
+   -- 1) Get trade id
+   IF P_TRADEID IS NULL THEN 
+		SP_GETSEQ(SEQ => V_SEQ);
+   ELSE 
+		V_SEQ:=P_TRADEID;
+   END IF;
+	
+    -- 2) Log the operate
+	BEGIN--记录错误日志
+		INSERT INTO TF_B_TRADE_BATCHLIST
+					(TRADEID, BATCHID, CARDNO, OPERATETYPECODE, TRADETYPECODE, OPERATESTAFFNO, OPERATETIME, 
+					ASN, WALLET1, WALLET2, VALIDBEGINDATE, VALIDENDDATE, ONLINETRADENO, OFFLINETRADENO,
+					SUCCESSTAG,ERRMSG, REMARK)
+		VALUES
+					(V_SEQ, P_BATCHID, P_CARDNO, P_OPERATETYPECODE, P_TRADETYPECODE, P_CURROPER, V_TODAY, 
+					P_ASN, P_WALLET1, P_WALLET2, P_STARTDATE, P_ENDDATE, P_ONLINETRADENO, P_OFFLINETRADENO,
+					P_SUCCTAG,P_ERRMSG, P_REMARK);
+			EXCEPTION
+				WHEN OTHERS THEN
+					P_RETCODE := 'S009009901';
+					P_RETMSG  := 'ERROR OCCURRED WHILE LOG THE OPERATION' || SQLERRM;
+					ROLLBACK; RETURN;
+	END;
+
+    P_RETCODE := '0000000000';
+    P_RETMSG  := '';
+    COMMIT; RETURN;
+
+END;
+
+/
+SHOW ERRORS
+

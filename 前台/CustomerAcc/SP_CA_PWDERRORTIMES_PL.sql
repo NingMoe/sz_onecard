@@ -1,0 +1,37 @@
+CREATE OR REPLACE PROCEDURE SP_CA_PWDERRORTIMES
+(
+  P_ACCT_ID        NUMBER, -- 帐户ID
+  P_CODEERRORTIMES INTEGER, --当前输错密码次数
+  P_CURROPER       CHAR, --当前操作者
+
+  P_CURRDEPT       CHAR, --当前操作者部门
+  P_RETCODE        OUT CHAR, --错误编码
+  P_RETMSG         OUT VARCHAR2 --错误信息
+) AS
+ V_TODAY         DATE := SYSDATE;
+
+BEGIN
+
+  -- 1)密码错误计数器累加
+  BEGIN
+    UPDATE TF_F_CUST_ACCT
+       SET CODEERRORTIMES = P_CODEERRORTIMES + 1,
+           LASTCODEERRORDATE = V_TODAY
+     WHERE ACCT_ID = P_ACCT_ID;
+  EXCEPTION
+    WHEN OTHERS THEN
+      P_RETCODE := 'S006001111';
+      P_RETMSG := '更新客户账户表失败' || SQLERRM;
+      ROLLBACK;
+      RETURN;
+  END;
+
+
+  P_RETCODE := '0000000000';
+  P_RETMSG := '';
+  COMMIT;
+  RETURN;
+END;
+
+/
+show errors;

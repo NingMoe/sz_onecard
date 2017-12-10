@@ -1,0 +1,16 @@
+					
+
+
+报文类型  http请求接口			    tuxedo接口			调用的存储过程 
+
+4003  	 /tuxedo/mac1authal   	->	MAC1AUTHAL    ->    SP_OA_SupplyCommitAL
+4011   	 /card/supply          		BANKCASHAUTH        SP_OA_SupplyCommit      
+4006   	 /prepay/supply				PREPAYLOAD			SP_OA_PrepaySupplyCommit
+4004  	 /prepay/accttranssupply	PREPAYAUTH
+4002   	 /tuxedo/alverify			ALVERIFY
+4001  	 /tuxedo/now				NOW
+4012  	 /recharcard/pwcheck		CARDVERIFY
+4013  	 /recharcard/supply			BANKCARDAUTH			
+4015  	 /group/supply				BANKGROUPAUTH	
+4016  	 /group/pwmodify			GROUPCHANGEPASS
+4014  	 /group/verify				GROUPVERIFY

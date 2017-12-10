@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>昨日人气指数榜</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"> 
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="plugins/jQuery/leanModal_style.css">
+  </style>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-collapse">
+<div class="wrapper">
+<div id="test" style="display:none;">
+ <header class="main-header">
+    <!-- Logo -->
+    <a class="logo"> 
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>苏州市民卡</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+		<div style="text-align:right;">
+			<a href="#signup" id="reportConfigLink" class="sidebar-toggle" style="display:block;" role="button" rel="leanModal">&nbsp;参数设置</a>
+		</div>
+    </nav>
+ </header>
+</div>
+  <!-- Config Report Parameters -->
+<div id="signup">
+	<div id="signup-ct">
+		<div id="signup-header">
+			<h2>设置报表参数</h2>
+		</div>
+		<div class="txt-fld">
+			<label for="saleRealTimeNum">实时发卡量显示记录数</label>
+			<input id="saleRealTimeNum" name="saleRealTimeNum" type="text" value=""/>
+		</div>
+		<div class="txt-fld">
+			<label for="saleRealTimeNumRefresh">实时发卡量刷新间隔时间(分)</label>
+			<input id="saleRealTimeNumRefresh" name="saleRealTimeNumRefresh" type="text" value=""/>
+		</div>
+		<div class="txt-fld">
+			<label for="departRefreshTime">网点人气刷新间隔时间(分)</label>
+			<input id="departRefreshTime" name="departRefreshTime" type="text" value=""/>
+		</div>
+		<div class="txt-fld">
+			<label for="pollingTime">静态报表切换时间(秒)</label>
+			<input id="pollingTime" name="pollingTime" type="text" value=""/>
+		</div>
+		<div class="txt-fld">
+			<label for="selStartHour">刷新起始时间</label>
+			<select name="selStartHour">
+				<option value ="1">1点</option>
+				<option value ="2">2点</option>
+				<option value ="3">3点</option>
+				<option value ="4">4点</option>
+				<option value ="5">5点</option>
+				<option value ="6">6点</option>
+				<option value ="7">7点</option>
+				<option value ="8">8点</option>
+				<option value ="9">9点</option>
+				<option value ="10">10点</option>
+				<option value ="11">11点</option>
+				<option value ="12">12点</option>
+				<option value ="13">13点</option>
+				<option value ="14">14点</option>
+				<option value ="15">15点</option>
+				<option value ="16">16点</option>
+				<option value ="17">17点</option>
+				<option value ="18">18点</option>
+				<option value ="19">19点</option>
+				<option value ="20">20点</option>
+				<option value ="21">21点</option>
+				<option value ="22">22点</option>
+				<option value ="23">23点</option>
+			</select>
+		</div>
+		<div class="txt-fld">
+			<label for="selEndHour">刷新截止时间</label>
+			<select name="selEndHour">
+				<option value ="1">1点</option>
+				<option value ="2">2点</option>
+				<option value ="3">3点</option>
+				<option value ="4">4点</option>
+				<option value ="5">5点</option>
+				<option value ="6">6点</option>
+				<option value ="7">7点</option>
+				<option value ="8">8点</option>
+				<option value ="9">9点</option>
+				<option value ="10">10点</option>
+				<option value ="11">11点</option>
+				<option value ="12">12点</option>
+				<option value ="13">13点</option>
+				<option value ="14">14点</option>
+				<option value ="15">15点</option>
+				<option value ="16">16点</option>
+				<option value ="17">17点</option>
+				<option value ="18">18点</option>
+				<option value ="19">19点</option>
+				<option value ="20">20点</option>
+				<option value ="21">21点</option>
+				<option value ="22">22点</option>
+				<option value ="23">23点</option>
+			</select>
+		</div>
+		<div class="btn-fld">
+			<button class="signbutton" onclick="submitReportConfig();">&nbsp;&nbsp;确定&nbsp;&nbsp;</button>
+		</div>
+	</div>
+</div>
+
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div style="width:96%;margin:0 auto;"> 
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">昨日人气指数榜</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+			  <div class="chart">
+                <canvas id="hotStore" style="height:250px"></canvas>
+			  </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <!-- /.col (RIGHT) -->
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  
+</div>
+<!-- jQuery 2.2.0 -->
+<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="plugins/jQuery/jquery.leanModal.min.js"></script>
+<script src="plugins/jQuery/jquery.cookie.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="plugins/chartjs/Chart.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script> 
+<!-- ./wrapper -->
+<script>
+	var AdminLTEOptions = {
+	//Enable sidebar expand on hover effect for sidebar mini
+	//This option is forced to true if both the fixed layout and sidebar mini
+	//are used together
+	sidebarSlimScroll: false,
+	//BoxRefresh Plugin
+	enableBoxRefresh: false,
+	//Bootstrap.js tooltip
+	enableBSToppltip: false
+	};
+	
+	var isNullOrEmpty = function (value){
+		if(typeof(value) == "undefined"){
+			return true;
+		}
+		return value.length == 0;
+	};
+	
+	var isInt32 = function (value){
+		return (/^(\+|-)?\d+$/.test( value )) && value > 0;
+	};
+	
+	var padLeft = function (value,length){
+		var str = value + '';
+		for(var i=0; i<length; i++){
+			str = '0' + str;
+		}
+		str = str.substring(str.length-length,str.length);
+		return str;
+	}
+	
+	var ajaxProxy = function(url,data){
+		var responseData = '';
+		$.ajax({   
+			url:url,   
+			type:'post',   
+			data:data,   
+			async : false,
+			error:function(){   
+			    console.log('Ajax请求失败,URL:'+url);
+			},   
+			success:function(data){   
+			   responseData = data;   
+			}
+		});
+		return JSON.stringify(responseData);
+	}
+  
+	//报表配置参数
+	var reportConfig = {
+		//配置参数
+		limitCount : 15, //实时发卡量显示15条记录
+		cardSaleRefreshTime : 60000, //实时发卡量刷新时间
+		departRefreshTime : 60000, //网点人气刷新时间
+		startHour : 8,//早点9点之后才可以轮询
+		endHour : 18, //晚上6点之后就不再轮询
+		pollingTime : 30000 , //静态报表切换时间
+		
+		//系统参数
+		//baseUrl : 'http://localhost:10643',
+		baseUrl : 'http://172.16.6.119:5500/onlyTVWALL',
+		initDate : new Date(), //系统初始化时间
+		initDateStr : '',
+		tradeHistoryPollType : 0,//最近7日刷卡数据 轮询类型；0.笔数 1.金额
+		hotStorePollType : 1,//昨日人气指数榜 轮询类型 1.商场 2.超市
+		hotViewPollType : 3,//昨日景点人气 轮询类型 3.园林 4.休闲
+	}
+	reportConfig.initDateStr = padLeft(reportConfig.initDate.getFullYear(),4)+padLeft((reportConfig.initDate.getMonth()+1),2)+padLeft(reportConfig.initDate.getDate(),2)+padLeft(reportConfig.startHour,2)+'00'+'00';
+	//调用接口读取配置
+	var tvWallParaProxy = function (type,tagcode,tagname,tagvalue){
+		var url = reportConfig.baseUrl + '/json/reply/TvWallParas';
+		var data = "";
+		if(type == "0"){ //查询
+			data = "requestType=" + type + "&TAGCODE=" + tagcode;
+		}else if(type == "1"){ //新增
+			data = "requestType=" + type + "&TAGCODE=" + tagcode + "&TAGNAME=" + tagname + "&TAGVALUE=" + tagvalue;
+		}
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	var tvParaObj = JSON.parse(tvWallParaProxy("0","limitCount"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.limitCount = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","cardSaleRefreshTime"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.cardSaleRefreshTime = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","departRefreshTime"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.departRefreshTime = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","startHour"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.startHour = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","endHour"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.endHour = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","pollingTime"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.pollingTime = tvParaObj.TAGVALUE * 1;
+	}
+	
+	//设置初始值
+	$('#saleRealTimeNum').val(reportConfig.limitCount);
+	$('#saleRealTimeNumRefresh').val(reportConfig.cardSaleRefreshTime / 60000);
+	$('#departRefreshTime').val(reportConfig.departRefreshTime / 60000);
+	$("select[name='selStartHour']").val(reportConfig.startHour);
+	$("select[name='selEndHour']").val(reportConfig.endHour);
+	$('#pollingTime').val(reportConfig.pollingTime / 1000);
+	
+	var isBetweenHour = function (){//是否可以轮询
+		var date = new Date();
+		var hour = date.getHours();
+		if(hour >= reportConfig.startHour && hour < reportConfig.endHour){
+			return true;
+		}
+		return false;
+	};
+	
+	//leanModal Dialog
+    $("#reportConfigLink").leanModal({top:50,overlay:0.5,closeButton:null});
+	
+	function submitReportConfig(){
+		var limitCount = $('#saleRealTimeNum').val();
+		var cardSaleRefreshTime = $('#saleRealTimeNumRefresh').val();
+		var departRefreshTime = $('#departRefreshTime').val();
+		var startHour = $("select[name='selStartHour']").val() * 1;
+		var endHour = $("select[name='selEndHour']").val() * 1;
+		var pollingTime = $('#pollingTime').val();
+
+		var errorMsg = '';
+		
+		//判断数据数据的合法性
+		if(isNullOrEmpty(limitCount)){
+			errorMsg += "实时发卡量显示记录数 不能为空！\r\n";
+		}else if(!isInt32(limitCount)){
+			errorMsg += "实时发卡量显示记录数 应该为正整数！\r\n";
+		}
+		
+		if(isNullOrEmpty(cardSaleRefreshTime)){
+			errorMsg += "实时发卡量刷新间隔时间 不能为空！\r\n";
+		}else if(!isInt32(cardSaleRefreshTime)){
+			errorMsg += "实时发卡量刷新间隔时间 应该为正整数！\r\n";
+		}
+		
+		if(isNullOrEmpty(departRefreshTime)){
+			errorMsg += "网点人气刷新间隔时间 不能为空！\r\n";
+		}else if(!isInt32(departRefreshTime)){
+			errorMsg += "网点人气刷新间隔时间 应该为正整数！\r\n";
+		}
+		
+		if(isNullOrEmpty(startHour)){
+			errorMsg += "刷新起始时间 不能为空！\r\n";
+		}
+		if(isNullOrEmpty(endHour)){
+			errorMsg += "刷新截止时间 不能为空！\r\n";
+		}
+		
+		if(!isNullOrEmpty(startHour) && !isNullOrEmpty(endHour)){
+			if(!isInt32(startHour)){
+				errorMsg += "刷新起始时间 应该为正整数！\r\n";
+			}else if(!isInt32(endHour)){
+				errorMsg += "刷新截止时间 应该为正整数！\r\n";
+			}else{
+				if(startHour >= endHour){
+					errorMsg += "刷新起始时间 不能大于等于 刷新截止时间！\r\n";
+				}
+			}
+		}
+		
+		if(isNullOrEmpty(pollingTime)){
+			errorMsg += "静态报表切换时间 不能为空！\r\n";
+		}else if(!isInt32(pollingTime)){
+			errorMsg += "静态报表切换时间 应该为正整数！\r\n";
+		}
+		
+		if(!isNullOrEmpty(errorMsg)){
+			alert(errorMsg);
+			return false;
+		}
+		
+		//调用接口，存入配置
+		tvWallParaProxy("1","limitCount","实时发卡量显示记录数",limitCount);
+		tvWallParaProxy("1","cardSaleRefreshTime","实时发卡量刷新时间",cardSaleRefreshTime * 60000);
+		tvWallParaProxy("1","departRefreshTime","网点人气刷新时间",departRefreshTime * 60000);
+		tvWallParaProxy("1","startHour","早上开始轮询时间",startHour);
+		tvWallParaProxy("1","endHour","晚上结束轮询时间",endHour);
+		tvWallParaProxy("1","pollingTime","静态报表切换时间",pollingTime * 1000);
+		
+		//刷新页面
+		location.reload();
+	}
+</script>
+
+<!-- page script -->
+<script>
+  $(function () { 	
+    var randomColorFactor = function() {
+        return Math.round(Math.random() * 255);
+    };
+    var _rgbColors = [];
+	_rgbColors.push('#D2691E');
+	_rgbColors.push('#4EEE94');
+	_rgbColors.push('#7A67EE');
+	_rgbColors.push('#636363');
+	_rgbColors.push('#68228B');
+	_rgbColors.push('#9ACD32');
+	_rgbColors.push('#F08080');
+	_rgbColors.push('#EE30A7');
+	_rgbColors.push('#CDAF95');
+	_rgbColors.push('#458B00');
+	_rgbColors.push('#EEEE00');
+	_rgbColors.push('#FF3030');//如果颜色不够，继续加就好。注意颜色之间差别要大
+    //var randomColor = function(opacity) {
+        //return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+    //};
+	var randomColor = function(index){
+		return _rgbColors[index];
+	}
+    var randomScalingFactor = function() {
+        return Math.round(Math.random() * 100);
+        //return 0;
+    };
+	
+	//昨日刷卡数据 json
+	var tradeHistoryJson = function(type){
+		var url = reportConfig.baseUrl + '/json/reply/HistoryTradeList';
+		var data = "requestType=" + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//昨日人气指数榜 json
+	var hotStoreJson = function(type){
+		var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+		var data='RequestType=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//实时发卡量 Json
+	var cardSaleJson = function(startTime){
+		var url = reportConfig.baseUrl + '/json/reply/CardSellRealTimeNums';
+		var data = 'Minutes=' + reportConfig.cardSaleRefreshTime / 60000;
+		if(!isNullOrEmpty(startTime)){
+			data = 'startTime=' + startTime;
+		}
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//网点人气Json
+	var hotDepartJson=function(){
+		var url = reportConfig.baseUrl + '/json/reply/DepartPopularityList';
+		var startTime = reportConfig.initDateStr;
+		var data = 'startTime=' + startTime;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//景点人气 Json
+	var hotViewJson=function(type){
+		var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+		var data='requestType=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//开始报表绘制工作
+	
+    //昨日人气指数榜 柱图
+    var hotStore = $('#hotStore'); 
+    var hotStoreCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	
+    window.hotStore = new Chart(hotStore,hotStoreCfg);
+	updateHotStore();
+	window.setInterval(updateHotStore,reportConfig.pollingTime);
+    
+	function updateHotStore(){
+		//数据填充
+		var hotStoreDataset={
+			label: '昨日人气',
+			backgroundColor: "#9FB6CD",
+			data: []
+		};
+		try{
+			var requestType = '';
+			if(reportConfig.hotStorePollType == 1){//查询商场
+				requestType = '1';
+				reportConfig.hotStorePollType = 2;
+				hotStoreDataset.label = '商场人气';
+			}else if(reportConfig.hotStorePollType == 2){//查询超市
+				requestType = '2';
+				reportConfig.hotStorePollType = 1;
+				hotStoreDataset.label = '超市人气';
+			}
+			var hotStoreObj = JSON.parse(hotStoreJson(requestType));
+			if(typeof(hotStoreObj.QueryList) == "undefined"){
+				return;
+			}
+			hotStoreCfg.data.datasets = [];
+			hotStoreCfg.data.labels = [];
+			for(var i=0;i<hotStoreObj.QueryList.length;i++){
+				var tempDate=hotStoreObj.QueryList[i].CORP;
+				hotStoreCfg.data.labels.push(tempDate);
+				hotStoreDataset.data.push(hotStoreObj.QueryList[i].TRADETIMES);
+			}
+		}catch(e){
+			console.log('昨日人气指数榜 加载异常: '+e.message);
+		}
+		
+		//添加datasets
+		hotStoreCfg.data.datasets.push(hotStoreDataset);
+		window.hotStore.update();
+	}
+  });
+</script>
+</body>
+</html>

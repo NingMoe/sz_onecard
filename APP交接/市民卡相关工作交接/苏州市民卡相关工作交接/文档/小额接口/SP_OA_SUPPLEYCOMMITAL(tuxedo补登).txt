@@ -1,0 +1,154 @@
+CREATE OR REPLACE PROCEDURE SP_OA_SupplyCommitAL
+(
+  p_TradeId        CHAR,--订单流水号，32位
+  p_CardNo         CHAR,--卡号 ,16位
+  p_Asn             CHAR,--应用序列号，16位
+  p_CardTypeCode     CHAR,--卡类型，2位
+  p_TermNo           CHAR,--终端编号，12位
+  p_CardTradeNo     CHAR,--联机交易序号，4位
+  p_CardMoney       INT,--卡余额
+  p_SupplyMoney     INT,--圈存金额
+  p_Hostdate        CHAR,--主机日期,8位，YYYYMMDD
+  p_Hosttime       CHAR,--主机时间,6位，HH24MISS
+  p_LinkAddr       CHAR,-- 充值地点
+  p_RetCode          OUT CHAR, -- Return Code
+  p_RetMsg           OUT VARCHAR2-- Return Message
+)
+AS
+  v_Today          DATE := SYSDATE;
+  v_ID             CHAR(18);
+  v_CurrDept       CHAR(4);
+  v_Count          INT;--临时变量用于计数
+  v_TradeID        VARCHAR2(32);--用于判定补登订单和卡号是否一致
+  --add by zhangrj 
+  v_PaymentType    VARCHAR2(10);--支付方式，2位
+  v_TradeTypeCode  VARCHAR2(10);--交易类型
+  --add end
+BEGIN
+  --判断充值上限
+  IF p_CardMoney + p_SupplyMoney > 100000 THEN
+    p_retCode := 'AEE1002133';
+    p_retMsg  := '总金额不能大于1000元';
+    ROLLBACK;RETURN;
+  END IF;
+
+  --根据设备号取部门编码
+  BEGIN
+    SELECT DEPARTNO INTO v_CurrDept
+    FROM TD_M_SAM
+    WHERE SAMNO = p_TermNo AND USETAG = '1';
+  EXCEPTION WHEN NO_DATA_FOUND THEN
+        p_retCode := 'A001002133';
+        p_retMsg  := 'A001002133:Can not find samcard';
+        RETURN;
+  END;
+    --根据补登订单和卡号判定，确保卡号和订单一致
+  BEGIN
+    SELECT TRADEID,PAYMENTTYPE INTO v_TradeID,v_PaymentType
+    FROM TF_OUT_ADDTRADE
+    WHERE TRADEID = p_TradeId AND CARDNO = P_CARDNO;
+  EXCEPTION WHEN NO_DATA_FOUND THEN
+        p_retCode := 'A001002134';
+        p_retMsg  := 'A001002134:Can not find tradeid...';
+        RETURN;
+  END;
+
+  --通过P_TRADEID判断是提交还是补写卡，限定当天
+  SELECT COUNT(1) INTO V_COUNT FROM  TF_OUT_TRADE_ADDITIONAL T
+  WHERE T.TRADEID = P_TRADEID   ;
+    IF V_COUNT = 0 THEN
+
+    --写入对外接口表
+    BEGIN
+      v_ID := TO_CHAR(v_Today, 'MMDDHH24MISS') || SUBSTR(p_Asn,-8);
+    --add by zhangrj 专有账户补登时，交易类型存入8H，其他类型2A
+    v_TradeTypeCode := '2A';
+    IF trim(v_PaymentType) = '04' THEN
+    v_TradeTypeCode := '8H';
+    END IF;
+    --add end
+
+      INSERT INTO TF_OUTSUPPLY_COMMIT
+        (ID,CARDNO,ASN,CARDTRADENO,TRADETYPECODE,CARDTYPECODE,
+        TRADEMONEY,PREMONEY,SUPPLYLOCNO,SAMNO,STAFFNO,STATECODE,OPERATETIME)
+      VALUES
+        (v_ID,p_CardNo,p_Asn,p_CardTradeNo,v_TradeTypeCode,p_CardTypeCode,
+        p_SupplyMoney,p_CardMoney,v_CurrDept,p_TermNo,'','1',v_Today);
+
+    EXCEPTION WHEN OTHERS THEN
+        p_retCode := 'OA00400001';
+        p_retMsg  := 'OA00400001:Error occurred while insert database';
+        ROLLBACK; RETURN;
+    END;
+
+    --写入终端补登订单充值表
+    BEGIN
+      INSERT INTO TF_OUT_TRADE_ADDITIONAL
+        (ID, TRADEID, CARDNO, ASN, CARDTYPECODE, CARDTRADENO, PREMONEY, SUPPLYMONEY,
+        SAMNO, HOSTDATE, HOSTTIME, OPERATETIME,LINKADDR)
+      VALUES
+        (v_ID, p_TradeId, p_CardNo, p_Asn, p_CardTypeCode, p_CardTradeNo, p_CardMoney,
+         p_SupplyMoney, p_TermNo, p_Hostdate, p_Hosttime, v_Today, p_LinkAddr);
+      EXCEPTION
+      WHEN OTHERS THEN
+        p_RetCode := 'OA00400002';
+        p_RetMsg  := 'OA00400002:Error occurred while insert database'|| SQLERRM;
+        ROLLBACK; RETURN;
+    END;
+
+     --使用完补登订单后，更新补登订单状态为已使用
+     BEGIN
+     UPDATE TF_OUT_ADDTRADE SET ORDERSTATUS = '1' WHERE TRADEID = p_TradeId  AND ORDERSTATUS = '0';
+     EXCEPTION WHEN OTHERS THEN
+       ROLLBACK;
+       p_retCode := 'OA00400005';
+       p_retMsg  := 'OA00400005:Error occurred while update data'|| SQLERRM;
+       RETURN;
+    END;
+  ELSE --V_COUNT <> 0 补写卡
+    BEGIN
+      ---验证参数，同一渠道、当天、同卡号、同交易序列号、同充值前金额、同充值金额
+      SELECT COUNT(1) INTO V_COUNT FROM  TF_OUT_TRADE_ADDITIONAL T
+      WHERE T.TRADEID = P_TRADEID  AND HOSTDATE = p_Hostdate AND CARDNO = p_CardNo
+      AND CARDTRADENO = p_CardTradeNo AND PREMONEY = p_CardMoney AND SUPPLYMONEY = p_SupplyMoney;
+      IF V_COUNT = 0 THEN
+          p_RetCode := 'OA00400003';
+          p_RetMsg  := 'OA00400003:parameter is changed, can not retrade';
+          ROLLBACK; RETURN;
+      END IF;
+      ---记录补写卡台帐
+      v_ID := TO_CHAR(v_Today, 'MMDDHH24MISS') || SUBSTR(p_Asn,-8);
+
+      INSERT INTO TF_OUT_RETRADE_ADDITIONAL
+       (ID, OLDID, TRADEID, CARDNO, ASN, CARDTYPECODE, CARDTRADENO, PREMONEY, SUPPLYMONEY,
+        SAMNO, HOSTDATE, HOSTTIME, OPERATETIME,LINKADDR)
+      SELECT
+        v_ID, ID, p_TradeId, p_CardNo, p_Asn, p_CardTypeCode, p_CardTradeNo, p_CardMoney, p_SupplyMoney,
+    p_TermNo, p_Hostdate, p_Hosttime, v_Today, p_LinkAddr
+      FROM  TF_OUT_TRADE_ADDITIONAL T WHERE T.TRADEID = P_TRADEID;
+
+    EXCEPTION  WHEN OTHERS THEN
+        p_RetCode := 'OA00400004';
+        p_RetMsg  := 'OA00400004:Error occurred while insert database';
+        ROLLBACK; RETURN;
+    END;
+
+     --更新充值成功时间
+     BEGIN
+     UPDATE TF_OUTSUPPLY_COMMIT SET OPERATETIME = v_Today WHERE ID = (
+     SELECT ID FROM TF_OUT_TRADE_ADDITIONAL WHERE TRADEID = p_TradeId);
+     EXCEPTION WHEN OTHERS THEN
+       ROLLBACK;
+       p_retCode := 'OA00400006';
+       p_retMsg  := 'OA00400006:Error occurred while update data'|| SQLERRM;
+       RETURN;
+     END;
+  END IF;
+
+  p_RetCode   := '0000000000';
+  p_RetMsg    := 'Succeed';
+    COMMIT; RETURN;
+
+END;
+
+

@@ -1,0 +1,2497 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>苏州市民卡有限公司</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"> 
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="plugins/jQuery/leanModal_style.css">
+  <style type="text/css"> 
+  .button{
+	font:15px Calibri, Arial, sans-serif;
+
+	/* A semi-transparent text shadow */
+	text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+	
+	/* Overriding the default underline styling of the links */
+	text-decoration:none !important;
+	white-space:nowrap;
+	
+	display:inline-block;
+	vertical-align:baseline;
+	position:relative;
+	cursor:pointer;
+	padding:10px 20px;
+	outline:none;
+	
+	background-repeat:no-repeat;
+
+	/* The following two rules are fallbacks, in case
+	   the browser does not support multiple backgrounds. */
+
+	background-position:bottom left;
+	background-image:url(dist/img/button_bg.png);
+	
+	/* Multiple backgrounds version. The background images
+	   are defined individually in color classes */
+	
+	background-position:bottom left, top right, 0 0, 0 0;
+	background-clip:border-box;
+	
+	/* Applying a default border raidus of 8px */
+	
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	
+	/* A 1px highlight inside of the button */
+	
+	-moz-box-shadow:0 0 1px #fff inset;
+	-webkit-box-shadow:0 0 1px #fff inset;
+	box-shadow:0 0 1px #fff inset;
+	
+	/* Animating the background positions with CSS3 */
+	/* Currently works only in Safari/Chrome */
+	
+	-webkit-transition:background-position 1s;
+	-moz-transition:background-position 1s;
+	transition:background-position 1s;
+}
+
+.button:hover{
+	
+	/* The first rule is a fallback, in case the browser
+	   does not support multiple backgrounds
+	*/
+	
+	background-position:top left;
+	background-position:top left, bottom right, 0 0, 0 0;
+}
+
+.button:active{
+	/* Moving the button 1px to the bottom when clicked */
+	bottom:-1px;
+}
+
+/* The three buttons sizes */
+
+.button.big		{ font-size:30px;}
+.button.medium	{ font-size:18px;}
+.button.small	{ font-size:13px;}
+
+/* A more rounded button */
+
+.button.rounded{
+	-moz-border-radius:4em;
+	-webkit-border-radius:4em;
+	border-radius:4em;
+}
+
+
+/* Defining four button colors */
+
+
+/* BlueButton */
+
+.blue.button{
+	color:#0f4b6d !important;
+	
+	border:1px solid #84acc3 !important;
+	
+	/* A fallback background color */
+	background-color: #48b5f2;
+	
+	/* Specifying a version with gradients according to */
+	
+	background-image:	url(dist/img/button_bg.png), url(dist/img/button_bg.png),
+						-moz-radial-gradient(	center bottom, circle,
+												rgba(89,208,244,1) 0,rgba(89,208,244,0) 100px),
+						-moz-linear-gradient(#4fbbf7, #3faeeb);
+
+	background-image:	url(dist/img/button_bg.png), url(dist/img/button_bg.png),
+						-webkit-gradient(	radial, 50% 100%, 0, 50% 100%, 100,
+											from(rgba(89,208,244,1)), to(rgba(89,208,244,0))),
+						-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4fbbf7), to(#3faeeb));
+}
+
+.blue.button:hover{
+	background-color:#63c7fe;
+	
+	background-image:	url(dist/img/button_bg.png), url(dist/img/button_bg.png),
+						-moz-radial-gradient(	center bottom, circle,
+												rgba(109,217,250,1) 0,rgba(109,217,250,0) 100px),
+						-moz-linear-gradient(#63c7fe, #58bef7);
+						
+	background-image:	url(dist/img/button_bg.png), url(dist/img/button_bg.png),
+						-webkit-gradient(	radial, 50% 100%, 0, 50% 100%, 100,
+											from(rgba(109,217,250,1)), to(rgba(109,217,250,0))),
+						-webkit-gradient(linear, 0% 0%, 0% 100%, from(#63c7fe), to(#58bef7));
+}
+
+/* Green Button */
+
+.green.button{
+	color:#345903 !important;
+	border:1px solid #96a37b !important;	
+	background-color: #79be1e;
+	
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -moz-radial-gradient(center bottom, circle, rgba(162,211,30,1) 0,rgba(162,211,30,0) 100px),-moz-linear-gradient(#82cc27, #74b317);
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(162,211,30,1)), to(rgba(162,211,30,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#82cc27), to(#74b317));
+}
+
+.green.button:hover{
+	background-color:#89d228;
+	
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -moz-radial-gradient(center bottom, circle, rgba(183,229,45,1) 0,rgba(183,229,45,0) 100px),-moz-linear-gradient(#90de31, #7fc01e);
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(183,229,45,1)), to(rgba(183,229,45,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#90de31), to(#7fc01e));
+}
+
+/* Orange Button */
+
+.orange.button{
+	color:#693e0a !important;
+	border:1px solid #bea280 !important;	
+	background-color: #e38d27;
+	
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -moz-radial-gradient(center bottom, circle, rgba(232,189,45,1) 0,rgba(232,189,45,0) 100px),-moz-linear-gradient(#f1982f, #d4821f);
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(232,189,45,1)), to(rgba(232,189,45,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f1982f), to(#d4821f));
+}
+
+.orange.button:hover{
+	background-color:#ec9732;
+	
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -moz-radial-gradient(center bottom, circle, rgba(241,192,52,1) 0,rgba(241,192,52,0) 100px),-moz-linear-gradient(#f9a746, #e18f2b);
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(241,192,52,1)), to(rgba(241,192,52,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f9a746), to(#e18f2b));
+}
+
+.gray.button{
+	color:#525252 !important;
+	border:1px solid #a5a5a5 !important;	
+	background-color: #a9adb1;
+	
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -moz-radial-gradient(center bottom, circle, rgba(197,199,202,1) 0,rgba(197,199,202,0) 100px),-moz-linear-gradient(#c5c7ca, #92989c);
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(197,199,202,1)), to(rgba(197,199,202,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#c5c7ca), to(#92989c));
+}
+
+.gray.button:hover{
+	background-color:#b6bbc0;
+	
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -moz-radial-gradient(center bottom, circle, rgba(202,205,208,1) 0,rgba(202,205,208,0) 100px),-moz-linear-gradient(#d1d3d6, #9fa5a9);
+	background-image:url(dist/img/button_bg.png), url(dist/img/button_bg.png), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(202,205,208,1)), to(rgba(202,205,208,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#d1d3d6), to(#9fa5a9));
+}
+.rightword{ position:absolute;bottom:20px;right: 10px}
+/*按钮CSS*/
+.copyright {
+  position: absolute;
+  bottom: 0;
+}
+.copyright a {
+  text-decoration: none;
+  color: #16a085;
+}
+.copyright a:hover {
+  text-decoration: underline;
+}
+
+.button1 {
+  position: relative;
+  padding: 1em 1.5em;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  font-size: 18px;
+  margin: 1em 0.8em;
+}
+.button1.type1 {
+  color: #566473;
+}
+.button1.type1.type1::after, .button1.type1.type1::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  border: 2px solid;
+  transition: all 0.6s ease;
+  border-radius: 2px;
+}
+.button1.type1.type1::after {
+  bottom: 0;
+  right: 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: #566473;
+  border-right-color: #566473;
+}
+.button1.type1.type1::before {
+  top: 0;
+  left: 0;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-top-color: #566473;
+  border-left-color: #566473;
+}
+.button1.type1.type1:hover:after, .button1.type1.type1:hover:before {
+  width: 100%;
+  height: 100%;
+}
+.button1.type2 {
+  color: #0072E3;
+}
+.button1.type2.type2:after, .button1.type2.type2:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #0072E3;
+  transition: all 0.3s ease;
+  transform: scale(0.85);
+}
+.button1.type2.type2:hover:before {
+  top: 0;
+  transform: scale(1);
+}
+.button1.type2.type2:hover:after {
+  transform: scale(1);
+}
+.button1.type3 {
+  color: #435a6b;
+}
+.button1.type3.type3::after, .button1.type3.type3::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  border: 2px solid;
+  transition: all 0.6s ease;
+  border-radius: 2px;
+}
+.button1.type3.type3::after {
+  bottom: 0;
+  right: 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: #435a6b;
+  border-right-color: #435a6b;
+}
+.button1.type3.type3::before {
+  top: 0;
+  left: 0;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-top-color: #435a6b;
+  border-left-color: #435a6b;
+}
+.button1.type3.type3:hover:after, .button1.type3.type3:hover:before {
+  border-bottom-color: #435a6b;
+  border-right-color: #435a6b;
+  border-top-color: #435a6b;
+  border-left-color: #435a6b;
+  width: 100%;
+  height: 100%;
+}
+
+  </style> 
+    <style type="text/css">
+        .clock {
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px;
+            color: #ffffff;
+            background-color: #00000;
+            position:absolute;bottom:0;
+        }
+        .dibu {
+            position:absolute;bottom:10px;
+        }
+        #Date {
+            font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            text-align: center;
+            text-shadow: 0 0 5px #000000;
+        }
+
+        ul {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0px;
+            list-style: none;
+            text-align: center;
+        }
+
+            ul li {
+                display: inline;
+                font-size: 25px;
+                text-align: center;
+                text-shadow: 0 0 5px #000;
+            }
+
+        #point {
+            position: relative;
+            -moz-animation: mymove 1s ease infinite;
+            -webkit-animation: mymove 1s ease infinite;
+            /*padding-left: 10px;
+            padding-right: 10px;*/
+        }
+
+        @-webkit-keyframes mymove {
+            0% {
+                opacity: 1.0;
+                text-shadow: 0 0 20px #00c6ff;
+            }
+
+            50% {
+                opacity: 0;
+                text-shadow: none;
+            }
+
+            100% {
+                opacity: 1.0;
+                text-shadow: 0 0 20px #00c6ff;
+            }
+        }
+
+
+        @-moz-keyframes mymove {
+            0% {
+                opacity: 1.0;
+                text-shadow: 0 0 20px #00c6ff;
+            }
+
+            50% {
+                opacity: 0;
+                text-shadow: none;
+            }
+
+            100% {
+                opacity: 1.0;
+                text-shadow: 0 0 20px #00c6ff;
+            }
+        }
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+// Create two variable with the names of the months and days in an array
+var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+// Create a newDate() object
+var newDate = new Date();
+// Extract the current date from Date object
+newDate.setDate(newDate.getDate());
+// Output the day, date, month and year
+$('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+
+setInterval( function() {
+	// Create a newDate() object and extract the seconds of the current time on the visitor's
+	var seconds = new Date().getSeconds();
+	// Add a leading zero to seconds value
+	$("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+	},1000);
+
+setInterval( function() {
+	// Create a newDate() object and extract the minutes of the current time on the visitor's
+	var minutes = new Date().getMinutes();
+	// Add a leading zero to the minutes value
+	$("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
+    },1000);
+
+setInterval( function() {
+	// Create a newDate() object and extract the hours of the current time on the visitor's
+	var hours = new Date().getHours();
+	// Add a leading zero to the hours value
+	$("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+    }, 1000);
+
+});
+    </script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-collapse">
+<div class="wrapper">
+<div id="test" style="display:none;">
+ <header class="main-header">
+    <!-- Logo -->
+    <a class="logo"> 
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>苏州市民卡</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+		<div style="text-align:right;">
+			<a href="#signup" id="reportConfigLink" class="sidebar-toggle" style="display:block;" role="button" rel="leanModal">&nbsp;参数设置</a>
+		</div>
+    </nav>
+ </header>
+</div>
+  <!-- Config Report Parameters -->
+<div id="signup">
+	<div id="signup-ct">
+		<div id="signup-header">
+			<h2>设置报表参数</h2>
+		</div>
+		<div class="txt-fld">
+			<label for="saleRealTimeNum">实时发卡量显示记录数</label>
+			<input id="saleRealTimeNum" name="saleRealTimeNum" type="text" value=""/>
+		</div>
+		<div class="txt-fld">
+			<label for="saleRealTimeNumRefresh">实时发卡量刷新间隔时间(分)</label>
+			<input id="saleRealTimeNumRefresh" name="saleRealTimeNumRefresh" type="text" value=""/>
+		</div>
+		<div class="txt-fld">
+			<label for="departRefreshTime">网点人气刷新间隔时间(分)</label>
+			<input id="departRefreshTime" name="departRefreshTime" type="text" value=""/>
+		</div>
+		<div class="txt-fld">
+			<label for="pollingTime">静态报表切换时间(秒)</label>
+			<input id="pollingTime" name="pollingTime" type="text" value=""/>
+		</div>
+		<div class="txt-fld">
+			<label for="selStartHour">刷新起始时间</label>
+			<select name="selStartHour">
+				<option value ="1">1点</option>
+				<option value ="2">2点</option>
+				<option value ="3">3点</option>
+				<option value ="4">4点</option>
+				<option value ="5">5点</option>
+				<option value ="6">6点</option>
+				<option value ="7">7点</option>
+				<option value ="8">8点</option>
+				<option value ="9">9点</option>
+				<option value ="10">10点</option>
+				<option value ="11">11点</option>
+				<option value ="12">12点</option>
+				<option value ="13">13点</option>
+				<option value ="14">14点</option>
+				<option value ="15">15点</option>
+				<option value ="16">16点</option>
+				<option value ="17">17点</option>
+				<option value ="18">18点</option>
+				<option value ="19">19点</option>
+				<option value ="20">20点</option>
+				<option value ="21">21点</option>
+				<option value ="22">22点</option>
+				<option value ="23">23点</option>
+			</select>
+		</div>
+		<div class="txt-fld">
+			<label for="selEndHour">刷新截止时间</label>
+			<select name="selEndHour">
+				<option value ="1">1点</option>
+				<option value ="2">2点</option>
+				<option value ="3">3点</option>
+				<option value ="4">4点</option>
+				<option value ="5">5点</option>
+				<option value ="6">6点</option>
+				<option value ="7">7点</option>
+				<option value ="8">8点</option>
+				<option value ="9">9点</option>
+				<option value ="10">10点</option>
+				<option value ="11">11点</option>
+				<option value ="12">12点</option>
+				<option value ="13">13点</option>
+				<option value ="14">14点</option>
+				<option value ="15">15点</option>
+				<option value ="16">16点</option>
+				<option value ="17">17点</option>
+				<option value ="18">18点</option>
+				<option value ="19">19点</option>
+				<option value ="20">20点</option>
+				<option value ="21">21点</option>
+				<option value ="22">22点</option>
+				<option value ="23">23点</option>
+			</select>
+		</div>
+		<div class="btn-fld">
+			<button class="signbutton" onClick="submitReportConfig();">&nbsp;&nbsp;确定&nbsp;&nbsp;</button>
+		</div>
+	</div>
+</div>
+
+  <div class="content-wrapper" style="background:url(dist/img/19.jpg) repeat;">
+    <!-- Main content -->
+    <section class="content">
+<br/><br/>
+      <div class="row">
+        <div  style="width:85%;margin:0 auto;border-left:3px solid #efefef; border-right:3px solid #fff; border-top:3px solid #efefef;"> 
+          <div id="tradehistory1" class="box box-primary" style="display:">
+              <div class="box-header with-border" >
+                  <h3 class="box-title" style="font-size: 30px" >最近7日刷卡数据</h3>
+              </div>
+              <!--<p id="tradehistory1text" class="bg-info" style="color: #8B8878; font-size: 16px;" align="center"></p>-->
+              <div class="box-body">
+                  <div id="tradehistory1textU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+                  <div class="row">
+                      <div id="left1" class="col-md-3" style="height: 430px; display: "><p> </p>
+                          <div id="tradehistory1textL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                          <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%"/></div>
+                      </div>
+                      <div id="middle1" class="col-md-9">
+                          <div class="chart">
+                              <canvas id="tradeHistory" style="height: 250px"></canvas>
+                          </div>
+                      </div>
+                      <div id="Right1" class="col-md-3" style="height: 430px; display: none">
+                          <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                          <div id="tradehistory1textR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      </div>
+                  </div>
+              </div>
+              <div id="tradehistory1text" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+          </div>
+          <!-- /.box -->
+          <div id="tradehistory2" class="box box-primary" style="display:;">
+            <div class="box-header with-border" >
+              <h3 class="box-title" style="font-size: 30px">最近7日刷卡金额</h3>
+            </div>
+              <div class="box-body">
+                  <div id="tradehistory2textU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+                  <div class="row">
+                      <div id="left2" class="col-md-3" style="height: 430px; display: ">
+                          <p> </p>
+                          <div id="tradehistory2textL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                          <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      </div>
+                      <div id="middle2" class="col-md-9">
+                          <div class="chart">
+                              <canvas id="tradeHistorynums" style="height: 250px"></canvas>
+                          </div>
+                      </div>
+                      <div id="Right2" class="col-md-3" style="height: 430px; display: none">
+                          <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                          <div id="tradehistory2textR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      </div>
+                  </div>
+              </div>
+            <!-- /.box-body --><div id="tradehistory2text" class="bg-info" style="color: #8B8878; font-size: 18px;padding:5px;" align="center"></div>
+          </div>
+          <div id="hotstore1" class="box box-danger" style="display:;">
+              <div class="box-header with-border">
+                  <h3 class="box-title" style="font-size: 30px">商场人气指数榜</h3>
+              </div>
+              <div class="box-body">
+                  <div id="hotstore1textU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+                  <div class="row">
+                      <div id="left3" class="col-md-3" style="height: 430px; display: ">
+                          <p> </p>
+                          <div id="hotstore1textL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                          <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      </div>
+                      <div id="middle3" class="col-md-9">
+                          <div class="chart">
+                              <canvas id="hotStore" style="height: 250px"></canvas>
+                          </div>
+                      </div>
+                      <div id="Right3" class="col-md-3" style="height: 430px; display: none">
+                          <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                          <div id="hotstore1textR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      </div>
+                  </div>
+              </div>
+              <div id="hotstore1text" class="bg-info" style="color: #8B8878; font-size: 18px;padding:5px;" align="center"></div>
+          </div>
+          <!-- /.box -->
+       <div id="hotstore2" class="box box-danger" style="display:;">
+           <div class="box-header with-border">
+               <h3 class="box-title" style="font-size: 30px">超市人气指数榜</h3>
+           </div>
+           <div class="box-body">
+               <div id="hotstore2textU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+               <div class="row">
+                   <div id="left4" class="col-md-3" style="height: 430px; display: ">
+                       <p> </p>
+                       <div id="hotstore2textL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                       <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                   </div>
+                   <div id="middle4" class="col-md-9">
+                       <div class="chart">
+                           <canvas id="hotsuperstore" style="height: 250px"></canvas>
+                       </div>
+                   </div>
+                   <div id="Right4" class="col-md-3" style="height: 430px; display: none">
+                       <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                       <div id="hotstore2textR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                   </div>
+               </div>
+           </div>
+            <!-- /.box-body --><div id="hotstore2text" class="bg-info" style="color: #8B8878; font-size: 18px;padding:5px;" align="center"></div>
+          </div>
+        </div>
+        <!-- /.col (LEFT) -->
+        <div style="width:85%;margin:0 auto;">
+          <!-- LINE CHART -->
+          <div id="cardnums" class="box box-info" style="display:;">
+              <div class="box-header with-border">
+                  <h3 class="box-title" style="font-size: 30px">实时发卡量</h3>
+              </div>
+              <div class="box-body">
+                  <div id="cardnumstextU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+                  <div class="row">
+                      <div id="left5" class="col-md-3" style="height: 430px; display: ">
+                          <p> </p>
+                          <div id="cardnumstextL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                          <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      </div>
+                      <div id="middle5" class="col-md-9">
+                          <div class="chart">
+                              <canvas id="cardSaleRealTime" style="height: 250px"></canvas>
+                          </div>
+                      </div>
+                      <div id="Right5" class="col-md-3" style="height: 430px; display: none">
+                          <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                          <div id="cardnumstextR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      </div>
+                  </div>
+              </div>
+            <!-- /.box-body --><div id="cardnumstext" class="bg-info" style="color: #8B8878; font-size: 18px;padding:5px;" align="center"></div>
+          </div>
+          <!-- /.box -->
+
+          <!-- BAR CHART -->
+          <div id="relaxnums" class="box box-success" style="display:;">
+              <div class="box-header with-border">
+                  <h3 class="box-title" style="font-size: 30px">昨日休闲人气</h3>
+              </div>
+              <div class="box-body">
+                  <div id="relaxnumstextU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+                  <div class="row">
+                      <div id="left6" class="col-md-3" style="height: 430px; display: ">
+                          <p> </p>
+                          <div id="relaxnumstextL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                          <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      </div>
+                      <div id="middle6" class="col-md-9">
+                          <div class="chart">
+                              <canvas id="relaxview" style="height: 250px"></canvas>
+                          </div>
+                      </div>
+                      <div id="Right6" class="col-md-3" style="height: 430px; display: none">
+                          <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                          <div id="relaxnumstextR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      </div>
+                  </div>
+              </div>
+            <!-- /.box-body --><div id="relaxnumstext" class="bg-info" style="color: #8B8878; font-size: 18px;padding:5px;" align="center"></div>
+
+          </div>
+		  
+          <div id="gardennums" class="box box-success" style="display:;">
+              <div class="box-header with-border">
+                  <h3 class="box-title" style="font-size: 30px">昨日园林人气</h3>
+              </div>
+              <div class="box-body">
+                  <div id="gardennumstextU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+                  <div class="row">
+                      <div id="left7" class="col-md-3" style="height: 430px; display: ">
+                          <p> </p>
+                          <div id="gardennumstextL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                          <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      </div>
+                      <div id="middle7" class="col-md-9">
+                          <div class="chart">
+                              <canvas id="gardenview" style="height: 250px"></canvas>
+                          </div>
+                      </div>
+                      <div id="Right7" class="col-md-3" style="height: 430px; display: none">
+                          <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                          <div id="gardennumstextR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      </div>
+                  </div>
+              </div>
+            <!-- /.box-body --><div id="gardennumstext" class="bg-info" style="color: #8B8878; font-size: 18px;padding:5px;" align="center"></div>
+
+          </div>		  
+          <!-- /.box -->
+          <div id="subwaymoney" class="box box-success" style="display:;">
+              <div class="box-header with-border">
+                  <h3 class="box-title" style="font-size: 30px">昨日地铁人气</h3>
+              </div>
+              <div class="box-body">
+                  <div id="subwaymoneytextU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+                  <div class="row">
+                      <div id="left8" class="col-md-3" style="height: 430px; display: ">
+                          <p> </p>
+                          <div id="subwaymoneytextL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                          <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      </div>
+                      <div id="middle8" class="col-md-9">
+                          <div class="chart">
+                              <canvas id="subwayview" style="height: 250px"></canvas>
+                          </div>
+                      </div>
+                      <div id="Right8" class="col-md-3" style="height: 430px; display: none">
+                          <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                          <div id="subwaymoneytextR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      </div>
+                  </div>
+              </div>
+            <!-- /.box-body --><div id="subwaymoneytext" class="bg-info" style="color: #8B8878; font-size: 18px;padding:5px;" align="center"></div>
+
+          </div>
+        </div>
+        <!-- /.col (RIGHT) -->
+      </div>
+      <!-- /.row -->
+	  <div class="row">
+        <div  style="width:85%;margin:0 auto;">
+			<!-- BAR CHART -->
+          <div id="departtimes" class="box box-warning" style="display:;">
+              <div class="box-header with-border">
+                  <h3 class="box-title" style="font-size: 30px">实时网点人气</h3>
+              </div>
+              <div class="box-body">
+                  <div id="departtimestextU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+                  <div class="row">
+                      <div id="left9" class="col-md-3" style="height: 430px; display: ">
+                          <p> </p>
+                          <div id="departtimestextL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                          <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      </div>
+                      <div id="middle9" class="col-md-9">
+                          <div class="chart">
+                              <canvas id="hotDepart" style="height: 250px"></canvas>
+                          </div>
+                      </div>
+                      <div id="Right9" class="col-md-3" style="height: 430px; display: none">
+                          <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                          <div id="departtimestextR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      </div>
+                  </div>
+              </div>
+            <!-- /.box-body --><div id="departtimestext" class="bg-info" style="color: #8B8878; font-size: 18px;padding:5px;" align="center"></div>
+
+          </div>
+		  
+		  <div id="barview" class="box box-warning" style="display:;">
+		      <div class="box-header with-border">
+		          <h3 id="barviewtitle" class="box-title" style="font-size: 30px">柱状图</h3>
+		      </div>
+          <div class="box-body">
+              <div id="barviewtextU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+              <div class="row">
+                  <div id="left10" class="col-md-3" style="height: 430px; display: ">
+                      <p> </p>
+                      <div id="barviewtextL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                  </div>
+                  <div id="middle10" class="col-md-9">
+                      <div class="chart">
+                          <canvas id="barviewchart" style="height:250px"></canvas>
+                          <input type="hidden" id="barIsShow" />
+                          <input type="hidden" id="barLabelName" />
+                      </div>
+                  </div>
+                  <div id="Right10" class="col-md-3" style="height: 430px; display: none">
+                      <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      <div id="barviewtextR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                  </div>
+              </div>
+          </div>
+            <!-- /.box-body --><div id="barviewtext" class="bg-info" style="color:#8B8878;font-size:18px;" align="center"></div>
+
+          </div>
+		  
+		  <div id="pieview" class="box box-warning" style="display:;">
+		      <div class="box-header with-border">
+		          <h3 id="pieviewtitle" class="box-title" style="font-size: 30px">饼状图</h3>
+		      </div>
+          <div class="box-body">
+              <div id="pieviewtextU" class="bg-info" style="color: #8B8878; font-size: 18px;display:none" align="center"></div>
+              <div class="row">
+                  <div id="left11" class="col-md-3" style="height: 430px; display: ">
+                      <p> </p>
+                      <div id="pieviewtextL" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                      <div class="dibu" align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                  </div>
+                  <div id="middle11" class="col-md-9">
+                      <div class="chart">
+                          <canvas id="pieviewchart" style="height:250px"></canvas>
+                          <input type="hidden" id="pieIsShow" />
+                      </div>
+                  </div>
+                  <div id="Right11" class="col-md-3" style="height: 430px; display: none">
+                      <div align="center"><img src="dist\img\szsmklogo.png" width="60%" /></div>
+                      <div id="pieviewtextR" class="rightword" style="color: #8B8878; font-size: 18px; white-space:pre-wrap" align="left"></div>
+                  </div>
+              </div>
+          </div>
+                <div id="pieviewtext" class="bg-info" style="color:#8B8878;font-size:18px;" align="center"></div>
+          </div>
+		</div>
+	  </div>
+        <br /><br />
+	  <!--<button id="btnNext" type="button" style="width:20%;margin:0 auto;" class="btn btn-primary btn-lg btn-block"  onclick="NextView();">NEXT</button>-->
+	  <div class="btn-group btn-group-justified" style="width:40%;margin:0 auto;" role="group" aria-label="...">
+        <div class="row">
+            <div class="col-md-6" align="center">
+                <!--<button type="button" class="button1 type2" onClick="LastView();">L A S T</button>-->
+                <button type="button" class="button blue medium" onClick="LastView();">Last Page</button>
+            </div>
+            <div class="col-md-6" align="center">
+                <!--<button type="button" class="button1 type2" onClick="NextView();">N E X T</button>-->
+                <button type="button" class="button orange medium" onClick="NextView();">Next Page</button>
+            </div>
+        </div>
+</div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer" style="text-align:center;"> 
+    苏州市民卡有限公司
+  </footer>
+  
+</div>
+<!-- jQuery 2.2.0 -->
+<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="plugins/jQuery/jquery.leanModal.min.js"></script>
+<script src="plugins/jQuery/jquery.cookie.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="plugins/chartjs/Chart.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script> 
+<!-- ./wrapper -->
+<script>
+	var AdminLTEOptions = {
+	//Enable sidebar expand on hover effect for sidebar mini
+	//This option is forced to true if both the fixed layout and sidebar mini
+	//are used together
+	sidebarSlimScroll: false,
+	//BoxRefresh Plugin
+	enableBoxRefresh: false,
+	//Bootstrap.js tooltip
+	enableBSToppltip: false
+	};
+	
+	var isNullOrEmpty = function (value){
+		if(typeof(value) == "undefined"){
+			return true;
+		}
+		return value.length == 0;
+	};
+	
+	var isInt32 = function (value){
+		return (/^(\+|-)?\d+$/.test( value )) && value > 0;
+	};
+	
+	var padLeft = function (value,length){
+		var str = value + '';
+		for(var i=0; i<length; i++){
+			str = '0' + str;
+		}
+		str = str.substring(str.length-length,str.length);
+		return str;
+	}
+	
+	var ajaxProxy = function(url,data){
+		var responseData = '';
+		$.ajax({   
+			url:url,   
+			type:'post',   
+			data:data,   
+			async : false,
+			error:function(){   
+			    console.log('Ajax请求失败,URL:'+url);
+			},   
+			success:function(data){   
+			   responseData = data;   
+			}
+		});
+		return JSON.stringify(responseData);
+	}
+  
+	//报表配置参数
+	var reportConfig = {
+		//配置参数
+		limitCount : 15, //实时发卡量显示15条记录
+		cardSaleRefreshTime : 60000, //实时发卡量刷新时间
+		departRefreshTime : 60000, //网点人气刷新时间
+		startHour : 8,//早点9点之后才可以轮询
+		endHour : 18, //晚上6点之后就不再轮询
+		pollingTime : 30000 , //静态报表切换时间
+		
+		//系统参数
+		//baseUrl : 'http://localhost:10643',
+		//baseUrl : 'http://192.168.128.208:8077',
+		baseUrl : 'http://172.16.6.119:5500/onlyTVWALL',
+		initDate : new Date(), //系统初始化时间
+		initDateStr : '',
+		tradeHistoryPollType : 0,//最近7日刷卡数据 轮询类型；0.笔数 1.金额
+		tradeHistorynumsPollType : 1,//最近7日刷卡数据 轮询类型；0.笔数 1.金额
+		hotStorePollType : 1,//昨日人气指数榜 轮询类型 1.商场 2.超市
+		hotsuperstorePollType : 2,//昨日人气指数榜 轮询类型 1.商场 2.超市
+		relaxviewPollType : 3,//昨日景点人气 轮询类型 3.园林 4.休闲
+		gardenviewPollType : 4,//昨日景点人气 轮询类型 3.园林 4.休闲
+		subwayviewPollType : 9,//昨日地铁人气   9
+	}
+	//document.getElementById('middle1').className = 'col-md-12';
+	reportConfig.initDateStr = padLeft(reportConfig.initDate.getFullYear(),4)+padLeft((reportConfig.initDate.getMonth()+1),2)+padLeft(reportConfig.initDate.getDate(),2)+padLeft(reportConfig.startHour,2)+'00'+'00';
+	//调用接口读取配置
+	var tvWallParaProxy = function (type,tagcode,tagname,tagvalue){
+		var url = reportConfig.baseUrl + '/json/reply/TvWallParas';
+		var data = "";
+		if(type == "0"){ //查询
+			data = "requestType=" + type + "&TAGCODE=" + tagcode;
+		}else if(type == "1"){ //新增
+			data = "requestType=" + type + "&TAGCODE=" + tagcode + "&TAGNAME=" + tagname + "&TAGVALUE=" + tagvalue;
+		}
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	var tvWallChartProxy = function (type,ChartId){
+		var url = reportConfig.baseUrl + '/json/reply/TvWallTag';
+		var data = "";
+		
+		data = "RequestType=" + type + "&ChartId=" + ChartId;
+
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	//柱状图配置
+	var barviewproxyObj=JSON.parse(tvWallChartProxy("0","barview"));
+	$('#barIsShow').val("0");
+        $('#pieIsShow').val("0");
+	if(barviewproxyObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#barviewtitle').html(barviewproxyObj.ChartName);
+		//$('#barTitleName').val(barviewproxyObj.ChartName);
+		$('#barLabelName').val(barviewproxyObj.LabelName);
+		$('#barIsShow').val(barviewproxyObj.IsShow);
+	}
+	//饼状图配置
+	var pieviewproxyObj=JSON.parse(tvWallChartProxy("0","pieview"));
+	if(pieviewproxyObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#pieviewtitle').html(pieviewproxyObj.ChartName);
+		//$('#barTitleName').val(barviewproxyObj.ChartName);
+		$('#pieIsShow').val(pieviewproxyObj.IsShow);
+	}
+	
+	var tvParaObj = JSON.parse(tvWallParaProxy("0","limitCount"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.limitCount = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","cardSaleRefreshTime"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.cardSaleRefreshTime = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","departRefreshTime"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.departRefreshTime = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","startHour"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.startHour = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","endHour"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.endHour = tvParaObj.TAGVALUE * 1;
+	}
+	
+	tvParaObj = JSON.parse(tvWallParaProxy("0","pollingTime"));
+	if(tvParaObj.ResponseStatus.ErrorCode == 'OK'){
+		reportConfig.pollingTime = tvParaObj.TAGVALUE * 1;
+	}
+	
+	//设置初始值
+	$('#saleRealTimeNum').val(reportConfig.limitCount);
+	$('#saleRealTimeNumRefresh').val(reportConfig.cardSaleRefreshTime / 60000);
+	$('#departRefreshTime').val(reportConfig.departRefreshTime / 60000);
+	$("select[name='selStartHour']").val(reportConfig.startHour);
+	$("select[name='selEndHour']").val(reportConfig.endHour);
+	$('#pollingTime').val(reportConfig.pollingTime / 1000);
+    //$('#barTitleName').val('试试看');
+	
+	//读取各图表文字部分
+	var TvWallMSG = function (type,ChartId){
+		var url = reportConfig.baseUrl + '/json/reply/TvWallMSG';
+		var data = "";
+		
+		data = "RequestType=" + type + "&ChartId=" + ChartId;
+
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	var TvWallMSGObj=JSON.parse(TvWallMSG("0","tradehistory1"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+	    $('#tradehistory1text').html(TvWallMSGObj.MESSAGE);
+	    $('#tradehistory1textL').html(TvWallMSGObj.MESSAGE);
+	    $('#tradehistory1textR').html(TvWallMSGObj.MESSAGE);
+	    $('#tradehistory1textU').html(TvWallMSGObj.MESSAGE);
+	    if (TvWallMSGObj.MSGPLACE == 'down') {
+	        document.getElementById('middle1').className = 'col-md-12';
+	        document.getElementById("tradehistory1text").style.display = "";
+	        document.getElementById("left1").style.display = "none";
+	        document.getElementById("Right1").style.display = "none";
+	        document.getElementById("tradehistory1textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'left') {
+	        document.getElementById('middle1').className = 'col-md-9';
+	        document.getElementById("tradehistory1text").style.display = "none";
+	        document.getElementById("left1").style.display = "";
+	        document.getElementById("Right1").style.display = "none";
+	        document.getElementById("tradehistory1textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'right') {
+	        document.getElementById('middle1').className = 'col-md-9';
+	        document.getElementById("tradehistory1text").style.display = "none";
+	        document.getElementById("left1").style.display = "none";
+	        document.getElementById("Right1").style.display = "";
+	        document.getElementById("tradehistory1textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'up') {
+	        document.getElementById('middle1').className = 'col-md-12';
+	        document.getElementById("tradehistory1text").style.display = "none";
+	        document.getElementById("left1").style.display = "none";
+	        document.getElementById("Right1").style.display = "none";
+	        document.getElementById("tradehistory1textU").style.display = "";
+	    }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","tradehistory2"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+	    $('#tradehistory2text').html(TvWallMSGObj.MESSAGE);
+	    $('#tradehistory2textL').html(TvWallMSGObj.MESSAGE);
+	    $('#tradehistory2textR').html(TvWallMSGObj.MESSAGE);
+	    $('#tradehistory2textU').html(TvWallMSGObj.MESSAGE);
+	    if (TvWallMSGObj.MSGPLACE == 'down') {
+	        document.getElementById('middle2').className = 'col-md-12';
+	        document.getElementById("tradehistory2text").style.display = "";
+	        document.getElementById("left2").style.display = "none";
+	        document.getElementById("Right2").style.display = "none";
+	        document.getElementById("tradehistory2textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'left') {
+	        document.getElementById('middle2').className = 'col-md-9';
+	        document.getElementById("tradehistory2text").style.display = "none";
+	        document.getElementById("left2").style.display = "";
+	        document.getElementById("Right2").style.display = "none";
+	        document.getElementById("tradehistory2textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'right') {
+	        document.getElementById('middle2').className = 'col-md-9';
+	        document.getElementById("tradehistory2text").style.display = "none";
+	        document.getElementById("left2").style.display = "none";
+	        document.getElementById("Right2").style.display = "";
+	        document.getElementById("tradehistory2textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'up') {
+	        document.getElementById('middle2').className = 'col-md-12';
+	        document.getElementById("tradehistory2text").style.display = "none";
+	        document.getElementById("left2").style.display = "none";
+	        document.getElementById("Right2").style.display = "none";
+	        document.getElementById("tradehistory2textU").style.display = "";
+	    }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","hotstore1"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+	    $('#hotstore1text').html(TvWallMSGObj.MESSAGE);
+	    $('#hotstore1textL').html(TvWallMSGObj.MESSAGE);
+	    $('#hotstore1textR').html(TvWallMSGObj.MESSAGE);
+	    $('#hotstore1textU').html(TvWallMSGObj.MESSAGE);
+	    if (TvWallMSGObj.MSGPLACE == 'down') {
+	        document.getElementById('middle3').className = 'col-md-12';
+	        document.getElementById("hotstore1text").style.display = "";
+	        document.getElementById("left3").style.display = "none";
+	        document.getElementById("Right3").style.display = "none";
+	        document.getElementById("hotstore1textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'left') {
+	        document.getElementById('middle3').className = 'col-md-9';
+	        document.getElementById("hotstore1text").style.display = "none";
+	        document.getElementById("left3").style.display = "";
+	        document.getElementById("Right3").style.display = "none";
+	        document.getElementById("hotstore1textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'right') {
+	        document.getElementById('middle3').className = 'col-md-9';
+	        document.getElementById("hotstore1text").style.display = "none";
+	        document.getElementById("left3").style.display = "none";
+	        document.getElementById("Right3").style.display = "";
+	        document.getElementById("hotstore1textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'up') {
+	        document.getElementById('middle3').className = 'col-md-12';
+	        document.getElementById("hotstore1text").style.display = "none";
+	        document.getElementById("left3").style.display = "none";
+	        document.getElementById("Right3").style.display = "none";
+	        document.getElementById("hotstore1textU").style.display = "";
+	    }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","hotstore2"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+	    $('#hotstore2text').html(TvWallMSGObj.MESSAGE);
+	    $('#hotstore2textL').html(TvWallMSGObj.MESSAGE);
+	    $('#hotstore2textR').html(TvWallMSGObj.MESSAGE);
+	    $('#hotstore2textU').html(TvWallMSGObj.MESSAGE);
+	    if (TvWallMSGObj.MSGPLACE == 'down') {
+	        document.getElementById('middle4').className = 'col-md-12';
+	        document.getElementById("hotstore2text").style.display = "";
+	        document.getElementById("left4").style.display = "none";
+	        document.getElementById("Right4").style.display = "none";
+	        document.getElementById("hotstore2textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'left') {
+	        document.getElementById('middle4').className = 'col-md-9';
+	        document.getElementById("hotstore2text").style.display = "none";
+	        document.getElementById("left4").style.display = "";
+	        document.getElementById("Right4").style.display = "none";
+	        document.getElementById("hotstore2textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'right') {
+	        document.getElementById('middle4').className = 'col-md-9';
+	        document.getElementById("hotstore2text").style.display = "none";
+	        document.getElementById("left4").style.display = "none";
+	        document.getElementById("Right4").style.display = "";
+	        document.getElementById("hotstore2textU").style.display = "none";
+	    }
+	    else if (TvWallMSGObj.MSGPLACE == 'up') {
+	        document.getElementById('middle4').className = 'col-md-12';
+	        document.getElementById("hotstore2text").style.display = "none";
+	        document.getElementById("left4").style.display = "none";
+	        document.getElementById("Right4").style.display = "none";
+	        document.getElementById("hotstore2textU").style.display = "";
+	    }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","cardnums"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#cardnumstext').html(TvWallMSGObj.MESSAGE);
+        $('#cardnumstextL').html(TvWallMSGObj.MESSAGE);
+        $('#cardnumstextR').html(TvWallMSGObj.MESSAGE);
+        $('#cardnumstextU').html(TvWallMSGObj.MESSAGE);
+        if (TvWallMSGObj.MSGPLACE == 'down') {
+            document.getElementById('middle5').className = 'col-md-12';
+            document.getElementById("cardnumstext").style.display = "";
+            document.getElementById("left5").style.display = "none";
+            document.getElementById("Right5").style.display = "none";
+            document.getElementById("cardnumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'left') {
+            document.getElementById('middle5').className = 'col-md-9';
+            document.getElementById("cardnumstext").style.display = "none";
+            document.getElementById("left5").style.display = "";
+            document.getElementById("Right5").style.display = "none";
+            document.getElementById("cardnumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'right') {
+            document.getElementById('middle5').className = 'col-md-9';
+            document.getElementById("cardnumstext").style.display = "none";
+            document.getElementById("left5").style.display = "none";
+            document.getElementById("Right5").style.display = "";
+            document.getElementById("cardnumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'up') {
+            document.getElementById('middle5').className = 'col-md-12';
+            document.getElementById("cardnumstext").style.display = "none";
+            document.getElementById("left5").style.display = "none";
+            document.getElementById("Right5").style.display = "none";
+            document.getElementById("cardnumstextU").style.display = "";
+        }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","relaxnums"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#relaxnumstext').html(TvWallMSGObj.MESSAGE);
+        $('#relaxnumstextL').html(TvWallMSGObj.MESSAGE);
+        $('#relaxnumstextR').html(TvWallMSGObj.MESSAGE);
+        $('#relaxnumstextU').html(TvWallMSGObj.MESSAGE);
+        if (TvWallMSGObj.MSGPLACE == 'down') {
+            document.getElementById('middle6').className = 'col-md-12';
+            document.getElementById("relaxnumstext").style.display = "";
+            document.getElementById("left6").style.display = "none";
+            document.getElementById("Right6").style.display = "none";
+            document.getElementById("relaxnumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'left') {
+            document.getElementById('middle6').className = 'col-md-9';
+            document.getElementById("relaxnumstext").style.display = "none";
+            document.getElementById("left6").style.display = "";
+            document.getElementById("Right6").style.display = "none";
+            document.getElementById("relaxnumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'right') {
+            document.getElementById('middle6').className = 'col-md-9';
+            document.getElementById("relaxnumstext").style.display = "none";
+            document.getElementById("left6").style.display = "none";
+            document.getElementById("Right6").style.display = "";
+            document.getElementById("relaxnumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'up') {
+            document.getElementById('middle6').className = 'col-md-12';
+            document.getElementById("relaxnumstext").style.display = "none";
+            document.getElementById("left6").style.display = "none";
+            document.getElementById("Right6").style.display = "none";
+            document.getElementById("relaxnumstextU").style.display = "";
+        }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","gardennums"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#gardennumstext').html(TvWallMSGObj.MESSAGE);
+        $('#gardennumstextL').html(TvWallMSGObj.MESSAGE);
+        $('#gardennumstextR').html(TvWallMSGObj.MESSAGE);
+        $('#gardennumstextU').html(TvWallMSGObj.MESSAGE);
+        if (TvWallMSGObj.MSGPLACE == 'down') {
+            document.getElementById('middle7').className = 'col-md-12';
+            document.getElementById("gardennumstext").style.display = "";
+            document.getElementById("left7").style.display = "none";
+            document.getElementById("Right7").style.display = "none";
+            document.getElementById("gardennumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'left') {
+            document.getElementById('middle7').className = 'col-md-9';
+            document.getElementById("gardennumstext").style.display = "none";
+            document.getElementById("left7").style.display = "";
+            document.getElementById("Right7").style.display = "none";
+            document.getElementById("gardennumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'right') {
+            document.getElementById('middle7').className = 'col-md-9';
+            document.getElementById("gardennumstext").style.display = "none";
+            document.getElementById("left7").style.display = "none";
+            document.getElementById("Right7").style.display = "";
+            document.getElementById("gardennumstextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'up') {
+            document.getElementById('middle7').className = 'col-md-12';
+            document.getElementById("gardennumstext").style.display = "none";
+            document.getElementById("left7").style.display = "none";
+            document.getElementById("Right7").style.display = "none";
+            document.getElementById("gardennumstextU").style.display = "";
+        }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","subwaymoney"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#subwaymoneytext').html(TvWallMSGObj.MESSAGE);
+        $('#subwaymoneytextL').html(TvWallMSGObj.MESSAGE);
+        $('#subwaymoneytextR').html(TvWallMSGObj.MESSAGE);
+        $('#subwaymoneytextU').html(TvWallMSGObj.MESSAGE);
+        if (TvWallMSGObj.MSGPLACE == 'down') {
+            document.getElementById('middle8').className = 'col-md-12';
+            document.getElementById("subwaymoneytext").style.display = "";
+            document.getElementById("left8").style.display = "none";
+            document.getElementById("Right8").style.display = "none";
+            document.getElementById("subwaymoneytextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'left') {
+            document.getElementById('middle8').className = 'col-md-9';
+            document.getElementById("subwaymoneytext").style.display = "none";
+            document.getElementById("left8").style.display = "";
+            document.getElementById("Right8").style.display = "none";
+            document.getElementById("subwaymoneytextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'right') {
+            document.getElementById('middle8').className = 'col-md-9';
+            document.getElementById("subwaymoneytext").style.display = "none";
+            document.getElementById("left8").style.display = "none";
+            document.getElementById("Right8").style.display = "";
+            document.getElementById("subwaymoneytextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'up') {
+            document.getElementById('middle8').className = 'col-md-12';
+            document.getElementById("subwaymoneytext").style.display = "none";
+            document.getElementById("left8").style.display = "none";
+            document.getElementById("Right8").style.display = "none";
+            document.getElementById("subwaymoneytextU").style.display = "";
+        }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","departtimes"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#departtimestext').html(TvWallMSGObj.MESSAGE);
+        $('#departtimestextL').html(TvWallMSGObj.MESSAGE);
+        $('#departtimestextR').html(TvWallMSGObj.MESSAGE);
+        $('#departtimestextU').html(TvWallMSGObj.MESSAGE);
+        if (TvWallMSGObj.MSGPLACE == 'down') {
+            document.getElementById('middle9').className = 'col-md-12';
+            document.getElementById("departtimestext").style.display = "";
+            document.getElementById("left9").style.display = "none";
+            document.getElementById("Right9").style.display = "none";
+            document.getElementById("departtimestextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'left') {
+            document.getElementById('middle9').className = 'col-md-9';
+            document.getElementById("departtimestext").style.display = "none";
+            document.getElementById("left9").style.display = "";
+            document.getElementById("Right9").style.display = "none";
+            document.getElementById("departtimestextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'right') {
+            document.getElementById('middle9').className = 'col-md-9';
+            document.getElementById("departtimestext").style.display = "none";
+            document.getElementById("left9").style.display = "none";
+            document.getElementById("Right9").style.display = "";
+            document.getElementById("departtimestextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'up') {
+            document.getElementById('middle9').className = 'col-md-12';
+            document.getElementById("departtimestext").style.display = "none";
+            document.getElementById("left9").style.display = "none";
+            document.getElementById("Right9").style.display = "none";
+            document.getElementById("departtimestextU").style.display = "";
+        }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","barview"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#barviewtext').html(TvWallMSGObj.MESSAGE);
+        $('#barviewtextL').html(TvWallMSGObj.MESSAGE);
+        $('#barviewtextR').html(TvWallMSGObj.MESSAGE);
+        $('#barviewtextU').html(TvWallMSGObj.MESSAGE);
+        if (TvWallMSGObj.MSGPLACE == 'down') {
+            document.getElementById('middle10').className = 'col-md-12';
+            document.getElementById("barviewtext").style.display = "";
+            document.getElementById("left10").style.display = "none";
+            document.getElementById("Right10").style.display = "none";
+            document.getElementById("barviewtextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'left') {
+            document.getElementById('middle10').className = 'col-md-9';
+            document.getElementById("barviewtext").style.display = "none";
+            document.getElementById("left10").style.display = "";
+            document.getElementById("Right10").style.display = "none";
+            document.getElementById("barviewtextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'right') {
+            document.getElementById('middle10').className = 'col-md-9';
+            document.getElementById("barviewtext").style.display = "none";
+            document.getElementById("left10").style.display = "none";
+            document.getElementById("Right10").style.display = "";
+            document.getElementById("barviewtextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'up') {
+            document.getElementById('middle10').className = 'col-md-12';
+            document.getElementById("barviewtext").style.display = "none";
+            document.getElementById("left10").style.display = "none";
+            document.getElementById("Right10").style.display = "none";
+            document.getElementById("barviewtextU").style.display = "";
+        }
+	}
+	TvWallMSGObj=JSON.parse(TvWallMSG("0","pieview"));
+	if(TvWallMSGObj.ResponseStatus.ErrorCode == 'OK'){
+        $('#pieviewtext').html(TvWallMSGObj.MESSAGE);
+        $('#pieviewtextL').html(TvWallMSGObj.MESSAGE);
+        $('#pieviewtextR').html(TvWallMSGObj.MESSAGE);
+        $('#pieviewtextU').html(TvWallMSGObj.MESSAGE);
+        if (TvWallMSGObj.MSGPLACE == 'down') {
+            document.getElementById('middle11').className = 'col-md-12';
+            document.getElementById("pieviewtext").style.display = "";
+            document.getElementById("left11").style.display = "none";
+            document.getElementById("Right11").style.display = "none";
+            document.getElementById("pieviewtextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'left') {
+            document.getElementById('middle11').className = 'col-md-9';
+            document.getElementById("pieviewtext").style.display = "none";
+            document.getElementById("left11").style.display = "";
+            document.getElementById("Right11").style.display = "none";
+            document.getElementById("pieviewtextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'right') {
+            document.getElementById('middle11').className = 'col-md-9';
+            document.getElementById("pieviewtext").style.display = "none";
+            document.getElementById("left11").style.display = "none";
+            document.getElementById("Right11").style.display = "";
+            document.getElementById("pieviewtextU").style.display = "none";
+        }
+        else if (TvWallMSGObj.MSGPLACE == 'up') {
+            document.getElementById('middle11').className = 'col-md-12';
+            document.getElementById("pieviewtext").style.display = "none";
+            document.getElementById("left11").style.display = "none";
+            document.getElementById("Right11").style.display = "none";
+            document.getElementById("pieviewtextU").style.display = "";
+        }
+	}
+	
+	var isBetweenHour = function (){//是否可以轮询
+		var date = new Date();
+		var hour = date.getHours();
+		if(hour >= reportConfig.startHour && hour < reportConfig.endHour){
+			return true;
+		}
+		return false;
+	};
+	
+	//leanModal Dialog
+    $("#reportConfigLink").leanModal({top:50,overlay:0.5,closeButton:null});
+	
+	function  NextView(){
+		nextViewByID();
+	}
+	//上一个图表
+	function LastView(){
+	if(document.getElementById("tradehistory1").style.display == ""){
+	            if($('#barIsShow').val()=="0" && $('#pieIsShow').val()=="0"){
+					document.getElementById("tradehistory1").style.display="none";
+					document.getElementById("departtimes").style.display="";
+				}
+				else if($('#pieIsShow').val()=="1"){
+				    document.getElementById("tradehistory1").style.display="none";
+					document.getElementById("pieview").style.display="";
+				}
+				else if($('#barIsShow').val()=="1"){
+					document.getElementById("tradehistory1").style.display="none";
+					document.getElementById("barview").style.display="";
+				}
+		}else if(document.getElementById("tradehistory2").style.display == ""){
+			document.getElementById("tradehistory1").style.display="";
+			document.getElementById("tradehistory2").style.display="none";
+		}else if(document.getElementById("hotstore1").style.display == ""){
+			document.getElementById("tradehistory2").style.display="";
+			document.getElementById("hotstore1").style.display="none";
+		}else if(document.getElementById("hotstore2").style.display == ""){
+			document.getElementById("hotstore1").style.display="";
+			document.getElementById("hotstore2").style.display="none";
+		}else if(document.getElementById("cardnums").style.display == ""){
+			document.getElementById("hotstore2").style.display="";
+			document.getElementById("cardnums").style.display="none";
+		}else if(document.getElementById("relaxnums").style.display == ""){
+			document.getElementById("cardnums").style.display="";
+			document.getElementById("relaxnums").style.display="none";
+		}else if(document.getElementById("gardennums").style.display == ""){
+			document.getElementById("relaxnums").style.display="";
+			document.getElementById("gardennums").style.display="none";
+		}else if(document.getElementById("subwaymoney").style.display == ""){
+			document.getElementById("gardennums").style.display="";
+			document.getElementById("subwaymoney").style.display="none";
+		}else if(document.getElementById("departtimes").style.display == ""){
+			document.getElementById("subwaymoney").style.display="";
+			document.getElementById("departtimes").style.display="none";
+		}else if(document.getElementById("barview").style.display==""){
+		    document.getElementById("barview").style.display="none";
+			document.getElementById("departtimes").style.display="";
+		}else if(document.getElementById("pieview").style.display==""){
+				if($('#barIsShow').val()=="1"){
+					document.getElementById("pieview").style.display="none";
+					document.getElementById("barview").style.display="";
+				}else if($('#barIsShow').val()=="0"){
+					document.getElementById("pieview").style.display="none";
+					document.getElementById("departtimes").style.display="";
+				}	    
+		}
+	}
+	window.setInterval(nextViewByID,reportConfig.pollingTime);
+	//下一个图表
+	function nextViewByID(){
+		if(document.getElementById("tradehistory1").style.display == ""){
+			document.getElementById("tradehistory1").style.display="none";
+			document.getElementById("tradehistory2").style.display="";
+		}else if(document.getElementById("tradehistory2").style.display == ""){
+			document.getElementById("tradehistory2").style.display="none";
+			document.getElementById("hotstore1").style.display="";
+		}else if(document.getElementById("hotstore1").style.display == ""){
+			document.getElementById("hotstore1").style.display="none";
+			document.getElementById("hotstore2").style.display="";
+		}else if(document.getElementById("hotstore2").style.display == ""){
+			document.getElementById("hotstore2").style.display="none";
+			document.getElementById("cardnums").style.display="";
+		}else if(document.getElementById("cardnums").style.display == ""){
+			document.getElementById("cardnums").style.display="none";
+			document.getElementById("relaxnums").style.display="";
+		}else if(document.getElementById("relaxnums").style.display == ""){
+			document.getElementById("relaxnums").style.display="none";
+			document.getElementById("gardennums").style.display="";
+		}else if(document.getElementById("gardennums").style.display == ""){
+			document.getElementById("gardennums").style.display="none";
+			document.getElementById("subwaymoney").style.display="";
+		}else if(document.getElementById("subwaymoney").style.display == ""){
+			document.getElementById("subwaymoney").style.display="none";
+			document.getElementById("departtimes").style.display="";
+		}else if(document.getElementById("departtimes").style.display == ""){
+				if($('#barIsShow').val()=="0" && $('#pieIsShow').val()=="0"){
+					document.getElementById("tradehistory1").style.display="";
+					document.getElementById("departtimes").style.display="none";
+				}
+				else if($('#barIsShow').val()=="1"){
+				    document.getElementById("barview").style.display="";
+					document.getElementById("departtimes").style.display="none";
+				}
+				else if($('#pieIsShow').val()=="1"){
+					document.getElementById("pieview").style.display="";
+					document.getElementById("departtimes").style.display="none";
+				}
+		}else if(document.getElementById("barview").style.display==""){
+		       if($('#pieIsShow').val()=="0"){
+					document.getElementById("barview").style.display="none";
+					document.getElementById("tradehistory1").style.display="";
+			   }else if($('#pieIsShow').val()=="1"){
+					document.getElementById("barview").style.display="none";
+					document.getElementById("pieview").style.display="";
+			   }
+		}else if(document.getElementById("pieview").style.display==""){
+				    document.getElementById("pieview").style.display="none";
+					document.getElementById("tradehistory1").style.display="";
+		}
+	}
+	
+	function submitReportConfig(){
+		var limitCount = $('#saleRealTimeNum').val();
+		var cardSaleRefreshTime = $('#saleRealTimeNumRefresh').val();
+		var departRefreshTime = $('#departRefreshTime').val();
+		var startHour = $("select[name='selStartHour']").val() * 1;
+		var endHour = $("select[name='selEndHour']").val() * 1;
+		var pollingTime = $('#pollingTime').val();
+
+		var errorMsg = '';
+		
+		//判断数据数据的合法性
+		if(isNullOrEmpty(limitCount)){
+			errorMsg += "实时发卡量显示记录数 不能为空！\r\n";
+		}else if(!isInt32(limitCount)){
+			errorMsg += "实时发卡量显示记录数 应该为正整数！\r\n";
+		}
+		
+		if(isNullOrEmpty(cardSaleRefreshTime)){
+			errorMsg += "实时发卡量刷新间隔时间 不能为空！\r\n";
+		}else if(!isInt32(cardSaleRefreshTime)){
+			errorMsg += "实时发卡量刷新间隔时间 应该为正整数！\r\n";
+		}
+		
+		if(isNullOrEmpty(departRefreshTime)){
+			errorMsg += "网点人气刷新间隔时间 不能为空！\r\n";
+		}else if(!isInt32(departRefreshTime)){
+			errorMsg += "网点人气刷新间隔时间 应该为正整数！\r\n";
+		}
+		
+		if(isNullOrEmpty(startHour)){
+			errorMsg += "刷新起始时间 不能为空！\r\n";
+		}
+		if(isNullOrEmpty(endHour)){
+			errorMsg += "刷新截止时间 不能为空！\r\n";
+		}
+		
+		if(!isNullOrEmpty(startHour) && !isNullOrEmpty(endHour)){
+			if(!isInt32(startHour)){
+				errorMsg += "刷新起始时间 应该为正整数！\r\n";
+			}else if(!isInt32(endHour)){
+				errorMsg += "刷新截止时间 应该为正整数！\r\n";
+			}else{
+				if(startHour >= endHour){
+					errorMsg += "刷新起始时间 不能大于等于 刷新截止时间！\r\n";
+				}
+			}
+		}
+		
+		if(isNullOrEmpty(pollingTime)){
+			errorMsg += "静态报表切换时间 不能为空！\r\n";
+		}else if(!isInt32(pollingTime)){
+			errorMsg += "静态报表切换时间 应该为正整数！\r\n";
+		}
+		
+		if(!isNullOrEmpty(errorMsg)){
+			alert(errorMsg);
+			return false;
+		}
+		
+		//调用接口，存入配置
+		tvWallParaProxy("1","limitCount","实时发卡量显示记录数",limitCount);
+		tvWallParaProxy("1","cardSaleRefreshTime","实时发卡量刷新时间",cardSaleRefreshTime * 60000);
+		tvWallParaProxy("1","departRefreshTime","网点人气刷新时间",departRefreshTime * 60000);
+		tvWallParaProxy("1","startHour","早上开始轮询时间",startHour);
+		tvWallParaProxy("1","endHour","晚上结束轮询时间",endHour);
+		tvWallParaProxy("1","pollingTime","静态报表切换时间",pollingTime * 1000);
+		
+		//刷新页面
+		location.reload();
+	}
+</script>
+
+<!-- page script -->
+<script>
+  $(function () { 	
+    var randomColorFactor = function() {
+        return Math.round(Math.random() * 255);
+    };
+	
+	var _rgbColors = [];
+	_rgbColors.push('#D2691E');
+	_rgbColors.push('#4EEE94');
+	_rgbColors.push('#7A67EE');
+	_rgbColors.push('#636363');
+	_rgbColors.push('#68228B');
+	_rgbColors.push('#9ACD32');
+	_rgbColors.push('#F08080');
+	_rgbColors.push('#EE30A7');
+	_rgbColors.push('#CDAF95');
+	_rgbColors.push('#458B00');
+	_rgbColors.push('#EEEE00');
+	_rgbColors.push('#FF3030');//如果颜色不够，继续加就好。注意颜色之间差别要大
+    //var randomColor = function(opacity) {
+        //return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+    //};
+	var randomColor = function(index){
+		return _rgbColors[index];
+	}
+    var randomScalingFactor = function() {
+        return Math.round(Math.random() * 100);
+        //return 0;
+    };
+	
+	//昨日刷卡数据 json
+	var tradeHistoryJson = function(type){
+		var url = reportConfig.baseUrl + '/json/reply/HistoryTradeList';
+		var data = "requestType=" + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	//昨日刷卡金额 json
+	var tradeHistorynumsJson = function(type){
+		var url = reportConfig.baseUrl + '/json/reply/HistoryTradeList';
+		var data = "requestType=" + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//昨日商场人气指数榜 json
+	var hotStoreJson = function(type){
+		var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+		var data='RequestType=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	//昨日超市人气指数榜 json
+	var hotsuperstoreJson = function(type){
+		var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+		var data='RequestType=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	//实时发卡量 Json
+	var cardSaleJson = function(startTime){
+		var url = reportConfig.baseUrl + '/json/reply/CardSellRealTimeNums';
+		var data = 'Minutes=' + reportConfig.cardSaleRefreshTime / 60000;
+		if(!isNullOrEmpty(startTime)){
+			data = 'startTime=' + startTime;
+		}
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//网点人气Json
+	var hotDepartJson=function(){
+		var url = reportConfig.baseUrl + '/json/reply/DepartPopularityList';
+		var startTime = reportConfig.initDateStr;
+		var data = 'startTime=' + startTime;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//休闲人气 Json
+	var relaxviewJson=function(type){
+		var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+		var data='requestType=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//园林人气 Json
+	var gardenviewJson=function(type){
+		var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+		var data='requestType=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	//地铁人气 Json
+	var subwayviewJson=function(type){
+		var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+		var data='requestType=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//配置柱状图 Json
+	var barviewJson=function(type){
+		var url = reportConfig.baseUrl + '/json/reply/TvWallListByTag';
+		var data='ShowChartId=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	
+	//配置柱状图 Json
+	var pieviewJson=function(type){
+		var url = reportConfig.baseUrl + '/json/reply/TvWallListByTag';
+		var data='ShowChartId=' + type;
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+	//开始报表绘制工作
+    //昨日刷卡数据 柱状图
+    var tradeHistory = $('#tradeHistory'); 
+    var tradeHistoryCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	
+	window.tradeHistory = new Chart(tradeHistory,tradeHistoryCfg);
+	updateTradeHistory();
+	window.setInterval(updateTradeHistory,10000000000000);
+     
+    
+	function updateTradeHistory(){
+		//添加datasets
+		var DRIVERCAR_ds={
+			label: '公交',
+			backgroundColor: randomColor(0),
+			data: []
+		};
+		var MERCHANT_ds={
+			label: '商户',
+			backgroundColor: randomColor(1),
+			data: []
+		};
+		var METRO_ds={
+			label: '地铁',
+			backgroundColor: randomColor(2),
+			data: []
+		};
+
+		try{
+			if(reportConfig.tradeHistoryPollType == 0){//查询笔数
+				reportConfig.tradeHistoryPollType = 0;
+				var tradeHistoryObj = JSON.parse(tradeHistoryJson('0'));
+				if(typeof(tradeHistoryObj.TradeList) == "undefined"){
+					return;
+				}
+				DRIVERCAR_ds.label = '公交笔数';
+				MERCHANT_ds.label = '商户笔数';
+				METRO_ds.label = '地铁笔数';
+				tradeHistoryCfg.data.labels = [];
+				tradeHistoryCfg.data.datasets = [];
+				for(var i=tradeHistoryObj.TradeList.length-1;i>=0;i--){
+					var tempDate=tradeHistoryObj.TradeList[i].TRADEDATE;
+					tradeHistoryCfg.data.labels.push(tempDate);
+					
+					DRIVERCAR_ds.data.push(tradeHistoryObj.TradeList[i].DRIVERCARTRADETIMES);
+					MERCHANT_ds.data.push(tradeHistoryObj.TradeList[i].MERCHANTTRADETIMES);
+					METRO_ds.data.push(tradeHistoryObj.TradeList[i].METROTRADETIMES);
+				}
+			}else if(reportConfig.tradeHistoryPollType == 1){//查询金额
+				reportConfig.tradeHistoryPollType = 1;
+				DRIVERCAR_ds.label = '公交金额';
+				MERCHANT_ds.label = '商户金额';
+				METRO_ds.label = '地铁金额';
+				var tradeHistoryObj = JSON.parse(tradeHistoryJson('1'));
+				if(typeof(tradeHistoryObj.TradeList) == "undefined"){
+					return;
+				}
+				tradeHistoryCfg.data.labels = [];
+				tradeHistoryCfg.data.datasets = [];
+				for(var i=tradeHistoryObj.TradeList.length-1;i>=0;i--){
+					var tempDate=tradeHistoryObj.TradeList[i].TRADEDATE;
+					tradeHistoryCfg.data.labels.push(tempDate);
+					
+					DRIVERCAR_ds.data.push(tradeHistoryObj.TradeList[i].DRIVERCARTRADEMONEY);
+					MERCHANT_ds.data.push(tradeHistoryObj.TradeList[i].MERCHANTTRADEMONEY);
+					METRO_ds.data.push(tradeHistoryObj.TradeList[i].METROTRADEMONEY);
+				}
+			}
+			
+		}catch(e){
+			console.log('最近7日刷卡数据 加载异常: '+e.message);
+		}
+
+		tradeHistoryCfg.data.datasets.push(DRIVERCAR_ds);
+		tradeHistoryCfg.data.datasets.push(MERCHANT_ds);
+		tradeHistoryCfg.data.datasets.push(METRO_ds);
+		window.tradeHistory.update();
+	}
+	
+	//昨日刷卡金额 柱状图
+    var tradeHistorynums = $('#tradeHistorynums'); 
+    var tradeHistorynumsCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	
+	window.tradeHistorynums = new Chart(tradeHistorynums,tradeHistorynumsCfg);
+	updatetradeHistorynums();
+	window.setInterval(updatetradeHistorynums,10000000000000);
+     
+    
+	function updatetradeHistorynums(){
+		//添加datasets
+		var DRIVERCAR_ds={
+			label: '公交',
+			backgroundColor: randomColor(0),
+			data: []
+		};
+		var MERCHANT_ds={
+			label: '商户',
+			backgroundColor: randomColor(1),
+			data: []
+		};
+		var METRO_ds={
+			label: '地铁',
+			backgroundColor: randomColor(2),
+			data: []
+		};
+
+		try{
+			if(reportConfig.tradeHistorynumsPollType == 0){//查询笔数
+				reportConfig.tradeHistorynumsPollType = 0;
+				var tradeHistorynumsObj = JSON.parse(tradeHistorynumsJson('0'));
+				if(typeof(tradeHistorynumsObj.TradeList) == "undefined"){
+					return;
+				}
+				DRIVERCAR_ds.label = '公交笔数';
+				MERCHANT_ds.label = '商户笔数';
+				METRO_ds.label = '地铁笔数';
+				tradeHistorynumsCfg.data.labels = [];
+				tradeHistorynumsCfg.data.datasets = [];
+				for(var i=tradeHistorynumsObj.TradeList.length-1;i>=0;i--){
+					var tempDate=tradeHistorynumsObj.TradeList[i].TRADEDATE;
+					tradeHistorynumsCfg.data.labels.push(tempDate);
+					
+					DRIVERCAR_ds.data.push(tradeHistorynumsObj.TradeList[i].DRIVERCARTRADETIMES);
+					MERCHANT_ds.data.push(tradeHistorynumsObj.TradeList[i].MERCHANTTRADETIMES);
+					METRO_ds.data.push(tradeHistorynumsObj.TradeList[i].METROTRADETIMES);
+				}
+			}else if(reportConfig.tradeHistorynumsPollType == 1){//查询金额
+				reportConfig.tradeHistorynumsPollType = 1;
+				DRIVERCAR_ds.label = '公交金额';
+				MERCHANT_ds.label = '商户金额';
+				METRO_ds.label = '地铁金额';
+				var tradeHistorynumsObj = JSON.parse(tradeHistorynumsJson('1'));
+				if(typeof(tradeHistorynumsObj.TradeList) == "undefined"){
+					return;
+				}
+				tradeHistorynumsCfg.data.labels = [];
+				tradeHistorynumsCfg.data.datasets = [];
+				for(var i=tradeHistorynumsObj.TradeList.length-1;i>=0;i--){
+					var tempDate=tradeHistorynumsObj.TradeList[i].TRADEDATE;
+					tradeHistorynumsCfg.data.labels.push(tempDate);
+					
+					DRIVERCAR_ds.data.push(tradeHistorynumsObj.TradeList[i].DRIVERCARTRADEMONEY);
+					MERCHANT_ds.data.push(tradeHistorynumsObj.TradeList[i].MERCHANTTRADEMONEY);
+					METRO_ds.data.push(tradeHistorynumsObj.TradeList[i].METROTRADEMONEY);
+				}
+			}
+			
+		}catch(e){
+			console.log('最近7日刷卡数据 加载异常: '+e.message);
+		}
+
+		tradeHistorynumsCfg.data.datasets.push(DRIVERCAR_ds);
+		tradeHistorynumsCfg.data.datasets.push(MERCHANT_ds);
+		tradeHistorynumsCfg.data.datasets.push(METRO_ds);
+		window.tradeHistorynums.update();
+	}
+	
+    //昨日商场人气指数榜 柱图
+    var hotStore = $('#hotStore'); 
+    var hotStoreCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	
+    window.hotStore = new Chart(hotStore,hotStoreCfg);
+	updateHotStore();
+	window.setInterval(updateHotStore,10000000000000);
+    
+	function updateHotStore(){
+		//数据填充
+		var hotStoreDataset={
+			label: '昨日人气',
+			backgroundColor: "#9FB6CD",
+			data: []
+		};
+		try{
+			var requestType = '';
+			if(reportConfig.hotStorePollType == 1){//查询商场
+				requestType = '1';
+				reportConfig.hotStorePollType = 1;
+				hotStoreDataset.label = '商场人气';
+			}else if(reportConfig.hotStorePollType == 2){//查询超市
+				requestType = '2';
+				reportConfig.hotStorePollType = 2;
+				hotStoreDataset.label = '超市人气';
+			}
+			var hotStoreObj = JSON.parse(hotStoreJson(requestType));
+			if(typeof(hotStoreObj.QueryList) == "undefined"){
+				return;
+			}
+			hotStoreCfg.data.datasets = [];
+			hotStoreCfg.data.labels = [];
+			for(var i=0;i<hotStoreObj.QueryList.length;i++){
+				var tempDate=hotStoreObj.QueryList[i].CORP;
+				hotStoreCfg.data.labels.push(tempDate);
+				hotStoreDataset.data.push(hotStoreObj.QueryList[i].TRADETIMES);
+			}
+		}catch(e){
+			console.log('昨日人气指数榜 加载异常: '+e.message);
+		}
+		
+		//添加datasets
+		hotStoreCfg.data.datasets.push(hotStoreDataset);
+		window.hotStore.update();
+	}
+	//昨日超市人气指数榜 柱图
+    var hotsuperstore = $('#hotsuperstore'); 
+    var hotsuperstoreCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	
+    window.hotsuperstore = new Chart(hotsuperstore,hotsuperstoreCfg);
+	updatehotsuperstore();
+	window.setInterval(updatehotsuperstore,10000000000000);
+    
+	function updatehotsuperstore(){
+		//数据填充
+		var hotsuperstoreDataset={
+			label: '昨日人气',
+			backgroundColor: "#9FB6CD",
+			data: []
+		};
+		try{
+			var requestType = '';
+			if(reportConfig.hotsuperstorePollType == 1){//查询商场
+				requestType = '1';
+				reportConfig.hotsuperstorePollType = 1;
+				hotsuperstoreDataset.label = '商场人气';
+			}else if(reportConfig.hotsuperstorePollType == 2){//查询超市
+				requestType = '2';
+				reportConfig.hotsuperstorePollType = 2;
+				hotsuperstoreDataset.label = '超市人气';
+			}
+			var hotsuperstoreObj = JSON.parse(hotsuperstoreJson(requestType));
+			if(typeof(hotsuperstoreObj.QueryList) == "undefined"){
+				return;
+			}
+			hotsuperstoreCfg.data.datasets = [];
+			hotsuperstoreCfg.data.labels = [];
+			for(var i=0;i<hotsuperstoreObj.QueryList.length;i++){
+				var tempDate=hotsuperstoreObj.QueryList[i].CORP;
+				hotsuperstoreCfg.data.labels.push(tempDate);
+				hotsuperstoreDataset.data.push(hotsuperstoreObj.QueryList[i].TRADETIMES);
+			}
+		}catch(e){
+			console.log('昨日人气指数榜 加载异常: '+e.message);
+		}
+		
+		//添加datasets
+		hotsuperstoreCfg.data.datasets.push(hotsuperstoreDataset);
+		window.hotsuperstore.update();
+	}
+	
+	//实时发卡量
+	var areaChartLabel = reportConfig.initDate.getFullYear()+'年'+(reportConfig.initDate.getMonth()+1)+'月'+reportConfig.initDate.getDate()+'日'+' 实时发卡量 ';
+    var areaChartCanvas = $("#cardSaleRealTime"); 
+    var areaChartOptions = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+              label: areaChartLabel + '(发卡总量: 0)',
+              fillColor: "rgba(210, 214, 222, 1)",
+              strokeColor: "rgba(210, 214, 222, 1)",
+              pointColor: "rgba(210, 214, 222, 1)",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: []
+            }]
+        },
+        options: { 
+          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+		  scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+		}
+    };
+	
+    $.each(areaChartOptions.data.datasets, function(i, dataset) {
+            dataset.borderColor = randomColor(0);
+            dataset.backgroundColor = randomColor(1);
+            dataset.pointBorderColor = randomColor(2);
+            dataset.pointBackgroundColor = randomColor(3);
+            dataset.pointBorderWidth = 1;
+        });
+ 
+    window.areaChart = new Chart(areaChartCanvas,areaChartOptions);
+	
+	var areaChartLoadDataCount = 0;
+    //轮询
+    function updateCardSaleRealTime()
+    {
+		try{
+			if(!isBetweenHour()){return;}
+			var cardSaleObj = JSON.parse(cardSaleJson());
+			if(typeof(cardSaleObj.QueryTime) == "undefined"){
+				return;
+			}
+			if (areaChartOptions.data.datasets.length > 0) {
+				$.each(areaChartOptions.data.datasets, function(i, dataset) {
+					if(areaChartLoadDataCount>=reportConfig.limitCount){
+						dataset.data.shift();
+					}
+					dataset.data.push(cardSaleObj.Counts);
+				}); 
+				if(areaChartLoadDataCount>=reportConfig.limitCount){
+					areaChartOptions.data.labels.shift();
+				}
+				areaChartOptions.data.labels.push(cardSaleObj.QueryTime);
+			}
+			if(areaChartLoadDataCount < reportConfig.limitCount){
+				areaChartLoadDataCount++;
+			}
+			 
+			cardSaleObj = JSON.parse(cardSaleJson(reportConfig.initDateStr));//得到总量
+			if(typeof(cardSaleObj.QueryTime) == "undefined"){
+				return;
+			}
+			$.each(areaChartOptions.data.datasets, function(i, dataset) {
+				var cardSaleCount = cardSaleObj.Counts;
+				dataset.label = areaChartLabel + '(发卡总量: ' + cardSaleCount + ')'
+			}); 
+			window.areaChart.update();
+		}catch(e){
+			console.log('实时发卡量 加载异常: '+e.message);
+		}
+    }
+	
+    window.setInterval(updateCardSaleRealTime,reportConfig.cardSaleRefreshTime);
+	
+	
+	//景点人气
+	var relaxview = $('#relaxview'); 
+    var relaxviewCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	window.relaxview = new Chart(relaxview,relaxviewCfg);
+	updaterelaxview();
+	window.setInterval(updaterelaxview,10000000000000);
+	
+	function updaterelaxview(){
+		var relaxviewDataSet={
+			label: '人气',
+			backgroundColor: "#46BFBD",
+			data: []
+		};
+		//填充数据
+		try{
+			var requestType = '';
+			if(reportConfig.relaxviewPollType == 3){ //查询休闲
+				requestType = '3';
+				reportConfig.relaxviewPollType = 3;
+				relaxviewDataSet.label = '休闲人气';
+			}else if(reportConfig.relaxviewPollType == 4){ //查询园林
+				requestType = '4';
+				reportConfig.relaxviewPollType = 3;
+				relaxviewDataSet.label = '园林人气';
+			}
+			var relaxviewObj=JSON.parse(relaxviewJson(requestType));
+			if(typeof(relaxviewObj.QueryList) == "undefined"){
+				return;
+			}
+			relaxviewCfg.data.labels = [];
+			relaxviewCfg.data.datasets = [];
+			for(var i=0;i<relaxviewObj.QueryList.length;i++){
+				relaxviewCfg.data.labels.push(relaxviewObj.QueryList[i].CORP);
+				relaxviewDataSet.data.push(relaxviewObj.QueryList[i].TRADETIMES);
+			}
+		}catch(e){
+			console.log('昨日景点人气 加载异常: '+e.message);
+		}
+		
+		relaxviewCfg.data.datasets.push(relaxviewDataSet);
+		window.relaxview.update();
+	}
+	
+	//园林人气
+	var gardenview = $('#gardenview'); 
+    var gardenviewCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	window.gardenview = new Chart(gardenview,gardenviewCfg);
+	updategardenview();
+	window.setInterval(updategardenview,10000000000000);
+	
+	function updategardenview(){
+		var gardenviewDataSet={
+			label: '人气',
+			backgroundColor: "#46BFBD",
+			data: []
+		};
+		//填充数据
+		try{
+			var requestType = '';
+			if(reportConfig.gardenviewPollType == 3){ //查询休闲
+				requestType = '3';
+				reportConfig.gardenviewPollType = 4;
+				gardenviewDataSet.label = '休闲人气';
+			}else if(reportConfig.gardenviewPollType == 4){ //查询园林
+				requestType = '4';
+				reportConfig.gardenviewPollType = 3;
+				gardenviewDataSet.label = '园林人气';
+			}
+			var gardenviewObj=JSON.parse(gardenviewJson(requestType));
+			if(typeof(gardenviewObj.QueryList) == "undefined"){
+				return;
+			}
+			gardenviewCfg.data.labels = [];
+			gardenviewCfg.data.datasets = [];
+			for(var i=0;i<gardenviewObj.QueryList.length;i++){
+				gardenviewCfg.data.labels.push(gardenviewObj.QueryList[i].CORP);
+				gardenviewDataSet.data.push(gardenviewObj.QueryList[i].TRADETIMES);
+			}
+		}catch(e){
+			console.log('昨日景点人气 加载异常: '+e.message);
+		}
+		
+		gardenviewCfg.data.datasets.push(gardenviewDataSet);
+		window.gardenview.update();
+	}
+	
+	//地铁人气
+	var subwayview = $('#subwayview'); 
+    var subwayviewCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	window.subwayview = new Chart(subwayview,subwayviewCfg);
+	updatesubwayview();
+	window.setInterval(updatesubwayview,10000000000000);
+	
+	function updatesubwayview(){
+		var subwayviewDataSet={
+			label: '人气',
+			backgroundColor: "#46BFBD",
+			data: []
+		};
+		//填充数据
+		try{
+			var requestType = '';
+			if(reportConfig.subwayviewPollType == 9){ //查询休闲
+				requestType = '9';
+				reportConfig.subwayviewPollType = 9;
+				subwayviewDataSet.label = '地铁刷卡金额';
+			}
+			var subwayviewObj=JSON.parse(subwayviewJson(requestType));
+			if(typeof(subwayviewObj.QueryList) == "undefined"){
+				return;
+			}
+			subwayviewCfg.data.labels = [];
+			subwayviewCfg.data.datasets = [];
+			for(var i=0;i<subwayviewObj.QueryList.length;i++){
+				subwayviewCfg.data.labels.push(subwayviewObj.QueryList[i].CORP);
+				if(requestType == 3){
+				subwayviewDataSet.data.push(subwayviewObj.QueryList[i].TRADETIMES);
+				}else if(requestType == 4){
+				subwayviewDataSet.data.push(subwayviewObj.QueryList[i].TRADETIMES);
+				}else{
+				subwayviewDataSet.data.push(subwayviewObj.QueryList[i].TRADEMONEY);
+				}
+			}
+		}catch(e){
+			console.log('昨日景点人气 加载异常: '+e.message);
+		}
+		
+		subwayviewCfg.data.datasets.push(subwayviewDataSet);
+		window.subwayview.update();
+	}
+	//配置柱状图
+	var barviewchart = $('#barviewchart'); 
+    var barviewchartCfg = {
+        type: 'bar',
+        data:  {
+            labels: [],
+            datasets: [] 
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+        }
+    };
+	window.barviewchart = new Chart(barviewchart,barviewchartCfg);
+	updatebarviewchart();
+	
+	function updatebarviewchart(){
+		var barviewchartDataSet={
+			label: $('#barLabelName').val(),
+			backgroundColor: "#46BFBD",
+			data: []
+		};
+		//填充数据
+		try{
+			var ShowChartId = 'barview';
+			
+			//$('#barviewtitle').html($('#barTitleName').val());//显示柱状图标题
+
+			var barviewchartObj=JSON.parse(barviewJson(ShowChartId));
+			if(typeof(barviewchartObj.QueryList) == "undefined"){
+				return;
+			}
+			barviewchartCfg.data.labels = [];
+			barviewchartCfg.data.datasets = [];
+			for(var i=0;i<barviewchartObj.QueryList.length;i++){
+				barviewchartCfg.data.labels.push(barviewchartObj.QueryList[i].CORP);
+				barviewchartDataSet.data.push(barviewchartObj.QueryList[i].CORPNUM);
+			}
+		}catch(e){
+			console.log('昨日景点人气 加载异常: '+e.message);
+		}
+		
+		barviewchartCfg.data.datasets.push(barviewchartDataSet);
+		window.barviewchart.update();
+	}
+	//网点人气
+	var hotDepart = $('#hotDepart'); 
+    var hotDepartCfg = {
+        type: 'pie',
+        data: {
+            datasets: [],
+            labels: []
+        },
+        options: {
+            responsive: true
+        }
+    };
+    window.hotDepart = new Chart(hotDepart,hotDepartCfg); 
+	//updateDepartRealTime();
+	window.setInterval(updateDepartRealTime,reportConfig.departRefreshTime);
+	
+	//定时轮询
+	function updateDepartRealTime(){
+		//填充数据
+		try{
+			if(!isBetweenHour()){return;}
+			//var currentSenconds = new Date().getSeconds();
+			//if(currentSenconds !='00'){//满一分钟才执行
+				//return;
+			//}
+			var hotDepartObj=JSON.parse(hotDepartJson());
+			hotDepartCfg.data.labels = [];
+			hotDepartCfg.data.datasets = [];
+			var hotDepartDataSet={
+				data: [],
+				backgroundColor: []
+			}
+			for(var i=0;i<hotDepartObj.PopularityList.length;i++){
+				hotDepartDataSet.data.push(hotDepartObj.PopularityList[i].TradeTimes);
+				hotDepartDataSet.backgroundColor.push(randomColor(i));
+				hotDepartCfg.data.labels.push(hotDepartObj.PopularityList[i].DepartName);
+			}
+		}catch(e){
+			console.log('网点人气 加载异常: '+e.message);
+		}
+
+		hotDepartCfg.data.datasets.push(hotDepartDataSet);
+		window.hotDepart.update();
+	}
+	
+	//配置饼状图
+	var pieviewchart = $('#pieviewchart'); 
+    var pieviewchartCfg = {
+        type: 'pie',
+        data: {
+            datasets: [],
+            labels: []
+        },
+        options: {
+            responsive: true
+        }
+    };
+    window.pieviewchart = new Chart(pieviewchart,pieviewchartCfg); 
+	updatepieviewchart();
+	
+	function updatepieviewchart(){
+		//填充数据
+		try{
+		    var ShowChartId='pieview';
+			var pieviewchartObj=JSON.parse(pieviewJson(ShowChartId));
+			pieviewchartCfg.data.labels = [];
+			pieviewchartCfg.data.datasets = [];
+			var pieviewchartDataSet={
+				data: [],
+				backgroundColor: []
+			}
+			for(var i=0;i<pieviewchartObj.QueryList.length;i++){
+				pieviewchartDataSet.data.push(pieviewchartObj.QueryList[i].CORPNUM);
+				pieviewchartDataSet.backgroundColor.push(randomColor(i));
+				pieviewchartCfg.data.labels.push(pieviewchartObj.QueryList[i].CORP);
+			}
+		}catch(e){
+			console.log('网点人气 加载异常: '+e.message);
+		}
+
+		pieviewchartCfg.data.datasets.push(pieviewchartDataSet);
+		window.pieviewchart.update();
+	}
+	$("#tradehistory2").hide();
+	$("#hotstore1").hide();
+	$("#hotstore2").hide();
+	$("#cardnums").hide();
+	$("#relaxnums").hide();
+	$("#gardennums").hide();
+	$("#subwaymoney").hide();
+	$("#departtimes").hide();
+	$("#barview").hide();
+	$("#pieview").hide();
+
+	//document.getElementById("tradehistory2").style.display = "none";
+	//document.getElementById("hotstore1").style.display = "none";
+	//document.getElementById("hotstore2").style.display = "none";
+	//document.getElementById("cardnums").style.display = "none";
+	//document.getElementById("relaxnums").style.display = "none";
+	//document.getElementById("gardennums").style.display = "none";
+	//document.getElementById("subwaymoney").style.display = "none";
+	//document.getElementById("departtimes").style.display = "none";
+	//document.getElementById("barview").style.display = "none";
+	//document.getElementById("pieview").style.display = "none";
+  });
+</script>
+</body>
+</html>

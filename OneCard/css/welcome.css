@@ -1,0 +1,30 @@
+@charset "utf-8";
+.welhead {
+	background-image: url(../Images/weldi.GIF);
+	background-repeat: repeat-x;
+	height: 146px;
+}
+.k600 {
+	width: 600px;
+}
+.z600 {
+	width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.weltb {
+	font-size: 18px;
+	color: #0066FF;
+	font-weight: normal;
+	font-family: "黑体";
+	line-height: 30px;
+	margin-top: 20px;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #dddddd;
+	margin-bottom: 10px;
+}
+.welnr {
+	font-size: 14px;
+	line-height: 25px;
+}

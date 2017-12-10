@@ -1,0 +1,87 @@
+/* ------------------------------------
+COPYRIGHT (C) 2012-2013 LINKAGE SOFTWARE 
+ ALL RIGHTS RESERVED.
+<AUTHOR>JIANGBB</AUTHOR>
+<CREATEDATE>2012-08-21</CREATEDATE>
+<MODIFY>JJIANGBB 2015-04-28</MODIFY>
+<DESCRIPTION>同步休闲存储过程</DESCRIPTION>
+------------------------------------ */
+CREATE OR REPLACE PROCEDURE SP_AS_SYNGARDENXXCARD
+(
+    P_CARDNO            CHAR,    	--卡号
+    P_ASN               CHAR,    	--ASN号
+    P_PAPERTYPE         VARCHAR2,  	--证件类型
+    P_PAPERNO           VARCHAR2,  	--证件号码
+	P_CUSTNAME          VARCHAR2,  	--持卡人姓名
+	P_ENDDATE      		VARCHAR2,  	--休闲年卡有效期
+    P_TIMES             INT,    	--苏州通库剩余次数
+	P_TRADETYPE      	CHAR,    	--操作类型 1:开通 2:补换卡 3:取消开通
+	P_CARDTIME      	DATE,    	--卡操作时间
+	P_OLDCARDNO      	CHAR,    	--补换卡业务的老卡号
+	P_RSRV1        		CHAR,    	--预留
+	P_TRADEID      		CHAR,    	--交易流水号
+	P_PACKAGETYPE    	CHAR,    	--套餐类型
+	P_ISOFFLINE      	CHAR,    	--开通方式  0：线下脱机  1：线上白名单
+  
+	p_CITYCODE      	CHAR,    --城市代码
+  
+	P_CURROPER          CHAR,
+    P_CURRDEPT          CHAR,
+    P_RETCODE   		OUT CHAR, -- RETURN CODE
+    P_RETMSG    		OUT VARCHAR2  -- RETURN MESSAGE
+)
+AS
+    V_ID      CHAR(20);
+  V_EX      EXCEPTION;
+  V_SEQNO      CHAR(16);
+  V_ISSZPARKTAG  CHAR(1);
+  V_ISHOTSPRING  CHAR(1);
+BEGIN
+  
+  --获取套餐是否包含苏州乐园、是否能刷温泉
+  BEGIN
+    SELECT ISSZPARKTAG,ISHOTSPRING INTO V_ISSZPARKTAG,V_ISHOTSPRING 
+    FROM td_m_packagetype WHERE PACKAGETYPECODE = P_PACKAGETYPE;
+    EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+      P_RETCODE :='S01901B108'; P_RETMSG :='获取套餐参数失败'|| SQLERRM;
+      RETURN; ROLLBACK;
+  END;
+  
+
+  
+  FOR V_CUR IN (SELECT CHANNELTYPECODE,CHANNELTYPENAME FROM TD_M_XXCHANNELTYPE WHERE USETAG = '1')
+  LOOP
+    SP_GETSEQ(SEQ => V_SEQNO);
+	-- 2) 生成ID
+    SELECT TO_CHAR(SYSDATE,'YYMMDD')||V_CUR.CHANNELTYPECODE||SUBSTR(V_SEQNO,-12) INTO V_ID FROM DUAL;
+    --插入同步休闲数据表
+    BEGIN
+      INSERT INTO TF_B_GARDENXXCARD
+              (ID      ,CARDNO      ,ASN      ,PAPERTYPE    ,
+              PAPERNO    ,CUSTNAME    ,ENDDATE    ,TIMES      ,
+              TRADETYPE  ,CARDTIME    ,OLDCARDNO    ,RSRV1      ,
+              DEALTYPE  ,DEPARTID    ,TRADEID    ,CHANNELTYPECODE,
+              PACKAGETYPE  ,USETAG      ,HOTSPRING    ,ISOFFLINE    ,
+              CITYCODE  ,XXTRADEID)
+      SELECT       V_ID    ,P_CARDNO    ,P_ASN      ,P_PAPERTYPE  ,
+              PAPERNO    ,CUSTNAME    ,P_ENDDATE    ,P_TIMES    ,
+              P_TRADETYPE  ,P_CARDTIME    ,P_OLDCARDNO  ,P_RSRV1    ,
+              0      ,P_CURRDEPT    ,P_TRADEID    ,V_CUR.CHANNELTYPECODE,
+              P_PACKAGETYPE,V_ISSZPARKTAG  ,V_ISHOTSPRING  ,P_ISOFFLINE  ,
+              p_CITYCODE  ,V_SEQNO
+      FROM TF_F_CUSTOMERREC
+      WHERE CARDNO = P_CARDNO;
+      IF  SQL%ROWCOUNT != 1 THEN RAISE V_EX; END IF;    
+            EXCEPTION
+                  WHEN OTHERS THEN
+                  P_RETCODE :='S01901B008'; P_RETMSG :='新增同步休闲数据表失败'|| SQLERRM;
+                  RETURN; ROLLBACK;
+    END;
+  END LOOP;
+
+    P_RETCODE := '0000000000'; P_RETMSG := '';
+    RETURN;
+END;
+/
+SHOW ERRORS

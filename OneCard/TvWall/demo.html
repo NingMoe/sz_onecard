@@ -1,0 +1,843 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="plugins/chartjs/Chart.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <link href="css/css.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/lrtk.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="css/default.css" />-->
+	<link rel="stylesheet" type="text/css" href="css/multilevelmenu.css" />
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<link rel="stylesheet" type="text/css" href="css/animations.css" />
+	<script src="js/modernizr.custom.js"></script>
+	<link rel="stylesheet" href="http://dreamsky.github.io/main/blog/common/init.css">
+	<script src="http://dreamsky.github.io/main/blog/common/jquery.min.js"></script>
+    <title>苏州市民卡 数据分析中心</title>
+    <style>
+        .aaa {
+            font-family: PingFangSC-Light;
+            font-size: 30px;
+            color: #FFFFFF;
+            letter-spacing: 0.75px;
+            margin-top: 10px;
+        }
+
+        .bbb {
+            font-family: PingFangSC-Regular;
+            font-size: 20px;
+            color: #D5D5D6;
+            letter-spacing: 0.5px;
+            line-height: 36px;
+        }
+
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            background: url('./dist/img/TV_1_bg.png')no-repeat;
+            background-size: 100%;
+        }
+
+        .bg1 {
+            background: url('./dist/img/TV_1_bg.png')no-repeat;
+            background-size: 100%;
+        }
+
+        .bg2 {
+            background: url('./dist/img/TV_2_bg.png')no-repeat;
+            background-size: 100%;
+        }
+        .bg3 {
+            background: url('./dist/img/dept1.png')no-repeat;
+            background-size: 100%;
+            position:absolute; 
+            left:0px; 
+            top:30px; 
+            width:535px; 
+            height:363px
+        }
+        .bg4 {
+            background: url('./dist/img/dept2.png')no-repeat;
+            background-size: 100%;
+             position:absolute; 
+            left:0px; 
+            top:30px; 
+            width:580px; 
+            height:397px
+        }
+        .circle1 {
+        width: 20px;
+        height: 20px;
+        background-color: #FFFFFF; 
+        border: 6px #ED9D7A solid;
+        -webkit-border-radius: 11px;
+        }
+         .circle2 {
+        width: 20px;
+        height: 20px;
+        background-color: #FFFFFF; 
+        border: 6px #EC553C solid;
+        -webkit-border-radius: 11px;
+        }
+         .box{ 
+        width:150px; 
+        height:25px; 
+        line-height:25px; 
+        border:#bbb 1px solid; 
+        overflow:hidden; 
+        } 
+        .box ul{margin:0; padding:0} 
+        .box li{ 
+        height:25px; 
+        line-height:25px; 
+        font-size:12px; 
+        text-align:center; 
+        list-style-type:none; 
+        } 
+         .biaoti1,.biaoti2{ display:inline}
+    </style>
+</head>
+<body>
+    <div class="container-fluid" style="margin:0px">
+        <div class="row" style="color:white; background-color:black;">
+            <div class="col-md-6 bg1" style="height: 540px;">
+                <div class="col-md-12" style="margin-top: 15px;display: inline">
+                    <p class="biaoti1" style="font-size: 44px;color: #FFFFFF;letter-spacing: 0.92px;"><b>苏州市民卡</b></p>
+                    <p class="biaoti2" style="font-size: 34px;color: #FFFFFF;letter-spacing: 0;">&nbsp;&nbsp;数据分析中心</p>
+                </div>
+                <div class="col-md-4" style="height: 540px">
+                    <div class="col-md-12 aaa" style="margin-top: 20px;">最近7日刷卡数据</div>
+                    <div class="col-md-12" style="margin-top: 10px;">
+                        <hr class="col-md-10" style="border: 0px; background-color: #474747; height: 1px;"/>
+                        <span class="bbb">监测显示：商业消费在市民卡消费金额中占据主流，公交、地铁消费金额目前已经基本持平。</span>
+                        <hr class="col-md-10" style="border: 0px; background-color: #474747; height: 1px;"/>
+                    </div>
+                </div>
+                <div class="col-md-8" style="height: 540px">
+                    <canvas id="tradeHistory" style="margin-top: 50px;"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6 bg2" style="height:540px;">
+                <div class="col-md-4" style="height:540px">
+                    <div class="col-md-12 aaa" style="margin-top:80px;">实时网点人气</div>
+                    <div class="col-md-12" style="margin-top:20px;">
+                        <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                        <span class="bbb">实时显示当日苏州市民卡各对外服务网点累计人流量分布</span>
+                        <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                    </div>
+                </div>
+                <div class="col-md-8" style="height:540px">
+                    <!--<canvas id="chart-area" style="float:none; width:400px;height:400px;margin-top:100px;"></canvas>-->
+                    <canvas id="hotDepart" style="margin-left: 0px;margin-top: 150px;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="color:white;">
+            <div id="tv3" class="col-md-6" style="background-color:black;height:540px;">
+                <div class="col-md-4" style="height:540px">
+                    <div class="col-md-12 aaa" style="margin-top:5px;">实时发卡量</div>
+                    <div class="col-md-12" style="margin-top:20px;">
+                        <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                        <span class="bbb">实时显示苏州市民卡最近15分钟内发卡量数据变化</span>
+                        <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                    </div>
+                </div>
+                <div class="col-md-8" style="height:540px;">
+                    <!--<canvas id="line" style="float:none; width:400px;height:400px;margin-top:50px;background-color:black;"></canvas>-->
+                    <canvas id="cardSaleRealTime" style="float:none;margin-top:50px;"></canvas>
+                </div>
+            </div>
+            <div id="tv4" class="col-md-6" style="background-color:black;height:540px;">
+                <div class="col-md-4" style="height:540px">
+                    <div class="col-md-12 aaa" style="margin-top:5px;">营业网点</div>
+                    <div class="col-md-12" style="margin-top:20px;">
+                        <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+                                <div class="circle1"></div>
+                            </div>
+                            <div class="col-md-9">自营网点</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+                                <div class="circle2"></div>
+                            </div>
+                            <div class="col-md-9">代理网点</div>
+                        </div>
+                        <hr  class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                        
+                    </div>
+                
+                </div>
+                <!--<div class="col-md-8 test1">
+                </div>-->
+                <div class="col-md-8">
+                    <div class="bg3" id="pic1" style="height:540px; display:none ;">
+                    </div>
+                    <div class="bg4" id="pic2" style="height:540px;">
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="margin:0px;display:none">
+            <div class="row" style="color:white; background-color:black;">
+                <div class="col-md-6 bg1" style="height: 540px;">
+                    <div class="col-md-12" style="margin-top: 15px;display: inline">
+                        <p class="biaoti1" style="font-size: 44px;color: #FFFFFF;letter-spacing: 0.92px;"><b>苏州市民卡</b></p>
+                        <p class="biaoti2" style="font-size: 34px;color: #FFFFFF;letter-spacing: 0;">&nbsp;&nbsp;数据分析中心</p>
+                    </div>
+                    <div class="col-md-4" style="height: 540px">
+                        <div class="col-md-12 aaa" style="margin-top: 20px;">昨日休闲人气</div>
+                        <div class="col-md-12" style="margin-top: 10px;">
+                            <hr class="col-md-10" style="border: 0px; background-color: #474747; height: 1px;" />
+                            <span class="bbb">来源：苏州市民卡后台监测系统 监测显示：昨日苏州各大休闲景点人气以苏州乐园、穹隆山、白马涧、同里等相对较高。</span>
+                            <hr class="col-md-10" style="border: 0px; background-color: #474747; height: 1px;" />
+                        </div>
+                    </div>
+                    <div class="col-md-8" style="height: 540px">
+                        <canvas id="relaxview" style="float: none; width: 400px; height: 250px; margin-top: 50px;"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6 bg2" style="height:540px;">
+                    <div class="col-md-4" style="height:540px">
+                        <div class="col-md-12 aaa" style="margin-top:80px;">昨日园林人气</div>
+                        <div class="col-md-12" style="margin-top:20px;">
+                            <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                            <span class="bbb">来源：苏州市民卡后台监测系统 监测显示：昨日苏州各大园林景点人气以拙政园、虎丘、动物园等相对较高。</span>
+                            <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                        </div>
+                    </div>
+                    <div class="col-md-8" style="height:540px">
+                        <!--<canvas id="chart-area" style="float:none; width:400px;height:400px;margin-top:100px;"></canvas>-->
+                        <canvas id="gardenview" style="height: 350px; margin-top: 150px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="color:white;">
+                <div id="tv3" class="col-md-6" style="background-color:black;height:540px;">
+                    <div class="col-md-4" style="height:540px">
+                        <div class="col-md-12 aaa" style="margin-top:5px;">昨日地铁人气</div>
+                        <div class="col-md-12" style="margin-top:20px;">
+                            <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                            <span class="bbb">来源：苏州市民卡后台监测系统 监测显示：昨日苏州各地铁线路综合人气以火车站、观前商圈站点、湖东湖西商圈站点相对较高。</span>
+                            <hr class="col-md-10" style="border:0px;background-color: #474747;height:1px;" />
+                        </div>
+                    </div>
+                    <div class="col-md-8" style="height:540px;">
+                        <!--<canvas id="line" style="float:none; width:400px;height:400px;margin-top:50px;background-color:black;"></canvas>-->
+                        <canvas id="subwayview" style="float:none;margin-top:50px;"></canvas>
+                    </div>
+                </div>
+                <div id="tv4" class="col-md-6" style="background-color:black;height:540px;">
+                    <div class="col-md-4" style="height:540px">
+                        <div class="col-md-12 aaa" style="margin-top:5px;">营业网点</div>
+                        <div class="col-md-12" style="margin-top:20px;">
+                            <div>
+                                <div id="playBox">
+                                    <div class="pre"></div>
+                                    <div class="next"></div>
+                                    <div class="smalltitle">
+                                        <ul>
+                                            <li class="thistitle"></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                                <ul class="oUlplay">
+                                    <li><img src="images/1.jpg"></li>
+                                    <li><img src="images/2.jpg"></li>
+                                    <li><img src="images/3.jpg"></li>
+                                    <li><img src="images/4.jpg"></li>
+                                    <li><img src="images/5.jpg"></li>
+                                    <li><img src="images/6.jpg"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--<div class="col-md-8 test1">
+                </div>-->
+               
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        var isNullOrEmpty = function (value) {
+            if (typeof (value) == "undefined") {
+                return true;
+            }
+            return value.length == 0;
+        };
+
+        var isInt32 = function (value) {
+            return (/^(\+|-)?\d+$/.test(value)) && value > 0;
+        };
+
+        var padLeft = function (value, length) {
+            var str = value + '';
+            for (var i = 0; i < length; i++) {
+                str = '0' + str;
+            }
+            str = str.substring(str.length - length, str.length);
+            return str;
+        }
+        var ajaxProxy = function (url, data) {
+            var responseData = '';
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: data,
+                async: false,
+                error: function () {
+                    console.log('Ajax请求失败,URL:' + url);
+                },
+                success: function (data) {
+                    responseData = data;
+                }
+            });
+            return JSON.stringify(responseData);
+        }
+        var reportConfig = {
+            //配置参数
+            limitCount: 15, //实时发卡量显示15条记录
+            cardSaleRefreshTime: 60000, //实时发卡量刷新时间
+            departRefreshTime: 60000, //网点人气刷新时间
+            startHour: 8,//早点9点之后才可以轮询
+            endHour: 18, //晚上6点之后就不再轮询
+            pollingTime: 30000, //静态报表切换时间
+
+            //系统参数
+            //baseUrl : 'http://localhost:10643',
+            //baseUrl: 'http://172.16.6.119:5500/onlyTVWALL',
+            baseUrl: 'http://172.16.6.119:5500/v105',
+            initDate: new Date(), //系统初始化时间
+            initDateStr: '',
+            tradeHistoryPollType: 0,//最近7日刷卡数据 轮询类型；0.笔数 1.金额
+            hotStorePollType: 1,//昨日人气指数榜 轮询类型 1.商场 2.超市
+            hotViewPollType: 3,//昨日景点人气 轮询类型 3.园林 4.休闲
+        }
+        reportConfig.initDateStr = padLeft(reportConfig.initDate.getFullYear(), 4) + padLeft((reportConfig.initDate.getMonth() + 1), 2) + padLeft(reportConfig.initDate.getDate(), 2) + padLeft(reportConfig.startHour, 2) + '00' + '00';
+    </script>
+    <script>
+  $(function () {
+    var randomColorFactor = function() {
+        return Math.round(Math.random() * 255);
+    };
+	var _rgbColors = [];
+	_rgbColors.push('#D2691E');
+	_rgbColors.push('#4EEE94');
+	_rgbColors.push('#7A67EE');
+	_rgbColors.push('#636363');
+	_rgbColors.push('#68228B');
+	_rgbColors.push('#9ACD32');
+	_rgbColors.push('#F08080');
+	_rgbColors.push('#EE30A7');
+	_rgbColors.push('#CDAF95');
+	_rgbColors.push('#458B00');
+	_rgbColors.push('#EEEE00');
+	_rgbColors.push('#FF3030');//如果颜色不够，继续加就好。注意颜色之间差别要大
+    //var randomColor = function(opacity) {
+        //return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+    //};
+	var randomColor = function(index){
+		return _rgbColors[index];
+	}
+    var randomScalingFactor = function() {
+        return Math.round(Math.random() * 100);
+        //return 0;
+    };
+    $("#tradeHistory").attr('height', 400);
+    $("#tradeHistory").attr('width', 500);
+    $("#hotDepart").attr('height', 400);
+    $("#hotDepart").attr('width', 500);
+    $("#relaxview").attr('height', 400);
+    $("#relaxview").attr('width', 500);
+    $("#gardenview").attr('height', 400);
+    $("#gardenview").attr('width', 500);
+    $("#subwayview").attr('height', 400);
+    $("#subwayview").attr('width', 500);
+      //昨日刷卡数据 json
+    var tradeHistoryJson = function (type) {
+        var url = reportConfig.baseUrl + '/json/reply/HistoryTradeList';
+        var data = "requestType=" + type;
+        var jsonData = ajaxProxy(url, data);
+        return jsonData;
+    }
+      //昨日人气指数榜 json
+    var hotStoreJson = function (type) {
+        var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+        var data = 'RequestType=' + type;
+        var jsonData = ajaxProxy(url, data);
+        return jsonData;
+    }
+      //网点人气Json
+    var hotDepartJson = function () {
+        var url = reportConfig.baseUrl + '/json/reply/DepartPopularityList';
+        var startTime = reportConfig.initDateStr;
+        var data = 'startTime=' + startTime;
+        var jsonData = ajaxProxy(url, data);
+        return jsonData;
+    }
+	//实时发卡量 Json
+	var cardSaleJson = function(startTime){
+		var url = reportConfig.baseUrl + '/json/reply/CardSellRealTimeNums';
+		var data = 'Minutes=' + reportConfig.cardSaleRefreshTime / 60000;
+		//if(!isNullOrEmpty(startTime)){
+		//	data = 'startTime=' + startTime;
+		//}
+		var jsonData = ajaxProxy(url,data);
+		return jsonData;
+	}
+      //休闲人气 Json
+	var relaxviewJson = function () {
+	    var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+	    var data = 'requestType=3';
+	    var jsonData = ajaxProxy(url, data);
+	    return jsonData;
+	}
+
+      //园林人气 Json
+	var gardenviewJson = function () {
+	    var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+	    var data = 'requestType=4';
+	    var jsonData = ajaxProxy(url, data);
+	    return jsonData;
+	}
+      //地铁人气 Json
+	var subwayviewJson = function () {
+	    var url = reportConfig.baseUrl + '/json/reply/BusPopularityList';
+	    var data = 'requestType=9';
+	    var jsonData = ajaxProxy(url, data);
+	    return jsonData;
+	}
+      //昨日刷卡数据 柱状图
+	var tradeHistory = $('#tradeHistory');
+	var tradeHistoryCfg = {
+	    type: 'bar',
+	    data: {
+	        labels: [],
+	        datasets: []
+	    },
+	    options: {
+	        responsive: true,
+	        legend: {
+	            position: 'top'
+	        },
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	};
+
+	window.tradeHistory = new Chart(tradeHistory, tradeHistoryCfg);
+	updateTradeHistory();
+	window.setInterval(updateTradeHistory, 5000);
+
+	function updateTradeHistory() {
+	    //添加datasets
+	    var DRIVERCAR_ds = {
+	        label: '公交',
+	        backgroundColor: "#30B0F0",
+	        data: []
+	    };
+	    var MERCHANT_ds = {
+	        label: '商户',
+	        backgroundColor: "#ED9D7A",
+	        data: []
+	    };
+	    var METRO_ds = {
+	        label: '地铁',
+	        backgroundColor: "#EA553C",
+	        data: []
+	    };
+
+	    try {
+	        var requestType = '';
+	        if (reportConfig.tradeHistoryPollType == 0) {//查询笔数
+	            $('.box-title').html('最近7日刷卡数据');
+	            reportConfig.tradeHistoryPollType = 1;
+	            requestType = '0';
+	            var tradeHistoryObj = JSON.parse(tradeHistoryJson(requestType));
+
+	            DRIVERCAR_ds.label = '公交笔数';
+	            MERCHANT_ds.label = '商户笔数';
+	            METRO_ds.label = '地铁笔数';
+	            tradeHistoryCfg.data.labels = [];
+	            tradeHistoryCfg.data.datasets = [];
+	            for (var i = tradeHistoryObj.TradeList.length - 1; i >= 0; i--) {
+	                var tempDate = tradeHistoryObj.TradeList[i].TRADEDATE;
+	                tradeHistoryCfg.data.labels.push(tempDate);
+
+	                DRIVERCAR_ds.data.push(tradeHistoryObj.TradeList[i].DRIVERCARTRADETIMES);
+	                MERCHANT_ds.data.push(tradeHistoryObj.TradeList[i].MERCHANTTRADETIMES);
+	                METRO_ds.data.push(tradeHistoryObj.TradeList[i].METROTRADETIMES);
+	            }
+	            tradeHistoryCfg.data.datasets = [];
+	            tradeHistoryCfg.data.datasets.push(DRIVERCAR_ds);
+	            tradeHistoryCfg.data.datasets.push(MERCHANT_ds);
+	            tradeHistoryCfg.data.datasets.push(METRO_ds);
+	        } else if (reportConfig.tradeHistoryPollType == 1) {//查询金额
+	            $('.box-title').html('最近7日刷卡数据');
+	            requestType = '1';
+	            reportConfig.tradeHistoryPollType = 0;
+	            DRIVERCAR_ds.label = '公交金额';
+	            MERCHANT_ds.label = '商户金额';
+	            METRO_ds.label = '地铁金额';
+	            var tradeHistoryObj = JSON.parse(tradeHistoryJson(requestType));
+	            if (typeof (tradeHistoryObj.TradeList) == "undefined") {
+	                return;
+	            }
+	            tradeHistoryCfg.data.labels = [];
+	            tradeHistoryCfg.data.datasets = [];
+	            for (var i = tradeHistoryObj.TradeList.length - 1; i >= 0; i--) {
+	                var tempDate = tradeHistoryObj.TradeList[i].TRADEDATE;
+	                tradeHistoryCfg.data.labels.push(tempDate);
+
+	                DRIVERCAR_ds.data.push(tradeHistoryObj.TradeList[i].DRIVERCARTRADEMONEY);
+	                MERCHANT_ds.data.push(tradeHistoryObj.TradeList[i].MERCHANTTRADEMONEY);
+	                METRO_ds.data.push(tradeHistoryObj.TradeList[i].METROTRADEMONEY);
+	            }
+	            tradeHistoryCfg.data.datasets = [];
+	            tradeHistoryCfg.data.datasets.push(DRIVERCAR_ds);
+	            tradeHistoryCfg.data.datasets.push(MERCHANT_ds);
+	            tradeHistoryCfg.data.datasets.push(METRO_ds);
+	        }
+	    } catch (e) {
+	        alert('最近7日刷卡数据 加载异常: ' + e.message);
+	        //console.log('最近7日刷卡数据 加载异常: ' + e.message);
+	    }
+	    window.tradeHistory.update();
+	}
+      //网点人气
+	var hotDepart = $('#hotDepart');
+	var hotDepartCfg = {
+	    type: 'pie',
+	    data: {
+	        datasets: [],
+	        labels: []
+	    },
+	    options: {
+	        responsive: true,
+	        legend: {
+	            position: 'bottom'
+	        }
+	    }
+	};
+
+	window.hotDepart = new Chart(hotDepart, hotDepartCfg);
+	window.setInterval(updateDepartRealTime, reportConfig.departRefreshTime);
+
+      //定时轮询
+	function updateDepartRealTime() {
+	    //填充数据
+	    try {
+	        //if (!isBetweenHour()) { return; }
+	        var hotDepartObj = JSON.parse(hotDepartJson());
+	        hotDepartCfg.data.labels = [];
+	        hotDepartCfg.data.datasets = [];
+	        var hotDepartDataSet = {
+	            data: [],
+	            backgroundColor: []
+	        }
+	        for (var i = 0; i < hotDepartObj.PopularityList.length; i++) {
+	            hotDepartDataSet.data.push(hotDepartObj.PopularityList[i].TradeTimes);
+	            hotDepartDataSet.backgroundColor.push(randomColor(i));
+	            hotDepartCfg.data.labels.push(hotDepartObj.PopularityList[i].DepartName);
+	        }
+	    } catch (e) {
+	        alert('网点人气 加载异常: ' + e.message);
+	        //console.log('网点人气 加载异常: ' + e.message);
+	    }
+	    hotDepartCfg.data.datasets.push(hotDepartDataSet);
+	    window.hotDepart.update();
+	}
+
+      //实时发卡量
+	$("#cardSaleRealTime").attr('height', 400);
+	$("#cardSaleRealTime").attr('width', 500);
+	var areaChartLabel = reportConfig.initDate.getFullYear()+'年'+(reportConfig.initDate.getMonth()+1)+'月'+reportConfig.initDate.getDate()+'日'+' 实时发卡量 ';
+    var areaChartCanvas = $("#cardSaleRealTime");
+    var areaChartOptions = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+              label: areaChartLabel + '(发卡总量: 0)',
+              fillColor: "rgba(210, 214, 222, 1)",
+              strokeColor: "rgba(210, 1, 222, 1)",
+              pointColor: "rgba(210, 1, 222, 1)",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: []
+            }]
+        },
+        options: {
+          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+          scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+		}
+    };
+
+    $.each(areaChartOptions.data.datasets, function(i, dataset) {
+            dataset.borderColor = "#30B0F0";
+            dataset.pointBorderColor = "#FFF";
+            dataset.pointBackgroundColor = "#FFF";
+            dataset.pointBorderWidth = 1;
+        });
+
+    window.areaChart = new Chart(areaChartCanvas,areaChartOptions);
+
+    var areaChartLoadDataCount = 0;
+
+    window.setInterval(updateCardSaleRealTime, reportConfig.departRefreshTime);
+    //轮询
+    function updateCardSaleRealTime()
+    {
+		try{
+			//if(!isBetweenHour()){return;}
+			var cardSaleObj = JSON.parse(cardSaleJson());
+			if(typeof(cardSaleObj.QueryTime) == "undefined"){
+				return;
+			}
+			if (areaChartOptions.data.datasets.length > 0) {
+				$.each(areaChartOptions.data.datasets, function(i, dataset) {
+					if(areaChartLoadDataCount>=reportConfig.limitCount){
+						dataset.data.shift();
+					}
+					dataset.data.push(cardSaleObj.Counts);
+				});
+				if(areaChartLoadDataCount>=reportConfig.limitCount){
+					areaChartOptions.data.labels.shift();
+				}
+				areaChartOptions.data.labels.push(cardSaleObj.QueryTime);
+			}
+			if(areaChartLoadDataCount < reportConfig.limitCount){
+				areaChartLoadDataCount++;
+			}
+
+			cardSaleObj = JSON.parse(cardSaleJson(reportConfig.initDateStr));//得到总量
+			if(typeof(cardSaleObj.QueryTime) == "undefined"){
+				return;
+			}
+			$.each(areaChartOptions.data.datasets, function(i, dataset) {
+				var cardSaleCount = cardSaleObj.Counts;
+				dataset.label = areaChartLabel + '(发卡总量: ' + cardSaleCount + ')'
+			});
+			window.areaChart.update();
+		} catch (e) {
+		    alert('实时发卡量 加载异常: ' + e.message);
+			//console.log('实时发卡量 加载异常: '+e.message);
+		}
+    }
+      //休闲人气
+    var relaxview = $('#relaxview');
+    var relaxviewCfg = {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: []
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    };
+    window.relaxview = new Chart(relaxview, relaxviewCfg);
+    updaterelaxview();
+
+    function updaterelaxview() {
+        var relaxviewDataSet = {
+            label: '休闲人气',
+            backgroundColor: "#30B0F0",
+            data: []
+        };
+        //填充数据
+        try {
+            var relaxviewObj = JSON.parse(relaxviewJson());
+            if (typeof (relaxviewObj.QueryList) == "undefined") {
+                return;
+            }
+            relaxviewCfg.data.labels = [];
+            relaxviewCfg.data.datasets = [];
+            for (var i = 0; i < relaxviewObj.QueryList.length; i++) {
+                relaxviewCfg.data.labels.push(relaxviewObj.QueryList[i].CORP);
+                relaxviewDataSet.data.push(relaxviewObj.QueryList[i].TRADETIMES);
+            }
+        } catch (e) {
+            alert('昨日景点人气 加载异常: ' + e.message);
+            //console.log('昨日景点人气 加载异常: ' + e.message);
+        }
+
+        relaxviewCfg.data.datasets.push(relaxviewDataSet);
+        window.relaxview.update();
+    }
+
+      //园林人气
+    var gardenview = $('#gardenview');
+    var gardenviewCfg = {
+        type: 'horizontalBar',
+        data: {
+            labels: [],
+            datasets: []
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    };
+    window.gardenview = new Chart(gardenview, gardenviewCfg);
+    updategardenview();
+
+    function updategardenview() {
+        var gardenviewDataSet = {
+            label: '园林人气',
+            backgroundColor: "#30B0F0",
+            data: []
+        };
+        //填充数据
+        try {
+            var gardenviewObj = JSON.parse(gardenviewJson());
+            if (typeof (gardenviewObj.QueryList) == "undefined") {
+                return;
+            }
+            gardenviewCfg.data.labels = [];
+            gardenviewCfg.data.datasets = [];
+            for (var i = 0; i < gardenviewObj.QueryList.length; i++) {
+                gardenviewCfg.data.labels.push(gardenviewObj.QueryList[i].CORP);
+                gardenviewDataSet.data.push(gardenviewObj.QueryList[i].TRADETIMES);
+            }
+        } catch (e) {
+            alert('昨日园林人气 加载异常: ' + e.message);
+            //console.log('昨日园林人气 加载异常: ' + e.message);
+        }
+
+        gardenviewCfg.data.datasets.push(gardenviewDataSet);
+        window.gardenview.update();
+    }
+
+      //地铁人气
+    var subwayview = $('#subwayview');
+    var subwayviewCfg = {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: []
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    };
+    window.subwayview = new Chart(subwayview, subwayviewCfg);
+    updatesubwayview();
+
+    function updatesubwayview() {
+        var subwayviewDataSet = {
+            label: '地铁刷卡金额',
+            backgroundColor: "#30B0F0",
+            data: []
+        };
+        //填充数据
+        try {
+            var subwayviewObj = JSON.parse(subwayviewJson());
+            if (typeof (subwayviewObj.QueryList) == "undefined") {
+                return;
+            }
+            subwayviewCfg.data.labels = [];
+            subwayviewCfg.data.datasets = [];
+            for (var i = 0; i < subwayviewObj.QueryList.length; i++) {
+                subwayviewCfg.data.labels.push(subwayviewObj.QueryList[i].CORP);
+                subwayviewDataSet.data.push(subwayviewObj.QueryList[i].TRADEMONEY);
+            }
+        } catch (e) {
+            alert('昨日地铁人气 加载异常: ' + e.message);
+            //console.log('昨日地铁人气 加载异常: ' + e.message);
+        }
+
+        subwayviewCfg.data.datasets.push(subwayviewDataSet);
+        window.subwayview.update();
+    }
+  });
+    </script>
+    <script>
+        window.setInterval(LoopPic, 3000);
+
+        function LoopPic() {
+            if (document.getElementById("pic1").style.display == "none") {
+                $("#pic2").fadeOut(1000);
+                $("#pic1").fadeIn(1000);
+            } else {
+                $("#pic1").fadeOut(1000);
+                $("#pic2").fadeIn(1000);
+            }
+        }
+        var oMarquee = document.getElementById("mydiv");//滚动对象
+        var iLineHeight = 5;                       //单行高度
+        var iLineCount = 1;         //实际行数
+        var iScrollAmount = 1;    //每次滚动高度
+        function play() {
+            oMarquee.scrollTop += iScrollAmount;
+            if (oMarquee.scrollTop == iLineHeight * iLineHeight) {
+
+                oMarquee.scrollTop = 0;
+            }
+            if (oMarquee.scrollTop % iLineHeight == 0) {
+                window.setTimeout("play()", 2000);
+            } else {
+                window.setTimeout("play()", 50);
+            }
+        }
+        oMarquee.innerHTML += oMarquee.innerHTML;
+        window.setTimeout("play()", 2000);  //定时器用来循环滚动
+    </script>
+</body>
+</html>

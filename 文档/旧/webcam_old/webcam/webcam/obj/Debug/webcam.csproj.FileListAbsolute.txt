@@ -1,0 +1,6 @@
+D:\webcam\webcam\webcam\bin\webcam.dll.config
+D:\webcam\webcam\webcam\bin\webcam.dll
+D:\webcam\webcam\webcam\bin\webcam.pdb
+D:\webcam\webcam\webcam\obj\Debug\webcam.csprojResolveAssemblyReference.cache
+D:\webcam\webcam\webcam\obj\Debug\webcam.dll
+D:\webcam\webcam\webcam\obj\Debug\webcam.pdb

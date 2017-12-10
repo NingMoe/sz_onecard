@@ -1,0 +1,85 @@
+﻿body {
+	    margin-left: 0px;
+	    margin-top: 0px;
+	    margin-right: 0px;
+	    margin-bottom: 0px;
+	    font-size: 14px;
+    }
+    .bt {
+	    font-size: 16px;
+	    text-decoration: underline;
+	    line-height: 20px;
+	    font-weight: bold;
+	    color: #000000;
+    }
+    .head {
+	    font-size: 14px;
+	    font-weight: bold;
+    }
+    .cgl {
+	    font-family: "黑体";
+	    font-size: 20px;
+    }
+    .line {
+	    border: 2px solid #000000;
+    }
+    .line2 {
+	    border-bottom-width: 1px;
+	    border-bottom-style: solid;
+	    border-bottom-color: #000000;
+    }
+    .line3 {
+	    border-right-width: 1px;
+	    border-right-style: solid;
+	    border-right-color: #000000;
+    }
+    .textbox100   
+    {    
+        BORDER-BOTTOM:   #000099   1px   solid;   
+        BORDER-LEFT:   #ffffff   1px   solid;   
+        BORDER-RIGHT:   #ffffff   1px   solid;   
+        BORDER-TOP:   #ffffff   1px   solid ;
+        width: 100px; 
+    }
+    .textbox200   
+    {    
+        BORDER-BOTTOM:   #000099   1px   solid;   
+        BORDER-LEFT:   #ffffff   1px   solid;   
+        BORDER-RIGHT:   #ffffff   1px   solid;   
+        BORDER-TOP:   #ffffff   1px   solid ;
+        width: 200px; 
+    }
+    .textbox150   
+    {    
+        BORDER-BOTTOM:   #000099   1px   solid;   
+        BORDER-LEFT:   #ffffff   1px   solid;   
+        BORDER-RIGHT:   #ffffff   1px   solid;   
+        BORDER-TOP:   #ffffff   1px   solid ;
+        width: 150px; 
+    }
+    .labeltextlong
+    {
+	    border: 0px;
+	    width: 200px;
+	    font-size: 12px;
+    }
+    .labeltextlonger
+    {
+	    border: 0px;
+	    width: 270px;
+	    font-size: 12px;
+    }
+    .labeltextmid
+    {
+	    border: 0px;
+	    width: 100px;
+	    font-size: 12px;
+    }
+     .textbox80   
+    {    
+        BORDER-BOTTOM:   #000099   1px   solid;   
+        BORDER-LEFT:   #ffffff   1px   solid;   
+        BORDER-RIGHT:   #ffffff   1px   solid;   
+        BORDER-TOP:   #ffffff   1px   solid ;
+        width: 80px; 
+    }

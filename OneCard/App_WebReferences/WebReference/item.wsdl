@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="http://service.sm.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://service.sm.com" targetNamespace="http://service.sm.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://service.sm.com">
+      <xsd:element name="RequestHandle">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="request" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RequestHandleResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="RequestHandleReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="RequestHandleRequest">
+    <wsdl:part name="parameters" element="impl:RequestHandle" />
+  </wsdl:message>
+  <wsdl:message name="RequestHandleResponse">
+    <wsdl:part name="parameters" element="impl:RequestHandleResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SzlibServiceHandler">
+    <wsdl:operation name="RequestHandle">
+      <wsdl:input name="RequestHandleRequest" message="impl:RequestHandleRequest" />
+      <wsdl:output name="RequestHandleResponse" message="impl:RequestHandleResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SzlibServiceHandlerSoapBinding" type="impl:SzlibServiceHandler">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RequestHandle">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RequestHandleRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RequestHandleResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SzlibServiceHandlerService">
+    <wsdl:port name="SzlibServiceHandler" binding="impl:SzlibServiceHandlerSoapBinding">
+      <wsdlsoap:address location="http://192.168.104.107:8080/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
