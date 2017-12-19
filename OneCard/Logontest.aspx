@@ -48,7 +48,7 @@
                 <tr>
                     <td>密　码:</td>
                     <td style="width: 163px">
-                        <asp:TextBox CssClass = "input" ID = "UserPass" MaxLength = "20" runat ="server" Text="szcic1234"  ></asp:TextBox>
+                        <asp:TextBox CssClass = "input" ID = "UserPass" MaxLength = "20" runat ="server" Text="szcic123"  ></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

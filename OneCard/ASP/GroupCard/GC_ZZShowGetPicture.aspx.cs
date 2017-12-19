@@ -56,8 +56,10 @@ public partial class ASP_GroupCard_GC_ZZShowGetPicture : Master.Master
     private byte[] ReadImage(string orderdetailid)
     {
         Dictionary<string, string> postData = new Dictionary<string, string>();
-        postData.Add("ORDERDETAILID", orderdetailid);
-        string jsonResponse = HttpHelper.PostRequest(HttpHelper.TradeType.ZZGetPhoto, postData);
+        postData.Add("channelCode", "ONECARD");
+        postData.Add("detailNo", orderdetailid);
+        postData.Add("remark", "");
+        string jsonResponse = HttpHelper.ZZPostRequest(HttpHelper.TradeType.ZZGetPhoto, postData);
         string code = "";
         string message = "";
         string bytePhoto = "";
@@ -80,7 +82,7 @@ public partial class ASP_GroupCard_GC_ZZShowGetPicture : Master.Master
         }
         if (code == "0000") //表示成功
         {
-            return System.Text.Encoding.Default.GetBytes(bytePhoto);
+            return Convert.FromBase64String(bytePhoto);
         }
 
         return null;
@@ -93,7 +95,7 @@ public partial class ASP_GroupCard_GC_ZZShowGetPicture : Master.Master
     /// <param name="res"></param>
     public static void RespondPicture(byte[] pic, HttpResponse res)
     {
-        if (pic != null)
+        if (pic != null && pic.Length != 0)
         {
             res.ContentType = "application/octet-stream";
             res.AddHeader("Content-Disposition", "attachment;FileName= picture.JPG");
