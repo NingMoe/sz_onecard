@@ -290,6 +290,39 @@ function CardAndReadCardForCheck() {
     
 }
 
+function SupplyAndReadCardForCheck() {
+    try {
+        var ret = ReadCardInfoForCheck();
+        if (!ret) {
+            return false;
+        }
+        if (cardReader.CardInfo.cardNo != $get('txtCardNo').value) {
+            MyExtAlert("警告", "读卡器上卡片为:<br>"
+            + '<span class="red">' + cardReader.CardInfo.cardNo + '</span>'
+            + "<br>先前读出卡号为: <br>"
+            + '<span class="red">' + $get('txtCardNo').value + '</span>'
+            + "<br>不一致。<br><br> 请重新点击读卡按钮后再操作！");
+            return false;
+        }
+        else if (cardReader.CardInfo.cardNo != $get('hidOrderCardNo').value) {
+            MyExtAlert("警告", "读卡器上卡片为:<br>"
+            + '<span class="red">' + cardReader.CardInfo.cardNo + '</span>'
+            + "<br>订单卡号为: <br>"
+            + '<span class="red">' + $get('hidOrderCardNo').value + '</span>'
+            + "<br>不一致。<br><br> 请重新点击读卡按钮后再操作！");
+            return false;
+        }
+        else {
+            return true;
+        }
+        return false;
+    }
+    catch (e) {
+        return false;
+    }
+
+}
+
 
 function SupplyCheck()
 {

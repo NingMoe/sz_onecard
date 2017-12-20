@@ -158,6 +158,8 @@
                             </tr>
                         </table>
                     </div>
+                    <asp:HiddenField ID="hidTradeNo" runat="server" />
+                    <asp:HiddenField ID="hidOrderCardNo" runat="server" />
                     <asp:HiddenField ID="hidOrderNo" runat="server" />
                     <asp:HiddenField ID="hidDetailNo" runat="server" />
                     <asp:HiddenField ID="hiddencMoney" runat="server" />
@@ -194,10 +196,10 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <HeaderTemplate>
-                                            <asp:Label ID="Label1" runat="server" Text="制卡"></asp:Label>
+                                            <asp:Label ID="Label1" runat="server" Text="售卡"></asp:Label>
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:Button ID="btnProduce" CssClass="button1" runat="server" Text="制卡" CausesValidation="true"
+                                            <asp:Button ID="btnProduce" CssClass="button1" runat="server" Text="售卡" CausesValidation="true"
                                                 CommandName="Produce" CommandArgument='<%#Container.DataItemIndex%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
