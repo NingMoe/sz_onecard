@@ -112,6 +112,16 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
                     break;
             }
 
+            Button btnProduce = (Button)e.Row.FindControl("btnProduce");
+            switch (e.Row.Cells[5].Text)
+            {
+                case "":
+                    btnProduce.Visible = true;
+                    break;
+                default:
+                    btnProduce.Visible = false;
+                    break;
+            }
             Button btnCharge = (Button)e.Row.FindControl("btnCharge");
             switch (e.Row.Cells[2].Text)
             {
@@ -170,7 +180,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         DataTable table = fillDataTable(HttpHelper.TradeType.ZZOrderCardQuery, DeclarePost(begin, end));
         if (table.Rows.Count > 0)
         {
-            gvOrderList.DataSource = table;
+            gvOrderList.DataSource = GetTableCard(table);
             gvOrderList.DataBind();
         }
         // 页数
@@ -207,6 +217,20 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             previousLink.Visible = false;
             nextLink.Visible = false;
         }
+    }
+
+    private DataTable GetTableCard(DataTable data)
+    {
+        foreach (DataRow item in data.Rows)
+        {
+            DataTable dt = GroupCardHelper.callQuery(context, "GetTableCard", item["DETAILNO"].ToString());
+            if (dt != null && dt.Rows.Count != 0)
+            {
+                item["CARDNO"] = dt.Rows[0][0].ToString();
+            }
+
+        }
+        return data;
     }
 
     private int GetListCount(HttpHelper.TradeType tradetype, Dictionary<string, string> postData)
@@ -346,7 +370,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
     /// 提交同步信息
     /// </summary>
     /// <param name="orderType"></param>
-    private void synMsg(object sender, EventArgs e, string orderNo, string detailNo, string cardNo, string orderType)
+    private void synMsg(object sender, EventArgs e, string orderNo, string detailNo, string cardNo, string orderType, ref string code, ref string message)
     {
 
         string orderid = orderNo;
@@ -376,8 +400,6 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         string jsonResponse = HttpHelper.ZZPostRequest(HttpHelper.TradeType.ZZOrderChange, postData);
 
         JObject deserObject = (JObject)JsonConvert.DeserializeObject(jsonResponse);
-        string code = "";
-        string message = "";
         foreach (JProperty itemProperty in deserObject.Properties())
         {
             string propertyName = itemProperty.Name;
@@ -399,17 +421,22 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         {
             context.AddMessage("处理失败,失败原因：" + message);
         }
-        //更新同步状态
-        UpdateSyncType(code, message);
     }
 
-    //接口调用完成更新同步表状态
-    private void UpdateSyncType(string syncCode, string syncMsg)
+    //记录同步信息
+    private void UpdateSyncType(string operateType, string tradeType, string syncCode, string syncMsg)
     {
+        //operateType 01新增 02修改
+        //tradeType 01售卡 02充值 03配送
         context.SPOpen();
         context.AddField("P_TRADEID").Value = hidTradeNo.Value;
+        context.AddField("P_ORDERNO").Value = hidOrderNo.Value;
+        context.AddField("P_DETAILNO").Value = hidDetailNo.Value;
+        context.AddField("P_CARDNO").Value = txtCardno.Text;
         context.AddField("P_SYNCTYPE").Value = syncCode == "0000" ? "02" : "03";
         context.AddField("P_SYNCMSG").Value = syncMsg;
+        context.AddField("P_OPERATETYPE").Value = operateType;
+        context.AddField("P_TRADETYPE").Value = tradeType;
         context.ExecuteSP("SP_GC_ZZUpdateSync");
     }
 
@@ -492,6 +519,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             //ScriptManager.RegisterStartupScript(this, this.GetType(),
             //            "js", "ReadCardInfo()", true);
 
+            hidMoney.Value = gvOrderList.Rows[index].Cells[2].Text;
             //验证卡状态
             checkCardState(txtCardno.Text);
 
@@ -506,17 +534,17 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             //return;
             //售卡-休闲开通
             ProduceCard(sender, e, "");
-            
+
         }
 
         if (e.CommandName == "Charge")
         {
-            hidOrderCardNo.Value = gvOrderList.Rows[index].Cells[25].Text;
+            hidOrderCardNo.Value = gvOrderList.Rows[index].Cells[5].Text;
             hidMoney.Value = gvOrderList.Rows[index].Cells[2].Text;
 
             //读卡验证卡号
-            ScriptManager.RegisterStartupScript(this, this.GetType(),
-                        "js", "SupplyAndReadCardForCheck()", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(),
+            //            "js", "SupplyAndReadCardForCheck()", true);
 
             //验证卡状态
             //checkCardState(txtCardno.Text);
@@ -526,12 +554,13 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             if (context.hasError())
                 return;
 
-            //充值前余额验证
-            ScriptManager.RegisterStartupScript(this, this.GetType(),
-                        "js", "ChargeCardChargeCheck()", true);
+            ////充值前余额验证
+            //ScriptManager.RegisterStartupScript(this, this.GetType(),
+            //            "js", "ChargeCardChargeCheck()", true);
+            btnSupply_Click(sender, e);
         }
     }
-    
+
 
     #region 售卡用户信息进行检验
     /// <summary>
@@ -594,7 +623,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         context.SPOpen();
         context.AddField("P_DETAILNO").Value = hidDetailNo.Value;      //子订单号
         context.AddField("P_ORDERNO").Value = hidDetailNo.Value;      //子订单号
-        context.AddField("P_ID").Value = DealString.GetRecordID(hiddentradeno.Value, "00215000"+txtCardno.Text.Substring(7,8));
+        context.AddField("P_ID").Value = DealString.GetRecordID(hiddentradeno.Value, "00215000" + txtCardno.Text.Substring(8, 8));
         //context.AddField("P_ID").Value = DealString.GetRecordID(hiddentradeno.Value, hiddenAsn.Value.Substring(4, 16));
         context.AddField("P_CARDNO").Value = txtCardno.Text;
         context.AddField("P_DEPOSIT").Value = 0;
@@ -634,9 +663,20 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         if (ok)
         {
             hidTradeNo.Value = "" + context.GetFieldValue("P_SALECARDTRADEID");
+            //记录同步信息
+            UpdateSyncType("01", "01", "", "");
             context.AddMessage("制卡完成！");
-            //调用同步接口
-            synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1");
+            //充值金额不为零则同步接口
+            if (hidMoney.Value != "0")
+            {
+                string code = "";
+                string message = "";
+                //调用同步接口
+                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", ref code, ref message);
+
+                //更新同步信息
+                UpdateSyncType("02", "01", code, message);
+            }
         }
     }
 
@@ -664,6 +704,13 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
 
             if (ok)
             {
+                string code = "";
+                string message = "";
+                //调用同步接口
+                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", ref code, ref message);
+
+                //更新同步信息
+                UpdateSyncType("02", "02", code, message);
                 AddMessage("前台写卡成功");
                 btnQuery_Click(sender, e);
             }
@@ -700,7 +747,8 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         //充值类型为现金
         SP_PB_ChargePDO pdo = new SP_PB_ChargePDO();
 
-        pdo.ID = DealString.GetRecordID(hiddentradeno.Value, hiddenAsn.Value.Substring(4, 16));
+        //pdo.ID = DealString.GetRecordID(hiddentradeno.Value, hiddenAsn.Value.Substring(4, 16));
+        pdo.ID = DealString.GetRecordID(hiddentradeno.Value, "00215000" + txtCardno.Text.Substring(8, 8));
         //pdo.ID = hiddentradeno.Value + DateTime.Now.ToString("MMddhhmmss") + LabAsn.Text.Substring(12, 4);
         pdo.CARDNO = txtCardno.Text;
         pdo.CARDTRADENO = hiddentradeno.Value;
@@ -720,7 +768,10 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         bool ok = TMStorePModule.Excute(context, pdo, out pdoOut);
         if (ok)
         {
-            hidoutTradeid.Value = "" + ((SP_PB_ChargePDO)pdoOut).TRADEID;
+            hidTradeNo.Value = "" + ((SP_PB_ChargePDO)pdoOut).TRADEID;
+
+            //记录同步信息
+            UpdateSyncType("01", "02", "", "");
             //AddMessage("M001002001");
             ScriptManager.RegisterStartupScript(this, this.GetType(),
                 "writeCardScript", "chargeCard();", true);

@@ -30,6 +30,7 @@ public partial class ASP_Financial_FI_RCParksQuery : Master.ExportMaster
         string month = sysdate.Substring(4,2);
         if (Int32.Parse(month) > 6)//如果系统时间201607-201612下拉期数为201606，201512，201506，201412
         {
+            selDate.Items.Add(new ListItem(year + "12", year + "12"));
             selDate.Items.Add(new ListItem(year + "06", year + "06"));
             selDate.Items.Add(new ListItem((Int32.Parse(year) - 1).ToString() + "12", (Int32.Parse(year) - 1).ToString() + "12"));
             selDate.Items.Add(new ListItem((Int32.Parse(year) - 1).ToString() + "06", (Int32.Parse(year) - 1).ToString() + "06"));
@@ -37,6 +38,7 @@ public partial class ASP_Financial_FI_RCParksQuery : Master.ExportMaster
         }
         else//如果系统时间201601-201606,下拉期数为201512，201506，201412，201406
         {
+            selDate.Items.Add(new ListItem(year + "06", year + "06"));
             selDate.Items.Add(new ListItem((Int32.Parse(year) - 1).ToString() + "12", (Int32.Parse(year) - 1).ToString() + "12"));
             selDate.Items.Add(new ListItem((Int32.Parse(year) - 1).ToString() + "06", (Int32.Parse(year) - 1).ToString() + "06"));
             selDate.Items.Add(new ListItem((Int32.Parse(year) - 2).ToString() + "12", (Int32.Parse(year) - 2).ToString() + "12"));

@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>休闲订单配送</title>
+    <title>转转卡订单配送</title>
     <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
     <link href="../../css/card.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../js/myext.js"></script>
@@ -82,7 +82,7 @@
     <cr:CardReader ID="cardReader" runat="server" />
     <form id="form1" runat="server">
     <div class="tb">
-        休闲订单配送
+        转转卡订单配送
     </div>
     <ajaxToolkit:ToolkitScriptManager EnableScriptGlobalization="true" EnableScriptLocalization="true"
         ID="ScriptManager1" runat="server" />
@@ -216,21 +216,13 @@
                             <Columns>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
-                                        <asp:CheckBox ID="chkAllOrder" runat="server" onclick="javascript:SelectAll(this);" />
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="chkOrderList" runat="server" Height="20px" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField>
-                                    <HeaderTemplate>
                                         <asp:Label ID="labClickList" runat="server" Text="查看明细"></asp:Label>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <%--<asp:Button runat="server" CssClass="button1" ID="btnQueryList" Text="查看明细"/>--%>
                                         <%--<linkbutton runat="server" id="asd" text="chakan" />--%>
                                         <asp:LinkButton ID="linkQueryList" runat="server" Text="查看明细" CausesValidation="true"
-                                            CommandName="QueryList" CommandArgument='<%# Eval("orderno")%>' />
+                                            CommandName="QueryList" CommandArgument='<%# Container.DataItemIndex%>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
@@ -252,9 +244,9 @@
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="orderno" HeaderText="订单号" />
                                 <asp:BoundField DataField="orderstates" HeaderText="订单状态" />
-                                <asp:BoundField DataField="custname" HeaderText="物流联系人" />
-                                <asp:BoundField DataField="address" HeaderText="物流地址" />
-                                <asp:BoundField DataField="custphone" HeaderText="物流电话" />
+                                <asp:BoundField DataField="RECEIVECUSTNAME" HeaderText="物流联系人" />
+                                <asp:BoundField DataField="RECEIVEADDRESS" HeaderText="物流地址" />
+                                <asp:BoundField DataField="RECEIVECUSTPHONE" HeaderText="物流电话" />
                                 <asp:BoundField DataField="custpost" HeaderText="物流邮编" />
                                 <asp:BoundField DataField="createtime" HeaderText="订单日期" />
                                 <asp:BoundField DataField="trackingcopcode" HeaderText="物流公司名称" />
@@ -263,9 +255,6 @@
                             <EmptyDataTemplate>
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
                                     <tr class="tabbt">
-                                        <td>
-                                            <input type="checkbox" />
-                                        </td>
                                         <td>
                                             物流公司
                                         </td>
@@ -309,46 +298,14 @@
                             PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
                             runat="server" AutoGenerateColumns="false" OnRowDataBound="gvList_RowDataBound">
                             <Columns>
-                                <asp:BoundField DataField="ordertype" HeaderText="订单类型" />
-                                <asp:BoundField DataField="detailstates" HeaderText="订单状态" />
-                                <asp:TemplateField>
-                                    <HeaderTemplate>
-                                        <asp:Label ID="labHeadPhoto" runat="server" Text="人物照片"></asp:Label>
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <asp:Image ID="imgPerson" runat="server" Width="50px" Height="50px" ImageUrl="~/Images/nom.jpg" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField>
-                                    <HeaderTemplate>
-                                        <asp:Label ID="labHeadPaperPhoto" runat="server" Text="身份证照片"></asp:Label>
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <asp:Image ID="imgIDCard" runat="server" Width="50px" Height="50px" ImageUrl="~/Images/nom.jpg" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                <asp:BoundField DataField="DETAILNO" HeaderText="子订单号" />
+                                <asp:BoundField DataField="ORDERNO" HeaderText="主订单号" />
                                 <asp:BoundField DataField="cardno" HeaderText="电子钱包卡号" />
                                 <asp:BoundField DataField="packagetypename" HeaderText="套餐类型" />
                                 <asp:BoundField DataField="custname" HeaderText="客户姓名" />
-                                <asp:BoundField DataField="papertypename" HeaderText="证件类型" />
                                 <asp:BoundField DataField="paperno" HeaderText="证件号码" />
-                                <asp:BoundField DataField="custbirth" HeaderText="生日" />
-                                <asp:BoundField DataField="custsex" HeaderText="性别" />
                                 <asp:BoundField DataField="custphone" HeaderText="联系电话" />
-                                <asp:BoundField DataField="address" HeaderText="地址" />
-                                <asp:BoundField DataField="custpost" HeaderText="邮编" />
-                                <asp:BoundField DataField="custemail" HeaderText="邮箱" />
-                                <asp:BoundField DataField="orderno" HeaderText="订单号" />
-                                <asp:BoundField DataField="paycanal" HeaderText="支付渠道" />
-                                <asp:BoundField DataField="orderdetailid" HeaderText="子订单号" />
-                                <asp:BoundField DataField="updatetime" HeaderText="更新日期" />
-                                <asp:BoundField DataField="recename" HeaderText="收货人姓名" />
-                                <asp:BoundField DataField="receaddress" HeaderText="收货人地址" />
-                                <asp:BoundField DataField="recephone" HeaderText="收货人电话" />
-                                <asp:BoundField DataField="recepost" HeaderText="收货人邮编" />
-                                <asp:BoundField DataField="papertype" HeaderText="证件类型" />
-                                <asp:BoundField DataField="packagetypecode" HeaderText="套餐类型编码" />
-                                <asp:BoundField DataField="funcfee" HeaderText="功能费" />
+                                <asp:BoundField DataField="createtime" HeaderText="订单录入时间" />
                             </Columns>
                             <EmptyDataTemplate>
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
@@ -363,15 +320,6 @@
                                             订单状态
                                         </td>
                                         <td>
-                                            人物照片
-                                        </td>
-                                        <td>
-                                            身份证照片
-                                        </td>
-                                        <td>
-                                            操作方式
-                                        </td>
-                                        <td>
                                             电子钱包卡号
                                         </td>
                                         <td>
@@ -381,34 +329,13 @@
                                             客户姓名
                                         </td>
                                         <td>
-                                            证件类型
+                                            证件号码
                                         </td>
                                         <td>
-                                            地址
+                                            联系电话
                                         </td>
                                         <td>
-                                            邮编
-                                        </td>
-                                        <td>
-                                            性别
-                                        </td>
-                                        <td>
-                                            生日
-                                        </td>
-                                        <td>
-                                            邮箱
-                                        </td>
-                                        <td>
-                                            订单号
-                                        </td>
-                                        <td>
-                                            支付渠道
-                                        </td>
-                                        <td>
-                                            子订单号
-                                        </td>
-                                        <td>
-                                            订单日期
+                                            订单录入时间
                                         </td>
                                     </tr>
                                 </table>

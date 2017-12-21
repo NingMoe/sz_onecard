@@ -9,6 +9,8 @@ using TM;
 using System.Web;
 using System.IO;
 using NPOI.HSSF.UserModel;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 //description 休闲订单操作
 //creater     蒋兵兵
@@ -78,15 +80,23 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         string fromDate = txtFromDate.Text.Trim();
         string endDate = txtToDate.Text.Trim();
 
-        DataTable dt = GroupCardHelper.callQuery(context, "QueryRelaxOrderDistrabutionAll", selOrderStates.SelectedValue, txtOrderNo.Text, fromDate, endDate, txtCustPhone.Text, selPayCanal.SelectedValue);
-        if (dt == null || dt.Rows.Count < 1)
+        Dictionary<string, string> postData = new Dictionary<string, string>();
+        postData.Add("channelCode", "ONECARD");
+        postData.Add("orderNo", txtOrderNo.Text);
+        postData.Add("fromDate", txtFromDate.Text);
+        postData.Add("toDate", txtToDate.Text);
+        postData.Add("orderState",selOrderStates.SelectedValue);
+        postData.Add("payCanal", selPayCanal.SelectedValue);
+        postData.Add("custPhone", "");
+        DataTable table = fillDataTable(HttpHelper.TradeType.ZZOrderDistrabution, postData);
+        if (table == null || table.Rows.Count < 1)
         {
             gvOrder.DataSource = new DataTable();
             gvOrder.DataBind();
             context.AddError("未查出记录");
             return;
         }
-        gvOrder.DataSource = dt;
+        gvOrder.DataSource = table;
         gvOrder.DataBind();
 
         //订单状态为制卡则启用配送按钮
@@ -98,6 +108,91 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         {
             btnPrint.Enabled = false;
         }
+    }
+
+    private DataTable initEmptyDataTable()
+    {
+        DataTable dt = new DataTable();
+        dt.Columns.Add("ORDERNO", typeof(string));//主订单号
+        dt.Columns.Add("ORDERSTATE", typeof(string));//订单状态
+        dt.Columns.Add("RECEIVECUSTNAME", typeof(string));//收件人
+        dt.Columns.Add("RECEIVEADDRESS", typeof(string));//收货地址
+        dt.Columns.Add("RECEIVECUSTPHONE", typeof(string));//收件人电话
+        dt.Columns.Add("CUSTPOST", typeof(string));//邮编
+        dt.Columns.Add("CREATETIME", typeof(string));//订单录入时间
+        dt.Columns.Add("TRACKINGNO", typeof(string));//快递编号
+        dt.Columns.Add("TRACKINGCOPCODE", typeof(string));//快递公司
+        
+        dt.Columns["ORDERNO"].MaxLength = 10000;
+        dt.Columns["ORDERSTATE"].MaxLength = 10000;
+        dt.Columns["RECEIVECUSTNAME"].MaxLength = 10000;
+        dt.Columns["RECEIVEADDRESS"].MaxLength = 10000;
+        dt.Columns["RECEIVECUSTPHONE"].MaxLength = 10000;
+        dt.Columns["CUSTPOST"].MaxLength = 10000;
+        dt.Columns["CREATETIME"].MaxLength = 10000;
+        dt.Columns["TRACKINGNO"].MaxLength = 10000;
+        dt.Columns["TRACKINGCOPCODE"].MaxLength = 10000;
+
+        return dt;
+    }
+
+    private DataTable fillDataTable(HttpHelper.TradeType tradetype, Dictionary<string, string> postData)
+    {
+        string jsonResponse = HttpHelper.ZZPostRequest(tradetype, postData);
+        //解析json
+        DataTable dt = initEmptyDataTable();
+        JObject deserObject = (JObject)JsonConvert.DeserializeObject(jsonResponse);
+        string code = "";
+        string message = "";
+        foreach (JProperty itemProperty in deserObject.Properties())
+        {
+            string propertyName = itemProperty.Name;
+            if (propertyName == "respCode")
+            {
+                code = itemProperty.Value.ToString();
+            }
+            else if (propertyName == "respDesc")
+            {
+                message = itemProperty.Value.ToString();
+            }
+        }
+
+        if (code == "0000") //表示成功
+        {
+            foreach (JProperty itemProperty in deserObject.Properties())
+            {
+                string propertyName = itemProperty.Name;
+                if (propertyName == "orderList")
+                {
+                    //DataTable赋值
+                    JArray detailArray = new JArray();
+                    try
+                    {
+                        detailArray = (JArray)itemProperty.Value;
+                    }
+                    catch (Exception)
+                    {
+                        context.AddMessage("查询结果为空");
+                        return new DataTable();
+                    }
+                    foreach (JObject subItem in detailArray)
+                    {
+                        DataRow newRow = dt.NewRow();
+                        //newRow["AccountId"] = hidAccountId.Value;
+                        foreach (JProperty subItemJProperty in subItem.Properties())
+                        {
+                            newRow[subItemJProperty.Name] = subItemJProperty.Value.ToString();
+                        }
+                        dt.Rows.Add(newRow);
+                    }
+                }
+            }
+        }
+        else
+        {
+            context.AddError(message);
+        }
+        return dt;
     }
 
     //Data绑定

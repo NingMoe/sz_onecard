@@ -194,7 +194,7 @@
                                 runat="server" AutoGenerateColumns="false" OnRowDataBound="gvOrderList_RowDataBound"
                                 OnRowCommand="gvOrderList_RowCommand">
                                 <Columns>
-                                    <asp:TemplateField>
+                                    <asp:TemplateField HeaderStyle-Width="100px">
                                         <HeaderTemplate>
                                             <asp:Label ID="Label1" runat="server" Text="售卡"></asp:Label>
                                         </HeaderTemplate>
@@ -203,7 +203,7 @@
                                                 CommandName="Produce" CommandArgument='<%#Container.DataItemIndex%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
+                                    <asp:TemplateField HeaderStyle-Width="100px">
                                         <HeaderTemplate>
                                             <asp:Label ID="Label1" runat="server" Text="充值"></asp:Label>
                                         </HeaderTemplate>

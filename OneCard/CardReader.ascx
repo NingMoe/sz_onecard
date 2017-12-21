@@ -203,6 +203,18 @@ function ChargeCardChargeCheckDelay() {
     MyExtConfirm('提示', '是否确认充值:' + $get('SupplyFee').innerHTML + '元?', SupplyCheckConfirm);
 }
 
+function ChargeCardZZChargeCheck() {
+    setTimeout(ChargeCardZZChargeCheckDelay, 500);
+}
+
+function ChargeCardZZChargeCheckDelay() {
+    if (!checkMaxBalance()) {
+        return false;
+    }
+
+    MyExtConfirm('提示', '是否确认充值:' + $get('hidMoney').value + '元?', SupplyCheckConfirm);
+}
+
 function checkMaxBalanceText(txtSupplyFee)
 {
     // 检测是否卡内余额加上充值金额超过1千元

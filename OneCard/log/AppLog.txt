@@ -3549,3 +3549,5 @@
 2017-12-01 11:34:51,022 [11] ERROR AppLog [(null)] - A001107102:Cardstate is wrong
 2017-12-01 11:38:22,108 [10] ERROR AppLog [(null)] - A001107102:Cardstate is wrong
 2017-12-01 11:38:22,220 [10] ERROR AppLog [(null)] - A001107102:Cardstate is wrong
+2017-12-21 16:05:23,250 [8] ERROR AppLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx || S094780092:记录订单台帐表失败ORA-01400: cannot insert NULL into ("UOWNER_B_SZ"."TF_F_ZZOL_SYNC"."TRADEID")
+2017-12-21 16:05:23,260 [8] ERROR AppLog [(null)] - S094780092:记录订单台帐表失败ORA-01400: cannot insert NULL into ("UOWNER_B_SZ"."TF_F_ZZOL_SYNC"."TRADEID")
