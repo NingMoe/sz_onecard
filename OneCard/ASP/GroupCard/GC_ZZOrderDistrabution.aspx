@@ -212,9 +212,16 @@
                             FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
                             PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
                             runat="server" AutoGenerateColumns="false" AllowPaging="True" PageSize="10" OnPageIndexChanging="gvOrder_Page"
-                            OnRowCreated="gvOrder_RowCreated" OnRowDataBound="gvOrder_RowDataBound" OnRowCommand="gvOrder_RowCommand">
+                            OnRowDataBound="gvOrder_RowDataBound" OnRowCommand="gvOrder_RowCommand">
                             <Columns>
                                 <asp:TemplateField>
+                                    <HeaderTemplate>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="chkOrderList" runat="server" Height="20px" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderStyle-Width="80px">
                                     <HeaderTemplate>
                                         <asp:Label ID="labClickList" runat="server" Text="查看明细"></asp:Label>
                                     </HeaderTemplate>
@@ -243,7 +250,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="orderno" HeaderText="订单号" />
-                                <asp:BoundField DataField="orderstates" HeaderText="订单状态" />
+                                <asp:BoundField DataField="orderstate" HeaderText="订单状态" />
                                 <asp:BoundField DataField="RECEIVECUSTNAME" HeaderText="物流联系人" />
                                 <asp:BoundField DataField="RECEIVEADDRESS" HeaderText="物流地址" />
                                 <asp:BoundField DataField="RECEIVECUSTPHONE" HeaderText="物流电话" />
@@ -293,7 +300,7 @@
                 </div>
                 <div class="kuang5">
                     <div class="gdtb" style="height: 200px;">
-                        <asp:GridView ID="gvList" Width="200%" CssClass="tab1" HeaderStyle-CssClass="tabbt"
+                        <asp:GridView ID="gvList" Width="98%" CssClass="tab1" HeaderStyle-CssClass="tabbt"
                             FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
                             PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
                             runat="server" AutoGenerateColumns="false" OnRowDataBound="gvList_RowDataBound">
@@ -301,7 +308,7 @@
                                 <asp:BoundField DataField="DETAILNO" HeaderText="子订单号" />
                                 <asp:BoundField DataField="ORDERNO" HeaderText="主订单号" />
                                 <asp:BoundField DataField="cardno" HeaderText="电子钱包卡号" />
-                                <asp:BoundField DataField="packagetypename" HeaderText="套餐类型" />
+                                <asp:BoundField DataField="packagename" HeaderText="套餐类型" />
                                 <asp:BoundField DataField="custname" HeaderText="客户姓名" />
                                 <asp:BoundField DataField="paperno" HeaderText="证件号码" />
                                 <asp:BoundField DataField="custphone" HeaderText="联系电话" />
@@ -310,9 +317,6 @@
                             <EmptyDataTemplate>
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
                                     <tr class="tabbt">
-                                        <td>
-                                            <input type="checkbox" />
-                                        </td>
                                         <td>
                                             订单类型
                                         </td>

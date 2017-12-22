@@ -28,26 +28,6 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
     }
 
     /// <summary>
-    /// 读取照片
-    /// </summary>
-    /// <param name="orderdetailid">子订单ID</param>
-    /// <param name="phototype">照片类型</param>
-    /// <returns>字节流</returns>
-    private byte[] ReadImage(string orderdetailid, string phototype)
-    {
-        string selectSql = "Select " + phototype + " From TF_F_XXOL_ORDERDETAIL Where ORDERDETAILID=:ORDERDETAILID";
-        context.DBOpen("Select");
-        context.AddField(":ORDERDETAILID").Value = orderdetailid;
-        DataTable dt = context.ExecuteReader(selectSql);
-        if (dt != null && dt.Rows.Count > 0 && dt.DefaultView[0][phototype].ToString() != "")
-        {
-            return (byte[])dt.Rows[0].ItemArray[0];
-        }
-
-        return null;
-    }
-
-    /// <summary>
     /// 查询验证
     /// </summary>
     /// <returns></returns>
@@ -88,7 +68,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         postData.Add("orderState",selOrderStates.SelectedValue);
         postData.Add("payCanal", selPayCanal.SelectedValue);
         postData.Add("custPhone", "");
-        DataTable table = fillDataTable(HttpHelper.TradeType.ZZOrderDistrabution, postData);
+        DataTable table = fillDataTable("order",HttpHelper.TradeType.ZZOrderDistrabution, postData);
         if (table == null || table.Rows.Count < 1)
         {
             gvOrder.DataSource = new DataTable();
@@ -136,11 +116,45 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         return dt;
     }
 
-    private DataTable fillDataTable(HttpHelper.TradeType tradetype, Dictionary<string, string> postData)
+    private DataTable initEmptyListDataTable()
+    {
+        DataTable dt = new DataTable();
+        dt.Columns.Add("DETAILNO", typeof(string));//子订单号
+        dt.Columns.Add("ORDERNO", typeof(string));//主订单号
+        dt.Columns.Add("CARDNO", typeof(string));//卡号
+        dt.Columns.Add("PACKAGENAME", typeof(string));//套餐类型
+        dt.Columns.Add("SUPPLYMONEY", typeof(string));//充值金额，单位分
+        dt.Columns.Add("CUSTNAME", typeof(string));//持卡人姓名
+        dt.Columns.Add("PAPERNO", typeof(string));//持卡人证件号码
+        dt.Columns.Add("CUSTPHONE", typeof(string));//持卡人电话
+        dt.Columns.Add("CREATETIME", typeof(string));//订单录入时间
+
+        dt.Columns["DETAILNO"].MaxLength = 10000;
+        dt.Columns["ORDERNO"].MaxLength = 10000;
+        dt.Columns["CARDNO"].MaxLength = 10000;
+        dt.Columns["PACKAGENAME"].MaxLength = 10000;
+        dt.Columns["SUPPLYMONEY"].MaxLength = 10000;
+        dt.Columns["CUSTNAME"].MaxLength = 10000;
+        dt.Columns["PAPERNO"].MaxLength = 10000;
+        dt.Columns["CUSTPHONE"].MaxLength = 10000;
+        dt.Columns["CREATETIME"].MaxLength = 10000;
+
+        return dt;
+    }
+
+    private DataTable fillDataTable(string orderType,HttpHelper.TradeType tradetype, Dictionary<string, string> postData)
     {
         string jsonResponse = HttpHelper.ZZPostRequest(tradetype, postData);
         //解析json
-        DataTable dt = initEmptyDataTable();
+        DataTable dt = new DataTable();
+        if (orderType == "order")
+        {
+            dt = initEmptyDataTable();
+        }
+        else
+        {
+            dt = initEmptyListDataTable();
+        }
         JObject deserObject = (JObject)JsonConvert.DeserializeObject(jsonResponse);
         string code = "";
         string message = "";
@@ -162,7 +176,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
             foreach (JProperty itemProperty in deserObject.Properties())
             {
                 string propertyName = itemProperty.Name;
-                if (propertyName == "orderList")
+                if (propertyName == "orderCardList")
                 {
                     //DataTable赋值
                     JArray detailArray = new JArray();
@@ -222,6 +236,23 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
             {
                 selCopName.SelectedValue = "01";
             }
+
+            switch (e.Row.Cells[5].Text)
+            {
+                case "0":
+                    e.Row.Cells[5].Text = "未处理";
+                    break;
+                case "1":
+                    e.Row.Cells[5].Text = "已制卡";
+                    break;
+                case "2":
+                    e.Row.Cells[5].Text = "已发货";
+                    break;
+                default:
+                    e.Row.Cells[5].Text = "状态异常";
+                    break;
+            }
+            
         }
 
         if (e.Row.RowType == DataControlRowType.DataRow || e.Row.RowType == DataControlRowType.Header)
@@ -238,22 +269,24 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         btnQuery_Click(sender, e);
     }
 
-    protected void gvOrder_RowCreated(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            //注册行单击事件
+    //protected void gvOrder_SelectedIndexChanged(object sender, EventArgs e)
+    //{
 
-            //e.Row.Attributes.Add("onclick", "javascirpt:__doPostBack('gvOrder','Select$" + e.Row.RowIndex + "')");
-        }
-    }
+    //    LinkButton btnClick = (LinkButton)gvOrder.Rows[gvOrder.SelectedIndex].FindControl("linkQueryList");
+    //    //btnClick.Attributes.Add("onclick", "javascirpt:__doPostBack('gvOrder','Select$" + e.Row.RowIndex + "')");
+    //}
 
     protected void gvOrder_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        int index = Convert.ToInt32(e.CommandArgument.ToString());
         if (e.CommandName == "QueryList")
         {
-            DataTable dt = GroupCardHelper.callQuery(context, "QueryRelaxOrderDistrabutionList", e.CommandArgument.ToString());
-            if (dt == null || dt.Rows.Count < 1)
+            Dictionary<string, string> postData = new Dictionary<string, string>();
+            postData.Add("channelCode", "ONECARD");
+            postData.Add("orderNo", gvOrder.Rows[index].Cells[4].Text);
+            DataTable table = fillDataTable("orderList",HttpHelper.TradeType.ZZOrderListDistrabution, postData);
+
+            if (table == null || table.Rows.Count < 1)
             {
                 gvList.DataSource = new DataTable();
                 gvList.DataBind();
@@ -261,7 +294,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
                 return;
             }
 
-            gvList.DataSource = dt;
+            gvList.DataSource = table;
             gvList.DataBind();
         }
     }
@@ -270,26 +303,26 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            Image imgP = (Image)e.Row.FindControl("imgPerson");
-            Session["PicData"] = ReadImage(e.Row.Cells[17].Text, "PHTOT");
-            string photoType = "PHTOT";
-            imgP.ImageUrl = "GC_RelaxCardOrderGetPic.aspx?orderDetailId=" + e.Row.Cells[17].Text + "&photoType=" + photoType;
+            //Image imgP = (Image)e.Row.FindControl("imgPerson");
+            //Session["PicData"] = ReadImage(e.Row.Cells[17].Text, "PHTOT");
+            //string photoType = "PHTOT";
+            //imgP.ImageUrl = "GC_RelaxCardOrderGetPic.aspx?orderDetailId=" + e.Row.Cells[17].Text + "&photoType=" + photoType;
 
-            Image imgI = (Image)e.Row.FindControl("imgIDCard");
-            Session["PicData"] = ReadImage(e.Row.Cells[17].Text, "PAPERPHTOT");
-            photoType = "PAPERPHTOT";
-            imgI.ImageUrl = "GC_RelaxCardOrderGetPic.aspx?orderDetailId=" + e.Row.Cells[17].Text + "&photoType=" + photoType;
+            //Image imgI = (Image)e.Row.FindControl("imgIDCard");
+            //Session["PicData"] = ReadImage(e.Row.Cells[17].Text, "PAPERPHTOT");
+            //photoType = "PAPERPHTOT";
+            //imgI.ImageUrl = "GC_RelaxCardOrderGetPic.aspx?orderDetailId=" + e.Row.Cells[17].Text + "&photoType=" + photoType;
         }
         if (e.Row.RowType == DataControlRowType.DataRow || e.Row.RowType == DataControlRowType.Header)
         {
             //收货人姓名、地址、电话、邮编、证件类型、套餐类型编码、功能费
-            e.Row.Cells[19].Visible = false;
-            e.Row.Cells[20].Visible = false;
-            e.Row.Cells[21].Visible = false;
-            e.Row.Cells[22].Visible = false;
-            e.Row.Cells[23].Visible = false;
-            e.Row.Cells[24].Visible = false;
-            e.Row.Cells[25].Visible = false;
+            //e.Row.Cells[19].Visible = false;
+            //e.Row.Cells[20].Visible = false;
+            //e.Row.Cells[21].Visible = false;
+            //e.Row.Cells[22].Visible = false;
+            //e.Row.Cells[23].Visible = false;
+            //e.Row.Cells[24].Visible = false;
+            //e.Row.Cells[25].Visible = false;
         }
     }
 
@@ -417,10 +450,6 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
     //配送
     protected void btnDistrabution_Click(object sender, EventArgs e)
     {
-        clearTempTable();
-
-        if (!RecordIntoTmp()) return;
-
         context.SPOpen();
         context.AddField("P_SESSIONID").Value = Session.SessionID;
         bool ok = context.ExecuteSP("SP_GC_RelaxDistrabution");
