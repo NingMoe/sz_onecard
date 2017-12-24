@@ -12,10 +12,6 @@ using NPOI.HSSF.UserModel;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-//description 休闲订单操作
-//creater     蒋兵兵
-//date        2015-04-17
-
 
 public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
 {
@@ -57,18 +53,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
 
         if (!ValidInput()) return;
 
-        string fromDate = txtFromDate.Text.Trim();
-        string endDate = txtToDate.Text.Trim();
-
-        Dictionary<string, string> postData = new Dictionary<string, string>();
-        postData.Add("channelCode", "ONECARD");
-        postData.Add("orderNo", txtOrderNo.Text);
-        postData.Add("fromDate", txtFromDate.Text);
-        postData.Add("toDate", txtToDate.Text);
-        postData.Add("orderState",selOrderStates.SelectedValue);
-        postData.Add("payCanal", selPayCanal.SelectedValue);
-        postData.Add("custPhone", "");
-        DataTable table = fillDataTable("order",HttpHelper.TradeType.ZZOrderDistrabution, postData);
+        DataTable table = GetQueryTable();
         if (table == null || table.Rows.Count < 1)
         {
             gvOrder.DataSource = new DataTable();
@@ -100,9 +85,9 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         dt.Columns.Add("RECEIVECUSTPHONE", typeof(string));//收件人电话
         dt.Columns.Add("CUSTPOST", typeof(string));//邮编
         dt.Columns.Add("CREATETIME", typeof(string));//订单录入时间
-        dt.Columns.Add("TRACKINGNO", typeof(string));//快递编号
         dt.Columns.Add("TRACKINGCOPCODE", typeof(string));//快递公司
-        
+        dt.Columns.Add("TRACKINGNO", typeof(string));//快递编号
+
         dt.Columns["ORDERNO"].MaxLength = 10000;
         dt.Columns["ORDERSTATE"].MaxLength = 10000;
         dt.Columns["RECEIVECUSTNAME"].MaxLength = 10000;
@@ -142,7 +127,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         return dt;
     }
 
-    private DataTable fillDataTable(string orderType,HttpHelper.TradeType tradetype, Dictionary<string, string> postData)
+    private DataTable fillDataTable(string orderType, HttpHelper.TradeType tradetype, Dictionary<string, string> postData)
     {
         string jsonResponse = HttpHelper.ZZPostRequest(tradetype, postData);
         //解析json
@@ -252,7 +237,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
                     e.Row.Cells[5].Text = "状态异常";
                     break;
             }
-            
+
         }
 
         if (e.Row.RowType == DataControlRowType.DataRow || e.Row.RowType == DataControlRowType.Header)
@@ -269,22 +254,13 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         btnQuery_Click(sender, e);
     }
 
-    //protected void gvOrder_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-
-    //    LinkButton btnClick = (LinkButton)gvOrder.Rows[gvOrder.SelectedIndex].FindControl("linkQueryList");
-    //    //btnClick.Attributes.Add("onclick", "javascirpt:__doPostBack('gvOrder','Select$" + e.Row.RowIndex + "')");
-    //}
-
     protected void gvOrder_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         int index = Convert.ToInt32(e.CommandArgument.ToString());
         if (e.CommandName == "QueryList")
         {
-            Dictionary<string, string> postData = new Dictionary<string, string>();
-            postData.Add("channelCode", "ONECARD");
-            postData.Add("orderNo", gvOrder.Rows[index].Cells[4].Text);
-            DataTable table = fillDataTable("orderList",HttpHelper.TradeType.ZZOrderListDistrabution, postData);
+            string orderNo = gvOrder.Rows[index].Cells[4].Text;
+            DataTable table = GetListTable(orderNo);
 
             if (table == null || table.Rows.Count < 1)
             {
@@ -303,32 +279,8 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            //Image imgP = (Image)e.Row.FindControl("imgPerson");
-            //Session["PicData"] = ReadImage(e.Row.Cells[17].Text, "PHTOT");
-            //string photoType = "PHTOT";
-            //imgP.ImageUrl = "GC_RelaxCardOrderGetPic.aspx?orderDetailId=" + e.Row.Cells[17].Text + "&photoType=" + photoType;
 
-            //Image imgI = (Image)e.Row.FindControl("imgIDCard");
-            //Session["PicData"] = ReadImage(e.Row.Cells[17].Text, "PAPERPHTOT");
-            //photoType = "PAPERPHTOT";
-            //imgI.ImageUrl = "GC_RelaxCardOrderGetPic.aspx?orderDetailId=" + e.Row.Cells[17].Text + "&photoType=" + photoType;
         }
-        if (e.Row.RowType == DataControlRowType.DataRow || e.Row.RowType == DataControlRowType.Header)
-        {
-            //收货人姓名、地址、电话、邮编、证件类型、套餐类型编码、功能费
-            //e.Row.Cells[19].Visible = false;
-            //e.Row.Cells[20].Visible = false;
-            //e.Row.Cells[21].Visible = false;
-            //e.Row.Cells[22].Visible = false;
-            //e.Row.Cells[23].Visible = false;
-            //e.Row.Cells[24].Visible = false;
-            //e.Row.Cells[25].Visible = false;
-        }
-    }
-
-    //清空内容
-    private void clearControl()
-    {
     }
 
     private void clearTempTable()//清空临时表
@@ -338,21 +290,72 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         context.DBCommit();
     }
 
-    //选中记录入临时表
-    private bool RecordIntoTmp()
+    private DataTable GetQueryTable()
     {
-        context.DBOpen("Insert");
-        int ordercount = 0;
+        DataTable table = new DataTable();
 
-        List<string> company = new List<string>();
+        Dictionary<string, string> postData = new Dictionary<string, string>();
+        postData.Add("channelCode", "ONECARD");
+        postData.Add("orderNo", txtOrderNo.Text);
+        postData.Add("fromDate", txtFromDate.Text);
+        postData.Add("toDate", txtToDate.Text);
+        postData.Add("orderState", selOrderStates.SelectedValue);
+        postData.Add("payCanal", selPayCanal.SelectedValue);
+        postData.Add("custPhone", "");
+        table = fillDataTable("order", HttpHelper.TradeType.ZZOrderDistrabution, postData);
+        return table;
+    }
+
+    /// <summary>
+    /// 获取子订单集合
+    /// </summary>
+    /// <param name="orderNo"></param>
+    /// <returns></returns>
+    private DataTable GetListTable(string orderNo)
+    {
+        DataTable table = new DataTable();
+
+        Dictionary<string, string> postData = new Dictionary<string, string>();
+        postData.Add("channelCode", "ONECARD");
+        postData.Add("orderNo", orderNo);
+        table = fillDataTable("orderList", HttpHelper.TradeType.ZZOrderListDistrabution, postData);
+        return table;
+    }
+
+    private string GetListInfo(DataTable dt)
+    {
+        string cardNoColl = "";
+        foreach (DataRow item in dt.Rows)
+        {
+            if (string.IsNullOrEmpty(item["cardno"].ToString()))
+            {
+                cardNoColl = cardNoColl + item["packagename"].ToString() + "兑换券,";
+            }
+            else
+            {
+                cardNoColl = cardNoColl + item["cardno"].ToString() + ",";
+            }
+        }
+        return cardNoColl;
+    }
+
+
+    //配送
+    protected void btnDistrabution_Click(object sender, EventArgs e)
+    {
+        int ordercount = 0;
+        string orderNo = string.Empty;
+        string custName = string.Empty;
+        string copName = string.Empty;
+        string copNo = string.Empty;
         foreach (GridViewRow gvr in gvOrder.Rows)
         {
             CheckBox cb = (CheckBox)gvr.FindControl("chkOrderList");
             if (cb != null && cb.Checked)
             {
+                ordercount++;
                 DropDownList ddl = (DropDownList)gvr.FindControl("selCopName");
                 TextBox txtCopNo = (TextBox)gvr.FindControl("txtCopNo");
-
                 if (ddl.SelectedValue == "")
                 {
                     context.AddError("请选择物流公司!", ddl);
@@ -361,95 +364,24 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
                 {
                     context.AddError("请录入物流单号!", txtCopNo);
                 }
-                ordercount++;
-                //订单记录入临时表
-                context.ExecuteNonQuery("insert into TMP_ORDER (F0,F1,F2,F3) values('" +
-                     Session.SessionID + "', '" + gvr.Cells[4].Text.Trim() + "','" + ddl.SelectedValue + "','" + txtCopNo.Text + "')");
-            }
-        }
-        //校验是否选择了订单
-
-        if (ordercount <= 0)
-        {
-            context.AddError("请选择订单！");
-            context.RollBack();
-            return false;
-        }
-        if (context.hasError())
-        {
-            context.RollBack();
-            return false;
-        }
-        context.DBCommit();
-        return true;
-    }
-
-    //选中记录入临时表用以导出功能
-    private bool RecordIntoTmpForExport()
-    {
-        context.DBOpen("Insert");
-
-        int ordercount = GetOrderCount();
-
-        List<string> company = new List<string>();
-
-        //校验是否选择了订单
-
-        if (ordercount <= 0)
-        {
-            context.AddError("请选择需要导出的订单！");
-            context.RollBack();
-            return false;
-        }
-        if (context.hasError())
-        {
-            context.RollBack();
-            return false;
-        }
-        context.DBCommit();
-        return true;
-    }
-
-    /// <summary>
-    /// 获取勾选的订单数量
-    /// </summary>
-    /// <returns></returns>
-    private int GetOrderCount()
-    {
-        int ordercount = 0;
-
-        foreach (GridViewRow gvr in gvOrder.Rows)
-        {
-            CheckBox cb = (CheckBox)gvr.FindControl("chkOrderList");
-            if (cb != null && cb.Checked)
-            {
-                ordercount++;
-                //订单记录入临时表
-                context.ExecuteNonQuery("insert into TMP_ORDER (F0,F1) values('" +
-                     Session.SessionID + "', '" + gvr.Cells[4].Text.Trim() + "')");
+                orderNo = gvr.Cells[4].Text.ToString();
+                copName = ddl.SelectedValue;
+                copNo = txtCopNo.Text;
             }
         }
 
-        return ordercount;
-    }
-
-
-    /// <summary>
-    /// 读卡信息判断
-    /// </summary>
-    private void CheckCard()
-    {
-        //卡内金额不为0
-        if (Convert.ToDecimal(hiddencMoney.Value) != 0)
+        if (context.hasError())
         {
-            context.AddError("A001001144");
             return;
         }
-    }
 
-    //配送
-    protected void btnDistrabution_Click(object sender, EventArgs e)
-    {
+        if (ordercount > 1 || ordercount == 0)
+        {
+            context.AddError("只能选择一个订单！");
+            return;
+        }
+
+
         context.SPOpen();
         context.AddField("P_SESSIONID").Value = Session.SessionID;
         bool ok = context.ExecuteSP("SP_GC_RelaxDistrabution");
@@ -457,29 +389,101 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         {
             context.AddMessage("配送完成！");
 
-            DataTable dt = GroupCardHelper.callQuery(context, "QueryDistrabution");
-            if (dt == null || dt.Rows.Count < 1)
-            {
-                context.AddError("未找到待同步记录");
-                return;
-            }
+            hidTradeNo.Value = GetSeq();
+            hidOrderNo.Value = orderNo;
+            //记录小额同步信息
+            UpdateSyncType("01", "03", "", "");
 
-            //调用休闲订单状态变更通知
-            string msg = RelaxWebServiceHelper.RelaxOrderTypeInfo(dt);
-            string disType = "1";   //默认成功
-            string disMsg = msg;
-            if (msg != "0000")
-            {
-                disType = "2";
-                if (msg.Length > 200)
-                {
-                    disMsg = msg.Substring(0, 150);
-                }
-            }
-            UpdateDistrabutionType(disType, disMsg);    //调用更新配送状态
+            //同步接口
+            string code = "";
+            string message = "";
+            synMsg(sender, e, "2", orderNo, copName, copNo, ref code, ref message);
 
+            //更新同步信息
+            UpdateSyncType("02", "03", code, message);
 
             btnQuery_Click(sender, e);
+        }
+    }
+
+    private string GetSeq()
+    {
+        context.SPOpen();
+        context.AddField("step").Value = 1;
+        context.AddField("seq", "string", "Output", "16");
+        context.ExecuteReader("SP_GetSeq");
+        context.DBCommit();
+
+        return "" + context.GetFieldValue("seq");
+    }
+
+    //记录同步信息
+    private void UpdateSyncType(string operateType, string tradeType, string syncCode, string syncMsg)
+    {
+        //operateType 01新增 02修改
+        //tradeType 01售卡 02充值 03配送
+        context.SPOpen();
+        context.AddField("P_TRADEID").Value = hidTradeNo.Value;
+        context.AddField("P_ORDERNO").Value = hidOrderNo.Value;
+        context.AddField("P_DETAILNO").Value = "";
+        context.AddField("P_CARDNO").Value = "";
+        context.AddField("P_SYNCTYPE").Value = syncCode == "0000" ? "02" : "03";
+        context.AddField("P_SYNCMSG").Value = syncMsg;
+        context.AddField("P_OPERATETYPE").Value = operateType;
+        context.AddField("P_TRADETYPE").Value = tradeType;
+        context.ExecuteSP("SP_GC_ZZUpdateSync");
+    }
+
+    private void synMsg(object sender, EventArgs e, string _orderState, string _orderId, string _logisticsCompany, string _trackingNo, ref string code, ref string message)
+    {
+
+        string orderid = _orderId;
+        string detailId = "";
+        string cardNo = "";
+        string orderState = _orderState;
+        string rejectType = "";
+        string logisticsCompany = _logisticsCompany;
+        string trackingNo = _trackingNo;
+        string operateStaffNo = context.s_UserID;
+        string operateDepartId = context.s_DepartID;
+        string remark = "";
+
+        Dictionary<string, string> postData = new Dictionary<string, string>();
+        postData.Add("channelCode", "ONECARD");
+        postData.Add("orderNo", orderid);
+        postData.Add("detailNo", detailId);
+        postData.Add("cardNo", cardNo);
+        postData.Add("orderState", orderState);
+        postData.Add("rejectType", rejectType);
+        postData.Add("logisticsCompany", logisticsCompany);
+        postData.Add("trackingNo", trackingNo);
+        postData.Add("operateStaffNo", operateStaffNo);
+        postData.Add("operateDepartId", operateDepartId);
+        postData.Add("remark", remark);
+
+        string jsonResponse = HttpHelper.ZZPostRequest(HttpHelper.TradeType.ZZOrderChange, postData);
+
+        JObject deserObject = (JObject)JsonConvert.DeserializeObject(jsonResponse);
+        foreach (JProperty itemProperty in deserObject.Properties())
+        {
+            string propertyName = itemProperty.Name;
+            if (propertyName == "respCode")
+            {
+                code = itemProperty.Value.ToString();
+            }
+            else if (propertyName == "respDesc")
+            {
+                message = itemProperty.Value.ToString();
+            }
+        }
+
+        if (code == "0000") //表示成功
+        {
+            context.AddMessage("处理成功");
+        }
+        else
+        {
+            context.AddMessage("处理失败,失败原因：" + message);
         }
     }
 
@@ -499,7 +503,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         string senderPhone = "0512-962026";
         string senderCompany = "苏州市民卡有限公司";
         string senderAddr = "苏州市姑苏区人民路3118号国发大厦18楼";
-        string labTag = "（休闲年卡）";
+        string labTag = "（转转卡）";
         foreach (GridViewRow gvr in gvOrder.Rows)
         {
             CheckBox cb = (CheckBox)gvr.FindControl("chkOrderList");
@@ -519,21 +523,23 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
             return;
         }
 
-        DataTable dt = GroupCardHelper.callQuery(context, "QueryOrderDetailCardNo", orderNo);
+        DataTable dt = GetListTable(orderNo);
         if (dt == null || dt.Rows.Count < 1)
         {
             context.AddError("未找到订单明细");
             return;
         }
+
+        string cardNoColl = GetListInfo(dt);
+        cardNoColl = cardNoColl.Substring(0, cardNoColl.Length == 0 ? 0 : cardNoColl.Length - 1);
         //获取卡号集合
-        string cardNoColl = dt.Rows[0][1].ToString();
         string cardNoCollReserved = string.Empty;
         if (cardNoColl.Length > 33)
         {
             cardNoCollReserved = cardNoColl.Substring(34);
             cardNoColl = cardNoColl.Substring(0, 33);
         }
-     
+
         //地址长度过长时换行 add by huangzl
         if (custAddr.Length > 23)
         {
@@ -568,15 +574,21 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
 
     protected void btnExport_Click(object sender, EventArgs e)
     {
-        clearTempTable();
+        DataTable dt = GetQueryTable();
 
-        if (!RecordIntoTmpForExport()) return;
-
-        DataTable data = GroupCardHelper.callQuery(context, "QueryExportDistrabution", Session.SessionID);
-
-        if (data != null && data.Rows.Count != 0)
+        if (dt != null && dt.Rows.Count != 0)
         {
-            ExportToExcel(data);
+            //删除订单状态、订单录入时间
+            dt.Columns.Remove("CREATETIME");
+            dt.Columns.Remove("ORDERSTATE");
+            dt.Columns.Add("cardno", typeof(string));
+            foreach (DataRow item in dt.Rows)
+            {
+                DataTable listDt = GetListTable(item["orderNo"].ToString());
+                string cardNoColl = GetListInfo(listDt);
+                item["cardno"] = cardNoColl.Substring(0, cardNoColl.Length == 0 ? 0 : cardNoColl.Length - 1);
+            }
+            ExportToExcel(dt);
         }
     }
 

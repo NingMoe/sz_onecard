@@ -105,6 +105,8 @@
             <asp:HiddenField ID="hidShowCheckQuery" runat="server" />
             <asp:HiddenField ID="hidRemind" runat="server" />
             <asp:HiddenField ID="hidApprove" runat="server" />
+            <asp:HiddenField ID="hidTradeNo" runat="server" />
+            <asp:HiddenField ID="hidOrderNo" runat="server" />
             <div class="con" width="95%">
                 <div class="card">
                     订单查询</div>

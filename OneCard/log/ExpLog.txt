@@ -37547,3 +37547,64 @@ System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
    在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
    在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
    在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-24 15:43:39,140 [6] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderDistrabution.aspx
+System.IndexOutOfRangeException: 在位置 6 处没有任何行。
+   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.RBTree`1.get_Item(Int32 index)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 ASP_GroupCard_GC_ZZOrderDistrabution.btnExport_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderDistrabution.aspx.cs:行号 598
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-24 15:43:46,793 [6] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderDistrabution.aspx
+System.IndexOutOfRangeException: 在位置 6 处没有任何行。
+   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.RBTree`1.get_Item(Int32 index)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 ASP_GroupCard_GC_ZZOrderDistrabution.btnExport_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderDistrabution.aspx.cs:行号 598
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-24 15:44:41,276 [6] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderDistrabution.aspx
+System.IndexOutOfRangeException: 在位置 6 处没有任何行。
+   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.RBTree`1.get_Item(Int32 index)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 ASP_GroupCard_GC_ZZOrderDistrabution.btnExport_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderDistrabution.aspx.cs:行号 598
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-24 15:46:36,809 [13] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderDistrabution.aspx
+System.IO.IOException: 文件“D:\Work\SZ_Github\OneCard\Tools\配送物流信息模板.xls”正由另一进程使用，因此该进程无法访问该文件。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   在 ASP_GroupCard_GC_ZZOrderDistrabution.ExportToExcel(DataTable dt) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderDistrabution.aspx.cs:行号 615
+   在 ASP_GroupCard_GC_ZZOrderDistrabution.btnExport_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderDistrabution.aspx.cs:行号 607
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-24 15:48:51,720 [13] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderDistrabution.aspx
+System.ArgumentOutOfRangeException: 长度不能小于 0。
+参数名: length
+   在 System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   在 System.String.Substring(Int32 startIndex, Int32 length)
+   在 ASP_GroupCard_GC_ZZOrderDistrabution.btnExport_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderDistrabution.aspx.cs:行号 605
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
