@@ -22,6 +22,7 @@ public class HttpHelper
     private static readonly string _zzOrderDistrabutionUrl = ConfigurationManager.AppSettings["ZZOrderDistrabutionUrl"];
     private static readonly string _zzOrderListDistrabutionUrl = ConfigurationManager.AppSettings["ZZOrderListDistrabutionUrl"];
     private static readonly string _zzGetPhotoUrl = ConfigurationManager.AppSettings["ZZGetPhotoUrl"];
+    private static readonly string _zzActivationCardUrl = ConfigurationManager.AppSettings["ZZActivationCardUrl"];
     private static readonly string _tokenKey = ConfigurationManager.AppSettings["TokenKey"];
     private static readonly string _zzTokenKey = ConfigurationManager.AppSettings["ZZTokenKey"];
 
@@ -109,6 +110,10 @@ public class HttpHelper
         {
             url = _zzGetPhotoUrl;
         }
+        else if (tradeType == TradeType.ZZActivationCard)
+        {
+            url = _zzActivationCardUrl;
+        }
         //构造请求参数
         Dictionary<string, string> realPostData = postData;
         postData = SortDictionary(postData);//排序后的集合
@@ -142,7 +147,8 @@ public class HttpHelper
         ZZOrderCardQuery,
         ZZOrderCardCount,
         ZZOrderDistrabution,
-        ZZOrderListDistrabution
+        ZZOrderListDistrabution,
+        ZZActivationCard
     }
     public enum TokenType
     {

@@ -37608,3 +37608,229 @@ System.ArgumentOutOfRangeException: 长度不能小于 0。
    在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
    在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
    在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 11:13:48,345 [11] ERROR ExpLog [(null)] - 页面：/LogonSSO.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.CmnContext.ExecuteSP(String spName) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 300
+   在 LogonSSO.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\logonSSO.aspx.cs:行号 39
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 14:40:04,075 [9] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03135: connection lost contact
+Process ID: 0
+Session ID: 277 Serial number: 12693
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 16:25:17,916 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 80
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 31
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 16:25:19,103 [11] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 80
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 31
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 16:25:19,916 [12] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 80
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 31
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 16:25:29,423 [12] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 80
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 31
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 16:25:39,314 [8] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12170: TNS:Connect timeout occurred
+
+   在 Master.DBConnectionOracle.Open(String cmdType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 82
+   在 Master.CmnContext.DBOpen(String cmdType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 271
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 81
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 80
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 31
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 16:34:45,100 [8] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-03114: not connected to ORACLE
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 18:21:10,187 [5] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03135: connection lost contact
+Process ID: 0
+Session ID: 204 Serial number: 49584
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 18:37:44,635 [12] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 19:16:00,455 [11] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-03114: not connected to ORACLE
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 80
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 31
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-26 19:16:02,984 [8] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 80
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 31
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-27 15:33:07,107 [9] ERROR ExpLog [(null)] - 页面：/Logontest.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 SPHelper.callQuery(SP_QueryPDO pdo, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 153
+   在 SPHelper.callQuery(String pdoName, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 106
+   在 SSO.SSOHelper.CheckLogin(Boolean isAdmin, CmnContext context, String username, String opercardno, String pwd, String ip, HttpResponse response, HttpSessionState session, String& loginURL, String& staffTable, DataTable& sysinfos) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SSOHelper.cs:行号 82
+   在 Logontest.LogonBtn_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\Logontest.aspx.cs:行号 150
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-27 15:33:09,252 [9] ERROR ExpLog [(null)] - 页面：/LogonSSO.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.CmnContext.ExecuteSP(String spName) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 300
+   在 LogonSSO.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\logonSSO.aspx.cs:行号 39
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-27 16:52:26,539 [9] ERROR ExpLog [(null)] - 页面：/Logontest.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 SPHelper.callQuery(SP_QueryPDO pdo, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 153
+   在 SPHelper.callQuery(String pdoName, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 106
+   在 SSO.SSOHelper.CheckLogin(Boolean isAdmin, CmnContext context, String username, String opercardno, String pwd, String ip, HttpResponse response, HttpSessionState session, String& loginURL, String& staffTable, DataTable& sysinfos) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SSOHelper.cs:行号 82
+   在 Logontest.LogonBtn_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\Logontest.aspx.cs:行号 150
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-27 16:52:28,239 [10] ERROR ExpLog [(null)] - 页面：/LogonSSO.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.CmnContext.ExecuteSP(String spName) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 300
+   在 LogonSSO.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\logonSSO.aspx.cs:行号 39
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2017-12-27 16:56:31,204 [10] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

@@ -545,11 +545,11 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         {
             if (custAddr.Length > 46)
             {
-                custAddr = custAddr.Substring(0, 23) + "<br/>" + custAddr.Substring(24, 23) + "<br/>" + custAddr.Substring(47);
+                custAddr = custAddr.Substring(0, 23) + "<br/>" + custAddr.Substring(23, 23) + "<br/>" + custAddr.Substring(46);
             }
             else
             {
-                custAddr = custAddr.Substring(0, 23) + "<br/>" + custAddr.Substring(24);
+                custAddr = custAddr.Substring(0, 23) + "<br/>" + custAddr.Substring(23);
             }
         }
         GroupCardHelper.prepareExpress(ptnExpress, senderPhone, senderCompany, senderAddr, labTag, custName, custPhone, custAddr, cardNoColl, cardNoCollReserved);

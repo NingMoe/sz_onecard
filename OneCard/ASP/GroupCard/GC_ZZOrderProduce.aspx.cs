@@ -627,7 +627,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         //context.AddField("P_ID").Value = DealString.GetRecordID(hiddentradeno.Value, hiddenAsn.Value.Substring(4, 16));
         context.AddField("P_CARDNO").Value = txtCardno.Text;
         context.AddField("P_DEPOSIT").Value = 0;
-        context.AddField("P_CARDCOST").Value = 0;       //卡费暂定零
+        context.AddField("P_CARDCOST").Value = Convert.ToDecimal(hiddenCardcostFee.Value) * 100;       //卡费暂定零
         context.AddField("P_OTHERFEE").Value = 0;
         context.AddField("P_CARDTRADENO").Value = hiddentradeno.Value;
         context.AddField("P_CARDTYPECODE").Value = hiddenLabCardtype.Value;
