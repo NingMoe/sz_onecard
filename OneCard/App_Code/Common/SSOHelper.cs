@@ -204,23 +204,23 @@ namespace SSO
             
             if (isNeedModifyPwd)
             {
-                //强制跳转到修改密码页面
-                Hashtable hash = new Hashtable();
-                hash.Add("UserID", username);
-                hash.Add("UserName", "");
-                hash.Add("CardID", "");
-                hash.Add("DepartID", "");
-                hash.Add("DepartName", "");
-                hash.Add("DateTime", "");
-                hash.Add("DecryptString", DecryptString.EncodeString(username));
-                hash.Add("RegionCode", "");
-                hash.Add("Debugging","");
-                hash["LogonLevel"] = isAdmin ? "Admin" : "Normal";
-                session["LogonInfo"] = hash;
-                string modifyPwdUrl =
-                    string.Format("~/ASP/PrivilegePR/PR_ChangePassword.aspx?modifyType={0}", modifyType);
-                response.Redirect(modifyPwdUrl);
-                return false;
+                ////强制跳转到修改密码页面
+                //Hashtable hash = new Hashtable();
+                //hash.Add("UserID", username);
+                //hash.Add("UserName", "");
+                //hash.Add("CardID", "");
+                //hash.Add("DepartID", "");
+                //hash.Add("DepartName", "");
+                //hash.Add("DateTime", "");
+                //hash.Add("DecryptString", DecryptString.EncodeString(username));
+                //hash.Add("RegionCode", "");
+                //hash.Add("Debugging","");
+                //hash["LogonLevel"] = isAdmin ? "Admin" : "Normal";
+                //session["LogonInfo"] = hash;
+                //string modifyPwdUrl =
+                //    string.Format("~/ASP/PrivilegePR/PR_ChangePassword.aspx?modifyType={0}", modifyType);
+                //response.Redirect(modifyPwdUrl);
+                //return false;
             }
             return true;
         }

@@ -102,10 +102,10 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             switch (e.Row.Cells[7].Text)
             {
                 case "Z1":
-                    e.Row.Cells[7].Text = "24小时套餐";
+                    e.Row.Cells[7].Text = "200元24小时套餐";
                     break;
                 case "Z2":
-                    e.Row.Cells[7].Text = "48小时套餐";
+                    e.Row.Cells[7].Text = "288元48小时套餐";
                     break;
                 default:
                     e.Row.Cells[7].Text = "套餐类型异常";

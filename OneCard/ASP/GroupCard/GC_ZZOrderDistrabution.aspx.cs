@@ -364,6 +364,10 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
                 {
                     context.AddError("请录入物流单号!", txtCopNo);
                 }
+                if (gvr.Cells[5].Text.ToString() != "已制卡")
+                {
+                    context.AddError("订单状态需为已制卡!");
+                }
                 orderNo = gvr.Cells[4].Text.ToString();
                 copName = ddl.SelectedValue;
                 copNo = txtCopNo.Text;

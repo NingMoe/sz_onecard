@@ -136,6 +136,19 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
                     e.Row.Cells[1].Text = "状态异常";
                     break;
             }
+
+            switch (e.Row.Cells[4].Text)
+            {
+                case "Z1":
+                    e.Row.Cells[4].Text = "200元24小时套餐";
+                    break;
+                case "Z2":
+                    e.Row.Cells[4].Text = "288元48小时套餐";
+                    break;
+                default:
+                    e.Row.Cells[4].Text = "套餐类型异常";
+                    break;
+            }
         }
     }
 
@@ -173,7 +186,7 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
         //总数
         int iCount = 0;
         //每页数量
-        int iPerPage = 10;
+        int iPerPage = 5;
         int begin = (page - 1) * iPerPage + 1;
         int end = page * iPerPage + 1;
 
