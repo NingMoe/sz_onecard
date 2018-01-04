@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>订单确认</title>
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+  <section class="order">
+    <div class="order-header">
+      <div class="cloud"></div>
+      <div class="car"></div>
+    </div>
+    <div class="card-box">
+      <div class="card-box-icn icn-car"></div>
+      <div class="card-box-main">
+        <label class="pull-left">派送方式</label>
+        <div class="pull-right">
+          <label class="radio-label">快递5.00元<input class="radio" type="radio" name="delivery" value="kd"></label>
+          <label class="radio-label">自取<input class="radio" type="radio" name="delivery" value="zq" checked="checked"></label>
+        </div>
+      </div>
+    </div>
+    <div class="order-self-pick text-right" id="orderSelf"><a  href="./selfpick.html">查看自取地址</a></div>
+    <div class="card-box hide" id="orderAddress">
+        <div class="card-box-icn icn-loc"></div>
+        <a class="card-box-main order-receipt" href="./address-manager.html">
+            <div class="order-receipt-person"><label>收货人：</label><span class="order-receipt-span">欧阳晓晓</span><span class="pull-right">18952135623</span></div>
+            <div class="order-receipt-addr"><label>收货地址：</label><span class="order-receipt-span">江苏省南京市鼓楼区集慧路18号联创科技大厦A座2楼</span></div>
+        </a>
+    </div>     
+    <div class="card-box commodity-lst">
+        <div class="card-box-icn icn-rmb"></div>
+        <div class="card-box-main commodity-item">
+          <div class="commodity-item-total">
+            <span class="commodity-item-title">套餐总额</span>
+            <span class="commodity-total-price pull-right">￥220</span>
+          </div>
+          <div class="commodity-item-hd">
+            <span class="commodity-item-title">转转卡A套餐兑换券</span>
+            <span class="commodity-item-price pull-right">￥200</span>
+          </div>
+          <div class="commodity-item-bd">
+            <span class="commodity-item-prepare">预充值</span>
+            <span class="commodity-item-price pull-right">￥20</span>
+          </div>
+          <div class="commodity-item-bar">
+            <span class="commodity-item-holder">持卡人</span>
+            <span class="commodity-item-name">欧阳女士</span>
+            <span class="commodity-item-phone">15651967076</span>
+          </div>
+        </div>
+        <div class="card-box-main commodity-item">
+          <div class="commodity-item-total">
+            <span class="commodity-item-title">套餐总额</span>
+            <span class="commodity-total-price pull-right">￥220</span>
+          </div>
+          <div class="commodity-item-hd">
+            <span class="commodity-item-title">转转卡B套餐兑换券</span>
+            <span class="commodity-item-price pull-right">￥200</span>
+          </div>
+          <div class="commodity-item-bd">
+            <span class="commodity-item-prepare">预充值</span>
+            <span class="commodity-item-price pull-right">￥20</span>
+          </div>
+          <div class="commodity-item-bar">
+            <span class="commodity-item-holder">持卡人</span>
+            <span class="commodity-item-name">欧阳女士</span>
+            <span class="commodity-item-phone">15651967076</span>
+          </div>
+        </div>
+    </div>  
+    <div class="card-box">
+        <div class="card-box-icn icn-edit"></div>
+        <div class="card-box-main">
+            <label>我要留言</label>
+            <div class="order-message"><textarea placeholder="留言"></textarea></div>
+        </div>
+    </div>  
+    <div class="card-box card-total">
+        <div class="card-box-icn icn-card"></div>
+        <div class="card-box-main">
+            <label>应付总额</label>
+            <span class="commodity-total-price pull-right" id="zq">￥440</span>
+            <span class="commodity-total-price pull-right hide" id="kd">￥445</span>
+        </div>
+    </div>           
+  </section>
+
+  <section class="popup transition" id="delPopup">
+    <div class="popup-inner">
+      <div class="popup-content">确定要删除？</div>
+      <div class="popup-action">
+        <button class="btn btn-sm del-cancel round"><span class="icn icn-cancel"></span>取消</button>
+        <button class="btn btn-sm do-del round"><span class="icn icn-next"></span>确定</button>
+      </div>
+    </div>
+  </section>
+  <section class="popup-mask"></section>
+
+  <div class="footer-holder"></div>
+  <footer class="footer"><a class="button go-payment" href="./payment.html?">立即支付</a></footer>
+  <section class="global-nav">
+    <ul>
+      <li><a href="./index.html"><span class="icn-palance"></span><strong>首页</strong></a></li>
+      <li><a href="./my-orders.html"><span class="icn-board"></span><strong>我的订单</strong></a></li>
+      <li><a href="./cart.html"><span class="icn-cart"></span><strong>我的购物车</strong></a></li>
+    </ul>
+  </section>
+  <script src="../js/jquery.min.js"> </script>
+  <script src="../js/fastclick.js"> </script>
+  <script src="../js/base.js"></script>
+  <script>
+    jQuery(function(){
+      //初始化vouchers购物车
+      vouchers.init();
+      
+
+      $('input[name=delivery]').on('click', function(){
+        if(this.value == "kd"){
+          $('#orderAddress, #kd').show();
+          $('#zq, #orderSelf').hide();
+        }else{
+          $('#orderAddress, #kd').hide();
+          $('#zq, #orderSelf').show();          
+        }
+      })
+
+    });
+  </script>
+</body>
+</html>

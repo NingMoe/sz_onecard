@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>订单确认</title>
+    <link rel="stylesheet" href="../dest/base.css">
+    <script src="../js/flexible.js"></script>
+</head>
+<body>
+  <section class="pay-sc text-center  hide">
+    <div class="pay-sc-main">
+      <div class="pay-sc-cloud"></div>
+      <p>恭喜您成功办理转转卡A套餐</p>
+      <div><a href="./packages.html">继续办理</a></div>
+    </div>
+    <div class="pay-sc-fence"></div>
+    <div class="pay-sc-ext">
+      <p>小主，请邀请你的小伙伴一起办理吧</p>
+      <div><a class="btn round" href="./packages.html">去邀请</a></div>
+    </div>
+  </section>
+  <section class="pay-sc text-center">
+    <div class="pay-sc-main">
+      <div class="pay-sc-break"></div>
+      <p>身份信息不符，请到网点办理或到网点<br>更正信息后线上办理</p>
+    </div>
+    <div class="pay-sc-fence"></div>
+    <div class="pay-sc-ext">
+      <a class="btn btn-block round" href="./order.html">&nbsp; &nbsp;返 回</a>
+    </div>
+  </section>  
+  <section class="global-nav">
+    <ul class="flex">
+      <li class="flex-1"><a href="./index.html"><span class="icn-palance"></span><strong>首页</strong></a></li>
+      <li class="flex-1"><a href="./my-orders.html"><span class="icn-board"></span><strong>我的订单</strong></a></li>
+      <li class="flex-1"><a href="./cart.html"><span class="icn-cart"></span><strong>我的购物车</strong></a></li>
+    </ul>
+  </section>  
+  <script src="../js/jquery.min.js"> </script>
+  <script src="../js/fastclick.js"> </script>
+  <script src="../js/base.js"></script>
+  <script>
+    jQuery(function(){
+
+      //取消支付
+      $('.go-back').on('click', function(){
+        history.back();
+      });
+      
+
+      //选择支付方式
+      $('.pay-type a').on('click', function(){
+        $('.pay-type').removeClass('pay-weixin pay-alipay').addClass('pay-' + $(this).data('type'));
+
+        // APP.showLoading();
+        // setTimeout(function(){
+        //   APP.showLoading();
+        // }, 5000);
+
+        //跳转至支付结果页
+        setTimeout(function(){
+          location.replace('./pay-result.html');
+        }, 5000)
+      });
+
+    });
+  </script>
+</body>
+</html>
