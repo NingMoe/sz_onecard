@@ -23,10 +23,15 @@ public class HttpHelper
     private static readonly string _zzOrderListDistrabutionUrl = ConfigurationManager.AppSettings["ZZOrderListDistrabutionUrl"];
     private static readonly string _zzGetPhotoUrl = ConfigurationManager.AppSettings["ZZGetPhotoUrl"];
     private static readonly string _zzActivationCardUrl = ConfigurationManager.AppSettings["ZZActivationCardUrl"];
+    private static readonly string _zzReceiveCardQueryUrl = ConfigurationManager.AppSettings["ZZReceiveCardQueryUrl"];
+    private static readonly string _zzPayCanalDataQueryUrl = ConfigurationManager.AppSettings["ZZPayCanalDataQueryUrl"];
+    private static readonly string _zzParkConSumerQueryUrl = ConfigurationManager.AppSettings["ZZParkConSumerQueryUrl"];
+    private static readonly string _zzCardConSumerQueryUrl = ConfigurationManager.AppSettings["ZZCardConSumerQueryUrl"];
+    private static readonly string _zzTradeQueryUrl = ConfigurationManager.AppSettings["ZZTradeQueryUrl"];
     private static readonly string _tokenKey = ConfigurationManager.AppSettings["TokenKey"];
     private static readonly string _zzTokenKey = ConfigurationManager.AppSettings["ZZTokenKey"];
 
-    public static string PostRealRequest(TradeType tradeType, Dictionary<string, string> postData, TokenType tokenType)
+    public static string PostRequest(TradeType tradeType, Dictionary<string, string> postData)
     {
         string url = "";
         if (tradeType == TradeType.Query)
@@ -37,41 +42,9 @@ public class HttpHelper
         {
             url = _payUrl;
         }
-        else if (tradeType == TradeType.ZZOrderChange)
-        {
-            url = _zzOrderChangeUrl;
-        }
-        else if (tradeType == TradeType.ZZOrderCardQuery)
-        {
-            url = _zzOrderCardQueryUrl;
-        }
-        else if (tradeType == TradeType.ZZOrderCardCount)
-        {
-            url = _zzOrderCardCountUrl;
-        }
-        else if (tradeType == TradeType.ZZOrderDistrabution)
-        {
-            url = _zzOrderDistrabutionUrl;
-        }
-        else if (tradeType == TradeType.ZZOrderListDistrabution)
-        {
-            url = _zzOrderListDistrabutionUrl;
-        }
-        else if (tradeType == TradeType.ZZGetPhoto)
-        {
-            url = _zzGetPhotoUrl;
-        }
         //构造请求参数
         postData = SortDictionary(postData);//排序后的集合
-        string token = "";
-        if (tokenType == TokenType.JFToken)
-        {
-            token = _tokenKey;
-        }
-        else if (tokenType == TokenType.ZZToken)
-        {
-            token = _zzTokenKey;
-        }
+        string token = _tokenKey;
         string postStr = getAppentStr(postData, token);
         string md5Token = get32ByteMd5(postStr);//生成Token
         postStr += "&TOKEN=" + md5Token;
@@ -114,6 +87,26 @@ public class HttpHelper
         {
             url = _zzActivationCardUrl;
         }
+        else if (tradeType == TradeType.ZZReceiveCardQuery)
+        {
+            url = _zzReceiveCardQueryUrl;
+        }
+        else if (tradeType == TradeType.ZZPayCanalDataQuery)
+        {
+            url = _zzPayCanalDataQueryUrl;
+        }
+        else if (tradeType == TradeType.ZZParkConSumerQuery)
+        {
+            url = _zzParkConSumerQueryUrl;
+        }
+        else if (tradeType == TradeType.ZZCardConSumerQuery)
+        {
+            url = _zzCardConSumerQueryUrl;
+        }
+        else if (tradeType == TradeType.ZZTradeQuery)
+        {
+            url = _zzTradeQueryUrl;
+        }
         //构造请求参数
         Dictionary<string, string> realPostData = postData;
         postData = SortDictionary(postData);//排序后的集合
@@ -128,10 +121,6 @@ public class HttpHelper
         StreamReader sr = new StreamReader(stream); //创建一个stream读取流  
         string html = sr.ReadToEnd();   //从头读到尾，放到字符串html
         return html;
-    }
-    public static string PostRequest(TradeType tradeType, Dictionary<string, string> postData)
-    {
-        return PostRealRequest(tradeType, postData, TokenType.JFToken);
     }
     public static string ZZPostRequest(TradeType tradeType, Dictionary<string, string> postData)
     {
@@ -148,7 +137,12 @@ public class HttpHelper
         ZZOrderCardCount,
         ZZOrderDistrabution,
         ZZOrderListDistrabution,
-        ZZActivationCard
+        ZZActivationCard,
+        ZZReceiveCardQuery,
+        ZZPayCanalDataQuery,
+        ZZParkConSumerQuery,
+        ZZCardConSumerQuery,
+        ZZTradeQuery
     }
     public enum TokenType
     {

@@ -105,13 +105,7 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
             txtRemark.Visible = false;
         }
     }
-
-    private Dictionary<string, string> PostQuery()
-    {
-        Dictionary<string, string> postData = new Dictionary<string, string>();
-        postData.Add("", "");
-        return postData;
-    }
+    
 
     protected void gvOrderList_RowDataBound(object sender, GridViewRowEventArgs e)
     {
