@@ -31,6 +31,11 @@ public class HttpHelper
     private static readonly string _tokenKey = ConfigurationManager.AppSettings["TokenKey"];
     private static readonly string _zzTokenKey = ConfigurationManager.AppSettings["ZZTokenKey"];
 
+    public static string ZZPostRequest(TradeType tradeType, Dictionary<string, string> postData)
+    {
+        return ZZPostRequest(tradeType, postData, TokenType.ZZToken);
+    }
+
     public static string PostRequest(TradeType tradeType, Dictionary<string, string> postData)
     {
         string url = "";
@@ -121,10 +126,6 @@ public class HttpHelper
         StreamReader sr = new StreamReader(stream); //创建一个stream读取流  
         string html = sr.ReadToEnd();   //从头读到尾，放到字符串html
         return html;
-    }
-    public static string ZZPostRequest(TradeType tradeType, Dictionary<string, string> postData)
-    {
-        return ZZPostRequest(tradeType, postData, TokenType.ZZToken);
     }
 
     public enum TradeType

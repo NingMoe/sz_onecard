@@ -90,6 +90,7 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
         btnRollBack.Enabled = false;
         btnRevoke.Enabled = false;
 
+        gvOrderList.SelectedIndex = -1;
         //驳回状态正常的可以驳回
         if (selOrderStates.SelectedValue == "0")
         {
@@ -141,6 +142,16 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
                     break;
                 default:
                     e.Row.Cells[4].Text = "套餐类型异常";
+                    break;
+            }
+
+            switch (e.Row.Cells[12].Text)
+            {
+                case "0":
+                    e.Row.Cells[12].Text = "0";
+                    break;
+                default:
+                    e.Row.Cells[12].Text = (Convert.ToDecimal(e.Row.Cells[12].Text) / 100).ToString();
                     break;
             }
         }

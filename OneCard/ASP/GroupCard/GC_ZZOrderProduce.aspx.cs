@@ -118,6 +118,9 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
                 case "":
                     btnProduce.Visible = true;
                     break;
+                case "&nbsp;":
+                    btnProduce.Visible = true;
+                    break;
                 default:
                     btnProduce.Visible = false;
                     break;

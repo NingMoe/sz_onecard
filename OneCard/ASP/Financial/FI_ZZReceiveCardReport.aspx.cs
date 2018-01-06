@@ -10,8 +10,9 @@ using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TDO.BalanceParameter;
+using TDO.UserManager;
 using TM;
-public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
+public partial class ASP_Financial_FI_ZZReceiveCardReport : Master.ExportMaster
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,18 +20,22 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
         {
             //初始化日期
 
-            TMTableModule tmTMTableModule = new TMTableModule();
             txtFromDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
             txtToDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
 
+
             gvResult.DataSource = new DataTable();
             gvResult.DataBind();
+
+            //从内部部门编码表(TD_M_INSIDEDEPART)中读取数据，放入下拉列表中
+
+            UserCardHelper.selectDepts(context, selDept, true);
+            UserCardHelper.selectAllStaffs(context, selStaff, selDept, true);
         }
     }
 
 
-    #region Private
-
+    #region private
 
     #region validate
     // 查询输入校验处理
@@ -64,7 +69,8 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
     {
         Dictionary<string, string> postData = new Dictionary<string, string>();
         postData.Add("channelCode", "ONECARD");
-        postData.Add("tradeType", selTradeType.SelectedValue);
+        postData.Add("operateDepartId", selDept.SelectedValue);
+        postData.Add("operateStaffNo", selStaff.SelectedValue);
         postData.Add("fromDate", txtFromDate.Text);
         postData.Add("toDate", txtToDate.Text);
 
@@ -74,21 +80,19 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
     private DataTable initEmptyDataTable()
     {
         DataTable dt = new DataTable();
-        dt.Columns.Add("TRADETYPE", typeof(string));//业务类型
+        dt.Columns.Add("DETAILNO", typeof(string));//子订单号
+        dt.Columns.Add("ORDERNO", typeof(string));//主订单号
         dt.Columns.Add("CARDNO", typeof(string));//卡号
-        dt.Columns.Add("OPERATETIME", typeof(string));//操作时间
+        dt.Columns.Add("PACKAGENAME", typeof(string));//套餐类型
         dt.Columns.Add("OPERATEDEPARTID", typeof(string));//操作部门号
-        dt.Columns.Add("STAFFNO", typeof(string));//操作员工号
-        dt.Columns.Add("POSNO", typeof(string));//POS编号
-        dt.Columns.Add("PSAMNO", typeof(string));//PSAM编号
+        dt.Columns.Add("OPERATESTAFFNO", typeof(string));//操作员工号
 
-        dt.Columns["TRADETYPE"].MaxLength = 100;
+        dt.Columns["DETAILNO"].MaxLength = 100;
+        dt.Columns["ORDERNO"].MaxLength = 100;
         dt.Columns["CARDNO"].MaxLength = 100;
-        dt.Columns["OPERATETIME"].MaxLength = 100;
+        dt.Columns["PACKAGENAME"].MaxLength = 100;
         dt.Columns["OPERATEDEPARTID"].MaxLength = 100;
-        dt.Columns["STAFFNO"].MaxLength = 100;
-        dt.Columns["POSNO"].MaxLength = 100;
-        dt.Columns["PSAMNO"].MaxLength = 100;
+        dt.Columns["OPERATESTAFFNO"].MaxLength = 100;
 
         return dt;
     }
@@ -112,7 +116,7 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
             {
                 message = itemProperty.Value.ToString();
             }
-            else if (propertyName == "tradeColl")
+            else if (propertyName == "receiveCardList")
             {
                 if (itemProperty.Value == null)
                 {
@@ -158,15 +162,51 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
         }
         return dt;
     }
-    #endregion
 
     #endregion
 
+    #endregion
 
     #region protect Event
+
+    protected void selDept_Changed(object sender, EventArgs e)
+    {
+        //查询选择部门名称后,设置员工姓名下拉列表值
+        UserCardHelper.selectAllStaffs(context, selStaff, selDept, true);
+    }
+
     protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        //
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            switch (e.Row.Cells[3].Text)
+            {
+                case "Z1":
+                    e.Row.Cells[3].Text = "200元24小时套餐";
+                    break;
+                case "Z2":
+                    e.Row.Cells[3].Text = "288元48小时套餐";
+                    break;
+                default:
+                    e.Row.Cells[3].Text = "套餐类型异常";
+                    break;
+            }
+
+            //获取部门编号对应的部门名称
+            ListItem listItem = selDept.Items.FindByValue(e.Row.Cells[4].Text);
+            if (listItem != null)
+            {
+                e.Row.Cells[4].Text = listItem.Text.Substring(listItem.Text.IndexOf(':') + 1);
+            }
+
+            //获取员工编号对应的员工名称
+            listItem = selStaff.Items.FindByValue(e.Row.Cells[5].Text);
+            if (listItem != null)
+            {
+                e.Row.Cells[5].Text = listItem.Text.Substring(listItem.Text.IndexOf(':') + 1);
+            }
+
+        }
     }
 
     // 查询处理
