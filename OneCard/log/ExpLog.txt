@@ -38234,3 +38234,201 @@ System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 61.155.17
    在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
    在 System.Net.Sockets.Socket.InternalConnect(EndPoint remoteEP)
    在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+2018-01-07 14:56:48,770 [11] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 582
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 15:08:26,905 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-03113: end-of-file on communication channel
+Process ID: 0
+Session ID: 185 Serial number: 38829
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 582
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 15:10:53,204 [10] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_StaffDailyDetail.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 Loki.LokiSlowQuery.QueryFormLoki(CmnContext context, SP_FI_QueryPDO pdo) 位置 d:\Work\SZ_Github\OneCard\App_Code\Loki\LokiSlowQuery.cs:行号 30
+   在 ASP_Financial_FI_StaffDailyDetail.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_StaffDailyDetail.aspx.cs:行号 305
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 15:27:13,041 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 582
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 15:43:23,681 [12] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.ArgumentOutOfRangeException: startIndex 不能大于字符串长度。
+参数名: startIndex
+   在 System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   在 System.String.Substring(Int32 startIndex, Int32 length)
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnSupply_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 682
+   在 ASP_GroupCard_GC_ZZOrderProduce.gvOrderList_RowCommand(Object sender, GridViewCommandEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 814
+   在 System.Web.UI.WebControls.GridView.OnRowCommand(GridViewCommandEventArgs e)
+   在 System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   在 System.Web.UI.WebControls.GridView.OnBubbleEvent(Object source, EventArgs e)
+   在 System.Web.UI.Control.RaiseBubbleEvent(Object source, EventArgs args)
+   在 System.Web.UI.WebControls.GridViewRow.OnBubbleEvent(Object source, EventArgs e)
+   在 System.Web.UI.Control.RaiseBubbleEvent(Object source, EventArgs args)
+   在 System.Web.UI.WebControls.Button.OnCommand(CommandEventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 15:43:30,611 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 582
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:10:42,617 [7] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Net.WebException: 基础连接已经关闭: 连接被意外关闭。
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpHelper.ZZCreatePostHttpResponse(String url, String postData, String postDataKey, Boolean isHttps, Encoding charset) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 304
+   在 HttpHelper.ZZPostRequest(TradeType tradeType, Dictionary`2 postData, TokenType tokenType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 124
+   在 HttpHelper.ZZPostRequest(TradeType tradeType, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 36
+   在 ASP_GroupCard_GC_ZZReceiveCard.btnSale_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 669
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:10:49,913 [7] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 82
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:11:28,309 [7] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Net.WebException: 远程服务器返回错误: (405) 不允许的方法。
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpHelper.ZZCreatePostHttpResponse(String url, String postData, String postDataKey, Boolean isHttps, Encoding charset) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 304
+   在 HttpHelper.ZZPostRequest(TradeType tradeType, Dictionary`2 postData, TokenType tokenType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 124
+   在 HttpHelper.ZZPostRequest(TradeType tradeType, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 36
+   在 ASP_GroupCard_GC_ZZReceiveCard.btnSale_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 669
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:11:32,888 [5] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 82
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:28:49,196 [7] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 CommonHelper.readCardJiMingState(CmnContext context, String cardNo, HiddenField hidIsJiMing) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\CommonHelper.cs:行号 63
+   在 ASP_GroupCard_GC_ZZReceiveCard.btnReadCard_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 475
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:28:52,141 [14] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 82
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:29:01,823 [14] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 CommonHelper.readCardJiMingState(CmnContext context, String cardNo, HiddenField hidIsJiMing) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\CommonHelper.cs:行号 63
+   在 ASP_GroupCard_GC_ZZReceiveCard.btnReadCard_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 475
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:29:04,220 [14] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 82
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-07 16:55:59,229 [13] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

@@ -3551,3 +3551,13 @@
 2017-12-01 11:38:22,220 [10] ERROR AppLog [(null)] - A001107102:Cardstate is wrong
 2017-12-21 16:05:23,250 [8] ERROR AppLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx || S094780092:记录订单台帐表失败ORA-01400: cannot insert NULL into ("UOWNER_B_SZ"."TF_F_ZZOL_SYNC"."TRADEID")
 2017-12-21 16:05:23,260 [8] ERROR AppLog [(null)] - S094780092:记录订单台帐表失败ORA-01400: cannot insert NULL into ("UOWNER_B_SZ"."TF_F_ZZOL_SYNC"."TRADEID")
+2018-01-07 15:11:43,797 [5] INFO  AppLog [(null)] - 2150010196560026充值存储过程时间为：41毫秒
+2018-01-07 15:11:44,548 [9] INFO  AppLog [(null)] - 2150010196560026充值写卡时间为：87毫秒
+2018-01-07 15:12:16,481 [11] INFO  AppLog [(null)] - 2150010196560026充值存储过程时间为：44毫秒
+2018-01-07 15:12:27,746 [11] INFO  AppLog [(null)] - 2150010196560026充值写卡时间为：7266毫秒
+2018-01-07 15:43:47,075 [9] ERROR AppLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx || S001026101:Unable to Updated card trade
+2018-01-07 15:43:47,088 [9] ERROR AppLog [(null)] - S001026101:Unable to Updated card trade
+2018-01-07 15:44:43,415 [14] ERROR AppLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx || S001026101:Unable to Updated card trade
+2018-01-07 15:44:43,424 [14] ERROR AppLog [(null)] - S001026101:Unable to Updated card trade
+2018-01-07 15:48:12,162 [12] ERROR AppLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx || S001026101:Unable to Updated card trade
+2018-01-07 15:48:12,169 [12] ERROR AppLog [(null)] - S001026101:Unable to Updated card trade

@@ -34,118 +34,9 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         }
     }
 
-    /// <summary>
-    /// 查询验证
-    /// </summary>
-    /// <returns></returns>
-    private bool ValidInput()
-    {
-        //校验联系人长度
-        if (!string.IsNullOrEmpty(txtOrderNo.Text) && !Validation.isCharNum(txtOrderNo.Text))
-        {
-            context.AddError("A094780090:订单号只能为英数");
-        }
+    #region private Event
 
-        //对开始日期和结束日期的判断
-
-        UserCardHelper.validateDateRange(context, txtFromDate, txtToDate, false);
-        return !(context.hasError());
-    }
-
-    /// <summary>
-    /// 查询订单按钮事件
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void btnQuery_Click(object sender, EventArgs e)
-    {
-
-        if (!ValidInput())
-            return;
-
-        gvOrderList.DataSource = new DataTable();
-        gvOrderList.DataBind();
-
-        string fromDate = txtFromDate.Text.Trim();
-        string endDate = txtToDate.Text.Trim();
-
-        previousLink.Visible = true;
-        nextLink.Visible = true;
-        ShowFileContent();
-    }
-
-    //Data绑定
-    protected void gvOrderList_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-
-            Image imgP = (Image)e.Row.FindControl("imgPerson");
-            imgP.ImageUrl = "GC_ZZShowGetPicture.aspx?orderDetailId=" + e.Row.Cells[14].Text;
-
-            switch (e.Row.Cells[4].Text)
-            {
-                case "0":
-                    e.Row.Cells[4].Text = "未处理";
-                    break;
-                case "1":
-                    e.Row.Cells[4].Text = "已制卡";
-                    break;
-                case "2":
-                    e.Row.Cells[4].Text = "已发货";
-                    break;
-                default:
-                    e.Row.Cells[4].Text = "状态异常";
-                    break;
-            }
-
-            switch (e.Row.Cells[7].Text)
-            {
-                case "Z1":
-                    e.Row.Cells[7].Text = "200元24小时套餐";
-                    break;
-                case "Z2":
-                    e.Row.Cells[7].Text = "288元48小时套餐";
-                    break;
-                default:
-                    e.Row.Cells[7].Text = "套餐类型异常";
-                    break;
-            }
-
-            Button btnProduce = (Button)e.Row.FindControl("btnProduce");
-            switch (e.Row.Cells[5].Text)
-            {
-                case "":
-                    btnProduce.Visible = true;
-                    break;
-                case "&nbsp;":
-                    btnProduce.Visible = true;
-                    break;
-                default:
-                    btnProduce.Visible = false;
-                    break;
-            }
-            Button btnCharge = (Button)e.Row.FindControl("btnCharge");
-            switch (e.Row.Cells[2].Text)
-            {
-                case "0":
-                    e.Row.Cells[2].Text = "0";
-                    btnCharge.Visible = false;
-                    break;
-                default:
-                    e.Row.Cells[2].Text = (Convert.ToDecimal(e.Row.Cells[2].Text) / 100).ToString();
-                    break;
-            }
-        }
-    }
-
-    //分页
-    protected void Link_Click(object sender, CommandEventArgs e)
-    {
-        ViewState["page"] = e.CommandArgument.ToString();
-        ShowFileContent();
-    }
-
+    #region queryData
     private Dictionary<string, string> DeclarePost(int begin, int end)
     {
         Dictionary<string, string> postData = new Dictionary<string, string>();
@@ -368,6 +259,9 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         }
         return dt;
     }
+    #endregion
+
+    #region execute
 
     /// <summary>
     /// 提交同步信息
@@ -443,6 +337,74 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         context.ExecuteSP("SP_GC_ZZUpdateSync");
     }
 
+
+    /// <summary>
+    /// 制卡功能
+    /// </summary>
+    private void ProduceCard(object sender, EventArgs e, string orderType)
+    {
+        StringBuilder strBuilder = new StringBuilder();
+        context.SPOpen();
+        context.AddField("P_DETAILNO").Value = hidDetailNo.Value;      //子订单号
+        context.AddField("P_ORDERNO").Value = hidDetailNo.Value;      //子订单号
+        context.AddField("P_ID").Value = DealString.GetRecordID(hiddentradeno.Value, "00215000" + txtCardno.Text.Substring(8, 8));
+        //context.AddField("P_ID").Value = DealString.GetRecordID(hiddentradeno.Value, hiddenAsn.Value.Substring(4, 16));
+        context.AddField("P_CARDNO").Value = txtCardno.Text;
+        context.AddField("P_DEPOSIT").Value = 0;
+        context.AddField("P_CARDCOST").Value = Convert.ToDecimal(hiddenCardcostFee.Value) * 100;       //卡费暂定零
+        context.AddField("P_OTHERFEE").Value = 0;
+        context.AddField("P_CARDTRADENO").Value = hiddentradeno.Value;
+        context.AddField("P_CARDTYPECODE").Value = hiddenLabCardtype.Value;
+        context.AddField("P_CARDMONEY").Value = 0;
+        context.AddField("P_SELLCHANNELCODE").Value = "01";
+        context.AddField("P_SERSTAKETAG").Value = "0";
+        context.AddField("P_TRADETYPECODE").Value = "01";
+
+        AESHelp.AESEncrypt(hidcustName.Value, ref strBuilder);
+        context.AddField("P_CUSTNAME").Value = strBuilder.ToString();
+        context.AddField("P_CUSTSEX").Value = hidcustSex.Value;
+        context.AddField("P_CUSTBIRTH").Value = hidcustBirth.Value;
+        context.AddField("P_PAPERTYPECODE").Value = hidpaperType.Value;
+
+        AESHelp.AESEncrypt(hidpaperNo.Value, ref strBuilder);
+        context.AddField("P_PAPERNO").Value = strBuilder.ToString();
+
+        AESHelp.AESEncrypt(hidaddress.Value, ref strBuilder);
+        context.AddField("P_CUSTADDR").Value = strBuilder.ToString();
+        context.AddField("P_CUSTPOST").Value = hidcustPost.Value;
+
+        AESHelp.AESEncrypt(hidcustPhone.Value, ref strBuilder);
+        context.AddField("P_CUSTPHONE").Value = strBuilder.ToString();
+        context.AddField("P_CUSTEMAIL").Value = hidcustEmail.Value;
+        context.AddField("P_REMARK").Value = "";
+        context.AddField("P_CUSTRECTYPECODE").Value = "1";
+        context.AddField("P_TERMNO").Value = "112233445566";
+        context.AddField("P_OPERCARDNO").Value = context.s_CardID;
+        context.AddField("P_CURRENTTIME", "DateTime", "output", "", null);
+        context.AddField("P_SALECARDTRADEID", "string", "output", "16", null);
+        //return;
+        bool ok = context.ExecuteSP("SP_GC_ZZSALECARD");
+        if (ok)
+        {
+            hidTradeNo.Value = "" + context.GetFieldValue("P_SALECARDTRADEID");
+            //记录同步信息
+            UpdateSyncType("01", "01", "", "");
+            context.AddMessage("制卡完成！");
+
+            string code = "";
+            string message = "";
+            //调用同步接口
+            synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", ref code, ref message);
+
+            //更新同步信息
+            UpdateSyncType("02", "01", code, message);
+
+        }
+    }
+
+    #endregion
+
+    #region initInfo
     /// <summary>
     /// 售卡费用相关信息
     /// </summary>
@@ -507,65 +469,41 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             hiddenDepositFee.Value = (Convert.ToDecimal(hiddenDepositFee.Value) + (Convert.ToDecimal(ddoTL_R_ICUSEROut.CARDPRICE)) / 100).ToString("0.00");
         }
     }
+    #endregion
+
+    #region validate
 
     /// <summary>
-    /// 绑定按钮事件
+    /// 查询验证
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void gvOrderList_RowCommand(object sender, GridViewCommandEventArgs e)
+    /// <returns></returns>
+    private bool ValidInput()
     {
-        int index = Convert.ToInt32(e.CommandArgument.ToString());
-        if (e.CommandName == "Produce")
+        //校验联系人长度
+        if (!string.IsNullOrEmpty(txtOrderNo.Text) && !Validation.isCharNum(txtOrderNo.Text))
         {
-
-            //ScriptManager.RegisterStartupScript(this, this.GetType(),
-            //            "js", "ReadCardInfo()", true);
-
-            hidMoney.Value = gvOrderList.Rows[index].Cells[2].Text;
-            //验证卡状态
-            checkCardState(txtCardno.Text);
-
-            //校验用户相关信息
-            SaleInfoValidation(index);
-
-            //获取卡相关资费
-            GetTradeFee();
-            if (context.hasError())
-                return;
-
-            //return;
-            //售卡-休闲开通
-            ProduceCard(sender, e, "");
-
+            context.AddError("A094780090:订单号只能为英数");
         }
 
-        if (e.CommandName == "Charge")
-        {
-            hidOrderCardNo.Value = gvOrderList.Rows[index].Cells[5].Text;
-            hidMoney.Value = gvOrderList.Rows[index].Cells[2].Text;
+        //对开始日期和结束日期的判断
 
-            //读卡验证卡号
-            //ScriptManager.RegisterStartupScript(this, this.GetType(),
-            //            "js", "SupplyAndReadCardForCheck()", true);
+        UserCardHelper.validateDateRange(context, txtFromDate, txtToDate, false);
+        return !(context.hasError());
+    }
 
-            //验证卡状态
-            //checkCardState(txtCardno.Text);
+    private bool inportValidation()
+    {
+        if (!Validation.isNum(hidMoney.Value.Trim()))
+            context.AddError("A001002100");
+        else if (hidMoney.Value.Trim() == "" || Convert.ToDecimal(hidMoney.Value.Trim()) == 0)
+            context.AddError("A001002126");
+        else if (!Validation.isPosRealNum(hidMoney.Value.Trim()))
+            context.AddError("A001002127");
 
-            //获取卡相关资费
-            GetTradeFee();
-            if (context.hasError())
-                return;
-
-            ////充值前余额验证
-            //ScriptManager.RegisterStartupScript(this, this.GetType(),
-            //            "js", "ChargeCardChargeCheck()", true);
-            btnSupply_Click(sender, e);
-        }
+        return !(context.hasError());
     }
 
 
-    #region 售卡用户信息进行检验
     /// <summary>
     /// 售卡用户信息进行检验
     /// </summary>
@@ -615,115 +553,105 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
 
         return !(context.hasError());
     }
+
     #endregion
 
+    #endregion
+
+    #region protect Event
+
     /// <summary>
-    /// 制卡功能
+    /// 查询订单按钮事件
     /// </summary>
-    protected void ProduceCard(object sender, EventArgs e, string orderType)
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnQuery_Click(object sender, EventArgs e)
     {
-        StringBuilder strBuilder = new StringBuilder();
-        context.SPOpen();
-        context.AddField("P_DETAILNO").Value = hidDetailNo.Value;      //子订单号
-        context.AddField("P_ORDERNO").Value = hidDetailNo.Value;      //子订单号
-        context.AddField("P_ID").Value = DealString.GetRecordID(hiddentradeno.Value, "00215000" + txtCardno.Text.Substring(8, 8));
-        //context.AddField("P_ID").Value = DealString.GetRecordID(hiddentradeno.Value, hiddenAsn.Value.Substring(4, 16));
-        context.AddField("P_CARDNO").Value = txtCardno.Text;
-        context.AddField("P_DEPOSIT").Value = 0;
-        context.AddField("P_CARDCOST").Value = Convert.ToDecimal(hiddenCardcostFee.Value) * 100;       //卡费暂定零
-        context.AddField("P_OTHERFEE").Value = 0;
-        context.AddField("P_CARDTRADENO").Value = hiddentradeno.Value;
-        context.AddField("P_CARDTYPECODE").Value = hiddenLabCardtype.Value;
-        context.AddField("P_CARDMONEY").Value = 0;
-        context.AddField("P_SELLCHANNELCODE").Value = "01";
-        context.AddField("P_SERSTAKETAG").Value = "0";
-        context.AddField("P_TRADETYPECODE").Value = "01";
 
-        AESHelp.AESEncrypt(hidcustName.Value, ref strBuilder);
-        context.AddField("P_CUSTNAME").Value = strBuilder.ToString();
-        context.AddField("P_CUSTSEX").Value = hidcustSex.Value;
-        context.AddField("P_CUSTBIRTH").Value = hidcustBirth.Value;
-        context.AddField("P_PAPERTYPECODE").Value = hidpaperType.Value;
+        if (!ValidInput())
+            return;
 
-        AESHelp.AESEncrypt(hidpaperNo.Value, ref strBuilder);
-        context.AddField("P_PAPERNO").Value = strBuilder.ToString();
+        gvOrderList.DataSource = new DataTable();
+        gvOrderList.DataBind();
 
-        AESHelp.AESEncrypt(hidaddress.Value, ref strBuilder);
-        context.AddField("P_CUSTADDR").Value = strBuilder.ToString();
-        context.AddField("P_CUSTPOST").Value = hidcustPost.Value;
+        string fromDate = txtFromDate.Text.Trim();
+        string endDate = txtToDate.Text.Trim();
 
-        AESHelp.AESEncrypt(hidcustPhone.Value, ref strBuilder);
-        context.AddField("P_CUSTPHONE").Value = strBuilder.ToString();
-        context.AddField("P_CUSTEMAIL").Value = hidcustEmail.Value;
-        context.AddField("P_REMARK").Value = "";
-        context.AddField("P_CUSTRECTYPECODE").Value = "1";
-        context.AddField("P_TERMNO").Value = "112233445566";
-        context.AddField("P_OPERCARDNO").Value = context.s_CardID;
-        context.AddField("P_CURRENTTIME", "DateTime", "output", "", null);
-        context.AddField("P_SALECARDTRADEID", "string", "output", "16", null);
-        //return;
-        bool ok = context.ExecuteSP("SP_GC_ZZSALECARD");
-        if (ok)
+        previousLink.Visible = true;
+        nextLink.Visible = true;
+        ShowFileContent();
+    }
+
+    //Data绑定
+    protected void gvOrderList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            hidTradeNo.Value = "" + context.GetFieldValue("P_SALECARDTRADEID");
-            //记录同步信息
-            UpdateSyncType("01", "01", "", "");
-            context.AddMessage("制卡完成！");
-            //充值金额不为零则同步接口
-            if (hidMoney.Value != "0")
-            {
-                string code = "";
-                string message = "";
-                //调用同步接口
-                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", ref code, ref message);
 
-                //更新同步信息
-                UpdateSyncType("02", "01", code, message);
+            Image imgP = (Image)e.Row.FindControl("imgPerson");
+            imgP.ImageUrl = "GC_ZZShowGetPicture.aspx?orderDetailId=" + e.Row.Cells[14].Text;
+
+            switch (e.Row.Cells[4].Text)
+            {
+                case "0":
+                    e.Row.Cells[4].Text = "未处理";
+                    break;
+                case "1":
+                    e.Row.Cells[4].Text = "已制卡";
+                    break;
+                case "2":
+                    e.Row.Cells[4].Text = "已发货";
+                    break;
+                default:
+                    e.Row.Cells[4].Text = "状态异常";
+                    break;
+            }
+
+            switch (e.Row.Cells[7].Text)
+            {
+                case "Z1":
+                    e.Row.Cells[7].Text = "200元24小时套餐";
+                    break;
+                case "Z2":
+                    e.Row.Cells[7].Text = "288元48小时套餐";
+                    break;
+                default:
+                    e.Row.Cells[7].Text = "套餐类型异常";
+                    break;
+            }
+
+            Button btnProduce = (Button)e.Row.FindControl("btnProduce");
+            switch (e.Row.Cells[5].Text)
+            {
+                case "":
+                    btnProduce.Visible = true;
+                    break;
+                case "&nbsp;":
+                    btnProduce.Visible = true;
+                    break;
+                default:
+                    btnProduce.Visible = false;
+                    break;
+            }
+            Button btnCharge = (Button)e.Row.FindControl("btnCharge");
+            switch (e.Row.Cells[2].Text)
+            {
+                case "0":
+                    e.Row.Cells[2].Text = "0";
+                    btnCharge.Visible = false;
+                    break;
+                default:
+                    e.Row.Cells[2].Text = (Convert.ToDecimal(e.Row.Cells[2].Text) / 100).ToString();
+                    break;
             }
         }
     }
 
-    protected void btnConfirm_Click(object sender, EventArgs e)
+    //分页
+    protected void Link_Click(object sender, CommandEventArgs e)
     {
-        if (hidWarning.Value == "CashChargeConfirm")
-        {
-            btnSupply_Click(sender, e);
-            hidWarning.Value = "";
-            return;
-        }
-
-        if (hidWarning.Value == "yes")
-        {
-            //btnSupply.Enabled = true;
-        }
-        else if (hidWarning.Value == "writeSuccess")
-        {
-
-            SP_PB_updateCardTradePDO pdo = new SP_PB_updateCardTradePDO();
-            pdo.CARDTRADENO = hiddentradeno.Value;
-            pdo.TRADEID = hidoutTradeid.Value;
-
-            bool ok = TMStorePModule.Excute(context, pdo);
-
-            if (ok)
-            {
-                string code = "";
-                string message = "";
-                //调用同步接口
-                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", ref code, ref message);
-
-                //更新同步信息
-                UpdateSyncType("02", "02", code, message);
-                AddMessage("前台写卡成功");
-                btnQuery_Click(sender, e);
-            }
-        }
-        else if (hidWarning.Value == "writeFail")
-        {
-            context.AddError("前台写卡失败");
-        }
-        hidWarning.Value = "";
-        hidCardnoForCheck.Value = "";//add by liuhe 20111104用于写卡前验证页面上的卡号和读卡器上的卡是否一致
+        ViewState["page"] = e.CommandArgument.ToString();
+        ShowFileContent();
     }
 
 
@@ -739,7 +667,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
 
         //从IC卡电子钱包账户表中读取数据
 
-
+        
         TF_F_CARDEWALLETACCTDO ddoTF_F_CARDEWALLETACCIn = new TF_F_CARDEWALLETACCTDO();
         ddoTF_F_CARDEWALLETACCIn.CARDNO = txtCardno.Text;
 
@@ -776,20 +704,117 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             //记录同步信息
             UpdateSyncType("01", "02", "", "");
             //AddMessage("M001002001");
-            ScriptManager.RegisterStartupScript(this, this.GetType(),
-                "writeCardScript", "chargeCard();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(),
+            //    "writeCardScript", "chargeCard();", true);
+            string code = "";
+            string message = "";
+            //调用同步接口
+            synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "7", ref code, ref message);
+
+            //更新同步信息
+            UpdateSyncType("02", "02", code, message);
         }
     }
 
-    private bool inportValidation()
-    {
-        if (!Validation.isNum(hidMoney.Value.Trim()))
-            context.AddError("A001002100");
-        else if (hidMoney.Value.Trim() == "" || Convert.ToDecimal(hidMoney.Value.Trim()) == 0)
-            context.AddError("A001002126");
-        else if (!Validation.isPosRealNum(hidMoney.Value.Trim()))
-            context.AddError("A001002127");
 
-        return !(context.hasError());
+    protected void btnConfirm_Click(object sender, EventArgs e)
+    {
+        if (hidWarning.Value == "CashChargeConfirm")
+        {
+            btnSupply_Click(sender, e);
+            hidWarning.Value = "";
+            return;
+        }
+
+        if (hidWarning.Value == "yes")
+        {
+            //btnSupply.Enabled = true;
+        }
+        else if (hidWarning.Value == "writeSuccess")
+        {
+
+            //SP_PB_updateCardTradePDO pdo = new SP_PB_updateCardTradePDO();
+            //pdo.CARDTRADENO = hiddentradeno.Value;
+            //pdo.TRADEID = hidoutTradeid.Value;
+
+            //bool ok = TMStorePModule.Excute(context, pdo);
+
+            //if (ok)
+            //{
+            //    string code = "";
+            //    string message = "";
+            //    //调用同步接口
+            //    synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "7", ref code, ref message);
+
+            //    //更新同步信息
+            //    UpdateSyncType("02", "02", code, message);
+            //    AddMessage("前台写卡成功");
+            //    btnQuery_Click(sender, e);
+            //}
+        }
+        else if (hidWarning.Value == "writeFail")
+        {
+            context.AddError("前台写卡失败");
+        }
+        hidWarning.Value = "";
+        hidCardnoForCheck.Value = "";//add by liuhe 20111104用于写卡前验证页面上的卡号和读卡器上的卡是否一致
     }
+
+    protected void gvOrderList_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        int index = Convert.ToInt32(e.CommandArgument.ToString());
+        if (e.CommandName == "Produce")
+        {
+
+            //ScriptManager.RegisterStartupScript(this, this.GetType(),
+            //            "js", "ReadCardInfo()", true);
+
+            hidMoney.Value = gvOrderList.Rows[index].Cells[2].Text;
+            //验证卡状态
+            checkCardState(txtCardno.Text);
+
+            //校验用户相关信息
+            SaleInfoValidation(index);
+
+            //获取卡相关资费
+            GetTradeFee();
+            if (context.hasError())
+                return;
+
+            //return;
+            //售卡-休闲开通
+            ProduceCard(sender, e, "");
+
+        }
+
+        if (e.CommandName == "Charge")
+        {
+            hidOrderCardNo.Value = gvOrderList.Rows[index].Cells[5].Text;
+            hidMoney.Value = gvOrderList.Rows[index].Cells[2].Text;
+            hidMoney.Value = Convert.ToInt32((Convert.ToDecimal(hidMoney.Value)) * 100).ToString();
+
+            hidDetailNo.Value = gvOrderList.Rows[index].Cells[14].Text.ToString().Trim();
+
+            //ScriptManager.RegisterStartupScript(this, this.GetType(),
+            //            "js", "ReadCardInfo()", true);
+
+            ////读卡验证卡号
+            //ScriptManager.RegisterStartupScript(this, this.GetType(),
+            //            "js", "SupplyAndReadCardForCheck()", true);
+
+            //验证卡状态
+            //checkCardState(txtCardno.Text);
+
+            //获取卡相关资费
+            //GetTradeFee();
+            //if (context.hasError())
+            //    return;
+
+            ////充值前余额验证
+            //ScriptManager.RegisterStartupScript(this, this.GetType(),
+            //            "js", "ChargeCardChargeCheck()", true);
+            btnSupply_Click(sender, e);
+        }
+    }
+    #endregion
 }

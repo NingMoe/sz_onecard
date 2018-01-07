@@ -641,7 +641,7 @@ public partial class ASP_GroupCard_GC_ZZReceiveCard : Master.FrontMaster
         //验证取件码
         if (txtFetchCode.Text.Trim() == "")
             context.AddError("A009422102:取件码为空", txtFetchCode);
-        else if (Validation.strLen(txtCustphone.Text.Trim()) != 14)
+        else if (Validation.strLen(txtFetchCode.Text.Trim()) != 14)
             context.AddError("A009422103:取件码长度不为14位", txtFetchCode);
 
         //判断售卡权限

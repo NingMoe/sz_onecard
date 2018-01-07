@@ -325,7 +325,7 @@ function SupplyAndReadCardForCheck() {
             return false;
         }
         else {
-            return true;
+            MyExtConfirm('提示', '是否确认充值:' + $get('SupplyFee').innerHTML + '元?', SupplyCheckConfirm);
         }
         return false;
     }
