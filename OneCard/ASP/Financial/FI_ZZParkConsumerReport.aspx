@@ -129,7 +129,7 @@
                         </tr>
                     </table>
                     <div id="printarea" class="kuang5">
-                        <div id="gdtbfix" style="height: 380px; overflow: auto;">
+                        <div id="gdtbfix" style="height: 380px; overflow: auto; width: 98%;">
                             <table id="printReport" width="80%">
                                 <tr align="center">
                                     <td style="font-size: 16px; font-weight: bold">转转卡景点刷卡统计
@@ -139,7 +139,7 @@
                             <asp:GridView ID="gvResult" runat="server" Width="95%" CssClass="tab2" HeaderStyle-CssClass="tabbt"
                                 FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
                                 PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
-                                AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="true">
+                                AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="false">
                                 <Columns>
                                     <asp:BoundField DataField="TRADEDATE" HeaderText="消费时间" />
                                     <asp:BoundField DataField="BALUNITNAME" HeaderText="结算单元名称" />

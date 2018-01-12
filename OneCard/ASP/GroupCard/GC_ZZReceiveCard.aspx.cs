@@ -520,109 +520,48 @@ public partial class ASP_GroupCard_GC_ZZReceiveCard : Master.FrontMaster
 
     protected void btnConfirm_Click(object sender, EventArgs e)
     {
-        if (hidpdotype.Value == "01")
+        if (hidWarning.Value == "yes")
         {
-            if (hidWarning.Value == "yes")
-            {
-                btnSale.Enabled = true;
-            }
-            else if (hidWarning.Value == "writeSuccess")
-            {
-                AddMessage("前台写卡成功");
-
-                #region add by liuhe 20111231 添加对代理营业厅预付款的验证,扣费后如果超过预警额度则提示
-                int opMoney = Convert.ToInt32(Convert.ToDecimal(DepositFee.Text) * 100)
-                    + Convert.ToInt32(Convert.ToDecimal(CardcostFee.Text) * 100)
-                    + Convert.ToInt32((Convert.ToDecimal(OtherFee.Text)) * 100);
-
-                DeptBalunitHelper.ValdatePrepay(context, opMoney, "1");
-                #endregion 
-
-                #region 写卡成功，张家港衍生卡信息同步
-
-                if (hidCardIDZJG.Value.Length >= 6 && hidCardIDZJG.Value.Substring(0, 6) == "215061")
-                {
-                    string tradeID = hidTradeIDZJG.Value;
-                    string syncCardID = hidCardIDZJG.Value;
-                    string[] parm = new string[2];
-                    parm[0] = tradeID;
-                    parm[1] = syncCardID;
-                    DataTable syncData = SPHelper.callQuery("SP_RC_QUERY", context, "QueryCardSaleInfoSync", parm);
-                    //证件类型转换
-                    string npaperType = syncData.Rows[0]["PAPER_TYPE"].ToString();
-                    switch (npaperType)
-                    {
-                        case "00": syncData.Rows[0]["PAPER_TYPE"] = "0"; break;//身份证
-
-                        case "01": syncData.Rows[0]["PAPER_TYPE"] = "8"; break;//学生证
-
-                        case "02": syncData.Rows[0]["PAPER_TYPE"] = "6"; break;//军官证
-
-                        case "05": syncData.Rows[0]["PAPER_TYPE"] = "2"; break;//护照
-                        case "06": syncData.Rows[0]["PAPER_TYPE"] = "3"; break;//港澳居民来往内地通行证
-
-                        case "07": syncData.Rows[0]["PAPER_TYPE"] = "1"; break;//户口簿
-
-                        case "08": syncData.Rows[0]["PAPER_TYPE"] = "8"; break;//武警证
-
-                        case "09": syncData.Rows[0]["PAPER_TYPE"] = "4"; break;//台湾同胞来往内地通行证
-
-                        case "99": syncData.Rows[0]["PAPER_TYPE"] = "8"; break;//其它类型证件
-                        default: break;
-                    }
-                    //姓名，证件号码解密
-
-                    CommonHelper.AESDeEncrypt(syncData, new List<string>(new string[] { "NAME", "PAPER_NO" }));
-
-                    //调用后台接口
-                    SyncRequest syncRequest;
-                    bool sync = DataExchangeHelp.ParseFormDataTable(syncData, tradeID, out syncRequest);
-                    if (sync == true)
-                    {
-                        SyncRequest syncResponse;
-                        string msg;
-                        bool succ = DataExchangeHelp.Sync(syncRequest, out syncResponse, out msg);
-                        if (!succ)
-                        {
-                            context.AddError("调用接口失败:" + msg);
-                        }
-                        else
-                        {
-                            AddMessage("接口调用成功!");
-                        }
-                    }
-                    else
-                    {
-                        context.AddError("调用接口转换错误!");
-                    }
-                }
-                #endregion
-
-                clearCustInfo(txtCardno, txtCusname, txtCustbirth, selPapertype, txtCustpaperno, selCustsex, txtCustphone,
-                    txtCustpost, txtCustaddr, txtEmail, txtRemark);
-            }
-            else if (hidWarning.Value == "writeFail")
-            {
-                context.AddError("前台写卡失败");
-            }
-
-            if (chkPingzheng.Checked && btnPrintSKPZ.Enabled)
-            {
-                ScriptManager.RegisterStartupScript(
-                    this, this.GetType(), "writeCardScript",
-                    "printInvoice();", true);
-            }
-            if (chkPingzhengRemin.Checked && btnPrintSKPZ.Enabled) //add by youyue  增加热敏打印方式
-            {
-                ScriptManager.RegisterStartupScript(
-                    this, this.GetType(), "writeCardScript",
-                    "printRMInvoice();", true);
-            }
-            hidWarning.Value = "";
-
-            hidCardIDZJG.Value = "";
-            hidTradeIDZJG.Value = "";
+            btnSale.Enabled = true;
         }
+        else if (hidWarning.Value == "writeSuccess")
+        {
+            AddMessage("前台写卡成功");
+
+            #region add by liuhe 20111231 添加对代理营业厅预付款的验证,扣费后如果超过预警额度则提示
+            int opMoney = Convert.ToInt32(Convert.ToDecimal(DepositFee.Text) * 100)
+                + Convert.ToInt32(Convert.ToDecimal(CardcostFee.Text) * 100)
+                + Convert.ToInt32((Convert.ToDecimal(OtherFee.Text)) * 100);
+
+            DeptBalunitHelper.ValdatePrepay(context, opMoney, "1");
+            #endregion
+
+
+            clearCustInfo(txtCardno, txtCusname, txtCustbirth, selPapertype, txtCustpaperno, selCustsex, txtCustphone,
+                txtCustpost, txtCustaddr, txtEmail, txtRemark,txtFetchCode);
+        }
+        else if (hidWarning.Value == "writeFail")
+        {
+            context.AddError("前台写卡失败");
+        }
+
+        if (chkPingzheng.Checked && btnPrintSKPZ.Enabled)
+        {
+            ScriptManager.RegisterStartupScript(
+                this, this.GetType(), "writeCardScript",
+                "printInvoice();", true);
+        }
+        if (chkPingzhengRemin.Checked && btnPrintSKPZ.Enabled) //add by youyue  增加热敏打印方式
+        {
+            ScriptManager.RegisterStartupScript(
+                this, this.GetType(), "writeCardScript",
+                "printRMInvoice();", true);
+        }
+        hidWarning.Value = "";
+
+        hidCardIDZJG.Value = "";
+        hidTradeIDZJG.Value = "";
+
     }
 
     //售卡
@@ -774,13 +713,13 @@ public partial class ASP_GroupCard_GC_ZZReceiveCard : Master.FrontMaster
             //重新初始化
 
             initLoad(sender, e);
-            
+
         }
         else
         {
             context.AddMessage("处理失败,失败原因：" + message);
         }
-        
+
     }
 
 

@@ -963,7 +963,7 @@ function endMonthlyInfo() {
 //add by liuhe 20120429
 function endMonthlyInfoNew() {
     cardReader.MonthlyInfo = '02FF';
-    cardReader.writeCardFunc = cardReader.writeMonthlyInfo;
+    cardReader.writeCardFunc = cardReader.writeMonthlyInfoEnd;
     writeCard();
 }
 

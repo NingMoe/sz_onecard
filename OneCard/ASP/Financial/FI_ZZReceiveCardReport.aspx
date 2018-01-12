@@ -108,14 +108,15 @@
                             <asp:GridView ID="gvResult" runat="server" Width="95%" CssClass="tab2" HeaderStyle-CssClass="tabbt"
                                 FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
                                 PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
-                                AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="true">
+                                AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="false">
                                 <Columns>
                                     <asp:BoundField DataField="DETAILNO" HeaderText="子订单号" />
                                     <asp:BoundField DataField="ORDERNO" HeaderText="主订单号" />
                                     <asp:BoundField DataField="CARDNO" HeaderText="卡号" />
+                                    <asp:BoundField DataField="OPERATETIME" HeaderText="领卡时间" />
                                     <asp:BoundField DataField="PACKAGENAME" HeaderText="套餐类型" />
                                     <asp:BoundField DataField="OPERATEDEPARTID" HeaderText="操作部门号" />
-                                    <asp:BoundField DataField="STAFFNO" HeaderText="操作员工号" />
+                                    <asp:BoundField DataField="OPERATESTAFFNO" HeaderText="操作员工号" />
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
@@ -125,6 +126,8 @@
                                             <td>主订单号
                                             </td>
                                             <td>卡号
+                                            </td>
+                                            <td>领卡时间
                                             </td>
                                             <td>套餐类型
                                             </td>

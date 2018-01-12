@@ -287,7 +287,7 @@ public partial class ASP_Financial_FI_ZZParkConsumerReport : Master.ExportMaster
         validate();
         if (context.hasError()) return;
 
-        DataTable data = fillDataTable(HttpHelper.TradeType.ZZOrderCardQuery, DeclarePost());
+        DataTable data = fillDataTable(HttpHelper.TradeType.ZZParkConSumerQuery, DeclarePost());
         if (data == null || data.Rows.Count == 0)
         {
             AddMessage("N005030001: 查询结果为空");

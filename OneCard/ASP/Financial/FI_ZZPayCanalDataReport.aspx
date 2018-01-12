@@ -62,10 +62,11 @@
                             <td>
                                 <asp:DropDownList ID="selTradeType" CssClass="inputmid" runat="server">
                                     <asp:ListItem Text="---请选择---" Value="" />
-                                    <asp:ListItem Text="支付宝" Value="01" />
-                                    <asp:ListItem Text="微信" Value="02" />
-                                    <asp:ListItem Text="银联" Value="03" />
-                                    <asp:ListItem Text="旅游局" Value="04" />
+                                    <asp:ListItem Text="01:支付宝" Value="01" />
+                                    <asp:ListItem Text="02:微信" Value="02" />
+                                    <asp:ListItem Text="03:银联" Value="03" />
+                                    <asp:ListItem Text="04:兑换券" Value="04" />
+                                    <asp:ListItem Text="05:旅游局" Value="05" />
                                 </asp:DropDownList>
                             </td>
                             <td>
@@ -109,15 +110,16 @@
                         <asp:GridView ID="gvResult" runat="server" Width="95%" CssClass="tab2" HeaderStyle-CssClass="tabbt"
                             FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
                             PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
-                            AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="true">
+                            AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="true" OnPreRender="gvResult_PreRender">
                             <Columns>
-                                <asp:BoundField DataField="tradetype" HeaderText="支付渠道" />
-                                <asp:BoundField DataField="cardno" HeaderText="邮费" />
-                                <asp:BoundField DataField="operatetime" HeaderText="渠道总金额" />
-                                <asp:BoundField DataField="operatedepartid" HeaderText="套餐类型" />
-                                <asp:BoundField DataField="staffno" HeaderText="功能费" />
-                                <asp:BoundField DataField="posno" HeaderText="兑换券优惠金额" />
-                                <asp:BoundField DataField="psamno" HeaderText="实际功能费" />
+                                <asp:BoundField DataField="PAYCANAL" HeaderText="支付渠道" />
+                                <asp:BoundField DataField="POSTAGE" HeaderText="邮费" />
+                                <asp:BoundField DataField="PAYCANALTOTALMONEY" HeaderText="渠道总金额" />
+                                <asp:BoundField DataField="PACKAGETYPE" HeaderText="套餐类型" />
+                                <asp:BoundField DataField="SUPPLYMONEY" HeaderText="充值金额" />
+                                <asp:BoundField DataField="FUNCFEE" HeaderText="功能费" />
+                                <asp:BoundField DataField="DISCOUNT" HeaderText="兑换券优惠金额" />
+                                <asp:BoundField DataField="TRANSFEE" HeaderText="实际功能费" />
                             </Columns>
                             <EmptyDataTemplate>
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
@@ -133,6 +135,9 @@
                                         </td>
                                         <td>
                                             套餐类型
+                                        </td>
+                                        <td>
+                                            充值金额
                                         </td>
                                         <td>
                                             功能费

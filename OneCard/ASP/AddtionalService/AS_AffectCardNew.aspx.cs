@@ -27,13 +27,13 @@ public partial class ASP_AddtionalService_AS_AffectCardNew : Master.FrontMaster
 
         if (radioGeneral.Checked)
         {
-            annualFee.Text = "379.00";
-            Total.Text = "379.00";
+            annualFee.Text = "399.00";
+            Total.Text = "399.00";
         }
         else if (radioXXGeneral.Checked)
         {
-            annualFee.Text = "479.00";
-            Total.Text = "479.00";
+            annualFee.Text = "529.00";
+            Total.Text = "529.00";
         }
 
         if (Page.IsPostBack) return;
@@ -398,25 +398,25 @@ public partial class ASP_AddtionalService_AS_AffectCardNew : Master.FrontMaster
                 AddMessage("兑换卡数据为空");
                 return;
             }
-            if (dt.Rows[0][1].ToString() == "37900")
+            if (dt.Rows[0][1].ToString() == "39900")
             {
                 hidFuncType.Value = "E3";
-                txtRealRecv.Text = "379";
+                txtRealRecv.Text = "399";
                 txtDiscount.Text = "0";
                 radioGeneral.Checked = true;
                 radioXXGeneral.Checked = false;
                 radioGeneral.Enabled = radioXXGeneral.Enabled = false;
-                labPromptFor.Text = "兑换卡为379套餐";
+                labPromptFor.Text = "兑换卡为399套餐";
             }
-            else if (dt.Rows[0][1].ToString() == "47900")
+            else if (dt.Rows[0][1].ToString() == "52900")
             {
                 hidFuncType.Value = "E4";
-                txtRealRecv.Text = "479";
+                txtRealRecv.Text = "529";
                 txtDiscount.Text = "0";
                 radioGeneral.Checked = false;
                 radioXXGeneral.Checked = true;
                 radioGeneral.Enabled = radioXXGeneral.Enabled = false;
-                labPromptFor.Text = "兑换卡为479套餐";
+                labPromptFor.Text = "兑换卡为529套餐";
             }
             Page_Load(sender, e);
         }
@@ -495,11 +495,11 @@ public partial class ASP_AddtionalService_AS_AffectCardNew : Master.FrontMaster
             packageTypeCode = hidFuncType.Value;
             if (hidFuncType.Value == "E3")
             {
-                tradeFee = "37900";
+                tradeFee = "39900";
             }
             else if (hidFuncType.Value == "E4")
             {
-                tradeFee = "47900";
+                tradeFee = "52900";
             }
             else
             {

@@ -37,9 +37,9 @@
 
         //金额选择
         function setGeneral() {
-            $get('hidAccRecv').value = '379.00';
-            $get('annualFee').innerHTML = '379.00';
-            $get('txtRealRecv').value = '379';
+            $get('hidAccRecv').value = '399.00';
+            $get('annualFee').innerHTML = '399.00';
+            $get('txtRealRecv').value = '399';
             $get('txtDiscount').value = '0';
             $get('hidFuncType').value = 'E3'; 
             $get('txtChanges').innerHTML = (parseFloat($get('txtRealRecv').value) + parseFloat($get('txtDiscount').value) - parseFloat($get('hidAccRecv').value)).toFixed(2);
@@ -47,9 +47,9 @@
         }
 
         function setXXGeneral() {
-            $get('hidAccRecv').value = '479.00';
-            $get('annualFee').innerHTML = '479.00';
-            $get('txtRealRecv').value = '479';
+            $get('hidAccRecv').value = '529.00';
+            $get('annualFee').innerHTML = '529.00';
+            $get('txtRealRecv').value = '529';
             $get('txtDiscount').value = '0';
             $get('hidFuncType').value = 'E4';
             $get('txtChanges').innerHTML = (parseFloat($get('txtRealRecv').value) + parseFloat($get('txtDiscount').value) - parseFloat($get('hidAccRecv').value)).toFixed(2);
@@ -467,11 +467,11 @@
                                     </script>
                                     <tr>
                                         <td width="90">
-                                            <asp:RadioButton ID="radioGeneral" runat="server" GroupName="radio" Text="一带一套餐" />
+                                            <asp:RadioButton ID="radioGeneral" runat="server" GroupName="radio" Text="二带一套餐" />
                                             <%--OnClick="return setGeneral();"--%>
                                         </td>
                                         <td width="120">
-                                            <asp:RadioButton ID="radioXXGeneral" runat="server" GroupName="radio" Text="二带一套餐" />
+                                            <asp:RadioButton ID="radioXXGeneral" runat="server" GroupName="radio" Text="二带二套餐" />
                                             <%--OnClick="return setXXGeneral();" --%>
                                         </td>
                                         <td colspan="2">

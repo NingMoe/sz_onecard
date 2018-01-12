@@ -83,6 +83,28 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>
+                                    <div align="right">
+                                        开始日期:
+                                    </div>
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtFromDate" MaxLength="8" CssClass="input"></asp:TextBox>
+                                    <ajaxToolkit:CalendarExtender ID="FCalendar1" runat="server" TargetControlID="txtFromDate"
+                                        Format="yyyyMMdd" />
+                                </td>
+                                <td>
+                                    <div align="right">
+                                        结束日期:
+                                    </div>
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtToDate" MaxLength="8" CssClass="input"></asp:TextBox>
+                                    <ajaxToolkit:CalendarExtender ID="FCalendar2" runat="server" TargetControlID="txtToDate"
+                                        Format="yyyyMMdd" />
+                                </td>
+                            </tr>
+                            <tr>
                                 <td align="right">卡号:
                                 </td>
                                 <td>
@@ -110,7 +132,7 @@
                         </tr>
                     </table>
                     <div id="printarea" class="kuang5">
-                        <div id="gdtbfix" style="height: 380px; overflow: auto;">
+                        <div id="gdtbfix" style="height: 380px; overflow: auto; width: 98%">
                             <table id="printReport" width="80%">
                                 <tr align="center">
                                     <td style="font-size: 16px; font-weight: bold">转转卡刷卡记录
@@ -120,32 +142,29 @@
                             <asp:GridView ID="gvResult" runat="server" Width="95%" CssClass="tab2" HeaderStyle-CssClass="tabbt"
                                 FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
                                 PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
-                                AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="true">
+                                AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="false">
                                 <Columns>
-                                    <asp:BoundField DataField="tradetype" HeaderText="业务类型" />
                                     <asp:BoundField DataField="cardno" HeaderText="卡号" />
-                                    <asp:BoundField DataField="operatetime" HeaderText="操作时间" />
-                                    <asp:BoundField DataField="operatedepartid" HeaderText="操作部门" />
-                                    <asp:BoundField DataField="staffno" HeaderText="操作员工" />
                                     <asp:BoundField DataField="posno" HeaderText="POS编号" />
                                     <asp:BoundField DataField="psamno" HeaderText="PSAM编号" />
+                                    <asp:BoundField DataField="tradedate" HeaderText="消费日期" />
+                                    <asp:BoundField DataField="tradetime" HeaderText="消费时间" />
+                                    <asp:BoundField DataField="balunitname" HeaderText="结算单元名称" />
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
                                         <tr class="tabbt">
-                                            <td>业务类型
-                                            </td>
                                             <td>卡号
-                                            </td>
-                                            <td>操作时间
-                                            </td>
-                                            <td>操作部门
-                                            </td>
-                                            <td>操作员工
                                             </td>
                                             <td>POS编号
                                             </td>
                                             <td>PSAM编号
+                                            </td>
+                                            <td>消费日期
+                                            </td>
+                                            <td>消费时间
+                                            </td>
+                                            <td>结算单元名称
                                             </td>
                                         </tr>
                                     </table>

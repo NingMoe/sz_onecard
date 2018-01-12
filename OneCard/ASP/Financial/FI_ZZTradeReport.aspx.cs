@@ -6,6 +6,7 @@ using NPOI.HSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -25,12 +26,21 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
 
             gvResult.DataSource = new DataTable();
             gvResult.DataBind();
+
+            //从内部部门编码表(TD_M_INSIDEDEPART)中读取数据，放入下拉列表中
+
+            UserCardHelper.selectDepts(context, selDept, true);
+            UserCardHelper.selectAllStaffs(context, selStaff, selDept, true);
         }
     }
 
 
     #region Private
-
+    protected void selDept_Changed(object sender, EventArgs e)
+    {
+        //查询选择部门名称后,设置员工姓名下拉列表值
+        UserCardHelper.selectAllStaffs(context, selStaff, selDept, true);
+    }
 
     #region validate
     // 查询输入校验处理
@@ -67,6 +77,8 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
         postData.Add("tradeType", selTradeType.SelectedValue);
         postData.Add("fromDate", txtFromDate.Text);
         postData.Add("toDate", txtToDate.Text);
+        postData.Add("operateDepartId", selDept.SelectedValue);
+        postData.Add("operateStaffNo", selStaff.SelectedValue);
 
         return postData;
     }
@@ -78,7 +90,7 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
         dt.Columns.Add("CARDNO", typeof(string));//卡号
         dt.Columns.Add("OPERATETIME", typeof(string));//操作时间
         dt.Columns.Add("OPERATEDEPARTID", typeof(string));//操作部门号
-        dt.Columns.Add("STAFFNO", typeof(string));//操作员工号
+        dt.Columns.Add("OPERATESTAFFNO", typeof(string));//操作员工号
         dt.Columns.Add("POSNO", typeof(string));//POS编号
         dt.Columns.Add("PSAMNO", typeof(string));//PSAM编号
 
@@ -86,7 +98,7 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
         dt.Columns["CARDNO"].MaxLength = 100;
         dt.Columns["OPERATETIME"].MaxLength = 100;
         dt.Columns["OPERATEDEPARTID"].MaxLength = 100;
-        dt.Columns["STAFFNO"].MaxLength = 100;
+        dt.Columns["OPERATESTAFFNO"].MaxLength = 100;
         dt.Columns["POSNO"].MaxLength = 100;
         dt.Columns["PSAMNO"].MaxLength = 100;
 
@@ -166,7 +178,18 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
     #region protect Event
     protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        //
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //获取对应的业务类型
+            ListItem listItem = selTradeType.Items.FindByValue(e.Row.Cells[0].Text);
+            if (listItem != null)
+            {
+                e.Row.Cells[0].Text = listItem.Text.Substring(listItem.Text.IndexOf(':') + 1);
+            }
+            DateTimeFormatInfo df = new System.Globalization.DateTimeFormatInfo();
+            
+            e.Row.Cells[2].Text = DateTime.ParseExact(e.Row.Cells[2].Text,"yyyyMMddHHmmss",System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss", null);
+        }
     }
 
     // 查询处理
@@ -175,7 +198,7 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
         validate();
         if (context.hasError()) return;
 
-        DataTable data = fillDataTable(HttpHelper.TradeType.ZZOrderCardQuery, DeclarePost());
+        DataTable data = fillDataTable(HttpHelper.TradeType.ZZTradeQuery, DeclarePost());
         if (data == null || data.Rows.Count == 0)
         {
             AddMessage("N005030001: 查询结果为空");

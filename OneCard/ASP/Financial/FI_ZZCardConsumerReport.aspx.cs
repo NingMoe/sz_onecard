@@ -46,6 +46,23 @@ public partial class ASP_Financial_FI_ZZCardConsumerReport : Master.ExportMaster
             else if (!Validation.isNum(txtCardNo.Text))
                 context.AddError("A009100110", txtCardNo);
         }
+
+        bool b = Validation.isEmpty(txtFromDate);
+        DateTime? fromDate = null, toDate = null;
+        if (!b)
+        {
+            fromDate = valid.beDate(txtFromDate, "开始日期范围起始值格式必须为yyyyMMdd");
+        }
+        b = Validation.isEmpty(txtToDate);
+        if (!b)
+        {
+            toDate = valid.beDate(txtToDate, "结束日期范围终止值格式必须为yyyyMMdd");
+        }
+
+        if (fromDate != null && toDate != null)
+        {
+            valid.check(fromDate.Value.CompareTo(toDate.Value) <= 0, "开始日期不能大于结束日期");
+        }
     }
 
     private void InitCorp(DropDownList origindwls, DropDownList extdwls, String sqlCondition)
@@ -120,6 +137,8 @@ public partial class ASP_Financial_FI_ZZCardConsumerReport : Master.ExportMaster
         postData.Add("corpNo", selCorp.SelectedValue);
         postData.Add("departNo", selDepart.SelectedValue);
         postData.Add("balunitNo", selBalUint.SelectedValue);
+        postData.Add("fromDate", txtFromDate.Text);
+        postData.Add("toDate", txtToDate.Text);
 
         return postData;
     }
@@ -127,21 +146,19 @@ public partial class ASP_Financial_FI_ZZCardConsumerReport : Master.ExportMaster
     private DataTable initEmptyDataTable()
     {
         DataTable dt = new DataTable();
-        dt.Columns.Add("TRADETYPE", typeof(string));//业务类型
         dt.Columns.Add("CARDNO", typeof(string));//卡号
-        dt.Columns.Add("OPERATETIME", typeof(string));//操作时间
-        dt.Columns.Add("OPERATEDEPARTID", typeof(string));//操作部门号
-        dt.Columns.Add("OPERATESTAFFNO", typeof(string));//操作员工号
         dt.Columns.Add("POSNO", typeof(string));//POS编号
         dt.Columns.Add("PSAMNO", typeof(string));//PSAM编号
-
-        dt.Columns["TRADETYPE"].MaxLength = 10000;
+        dt.Columns.Add("TRADEDATE", typeof(string));//消费日期
+        dt.Columns.Add("TRADETIME", typeof(string));//消费时间
+        dt.Columns.Add("BALUNITNAME", typeof(string));//结算单元名称
+        
         dt.Columns["CARDNO"].MaxLength = 10000;
-        dt.Columns["OPERATETIME"].MaxLength = 10000;
-        dt.Columns["OPERATEDEPARTID"].MaxLength = 10000;
-        dt.Columns["STAFFNO"].MaxLength = 10000;
         dt.Columns["POSNO"].MaxLength = 10000;
         dt.Columns["PSAMNO"].MaxLength = 10000;
+        dt.Columns["TRADEDATE"].MaxLength = 10000;
+        dt.Columns["TRADETIME"].MaxLength = 10000;
+        dt.Columns["BALUNITNAME"].MaxLength = 10000;
 
         return dt;
     }
@@ -165,7 +182,7 @@ public partial class ASP_Financial_FI_ZZCardConsumerReport : Master.ExportMaster
             {
                 message = itemProperty.Value.ToString();
             }
-            else if (propertyName == "tradeColl")
+            else if (propertyName == "cardConsumerColl")
             {
                 if (itemProperty.Value == null)
                 {
@@ -180,7 +197,7 @@ public partial class ASP_Financial_FI_ZZCardConsumerReport : Master.ExportMaster
             foreach (JProperty itemProperty in deserObject.Properties())
             {
                 string propertyName = itemProperty.Name;
-                if (propertyName == "tradeColl")
+                if (propertyName == "cardConsumerColl")
                 {
                     //DataTable赋值
                     JArray detailArray = new JArray();
@@ -288,7 +305,7 @@ public partial class ASP_Financial_FI_ZZCardConsumerReport : Master.ExportMaster
         validate();
         if (context.hasError()) return;
 
-        DataTable data = fillDataTable(HttpHelper.TradeType.ZZOrderCardQuery, DeclarePost());
+        DataTable data = fillDataTable(HttpHelper.TradeType.ZZCardConSumerQuery, DeclarePost());
         if (data == null || data.Rows.Count == 0)
         {
             AddMessage("N005030001: 查询结果为空");

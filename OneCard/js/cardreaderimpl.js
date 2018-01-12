@@ -526,6 +526,21 @@ function CardReader() {
             this.ErrInfo = SX_CARDOCX1.ErrInfo;
             return false;
         }
+        if (pritype == "A9") {
+            var NewYearInfo = "00000000";
+            var NewIndex1 = "00000000";
+            this.ErrRet = SX_CARDOCX1.ExaYuepiaoIndex(this.OperateCardNo, this.CardNo, NewYearInfo, NewIndex1);
+            if (this.ErrRet != 0) {
+                this.ErrInfo = SX_CARDOCX1.ErrInfo;
+                return false;
+            }
+            var NewIndex = "000000000000000000000000000000000000000000000000";
+            this.ErrRet = SX_CARDOCX1.LoadYuepiaoIndex(this.OperateCardNo, this.CardNo, NewIndex);
+            if (this.ErrRet != 0) {
+                this.ErrInfo = SX_CARDOCX1.ErrInfo;
+                return false;
+            }
+        }
         if (this.MonthlyIsF == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF") {
             var NewYearInfo = "00000000";
             var NewIndex1 = "00000000";
@@ -609,6 +624,40 @@ function CardReader() {
         var index1 = this.YearCheck.substr(8, 8);
 
         this.ErrRet = SX_CARDOCX1.ExaYuepiaoIndex(this.OperateCardNo, this.CardNo, yearcheck, index1);
+        if (this.ErrRet != 0) {
+            this.ErrInfo = SX_CARDOCX1.ErrInfo;
+            return false;
+        }
+        return true;
+    }
+    //add by chenchu 20171127 ÔÂÆ±¿¨¹Ø±Õ
+    this.writeMonthlyInfoEnd = function () {
+        var apptype = this.MonthlyInfo.substr(0, 2);
+        this.ErrRet = SX_CARDOCX1.StartYuepiao(this.OperateCardNo, this.CardNo, apptype);
+        if (this.ErrRet != 0) {
+            this.ErrInfo = SX_CARDOCX1.ErrInfo;
+            return false;
+        }
+        var stafftag = this.MonthlyInfo.substr(2, 2);
+        this.ErrRet = SX_CARDOCX1.ModifyStaffTag(this.OperateCardNo, this.CardNo, stafftag);
+        if (this.ErrRet != 0) {
+            this.ErrInfo = SX_CARDOCX1.ErrInfo;
+            return false;
+        }
+
+        this.ErrRet = SX_CARDOCX1.ActYuepiaoIndex(this.OperateCardNo, this.CardNo, 'FF', 'FF', 'FF');
+        if (this.ErrRet != 0) {
+            this.ErrInfo = SX_CARDOCX1.ErrInfo;
+            return false;
+        }
+
+        this.ErrRet = SX_CARDOCX1.ExaYuepiaoIndex(this.OperateCardNo, this.CardNo, 'FFFFFFFF', 'FFFFFFFF');
+        if (this.ErrRet != 0) {
+            this.ErrInfo = SX_CARDOCX1.ErrInfo;
+            return false;
+        }
+
+        this.ErrRet = SX_CARDOCX1.LoadYuepiaoIndex(this.OperateCardNo, this.CardNo, 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
         if (this.ErrRet != 0) {
             this.ErrInfo = SX_CARDOCX1.ErrInfo;
             return false;

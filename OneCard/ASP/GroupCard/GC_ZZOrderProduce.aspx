@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>休闲订单制卡</title>
+    <title>转转卡订单制卡</title>
     <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
     <link href="../../css/card.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../js/myext.js"></script>
@@ -54,7 +54,7 @@
     <cr:CardReader ID="cardReader" runat="server" />
     <form id="form1" runat="server">
         <div class="tb">
-            休闲订单制卡
+            转转卡订单制卡
         </div>
         <ajaxToolkit:ToolkitScriptManager EnableScriptGlobalization="true" EnableScriptLocalization="true"
             ID="ScriptManager1" runat="server" />
@@ -127,8 +127,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <div align="right">
+                                        订单类型:
+                                    </div>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="selOrderType" CssClass="inputmid" runat="server">
+                                        <asp:ListItem Text="购卡订单" Value="1" Selected="True" />
+                                        <asp:ListItem Text="兑换券订单" Value="2" />
+                                    </asp:DropDownList>
+                                </td>
                                 <td></td>
                                 <td></td>
                                 <td colspan="2"></td>
@@ -209,7 +218,7 @@
                                         </HeaderTemplate>
                                         <ItemTemplate>
                                             <asp:Button ID="btnCharge" CssClass="button1" runat="server" Text="充值" CausesValidation="true"
-                                                CommandName="Charge" CommandArgument='<%#Container.DataItemIndex%>'/>
+                                                CommandName="Charge" CommandArgument='<%#Container.DataItemIndex%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="SUPPLYMONEY" HeaderText="充值金额" />
@@ -238,6 +247,8 @@
                                         <tr class="tabbt">
                                             <td>功能区域
                                             </td>
+                                            <td>充值金额
+                                            </td>
                                             <td>订单号
                                             </td>
                                             <td>订单状态
@@ -262,7 +273,71 @@
                                             </td>
                                             <td>子订单号
                                             </td>
-                                            <td>充值金额
+                                        </tr>
+                                    </table>
+                                </EmptyDataTemplate>
+                            </asp:GridView>
+
+                            <asp:GridView ID="gvChargeCardList" Width="200%" CssClass="tab1" HeaderStyle-CssClass="tabbt"
+                                FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
+                                PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
+                                runat="server" AutoGenerateColumns="false" OnRowDataBound="gvChargeCardList_RowDataBound"
+                                OnRowCommand="gvChargeCardList_RowCommand">
+                                <Columns>
+                                    <asp:TemplateField HeaderStyle-Width="100px">
+                                        <HeaderTemplate>
+                                            <asp:Label ID="Label1" runat="server" Text="售卡"></asp:Label>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Button ID="btnProduce" CssClass="button1" runat="server" Text="售卡" CausesValidation="true"
+                                                CommandName="Produce" CommandArgument='<%#Container.DataItemIndex%>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Label ID="Label2" runat="server" Text="兑换券卡号"></asp:Label>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:TextBox ID="txtChargeCardNo" runat="server" CssClass="input"></asp:TextBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="SUPPLYMONEY" HeaderText="充值金额" />
+                                    <asp:BoundField DataField="ORDERNO" HeaderText="订单号" />
+                                    <asp:BoundField DataField="ORDERSTATE" HeaderText="订单状态" />
+                                    <asp:BoundField DataField="CARDNO" HeaderText="卡号" />
+                                    <asp:BoundField DataField="PACKAGENAME" HeaderText="套餐类型" />
+                                    <asp:BoundField DataField="RECEIVECUSTNAME" HeaderText="收货人" />
+                                    <asp:BoundField DataField="RECEIVEADDRESS" HeaderText="收货地址" />
+                                    <asp:BoundField DataField="RECEIVECUSTPHONE" HeaderText="收货号码" />
+                                    <asp:BoundField DataField="CUSTNAME" HeaderText="客户姓名" />
+                                    <asp:BoundField DataField="PAPERNO" HeaderText="客户证件号码" />
+                                    <asp:BoundField DataField="CUSTPHONE" HeaderText="客户电话" />
+                                    <asp:BoundField DataField="DETAILNO" HeaderText="子订单号" />
+                                </Columns>
+                                <EmptyDataTemplate>
+                                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
+                                        <tr class="tabbt">
+                                            <td>功能区域
+                                            </td>
+                                            <td>订单号
+                                            </td>
+                                            <td>订单状态
+                                            </td>
+                                            <td>套餐类型
+                                            </td>
+                                            <td>收货人
+                                            </td>
+                                            <td>收货地址
+                                            </td>
+                                            <td>收货号码
+                                            </td>
+                                            <td>客户姓名
+                                            </td>
+                                            <td>客户证件号码
+                                            </td>
+                                            <td>客户电话
+                                            </td>
+                                            <td>子订单号
                                             </td>
                                         </tr>
                                     </table>

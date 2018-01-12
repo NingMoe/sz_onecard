@@ -49,8 +49,7 @@ public class HttpHelper
         }
         //构造请求参数
         postData = SortDictionary(postData);//排序后的集合
-        string token = _tokenKey;
-        string postStr = getAppentStr(postData, token);
+        string postStr = getAppentStr(postData, _tokenKey);
         string md5Token = get32ByteMd5(postStr);//生成Token
         postStr += "&TOKEN=" + md5Token;
         //发送请求
@@ -249,8 +248,8 @@ public class HttpHelper
         }
 
         request.Method = "POST";
-        //request.ContentType = "application/x-www-form-urlencoded";
-        request.ContentType = "application/json";
+        request.ContentType = "application/x-www-form-urlencoded";
+        //request.ContentType = "application/json";
         request.UserAgent = _defaultUserAgent;
         request.Proxy = null;
         byte[] data;

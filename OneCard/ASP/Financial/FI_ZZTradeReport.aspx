@@ -62,15 +62,46 @@
                             <td>
                                 <asp:DropDownList ID="selTradeType" CssClass="inputmid" runat="server">
                                     <asp:ListItem Text="---请选择---" Value="" />
-                                    <asp:ListItem Text="订单录入" Value="00" />
-                                    <asp:ListItem Text="售卡" Value="01" />
-                                    <asp:ListItem Text="驳回" Value="02" />
-                                    <asp:ListItem Text="发货" Value="03" />
-                                    <asp:ListItem Text="修改资料" Value="04" />
-                                    <asp:ListItem Text="撤销驳回" Value="05" />
-                                    <asp:ListItem Text="激活领卡" Value="06" />
-                                    <asp:ListItem Text="充值" Value="07" />
+                                    <asp:ListItem Text="00:订单录入" Value="00" />
+                                    <asp:ListItem Text="01:售卡" Value="01" />
+                                    <asp:ListItem Text="02:驳回" Value="02" />
+                                    <asp:ListItem Text="03:发货" Value="03" />
+                                    <asp:ListItem Text="04:修改资料" Value="04" />
+                                    <asp:ListItem Text="05:撤销驳回" Value="05" />
+                                    <asp:ListItem Text="06:激活领卡" Value="06" />
+                                    <asp:ListItem Text="07:充值" Value="07" />
                                 </asp:DropDownList>
+                            </td>
+                            <td>
+                                <div align="right">
+                                    </div>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td align="right">
+                            </td>
+                        </tr>
+                        <tr><td>
+                                <div align="right">
+                                    操作部门:</div>
+                            </td>
+                            <td>
+                                    <asp:DropDownList ID="selDept" CssClass="inputmid" runat="server" AutoPostBack="true" OnSelectedIndexChanged="selDept_Changed"></asp:DropDownList>
+                            </td>
+                            <td>
+                                <div align="right">
+                                    操作员工:</div>
+                            </td>
+                            <td colspan="3">
+                                    <asp:DropDownList ID="selStaff" CssClass="inputmid" runat="server"></asp:DropDownList>
+                            </td>
+                            <td>
+                                <div align="right">
+                                    </div>
+                            </td>
+                            <td>
                             </td>
                             <td>
                                 <div align="right">
@@ -83,8 +114,6 @@
                             <td align="right">
                                 <asp:Button ID="Button1" CssClass="button1" runat="server" Text="查询" OnClick="btnQuery_Click" />
                             </td>
-                        </tr>
-                        <tr>
                         </tr>
                     </table>
                 </div>
@@ -113,13 +142,13 @@
                         <asp:GridView ID="gvResult" runat="server" Width="95%" CssClass="tab2" HeaderStyle-CssClass="tabbt"
                             FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
                             PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
-                            AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="true">
+                            AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="false">
                             <Columns>
                                 <asp:BoundField DataField="tradetype" HeaderText="业务类型" />
                                 <asp:BoundField DataField="cardno" HeaderText="卡号" />
                                 <asp:BoundField DataField="operatetime" HeaderText="操作时间" />
                                 <asp:BoundField DataField="operatedepartid" HeaderText="操作部门" />
-                                <asp:BoundField DataField="staffno" HeaderText="操作员工" />
+                                <asp:BoundField DataField="operatestaffno" HeaderText="操作员工" />
                                 <asp:BoundField DataField="posno" HeaderText="POS编号" />
                                 <asp:BoundField DataField="psamno" HeaderText="PSAM编号" />
                             </Columns>

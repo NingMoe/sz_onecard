@@ -308,11 +308,11 @@ function SupplyAndReadCardForCheck() {
         if (!ret) {
             return false;
         }
-        if (cardReader.CardInfo.cardNo != $get('txtCardNo').value) {
+        if (cardReader.CardInfo.cardNo != $get('txtCardno').value) {
             MyExtAlert("警告", "读卡器上卡片为:<br>"
             + '<span class="red">' + cardReader.CardInfo.cardNo + '</span>'
             + "<br>先前读出卡号为: <br>"
-            + '<span class="red">' + $get('txtCardNo').value + '</span>'
+            + '<span class="red">' + $get('txtCardno').value + '</span>'
             + "<br>不一致。<br><br> 请重新点击读卡按钮后再操作！");
             return false;
         }
@@ -325,7 +325,7 @@ function SupplyAndReadCardForCheck() {
             return false;
         }
         else {
-            MyExtConfirm('提示', '是否确认充值:' + $get('SupplyFee').innerHTML + '元?', SupplyCheckConfirm);
+            MyExtConfirm('提示', '是否确认充值:' + ($get('hidMoney').value*1.0).toFixed(2) + '元?', SupplyCheckConfirm);
         }
         return false;
     }

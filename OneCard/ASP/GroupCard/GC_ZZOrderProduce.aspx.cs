@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using PDO.PersonalBusiness;
 using TDO.CardManager;
 using Master;
+using PDO.ChargeCard;
 
 //description 休闲订单制卡
 //creater     蒋兵兵
@@ -28,6 +29,9 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         {
             gvOrderList.DataSource = new DataTable();
             gvOrderList.DataBind();
+
+            gvChargeCardList.DataSource = new DataTable();
+            gvChargeCardList.DataBind();
 
             previousLink.Visible = false;
             nextLink.Visible = false;
@@ -46,6 +50,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         postData.Add("toDate", txtToDate.Text);
         postData.Add("rejectType", "");
         postData.Add("payCanal", selPayCanal.SelectedValue);
+        postData.Add("orderType", selOrderType.SelectedValue);
         postData.Add("beginIndex", begin.ToString());
         postData.Add("endIndex", end.ToString());
         postData.Add("orderState", "0");
@@ -65,7 +70,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         //总数
         int iCount = 0;
         //每页数量
-        int iPerPage = 9;
+        int iPerPage = 10;
         int begin = (page - 1) * iPerPage + 1;
         int end = page * iPerPage + 1;
 
@@ -74,8 +79,16 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         DataTable table = fillDataTable(HttpHelper.TradeType.ZZOrderCardQuery, DeclarePost(begin, end));
         if (table.Rows.Count > 0)
         {
-            gvOrderList.DataSource = GetTableCard(table);
-            gvOrderList.DataBind();
+            if (selOrderType.SelectedValue == "1")
+            {
+                gvOrderList.DataSource = GetTableCard(table);
+                gvOrderList.DataBind();
+            }
+            else
+            {
+                gvChargeCardList.DataSource = GetTableCard(table);
+                gvChargeCardList.DataBind();
+            }
         }
         // 页数
         int iPagecount = 1;
@@ -324,7 +337,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
     private void UpdateSyncType(string operateType, string tradeType, string syncCode, string syncMsg)
     {
         //operateType 01新增 02修改
-        //tradeType 01售卡 02充值 03配送
+        //tradeType 01电子钱包售卡 02充值 03配送 04兑换券
         context.SPOpen();
         context.AddField("P_TRADEID").Value = hidTradeNo.Value;
         context.AddField("P_ORDERNO").Value = hidOrderNo.Value;
@@ -502,6 +515,31 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
 
         return !(context.hasError());
     }
+    private void chargeCardValidation(TextBox chargeCardNo)
+    {
+        Validation valid = new Validation(context);
+
+        if (string.IsNullOrEmpty(chargeCardNo.Text))
+        {
+            context.AddError("A093540023:兑换券不能为空!");
+        }
+        else if (Validation.strLen(chargeCardNo.Text) != 14)
+        {
+            context.AddError("A093540024:兑换券不为14位!");
+        }
+        else if (!ChargeCardHelper.validateCardNo(chargeCardNo.Text))
+        {
+            context.AddError("A093540025:兑换券格式不正确!");
+        }
+        else
+        {
+            int chargeCardNum = ChargeCardHelper.queryCountOfSalable(context, chargeCardNo, chargeCardNo);
+            if (chargeCardNum != 1)
+            {
+                context.AddError("A093540026:兑换券不存在或状态不正确!");
+            }
+        }
+    }
 
 
     /// <summary>
@@ -560,6 +598,13 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
 
     #region protect Event
 
+    //读卡功能
+    protected void btnReadCard_Click(object sender, EventArgs e)
+    {
+        ScriptManager.RegisterStartupScript(this, this.GetType(),
+                    "js", "ReadCardInfo()", true);
+    }
+
     /// <summary>
     /// 查询订单按钮事件
     /// </summary>
@@ -574,12 +619,25 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         gvOrderList.DataSource = new DataTable();
         gvOrderList.DataBind();
 
+        gvChargeCardList.DataSource = new DataTable();
+        gvChargeCardList.DataBind();
+
         string fromDate = txtFromDate.Text.Trim();
         string endDate = txtToDate.Text.Trim();
 
         previousLink.Visible = true;
         nextLink.Visible = true;
         ShowFileContent();
+        if (selOrderType.SelectedValue == "1")
+        {
+            gvOrderList.Visible = true;
+            gvChargeCardList.Visible = false;
+        }
+        else
+        {
+            gvOrderList.Visible = false;
+            gvChargeCardList.Visible = true;
+        }
     }
 
     //Data绑定
@@ -621,6 +679,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             }
 
             Button btnProduce = (Button)e.Row.FindControl("btnProduce");
+            btnProduce.OnClientClick = "ReadCardInfo()";
             switch (e.Row.Cells[5].Text)
             {
                 case "":
@@ -634,6 +693,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
                     break;
             }
             Button btnCharge = (Button)e.Row.FindControl("btnCharge");
+            btnCharge.OnClientClick = "ReadCardInfo()";
             switch (e.Row.Cells[2].Text)
             {
                 case "0":
@@ -644,6 +704,41 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
                     e.Row.Cells[2].Text = (Convert.ToDecimal(e.Row.Cells[2].Text) / 100).ToString();
                     break;
             }
+        }
+    }
+
+    protected void gvChargeCardList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        e.Row.Cells[2].Visible = false;
+        e.Row.Cells[5].Visible = false;
+
+        switch (e.Row.Cells[4].Text)
+        {
+            case "0":
+                e.Row.Cells[4].Text = "未处理";
+                break;
+            case "1":
+                e.Row.Cells[4].Text = "已制卡";
+                break;
+            case "2":
+                e.Row.Cells[4].Text = "已发货";
+                break;
+            default:
+                e.Row.Cells[4].Text = "状态异常";
+                break;
+        }
+
+        switch (e.Row.Cells[6].Text)
+        {
+            case "Z1":
+                e.Row.Cells[6].Text = "200元24小时套餐";
+                break;
+            case "Z2":
+                e.Row.Cells[6].Text = "288元48小时套餐";
+                break;
+            default:
+                e.Row.Cells[6].Text = "套餐类型异常";
+                break;
         }
     }
 
@@ -667,7 +762,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
 
         //从IC卡电子钱包账户表中读取数据
 
-        
+
         TF_F_CARDEWALLETACCTDO ddoTF_F_CARDEWALLETACCIn = new TF_F_CARDEWALLETACCTDO();
         ddoTF_F_CARDEWALLETACCIn.CARDNO = txtCardno.Text;
 
@@ -685,7 +780,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         pdo.CARDTRADENO = hiddentradeno.Value;
         pdo.CARDMONEY = Convert.ToInt32(Convert.ToDecimal(hidMoney.Value) * 100);
         pdo.CARDACCMONEY = ddoTF_F_CARDEWALLETACCOut.CARDACCMONEY;
-        pdo.ASN = hiddenAsn.Value;
+        pdo.ASN = hiddenAsn.Value.Substring(4, 16);
         pdo.CARDTYPECODE = hiddenLabCardtype.Value;
         pdo.TRADETYPECODE = "02";
         pdo.SUPPLYMONEY = Convert.ToInt32((Convert.ToDecimal(hidMoney.Value)) * 100);
@@ -700,19 +795,19 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         if (ok)
         {
             hidTradeNo.Value = "" + ((SP_PB_ChargePDO)pdoOut).TRADEID;
-
+            hidoutTradeid.Value = "" + ((SP_PB_ChargePDO)pdoOut).TRADEID;
             //记录同步信息
             UpdateSyncType("01", "02", "", "");
             //AddMessage("M001002001");
-            //ScriptManager.RegisterStartupScript(this, this.GetType(),
-            //    "writeCardScript", "chargeCard();", true);
-            string code = "";
-            string message = "";
-            //调用同步接口
-            synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "7", ref code, ref message);
+            ScriptManager.RegisterStartupScript(this, this.GetType(),
+                "writeCardScript", "chargeCard();", true);
+            //string code = "";
+            //string message = "";
+            ////调用同步接口
+            //synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "7", ref code, ref message);
 
-            //更新同步信息
-            UpdateSyncType("02", "02", code, message);
+            ////更新同步信息
+            //UpdateSyncType("02", "02", code, message);
         }
     }
 
@@ -733,24 +828,24 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         else if (hidWarning.Value == "writeSuccess")
         {
 
-            //SP_PB_updateCardTradePDO pdo = new SP_PB_updateCardTradePDO();
-            //pdo.CARDTRADENO = hiddentradeno.Value;
-            //pdo.TRADEID = hidoutTradeid.Value;
+            SP_PB_updateCardTradePDO pdo = new SP_PB_updateCardTradePDO();
+            pdo.CARDTRADENO = hiddentradeno.Value;
+            pdo.TRADEID = hidTradeNo.Value;
 
-            //bool ok = TMStorePModule.Excute(context, pdo);
+            bool ok = TMStorePModule.Excute(context, pdo);
 
-            //if (ok)
-            //{
-            //    string code = "";
-            //    string message = "";
-            //    //调用同步接口
-            //    synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "7", ref code, ref message);
+            if (ok)
+            {
+                string code = "";
+                string message = "";
+                //调用同步接口
+                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "7", ref code, ref message);
 
-            //    //更新同步信息
-            //    UpdateSyncType("02", "02", code, message);
-            //    AddMessage("前台写卡成功");
-            //    btnQuery_Click(sender, e);
-            //}
+                //更新同步信息
+                UpdateSyncType("02", "02", code, message);
+                AddMessage("前台写卡成功");
+                btnQuery_Click(sender, e);
+            }
         }
         else if (hidWarning.Value == "writeFail")
         {
@@ -765,9 +860,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         int index = Convert.ToInt32(e.CommandArgument.ToString());
         if (e.CommandName == "Produce")
         {
-
-            //ScriptManager.RegisterStartupScript(this, this.GetType(),
-            //            "js", "ReadCardInfo()", true);
+            btnReadCard_Click(sender, e);
 
             hidMoney.Value = gvOrderList.Rows[index].Cells[2].Text;
             //验证卡状态
@@ -781,39 +874,84 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             if (context.hasError())
                 return;
 
-            //return;
             //售卡-休闲开通
             ProduceCard(sender, e, "");
 
+            btnQuery_Click(sender, e);
         }
 
-        if (e.CommandName == "Charge")
+        else if (e.CommandName == "Charge")
         {
+            //btnReadCard_Click(sender, e);
             hidOrderCardNo.Value = gvOrderList.Rows[index].Cells[5].Text;
             hidMoney.Value = gvOrderList.Rows[index].Cells[2].Text;
-            hidMoney.Value = Convert.ToInt32((Convert.ToDecimal(hidMoney.Value)) * 100).ToString();
+            hidMoney.Value = Convert.ToInt32((Convert.ToDecimal(hidMoney.Value))).ToString();
 
             hidDetailNo.Value = gvOrderList.Rows[index].Cells[14].Text.ToString().Trim();
 
-            //ScriptManager.RegisterStartupScript(this, this.GetType(),
-            //            "js", "ReadCardInfo()", true);
+            if (context.hasError())
+                return;
 
-            ////读卡验证卡号
-            //ScriptManager.RegisterStartupScript(this, this.GetType(),
-            //            "js", "SupplyAndReadCardForCheck()", true);
+            //读卡验证卡号
+            ScriptManager.RegisterStartupScript(this, this.GetType(),
+                        "js", "SupplyAndReadCardForCheck()", true);
 
             //验证卡状态
             //checkCardState(txtCardno.Text);
 
             //获取卡相关资费
             //GetTradeFee();
-            //if (context.hasError())
-            //    return;
 
             ////充值前余额验证
             //ScriptManager.RegisterStartupScript(this, this.GetType(),
             //            "js", "ChargeCardChargeCheck()", true);
-            btnSupply_Click(sender, e);
+            //btnSupply_Click(sender, e);
+        }
+    }
+
+    protected void gvChargeCardList_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+
+        if (e.CommandName == "Activate")
+        {
+            int index = Convert.ToInt32(e.CommandArgument.ToString());
+
+            GridViewRow gvr = gvOrderList.Rows[index];
+            TextBox txtChargeCardNo = (TextBox)gvr.FindControl("txtChargeCardNo");
+
+            hidOrderNo.Value = gvr.Cells[3].Text.ToString().Trim();
+            hidDetailNo.Value = gvr.Cells[13].Text.ToString().Trim();
+            //兑换券校验
+            chargeCardValidation(txtChargeCardNo);
+
+            if (context.hasError()) return;
+
+            txtCardno.Text = txtChargeCardNo.Text;
+            // 生成充值卡激活/关闭存储过程，并调用之
+
+            SP_CC_ActivatePDO pdo = new SP_CC_ActivatePDO();    // 充值卡激活/关闭存储过程
+            pdo.fromCardNo = txtChargeCardNo.Text;              // 起始卡号
+            pdo.toCardNo = txtChargeCardNo.Text;                 // 结束卡号
+            pdo.stateCode = "4";                                // 激活为'4', 关闭为'3'
+            pdo.remark = "";                                   // 备注
+
+            bool ok = TMStorePModule.Excute(context, pdo);   // 执行存储过程
+
+            if (ok)
+            {
+
+                //记录同步信息
+                UpdateSyncType("01", "04", "", "");
+                context.AddMessage("激活完成！");
+
+                string code = "";
+                string message = "";
+                //调用同步接口
+                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", ref code, ref message);
+
+                //更新同步信息
+                UpdateSyncType("02", "04", code, message);
+            }
         }
     }
     #endregion

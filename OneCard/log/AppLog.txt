@@ -3561,3 +3561,7 @@
 2018-01-07 15:44:43,424 [14] ERROR AppLog [(null)] - S001026101:Unable to Updated card trade
 2018-01-07 15:48:12,162 [12] ERROR AppLog [(null)] - ҳ�棺/ASP/GroupCard/GC_ZZOrderProduce.aspx || S001026101:Unable to Updated card trade
 2018-01-07 15:48:12,169 [12] ERROR AppLog [(null)] - S001026101:Unable to Updated card trade
+2018-01-11 19:30:58,237 [8] ERROR AppLog [(null)] - ҳ�棺/ASP/GroupCard/GC_ZZOrderProduce.aspx || S001002115:S001002115:Unable to insert a row of group supply log
+2018-01-11 19:30:58,258 [8] ERROR AppLog [(null)] - S001002115:S001002115:Unable to insert a row of group supply log
+2018-01-11 19:43:21,801 [8] ERROR AppLog [(null)] - ҳ�棺/ASP/GroupCard/GC_ZZOrderProduce.aspx || S001026101:Unable to Updated card trade
+2018-01-11 19:43:21,810 [8] ERROR AppLog [(null)] - S001026101:Unable to Updated card trade

@@ -83,6 +83,7 @@ public partial class ASP_Financial_FI_ZZReceiveCardReport : Master.ExportMaster
         dt.Columns.Add("DETAILNO", typeof(string));//子订单号
         dt.Columns.Add("ORDERNO", typeof(string));//主订单号
         dt.Columns.Add("CARDNO", typeof(string));//卡号
+        dt.Columns.Add("OPERATETIME", typeof(string));//领卡时间
         dt.Columns.Add("PACKAGENAME", typeof(string));//套餐类型
         dt.Columns.Add("OPERATEDEPARTID", typeof(string));//操作部门号
         dt.Columns.Add("OPERATESTAFFNO", typeof(string));//操作员工号
@@ -90,6 +91,7 @@ public partial class ASP_Financial_FI_ZZReceiveCardReport : Master.ExportMaster
         dt.Columns["DETAILNO"].MaxLength = 100;
         dt.Columns["ORDERNO"].MaxLength = 100;
         dt.Columns["CARDNO"].MaxLength = 100;
+        dt.Columns["OPERATETIME"].MaxLength = 100;
         dt.Columns["PACKAGENAME"].MaxLength = 100;
         dt.Columns["OPERATEDEPARTID"].MaxLength = 100;
         dt.Columns["OPERATESTAFFNO"].MaxLength = 100;
@@ -131,7 +133,7 @@ public partial class ASP_Financial_FI_ZZReceiveCardReport : Master.ExportMaster
             foreach (JProperty itemProperty in deserObject.Properties())
             {
                 string propertyName = itemProperty.Name;
-                if (propertyName == "tradeColl")
+                if (propertyName == "receiveCardList")
                 {
                     //DataTable赋值
                     JArray detailArray = new JArray();
@@ -179,33 +181,34 @@ public partial class ASP_Financial_FI_ZZReceiveCardReport : Master.ExportMaster
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            switch (e.Row.Cells[3].Text)
+            switch (e.Row.Cells[4].Text)
             {
                 case "Z1":
-                    e.Row.Cells[3].Text = "200元24小时套餐";
+                    e.Row.Cells[4].Text = "200元24小时套餐";
                     break;
                 case "Z2":
-                    e.Row.Cells[3].Text = "288元48小时套餐";
+                    e.Row.Cells[4].Text = "288元48小时套餐";
                     break;
                 default:
-                    e.Row.Cells[3].Text = "套餐类型异常";
+                    e.Row.Cells[4].Text = "套餐类型异常";
                     break;
             }
 
             //获取部门编号对应的部门名称
-            ListItem listItem = selDept.Items.FindByValue(e.Row.Cells[4].Text);
-            if (listItem != null)
-            {
-                e.Row.Cells[4].Text = listItem.Text.Substring(listItem.Text.IndexOf(':') + 1);
-            }
-
-            //获取员工编号对应的员工名称
-            listItem = selStaff.Items.FindByValue(e.Row.Cells[5].Text);
+            ListItem listItem = selDept.Items.FindByValue(e.Row.Cells[5].Text);
             if (listItem != null)
             {
                 e.Row.Cells[5].Text = listItem.Text.Substring(listItem.Text.IndexOf(':') + 1);
             }
 
+            //获取员工编号对应的员工名称
+            listItem = selStaff.Items.FindByValue(e.Row.Cells[6].Text);
+            if (listItem != null)
+            {
+                e.Row.Cells[6].Text = listItem.Text.Substring(listItem.Text.IndexOf(':') + 1);
+            }
+
+            e.Row.Cells[3].Text = DateTime.ParseExact(e.Row.Cells[3].Text, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss", null);
         }
     }
 
@@ -215,7 +218,7 @@ public partial class ASP_Financial_FI_ZZReceiveCardReport : Master.ExportMaster
         validate();
         if (context.hasError()) return;
 
-        DataTable data = fillDataTable(HttpHelper.TradeType.ZZOrderCardQuery, DeclarePost());
+        DataTable data = fillDataTable(HttpHelper.TradeType.ZZReceiveCardQuery, DeclarePost());
         if (data == null || data.Rows.Count == 0)
         {
             AddMessage("N005030001: 查询结果为空");

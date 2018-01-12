@@ -38432,3 +38432,1127 @@ System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
    在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
    在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
    在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 09:51:00,306 [6] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03135: connection lost contact
+Process ID: 0
+Session ID: 200 Serial number: 62743
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 10:03:12,384 [8] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 DeptBalunitHelper.ValdatePrepay(CmnContext context, Int32 opMoney, String opType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\DeptBalunitHelper.cs:行号 44
+   在 DeptBalunitHelper.ValdatePrepay(CmnContext context) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\DeptBalunitHelper.cs:行号 26
+   在 ASP_GroupCard_GC_ZZReceiveCard.btnReadCard_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 331
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 10:09:45,940 [8] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-03114: not connected to ORACLE
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 DeptBalunitHelper.ValdatePrepay(CmnContext context, Int32 opMoney, String opType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\DeptBalunitHelper.cs:行号 44
+   在 DeptBalunitHelper.ValdatePrepay(CmnContext context) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\DeptBalunitHelper.cs:行号 26
+   在 ASP_GroupCard_GC_ZZReceiveCard.btnReadCard_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 331
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 13:40:52,827 [7] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 82
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 14:06:20,206 [8] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 82
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 16:29:18,649 [8] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 16:29:20,169 [8] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 16:29:21,207 [8] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 16:29:24,874 [8] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 16:29:25,449 [11] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-08 17:15:21,063 [7] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-12170: TNS:Connect timeout occurred
+
+   在 Master.DBConnectionOracle.Open(String cmdType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 82
+   在 Master.CmnContext.DBOpen(String cmdType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 271
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 47
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 top.CheckResourcePower() 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 155
+   在 top.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 46
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-09 16:42:35,119 [6] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03135: connection lost contact
+Process ID: 0
+Session ID: 276 Serial number: 13375
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 16:18:07,495 [9] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03135: connection lost contact
+Process ID: 0
+Session ID: 197 Serial number: 6107
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 16:21:23,482 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZReceiveCard.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 ASHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 450
+   在 ASHelper.initPaperTypeList(CmnContext context, DropDownList lst) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\ASHelper.cs:行号 23
+   在 ASP_GroupCard_GC_ZZReceiveCard.initLoad(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 82
+   在 ASP_GroupCard_GC_ZZReceiveCard.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZReceiveCard.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 18:33:45,716 [10] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-03135: connection lost contact
+Process ID: 0
+Session ID: 190 Serial number: 41212
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 589
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 18:33:49,135 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 589
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 18:36:14,452 [11] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_RelaxOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-03114: not connected to ORACLE
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_RelaxOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_RelaxOrderProduce.aspx.cs:行号 151
+   在 ASP_GroupCard_GC_RelaxOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_RelaxOrderProduce.aspx.cs:行号 90
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 18:38:36,886 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_RelaxOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-03114: not connected to ORACLE
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 DAO.SelectDAO.selDDO(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 32
+   在 TM.TMTableModule.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn, Type type, String errCode, String strSqlKey, String strSql) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\TMTableModule.cs:行号 133
+   在 Master.FrontMaster.checkCardState(String cardNo) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\FrontMaster.cs:行号 334
+   在 ASP_GroupCard_GC_RelaxOrderProduce.gvOrderList_RowCommand(Object sender, GridViewCommandEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_RelaxOrderProduce.aspx.cs:行号 325
+   在 System.Web.UI.WebControls.GridView.OnRowCommand(GridViewCommandEventArgs e)
+   在 System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   在 System.Web.UI.WebControls.GridView.OnBubbleEvent(Object source, EventArgs e)
+   在 System.Web.UI.Control.RaiseBubbleEvent(Object source, EventArgs args)
+   在 System.Web.UI.WebControls.GridViewRow.OnBubbleEvent(Object source, EventArgs e)
+   在 System.Web.UI.Control.RaiseBubbleEvent(Object source, EventArgs args)
+   在 System.Web.UI.WebControls.Button.OnCommand(CommandEventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 19:04:34,245 [10] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_RelaxOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_RelaxOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_RelaxOrderProduce.aspx.cs:行号 151
+   在 ASP_GroupCard_GC_RelaxOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_RelaxOrderProduce.aspx.cs:行号 90
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 19:17:03,352 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_RelaxOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 DAO.SelectDAO.selDDO(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 32
+   在 TM.TMTableModule.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn, Type type, String errCode, String strSqlKey, String strSql) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\TMTableModule.cs:行号 133
+   在 Master.FrontMaster.checkCardState(String cardNo) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\FrontMaster.cs:行号 334
+   在 ASP_GroupCard_GC_RelaxOrderProduce.gvOrderList_RowCommand(Object sender, GridViewCommandEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_RelaxOrderProduce.aspx.cs:行号 325
+   在 System.Web.UI.WebControls.GridView.OnRowCommand(GridViewCommandEventArgs e)
+   在 System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   在 System.Web.UI.WebControls.GridView.OnBubbleEvent(Object source, EventArgs e)
+   在 System.Web.UI.Control.RaiseBubbleEvent(Object source, EventArgs args)
+   在 System.Web.UI.WebControls.GridViewRow.OnBubbleEvent(Object source, EventArgs e)
+   在 System.Web.UI.Control.RaiseBubbleEvent(Object source, EventArgs args)
+   在 System.Web.UI.WebControls.Button.OnCommand(CommandEventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-10 19:31:55,582 [9] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_RelaxOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_RelaxOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_RelaxOrderProduce.aspx.cs:行号 151
+   在 ASP_GroupCard_GC_RelaxOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_RelaxOrderProduce.aspx.cs:行号 90
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 15:30:26,792 [10] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03113: end-of-file on communication channel
+Process ID: 0
+Session ID: 198 Serial number: 21816
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 15:42:38,604 [10] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 589
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 15:52:30,068 [8] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 589
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 16:00:17,098 [7] ERROR ExpLog [(null)] - 页面：/Logontest.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 SPHelper.callQuery(SP_QueryPDO pdo, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 153
+   在 SPHelper.callQuery(String pdoName, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 106
+   在 SSO.SSOHelper.CheckLogin(Boolean isAdmin, CmnContext context, String username, String opercardno, String pwd, String ip, HttpResponse response, HttpSessionState session, String& loginURL, String& staffTable, DataTable& sysinfos) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SSOHelper.cs:行号 82
+   在 Logontest.LogonBtn_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\Logontest.aspx.cs:行号 150
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 16:00:19,370 [9] ERROR ExpLog [(null)] - 页面：/LogonSSO.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.CmnContext.ExecuteSP(String spName) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 300
+   在 LogonSSO.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\logonSSO.aspx.cs:行号 39
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:15:25,519 [9] ERROR ExpLog [(null)] - 页面：/LogonSSO.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.CmnContext.ExecuteSP(String spName) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 300
+   在 LogonSSO.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\logonSSO.aspx.cs:行号 39
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:25:19,696 [10] ERROR ExpLog [(null)] - 页面：/LogonSSO.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.CmnContext.ExecuteSP(String spName) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 300
+   在 LogonSSO.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\logonSSO.aspx.cs:行号 39
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:40:44,406 [10] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-06502: PL/SQL: numeric or value error: character string buffer too small
+ORA-06512: at "UCRAPP_B_SZ.SP_PB_UPDATEACC", line 92
+ORA-12899: value too large for column "UOWNER_B_SZ"."TF_SUPPLY_REALTIME"."ASN" (actual: 20, maximum: 16)
+ORA-06512: at "UCRAPP_B_SZ.SP_PB_CHARGE", line 50
+ORA-06512: at line 1
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 61
+   在 DAO.StoreProduceDAO.Excute(CmnContext context, DDOBase a_ddoBaseIn, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\StoreProduceDAO.cs:行号 21
+   在 TM.TMStorePModule.Excute(CmnContext context, PDOBase pdo, PDOBase& pdoOut) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\TMStorePModule.cs:行号 46
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnSupply_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 708
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 733
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:40:51,041 [10] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 120
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 77
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 589
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:42:36,243 [10] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-06502: PL/SQL: numeric or value error: character string buffer too small
+ORA-06512: at "UCRAPP_B_SZ.SP_PB_UPDATEACC", line 92
+ORA-12899: value too large for column "UOWNER_B_SZ"."TF_SUPPLY_REALTIME"."ASN" (actual: 20, maximum: 16)
+ORA-06512: at "UCRAPP_B_SZ.SP_PB_CHARGE", line 50
+ORA-06512: at line 1
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 61
+   在 DAO.StoreProduceDAO.Excute(CmnContext context, DDOBase a_ddoBaseIn, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\StoreProduceDAO.cs:行号 21
+   在 TM.TMStorePModule.Excute(CmnContext context, PDOBase pdo, PDOBase& pdoOut) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\TMStorePModule.cs:行号 46
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnSupply_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 708
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 733
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:42:38,447 [8] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:46:13,301 [9] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-03113: end-of-file on communication channel
+Process ID: 0
+Session ID: 230 Serial number: 24828
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:46:47,656 [10] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZCardConsumerReport.aspx
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP_Financial_FI_ZZCardConsumerReport.initEmptyDataTable() 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 143
+   在 ASP_Financial_FI_ZZCardConsumerReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 154
+   在 ASP_Financial_FI_ZZCardConsumerReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 299
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:47:00,450 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZCardConsumerReport.aspx
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP_Financial_FI_ZZCardConsumerReport.initEmptyDataTable() 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 143
+   在 ASP_Financial_FI_ZZCardConsumerReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 154
+   在 ASP_Financial_FI_ZZCardConsumerReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 299
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 19:48:15,933 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZCardConsumerReport.aspx
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP_Financial_FI_ZZCardConsumerReport.initEmptyDataTable() 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 143
+   在 ASP_Financial_FI_ZZCardConsumerReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 154
+   在 ASP_Financial_FI_ZZCardConsumerReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZCardConsumerReport.aspx.cs:行号 299
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 20:07:43,533 [9] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZReceiveCardReport.aspx
+System.Web.HttpException: 在选定的数据源上未找到名为“STAFFNO”的字段或属性。
+   在 System.Web.UI.WebControls.BoundField.GetValue(Control controlContainer)
+   在 System.Web.UI.WebControls.BoundField.OnDataBindField(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnDataBinding(EventArgs e)
+   在 System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   在 System.Web.UI.Control.DataBind()
+   在 System.Web.UI.Control.DataBindChildren()
+   在 System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   在 System.Web.UI.Control.DataBind()
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZReceiveCardReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZReceiveCardReport.aspx.cs:行号 224
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 20:08:53,190 [10] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZReceiveCardReport.aspx
+System.Web.HttpException: 在选定的数据源上未找到名为“STAFFNO”的字段或属性。
+   在 System.Web.UI.WebControls.BoundField.GetValue(Control controlContainer)
+   在 System.Web.UI.WebControls.BoundField.OnDataBindField(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnDataBinding(EventArgs e)
+   在 System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   在 System.Web.UI.Control.DataBind()
+   在 System.Web.UI.Control.DataBindChildren()
+   在 System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   在 System.Web.UI.Control.DataBind()
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZReceiveCardReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZReceiveCardReport.aspx.cs:行号 224
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 21:43:37,429 [8] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZTradeReport.aspx
+System.ArgumentException: 列“operateStaffNo”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.set_Item(String columnName, Object value)
+   在 ASP_Financial_FI_ZZTradeReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTradeReport.aspx.cs:行号 148
+   在 ASP_Financial_FI_ZZTradeReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTradeReport.aspx.cs:行号 178
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 21:44:07,438 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZTradeReport.aspx
+System.ArgumentException: 列“operateStaffNo”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.set_Item(String columnName, Object value)
+   在 ASP_Financial_FI_ZZTradeReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTradeReport.aspx.cs:行号 148
+   在 ASP_Financial_FI_ZZTradeReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTradeReport.aspx.cs:行号 178
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 21:59:32,109 [8] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 列“payCanalDataList”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.set_Item(String columnName, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 279
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 121
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:02:45,771 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 列“payCanalDataList”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.set_Item(String columnName, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 279
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 121
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:03:54,185 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 列“payCanalDataList”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.set_Item(String columnName, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 279
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 121
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:09:52,793 [8] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 列“payCanalDataList”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.set_Item(String columnName, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 280
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 121
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:10:51,237 [8] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 列“payCanalDataList”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.set_Item(String columnName, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 281
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 121
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:15:43,999 [9] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 该行已经属于此表。
+   在 System.Data.DataTable.InsertRow(DataRow row, Int64 proposedID, Int32 pos, Boolean fireEvent)
+   在 System.Data.DataRowCollection.Add(DataRow row)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 303
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 121
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:16:26,884 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 该行已经属于此表。
+   在 System.Data.DataTable.InsertRow(DataRow row, Int64 proposedID, Int32 pos, Boolean fireEvent)
+   在 System.Data.DataRowCollection.Add(DataRow row)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 303
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 121
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:17:52,337 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 61.155.179.185:5001
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.InternalConnect(EndPoint remoteEP)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+2018-01-11 22:21:07,392 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.Web.HttpException: 在选定的数据源上未找到名为“tradetype”的字段或属性。
+   在 System.Web.UI.WebControls.BoundField.GetValue(Control controlContainer)
+   在 System.Web.UI.WebControls.BoundField.OnDataBindField(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnDataBinding(EventArgs e)
+   在 System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   在 System.Web.UI.Control.DataBind()
+   在 System.Web.UI.Control.DataBindChildren()
+   在 System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   在 System.Web.UI.Control.DataBind()
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 127
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:22:03,660 [8] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.Web.HttpException: 在选定的数据源上未找到名为“tradetype”的字段或属性。
+   在 System.Web.UI.WebControls.BoundField.GetValue(Control controlContainer)
+   在 System.Web.UI.WebControls.BoundField.OnDataBindField(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnDataBinding(EventArgs e)
+   在 System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   在 System.Web.UI.Control.DataBind()
+   在 System.Web.UI.Control.DataBindChildren()
+   在 System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   在 System.Web.UI.Control.DataBind()
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 127
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:23:45,714 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   在 System.Double.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.Convert.ToDouble(String value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.gvResult_RowDataBound(Object sender, GridViewRowEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 40
+   在 System.Web.UI.WebControls.GridView.OnRowDataBound(GridViewRowEventArgs e)
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 127
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:25:35,914 [9] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   在 System.Double.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.Convert.ToDouble(String value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.gvResult_RowDataBound(Object sender, GridViewRowEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 40
+   在 System.Web.UI.WebControls.GridView.OnRowDataBound(GridViewRowEventArgs e)
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 127
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 22:37:16,168 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   在 System.Double.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.Convert.ToDouble(String value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.gvResult_RowDataBound(Object sender, GridViewRowEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 38
+   在 System.Web.UI.WebControls.GridView.OnRowDataBound(GridViewRowEventArgs e)
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 117
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 23:10:06,607 [13] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZTradeReport.aspx
+System.FormatException: 该字符串未被识别为有效的 DateTime。
+   在 System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   在 System.Convert.ToDateTime(String value)
+   在 ASP_Financial_FI_ZZTradeReport.gvResult_RowDataBound(Object sender, GridViewRowEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTradeReport.aspx.cs:行号 189
+   在 System.Web.UI.WebControls.GridView.OnRowDataBound(GridViewRowEventArgs e)
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZTradeReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTradeReport.aspx.cs:行号 205
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-11 23:13:58,977 [8] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZTradeReport.aspx
+System.FormatException: 该字符串未被识别为有效的 DateTime。
+   在 System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   在 System.DateTime.Parse(String s)
+   在 ASP_Financial_FI_ZZTradeReport.gvResult_RowDataBound(Object sender, GridViewRowEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTradeReport.aspx.cs:行号 189
+   在 System.Web.UI.WebControls.GridView.OnRowDataBound(GridViewRowEventArgs e)
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 UserCardHelper.resetData(GridView gv, DataTable dt) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\UserCardHelper.cs:行号 129
+   在 ASP_Financial_FI_ZZTradeReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTradeReport.aspx.cs:行号 205
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 11:14:00,086 [8] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 已添加项。字典中的关键字:“01”所添加的关键字:“01”
+   在 System.Collections.Hashtable.Insert(Object key, Object nvalue, Boolean add)
+   在 System.Collections.Hashtable.Add(Object key, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 312
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 158
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 11:14:05,274 [7] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 已添加项。字典中的关键字:“01”所添加的关键字:“01”
+   在 System.Collections.Hashtable.Insert(Object key, Object nvalue, Boolean add)
+   在 System.Collections.Hashtable.Add(Object key, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 312
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 158
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 11:15:08,007 [9] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 已添加项。字典中的关键字:“01”所添加的关键字:“01”
+   在 System.Collections.Hashtable.Insert(Object key, Object nvalue, Boolean add)
+   在 System.Collections.Hashtable.Add(Object key, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 314
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 160
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 11:17:11,393 [8] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.ArgumentException: 已添加项。字典中的关键字:“01”所添加的关键字:“01”
+   在 System.Collections.Hashtable.Insert(Object key, Object nvalue, Boolean add)
+   在 System.Collections.Hashtable.Add(Object key, Object value)
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 314
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 160
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 16:50:10,861 [7] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03135: connection lost contact
+Process ID: 0
+Session ID: 190 Serial number: 45047
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 17:34:41,397 [9] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 17:34:43,784 [6] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 top.CheckResourcePower() 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 155
+   在 top.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 46
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 17:34:44,344 [6] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 17:34:46,209 [6] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 top.CheckResourcePower() 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 155
+   在 top.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 46
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 17:35:02,807 [10] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12170: TNS:Connect timeout occurred
+
+   在 Master.DBConnectionOracle.Open(String cmdType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 82
+   在 Master.CmnContext.DBOpen(String cmdType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 271
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 47
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 17:35:03,246 [7] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-12170: TNS:Connect timeout occurred
+
+   在 Master.DBConnectionOracle.Open(String cmdType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 82
+   在 Master.CmnContext.DBOpen(String cmdType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 271
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 47
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 top.CheckResourcePower() 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 155
+   在 top.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 46
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 17:41:15,712 [6] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03114: not connected to ORACLE
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 18:07:10,050 [13] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 121
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 78
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 590
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 19:04:01,810 [6] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderDistrabution.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 GroupCardHelper.fillInTrackingCop(CmnContext context, DropDownList ddl, Boolean empty) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 64
+   在 ASP_GroupCard_GC_ZZOrderDistrabution.gvOrder_RowDataBound(Object sender, GridViewRowEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderDistrabution.aspx.cs:行号 203
+   在 System.Web.UI.WebControls.GridView.OnRowDataBound(GridViewRowEventArgs e)
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 ASP_GroupCard_GC_ZZOrderDistrabution.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderDistrabution.aspx.cs:行号 65
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 19:18:01,886 [6] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 GroupCardHelper.callQuery(CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\GroupCardHelper.cs:行号 144
+   在 ASP_GroupCard_GC_ZZOrderProduce.GetTableCard(DataTable data) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 121
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 78
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 590
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 19:22:23,610 [10] ERROR ExpLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx
+System.ArgumentOutOfRangeException: 指定的参数已超出有效值的范围。
+参数名: index
+   在 System.Web.UI.ControlCollection.get_Item(Int32 index)
+   在 System.Web.UI.WebControls.TableCellCollection.get_Item(Int32 index)
+   在 ASP_GroupCard_GC_ZZOrderProduce.gvOrderList_RowDataBound(Object sender, GridViewRowEventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 600
+   在 System.Web.UI.WebControls.GridView.OnRowDataBound(GridViewRowEventArgs e)
+   在 System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   在 System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   在 System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   在 System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   在 System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   在 System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   在 System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   在 System.Web.UI.WebControls.GridView.DataBind()
+   在 ASP_GroupCard_GC_ZZOrderProduce.ShowFileContent() 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 79
+   在 ASP_GroupCard_GC_ZZOrderProduce.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\GroupCard\GC_ZZOrderProduce.aspx.cs:行号 590
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-01-12 19:37:40,251 [8] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
