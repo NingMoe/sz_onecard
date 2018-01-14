@@ -444,6 +444,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         string orderid = _orderId;
         string detailId = "";
         string cardNo = "";
+        string orderType = "";
         string orderState = _orderState;
         string rejectType = "";
         string logisticsCompany = _logisticsCompany;
@@ -457,6 +458,7 @@ public partial class ASP_GroupCard_GC_ZZOrderDistrabution : Master.FrontMaster
         postData.Add("orderNo", orderid);
         postData.Add("detailNo", detailId);
         postData.Add("cardNo", cardNo);
+        postData.Add("orderType", orderType);
         postData.Add("orderState", orderState);
         postData.Add("rejectType", rejectType);
         postData.Add("logisticsCompany", logisticsCompany);

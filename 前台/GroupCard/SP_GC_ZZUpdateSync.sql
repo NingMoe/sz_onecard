@@ -20,6 +20,10 @@ AS
 	V_TODAY				DATE := SYSDATE;
     V_SEQNO				CHAR(16);			--流水号
 BEGIN
+
+	IF P_OPERATETYPE IS NULL THEN
+	    SP_GetSeq(seq => v_seqNo);
+	END IF;
 	
 	IF P_OPERATETYPE  = '01' THEN
 		--记录订单台帐表

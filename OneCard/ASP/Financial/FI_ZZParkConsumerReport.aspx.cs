@@ -22,7 +22,7 @@ public partial class ASP_Financial_FI_ZZParkConsumerReport : Master.ExportMaster
 
             TMTableModule tmTMTableModule = new TMTableModule();
             txtFromDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
-            txtToDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
+            txtToDate.Text = DateTime.Today.ToString("yyyyMMdd");
 
             gvResult.DataSource = new DataTable();
             gvResult.DataBind();

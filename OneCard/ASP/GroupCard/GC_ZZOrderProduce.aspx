@@ -286,11 +286,11 @@
                                 <Columns>
                                     <asp:TemplateField HeaderStyle-Width="100px">
                                         <HeaderTemplate>
-                                            <asp:Label ID="Label1" runat="server" Text="售卡"></asp:Label>
+                                            <asp:Label ID="Label1" runat="server" Text="激活"></asp:Label>
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:Button ID="btnProduce" CssClass="button1" runat="server" Text="售卡" CausesValidation="true"
-                                                CommandName="Produce" CommandArgument='<%#Container.DataItemIndex%>' />
+                                            <asp:Button ID="btnProduce" CssClass="button1" runat="server" Text="激活" CausesValidation="true"
+                                                CommandName="Activate" CommandArgument='<%#Container.DataItemIndex%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -298,7 +298,7 @@
                                             <asp:Label ID="Label2" runat="server" Text="兑换券卡号"></asp:Label>
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:TextBox ID="txtChargeCardNo" runat="server" CssClass="input"></asp:TextBox>
+                                            <asp:TextBox ID="txtChargeCardNo" runat="server" CssClass="input" MaxLength="14"></asp:TextBox>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="SUPPLYMONEY" HeaderText="充值金额" />

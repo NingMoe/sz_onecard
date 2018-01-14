@@ -33,6 +33,8 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             gvChargeCardList.DataSource = new DataTable();
             gvChargeCardList.DataBind();
 
+            gvChargeCardList.Visible = false;
+
             previousLink.Visible = false;
             nextLink.Visible = false;
         }
@@ -54,7 +56,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         postData.Add("beginIndex", begin.ToString());
         postData.Add("endIndex", end.ToString());
         postData.Add("orderState", "0");
-        postData.Add("fetchType", "");
+        postData.Add("fetchType", "00");
 
         return postData;
     }
@@ -256,7 +258,6 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
                     foreach (JObject subItem in detailArray)
                     {
                         DataRow newRow = dt.NewRow();
-                        //newRow["AccountId"] = hidAccountId.Value;
                         foreach (JProperty subItemJProperty in subItem.Properties())
                         {
                             newRow[subItemJProperty.Name] = subItemJProperty.Value.ToString();
@@ -277,16 +278,25 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
     #region execute
 
     /// <summary>
-    /// 提交同步信息
+    /// 请求同步接口
     /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    /// <param name="orderNo">主订单号</param>
+    /// <param name="detailNo">子订单号</param>
+    /// <param name="cardNo">卡号</param>
     /// <param name="orderType"></param>
-    private void synMsg(object sender, EventArgs e, string orderNo, string detailNo, string cardNo, string orderType, ref string code, ref string message)
+    /// <param name="orderState"></param>
+    /// <param name="code"></param>
+    /// <param name="message"></param>
+    private void synMsg(object sender, EventArgs e, string orderNo, string detailNo, string cardNo, string orderType, string orderState, ref string code, ref string message)
     {
 
         string orderid = orderNo;
         string detailid = detailNo;
         string cardno = cardNo;
-        string orderState = orderType;
+        string _orderType = orderType;
+        string _orderState = orderState;
         string rejectType = "";
         string logisticsCompany = "";
         string trackingNo = "";
@@ -299,7 +309,8 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         postData.Add("orderNo", orderid);
         postData.Add("detailNo", detailid);
         postData.Add("cardNo", cardno);
-        postData.Add("orderState", orderState);
+        postData.Add("orderType", _orderType);
+        postData.Add("orderState", _orderState);
         postData.Add("rejectType", rejectType);
         postData.Add("logisticsCompany", logisticsCompany);
         postData.Add("trackingNo", trackingNo);
@@ -407,7 +418,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             string code = "";
             string message = "";
             //调用同步接口
-            synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", ref code, ref message);
+            synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", "1", ref code, ref message);
 
             //更新同步信息
             UpdateSyncType("02", "01", code, message);
@@ -515,9 +526,8 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
 
         return !(context.hasError());
     }
-    private void chargeCardValidation(TextBox chargeCardNo)
+    private void chargeCardValidation(TextBox chargeCardNo, string packageType)
     {
-        Validation valid = new Validation(context);
 
         if (string.IsNullOrEmpty(chargeCardNo.Text))
         {
@@ -537,6 +547,18 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             if (chargeCardNum != 1)
             {
                 context.AddError("A093540026:兑换券不存在或状态不正确!");
+            }
+            else
+            {
+                DataTable dt = ChargeCardHelper.callQuery(context, "F1", chargeCardNo.Text, chargeCardNo.Text);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    string valueCode = dt.Rows[0][0].ToString();
+                    if ((valueCode == "R" && packageType != "200元24小时套餐") || (valueCode == "S" && packageType != "288元48小时套餐"))
+                    {
+                        context.AddError("A093540027:兑换券与所选套餐不匹配!");
+                    }
+                }
             }
         }
     }
@@ -622,6 +644,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         gvChargeCardList.DataSource = new DataTable();
         gvChargeCardList.DataBind();
 
+        txtCardno.Text = "";
         string fromDate = txtFromDate.Text.Trim();
         string endDate = txtToDate.Text.Trim();
 
@@ -709,36 +732,42 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
 
     protected void gvChargeCardList_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        e.Row.Cells[2].Visible = false;
-        e.Row.Cells[5].Visible = false;
-
-        switch (e.Row.Cells[4].Text)
+        if (e.Row.RowType == DataControlRowType.DataRow || e.Row.RowType == DataControlRowType.Header || e.Row.RowType == DataControlRowType.Footer)
         {
-            case "0":
-                e.Row.Cells[4].Text = "未处理";
-                break;
-            case "1":
-                e.Row.Cells[4].Text = "已制卡";
-                break;
-            case "2":
-                e.Row.Cells[4].Text = "已发货";
-                break;
-            default:
-                e.Row.Cells[4].Text = "状态异常";
-                break;
+            e.Row.Cells[2].Visible = false;
+            e.Row.Cells[5].Visible = false;
         }
 
-        switch (e.Row.Cells[6].Text)
+        if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            case "Z1":
-                e.Row.Cells[6].Text = "200元24小时套餐";
-                break;
-            case "Z2":
-                e.Row.Cells[6].Text = "288元48小时套餐";
-                break;
-            default:
-                e.Row.Cells[6].Text = "套餐类型异常";
-                break;
+            switch (e.Row.Cells[4].Text)
+            {
+                case "0":
+                    e.Row.Cells[4].Text = "未处理";
+                    break;
+                case "1":
+                    e.Row.Cells[4].Text = "已制卡";
+                    break;
+                case "2":
+                    e.Row.Cells[4].Text = "已发货";
+                    break;
+                default:
+                    e.Row.Cells[4].Text = "状态异常";
+                    break;
+            }
+
+            switch (e.Row.Cells[6].Text)
+            {
+                case "Z1":
+                    e.Row.Cells[6].Text = "200元24小时套餐";
+                    break;
+                case "Z2":
+                    e.Row.Cells[6].Text = "288元48小时套餐";
+                    break;
+                default:
+                    e.Row.Cells[6].Text = "套餐类型异常";
+                    break;
+            }
         }
     }
 
@@ -839,7 +868,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
                 string code = "";
                 string message = "";
                 //调用同步接口
-                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "7", ref code, ref message);
+                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", "7", ref code, ref message);
 
                 //更新同步信息
                 UpdateSyncType("02", "02", code, message);
@@ -916,30 +945,38 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
         {
             int index = Convert.ToInt32(e.CommandArgument.ToString());
 
-            GridViewRow gvr = gvOrderList.Rows[index];
+            GridViewRow gvr = gvChargeCardList.Rows[index];
             TextBox txtChargeCardNo = (TextBox)gvr.FindControl("txtChargeCardNo");
 
             hidOrderNo.Value = gvr.Cells[3].Text.ToString().Trim();
             hidDetailNo.Value = gvr.Cells[13].Text.ToString().Trim();
+            string packageType = gvr.Cells[6].Text.ToString().Trim();
             //兑换券校验
-            chargeCardValidation(txtChargeCardNo);
+            chargeCardValidation(txtChargeCardNo, packageType);
 
+            
             if (context.hasError()) return;
 
             txtCardno.Text = txtChargeCardNo.Text;
             // 生成充值卡激活/关闭存储过程，并调用之
 
-            SP_CC_ActivatePDO pdo = new SP_CC_ActivatePDO();    // 充值卡激活/关闭存储过程
-            pdo.fromCardNo = txtChargeCardNo.Text;              // 起始卡号
-            pdo.toCardNo = txtChargeCardNo.Text;                 // 结束卡号
-            pdo.stateCode = "4";                                // 激活为'4', 关闭为'3'
-            pdo.remark = "";                                   // 备注
+            //SP_CC_ActivatePDO pdo = new SP_CC_ActivatePDO();    // 充值卡激活/关闭存储过程
+            //pdo.fromCardNo = txtChargeCardNo.Text;              // 起始卡号
+            //pdo.toCardNo = txtChargeCardNo.Text;                 // 结束卡号
+            //pdo.stateCode = "4";                                // 激活为'4', 关闭为'3'
+            //pdo.remark = "";                                   // 备注
 
-            bool ok = TMStorePModule.Excute(context, pdo);   // 执行存储过程
+            context.SPOpen();
+            context.AddField("p_fromCardNo").Value = txtChargeCardNo.Text;
+            context.AddField("p_toCardNo").Value = txtChargeCardNo.Text;
+            context.AddField("p_remark").Value = "";
+            context.AddField("p_tradeId", "String", "output", "16", null);
+
+            bool ok = context.ExecuteSP("SP_CC_Sale_zzOrder");   // 执行存储过程
 
             if (ok)
             {
-
+                hidTradeNo.Value= context.GetFieldValue("p_tradeId").ToString().Trim();
                 //记录同步信息
                 UpdateSyncType("01", "04", "", "");
                 context.AddMessage("激活完成！");
@@ -947,10 +984,12 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
                 string code = "";
                 string message = "";
                 //调用同步接口
-                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "1", ref code, ref message);
+                synMsg(sender, e, hidOrderNo.Value, hidDetailNo.Value, txtCardno.Text, "2", "1", ref code, ref message);
 
                 //更新同步信息
                 UpdateSyncType("02", "04", code, message);
+
+                btnQuery_Click(sender, e);
             }
         }
     }

@@ -22,7 +22,7 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
 
             TMTableModule tmTMTableModule = new TMTableModule();
             txtFromDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
-            txtToDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
+            txtToDate.Text = DateTime.Today.ToString("yyyyMMdd");
 
             gvResult.DataSource = new DataTable();
             gvResult.DataBind();
@@ -93,6 +93,8 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
         dt.Columns.Add("OPERATESTAFFNO", typeof(string));//操作员工号
         dt.Columns.Add("POSNO", typeof(string));//POS编号
         dt.Columns.Add("PSAMNO", typeof(string));//PSAM编号
+        dt.Columns.Add("DETAILNO", typeof(string));//子订单号
+        dt.Columns.Add("ORDERNO", typeof(string));//主订单号
 
         dt.Columns["TRADETYPE"].MaxLength = 100;
         dt.Columns["CARDNO"].MaxLength = 100;
@@ -101,6 +103,8 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
         dt.Columns["OPERATESTAFFNO"].MaxLength = 100;
         dt.Columns["POSNO"].MaxLength = 100;
         dt.Columns["PSAMNO"].MaxLength = 100;
+        dt.Columns["DETAILNO"].MaxLength = 100;
+        dt.Columns["ORDERNO"].MaxLength = 100;
 
         return dt;
     }
@@ -186,6 +190,21 @@ public partial class ASP_Financial_FI_ZZTradeReport : Master.ExportMaster
             {
                 e.Row.Cells[0].Text = listItem.Text.Substring(listItem.Text.IndexOf(':') + 1);
             }
+
+            //获取对应的操作部门
+            ListItem listDeptItem = selDept.Items.FindByValue(e.Row.Cells[3].Text);
+            if (listDeptItem != null)
+            {
+                e.Row.Cells[3].Text = listDeptItem.Text.Substring(listDeptItem.Text.IndexOf(':') + 1);
+            }
+
+            //获取对应的操作员工
+            ListItem listStaffItem = selStaff.Items.FindByValue(e.Row.Cells[4].Text);
+            if (listStaffItem != null)
+            {
+                e.Row.Cells[4].Text = listStaffItem.Text.Substring(listStaffItem.Text.IndexOf(':') + 1);
+            }
+
             DateTimeFormatInfo df = new System.Globalization.DateTimeFormatInfo();
             
             e.Row.Cells[2].Text = DateTime.ParseExact(e.Row.Cells[2].Text,"yyyyMMddHHmmss",System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss", null);

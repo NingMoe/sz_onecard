@@ -19,6 +19,9 @@ public partial class ASP_Financial_FI_ZZCardConsumerReport : Master.ExportMaster
         if (!Page.IsPostBack)
         {
 
+            txtFromDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
+            txtToDate.Text = DateTime.Today.ToString("yyyyMMdd");
+
             gvResult.DataSource = new DataTable();
             gvResult.DataBind();
         }

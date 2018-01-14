@@ -21,7 +21,7 @@ public partial class ASP_Financial_FI_ZZReceiveCardReport : Master.ExportMaster
             //初始化日期
 
             txtFromDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
-            txtToDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
+            txtToDate.Text = DateTime.Today.ToString("yyyyMMdd");
 
 
             gvResult.DataSource = new DataTable();

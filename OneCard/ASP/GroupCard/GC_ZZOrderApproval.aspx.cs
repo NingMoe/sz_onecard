@@ -175,6 +175,7 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
         postData.Add("beginIndex", begin.ToString());
         postData.Add("endIndex", end.ToString());
         postData.Add("orderState", "");
+        postData.Add("orderType", "1");
         postData.Add("fetchType", "");
 
         return postData;
@@ -400,13 +401,13 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
     /// 提交同步信息
     /// </summary>
     /// <param name="orderType"></param>
-    private void synMsg(object sender, EventArgs e, string orderType)
+    private void synMsg(object sender, EventArgs e, string rejectType)
     {
 
         string orderid = gvOrderList.SelectedRow.Cells[0].Text.ToString();
         string detailId = gvOrderList.SelectedRow.Cells[11].Text.ToString();
         string cardNo = gvOrderList.SelectedRow.Cells[2].Text.ToString();
-        string rejectType = orderType;
+        string orderType = "1";
         string logisticsCompany = "";
         string trackingNo = "";
         string operateStaffNo = context.s_UserID;
@@ -419,6 +420,7 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
         postData.Add("detailNo", detailId);
         postData.Add("cardNo", cardNo);
         postData.Add("orderState", "");
+        postData.Add("orderType", orderType);
         postData.Add("rejectType", rejectType);
         postData.Add("logisticsCompany", logisticsCompany);
         postData.Add("trackingNo", trackingNo);

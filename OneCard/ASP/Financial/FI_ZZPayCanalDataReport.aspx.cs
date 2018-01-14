@@ -19,16 +19,17 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
 
             TMTableModule tmTMTableModule = new TMTableModule();
             txtFromDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
-            txtToDate.Text = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
+            txtToDate.Text = DateTime.Today.ToString("yyyyMMdd");
 
             gvResult.DataSource = new DataTable();
             gvResult.DataBind();
         }
     }
 
-    private double totalpostage = 0;          //邮费
-    private double totalPayCanalMoney = 0;           //渠道总金额
-    private double totalSupplyMoney = 0;         //充值金额
+    private double totalpostage = 0;            //邮费
+    private double totalPayCanalMoney = 0;      //渠道总金额
+    private double totalOpenTimes = 0;         //开通数量
+    private double totalSupplyMoney = 0;        //充值金额
     private double totalfuncfee = 0;          //功能费
     private double totaldiscount = 0;         //优惠金额
     private double totalorderfee = 0;         //实际功能费
@@ -37,25 +38,42 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
         if (gvResult.ShowFooter && e.Row.RowType == DataControlRowType.DataRow)
         {
 
+            string orderType = "";
+
             switch (e.Row.Cells[3].Text)
             {
-                case "Z1":
-                    e.Row.Cells[3].Text = "200元24小时套餐";
+                case "1":
+                    orderType = "(无卡办理)";
                     break;
-                case "Z2":
-                    e.Row.Cells[3].Text = "288元48小时套餐";
+                case "2":
+                    orderType = "(兑换券)";
                     break;
                 default:
-                    e.Row.Cells[3].Text = "套餐类型异常";
+                    orderType = "(类型异常)";
+                    break;
+            }
+
+
+            switch (e.Row.Cells[4].Text)
+            {
+                case "Z1":
+                    e.Row.Cells[4].Text = "200元24小时套餐" + orderType;
+                    break;
+                case "Z2":
+                    e.Row.Cells[4].Text = "288元48小时套餐" + orderType;
+                    break;
+                default:
+                    e.Row.Cells[4].Text = "套餐类型异常" + orderType;
                     break;
             }
 
             e.Row.Cells[1].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[1])) / 100.0).ToString();
             e.Row.Cells[2].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[2])) / 100.0).ToString();
-            e.Row.Cells[4].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[4])) / 100.0).ToString();
-            e.Row.Cells[5].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[5])) / 100.0).ToString();
+            e.Row.Cells[5].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[5]))).ToString();
             e.Row.Cells[6].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[6])) / 100.0).ToString();
             e.Row.Cells[7].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[7])) / 100.0).ToString();
+            e.Row.Cells[8].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[8])) / 100.0).ToString();
+            e.Row.Cells[9].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[9])) / 100.0).ToString();
 
             //邮费和渠道总金额根据渠道次数汇总
             //已计算过该渠道则不再计算
@@ -67,10 +85,11 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
                 totalPayCanalMoney += Convert.ToDouble(GetTableCellValue(e.Row.Cells[2]));
             }
 
-            totalSupplyMoney += Convert.ToDouble(GetTableCellValue(e.Row.Cells[4]));
-            totalfuncfee += Convert.ToDouble(GetTableCellValue(e.Row.Cells[5]));
-            totaldiscount += Convert.ToDouble(GetTableCellValue(e.Row.Cells[6]));
-            totalorderfee += Convert.ToDouble(GetTableCellValue(e.Row.Cells[7]));
+            totalOpenTimes += Convert.ToDouble(GetTableCellValue(e.Row.Cells[5]));
+            totalSupplyMoney += Convert.ToDouble(GetTableCellValue(e.Row.Cells[6]));
+            totalfuncfee += Convert.ToDouble(GetTableCellValue(e.Row.Cells[7]));
+            totaldiscount += Convert.ToDouble(GetTableCellValue(e.Row.Cells[8]));
+            totalorderfee += Convert.ToDouble(GetTableCellValue(e.Row.Cells[9]));
 
 
 
@@ -87,10 +106,16 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
             e.Row.Cells[0].Text = "总计";
             e.Row.Cells[1].Text = totalpostage.ToString();
             e.Row.Cells[2].Text = totalPayCanalMoney.ToString();
-            e.Row.Cells[4].Text = totalSupplyMoney.ToString();
-            e.Row.Cells[5].Text = totalfuncfee.ToString();
-            e.Row.Cells[6].Text = totaldiscount.ToString();
-            e.Row.Cells[7].Text = totalorderfee.ToString();
+            e.Row.Cells[5].Text = totalOpenTimes.ToString();
+            e.Row.Cells[6].Text = totalSupplyMoney.ToString();
+            e.Row.Cells[7].Text = totalfuncfee.ToString();
+            e.Row.Cells[8].Text = totaldiscount.ToString();
+            e.Row.Cells[9].Text = totalorderfee.ToString();
+        }
+
+        if (e.Row.RowType == DataControlRowType.Header || e.Row.RowType == DataControlRowType.DataRow || e.Row.RowType == DataControlRowType.Footer)
+        {
+            e.Row.Cells[3].Visible = false;
         }
     }
 
@@ -200,7 +225,9 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
         dt.Columns.Add("PAYCANAL", typeof(string));//支付渠道
         dt.Columns.Add("POSTAGE", typeof(string));//邮费
         dt.Columns.Add("PAYCANALTOTALMONEY", typeof(string));//渠道总金额
+        dt.Columns.Add("ORDERTYPE", typeof(string));//子订单类型
         dt.Columns.Add("PACKAGETYPE", typeof(string));//套餐类型
+        dt.Columns.Add("OPENTIMES", typeof(string));//开通数量
         dt.Columns.Add("SUPPLYMONEY", typeof(string));//充值金额
         dt.Columns.Add("FUNCFEE", typeof(string));//功能费
         dt.Columns.Add("DISCOUNT", typeof(string));//兑换券优惠金额
@@ -209,7 +236,9 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
         dt.Columns["PAYCANAL"].MaxLength = 10000;
         dt.Columns["POSTAGE"].MaxLength = 10000;
         dt.Columns["PAYCANALTOTALMONEY"].MaxLength = 10000;
+        dt.Columns["ORDERTYPE"].MaxLength = 10000;
         dt.Columns["PACKAGETYPE"].MaxLength = 10000;
+        dt.Columns["OPENTIMES"].MaxLength = 10000;
         dt.Columns["SUPPLYMONEY"].MaxLength = 10000;
         dt.Columns["FUNCFEE"].MaxLength = 10000;
         dt.Columns["DISCOUNT"].MaxLength = 10000;

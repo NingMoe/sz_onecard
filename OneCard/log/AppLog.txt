@@ -3565,3 +3565,7 @@
 2018-01-11 19:30:58,258 [8] ERROR AppLog [(null)] - S001002115:S001002115:Unable to insert a row of group supply log
 2018-01-11 19:43:21,801 [8] ERROR AppLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx || S001026101:Unable to Updated card trade
 2018-01-11 19:43:21,810 [8] ERROR AppLog [(null)] - S001026101:Unable to Updated card trade
+2018-01-13 14:48:30,479 [8] ERROR AppLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx || S094780092:记录订单台帐表失败ORA-01400: cannot insert NULL into ("UOWNER_B_SZ"."TF_F_ZZOL_SYNC"."TRADEID")
+2018-01-13 14:48:30,520 [8] ERROR AppLog [(null)] - S094780092:记录订单台帐表失败ORA-01400: cannot insert NULL into ("UOWNER_B_SZ"."TF_F_ZZOL_SYNC"."TRADEID")
+2018-01-13 14:59:18,051 [10] ERROR AppLog [(null)] - 页面：/ASP/GroupCard/GC_ZZOrderProduce.aspx || S094780092:记录订单台帐表失败ORA-01400: cannot insert NULL into ("UOWNER_B_SZ"."TF_F_ZZOL_SYNC"."TRADEID")
+2018-01-13 14:59:18,069 [10] ERROR AppLog [(null)] - S094780092:记录订单台帐表失败ORA-01400: cannot insert NULL into ("UOWNER_B_SZ"."TF_F_ZZOL_SYNC"."TRADEID")

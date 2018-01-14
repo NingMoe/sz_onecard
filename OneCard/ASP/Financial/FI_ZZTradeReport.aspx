@@ -151,6 +151,8 @@
                                 <asp:BoundField DataField="operatestaffno" HeaderText="操作员工" />
                                 <asp:BoundField DataField="posno" HeaderText="POS编号" />
                                 <asp:BoundField DataField="psamno" HeaderText="PSAM编号" />
+                                <asp:BoundField DataField="detailno" HeaderText="子订单号" />
+                                <asp:BoundField DataField="orderno" HeaderText="主订单号" />
                             </Columns>
                             <EmptyDataTemplate>
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
@@ -175,6 +177,12 @@
                                         </td>
                                         <td>
                                             PSAM编号
+                                        </td>
+                                        <td>
+                                            子订单号
+                                        </td>
+                                        <td>
+                                            主订单号
                                         </td>
                                     </tr>
                                 </table>

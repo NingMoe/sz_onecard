@@ -115,7 +115,9 @@
                                 <asp:BoundField DataField="PAYCANAL" HeaderText="支付渠道" />
                                 <asp:BoundField DataField="POSTAGE" HeaderText="邮费" />
                                 <asp:BoundField DataField="PAYCANALTOTALMONEY" HeaderText="渠道总金额" />
+                                <asp:BoundField DataField="ORDERTYPE" HeaderText="订单类型" />
                                 <asp:BoundField DataField="PACKAGETYPE" HeaderText="套餐类型" />
+                                <asp:BoundField DataField="OPENTIMES" HeaderText="数量/张数" />
                                 <asp:BoundField DataField="SUPPLYMONEY" HeaderText="充值金额" />
                                 <asp:BoundField DataField="FUNCFEE" HeaderText="功能费" />
                                 <asp:BoundField DataField="DISCOUNT" HeaderText="兑换券优惠金额" />
@@ -135,6 +137,9 @@
                                         </td>
                                         <td>
                                             套餐类型
+                                        </td>
+                                        <td>
+                                            数量/张数
                                         </td>
                                         <td>
                                             充值金额

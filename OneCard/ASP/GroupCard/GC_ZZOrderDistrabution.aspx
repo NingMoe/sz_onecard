@@ -309,7 +309,7 @@
                             <Columns>
                                 <asp:BoundField DataField="DETAILNO" HeaderText="子订单号" />
                                 <asp:BoundField DataField="ORDERNO" HeaderText="主订单号" />
-                                <asp:BoundField DataField="cardno" HeaderText="电子钱包卡号" />
+                                <asp:BoundField DataField="cardno" HeaderText="电子钱包/兑换券卡号" />
                                 <asp:BoundField DataField="packagename" HeaderText="套餐类型" />
                                 <asp:BoundField DataField="custname" HeaderText="客户姓名" />
                                 <asp:BoundField DataField="paperno" HeaderText="证件号码" />
@@ -326,7 +326,7 @@
                                             订单状态
                                         </td>
                                         <td>
-                                            电子钱包卡号
+                                            电子钱包/兑换券卡号
                                         </td>
                                         <td>
                                             套餐类型
