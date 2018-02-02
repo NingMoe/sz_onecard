@@ -13,6 +13,7 @@ create or replace procedure SP_FI_STAT
     p_cursor out SYS_REFCURSOR
 )
 as
+    v0 varchar2(16);
     v1 varchar2(16);
     v2 varchar2(16);
     v3 varchar2(16);
@@ -24,10 +25,19 @@ as
     v9 varchar2(16);
     v10 varchar2(16);
     v11 varchar2(16);
+    v12 varchar2(16);
+    v13 varchar2(16);
+    v14 varchar2(16);
+    v15 varchar2(16);
+    v16 varchar2(16);
+    v17 varchar2(16);
+    v18 varchar2(16);
     m1 varchar2(16);
     m2 varchar2(16);
     m3 varchar2(16);
     m4 varchar2(16);
+    m5 varchar2(16);
+    m6 varchar2(16);
 
 begin
 if p_funcCode = 'CardSaleStat' then -- 售卡统计
@@ -63,7 +73,7 @@ if p_funcCode = 'CardSaleStat' then -- 售卡统计
         AND OPERATETIME <= TO_DATE(p_var2,'yyyyMMdd') + 1
         AND OPERATEDEPARTID = v_cur.departno;
 
-        SELECT COUNT(1) INTO v5 -- 礼金卡
+        SELECT COUNT(1) INTO v5 -- 利金卡
         FROM TF_B_TRADE
         WHERE TRADETYPECODE = '01'
         AND CARDTYPECODE IN ('03','04','05') AND CANCELTAG = '0'
@@ -128,7 +138,7 @@ if p_funcCode = 'CardSaleStat' then -- 售卡统计
 
     open p_cursor for
     select f0 "网点"      , f1 "售卡总数(张)", TO_NUMBER(f2)/100.0 "总金额(元)",
-           f3 "联名卡(张)", f4 "非联名卡(张)", f5 "礼金卡(张)",
+           f3 "联名卡(张)", f4 "非联名卡(张)", f5 "利金卡(张)",
            f6 "月票卡(张)", f7 "高龄卡(张)"  , f8 "移动Simpass卡(张)",
            f9 "电信Simpass卡(张)"
     from   TMP_FI_STAT
@@ -175,7 +185,7 @@ elsif p_funcCode = 'ChangeCardStat' then -- 换卡统计
         AND OPERATETIME <= TO_DATE(p_var2,'yyyyMMdd') + 1
         AND OPERATEDEPARTID = v_cur.departno;
 
-        SELECT COUNT(1) INTO v6 -- 礼金卡换卡
+        SELECT COUNT(1) INTO v6 -- 利金卡换卡
         FROM TF_B_TRADE WHERE TRADETYPECODE = '03'
         AND CARDTYPECODE IN ('03','04','05') AND CANCELTAG = '0'
         AND OPERATETIME >= TO_DATE(p_var1,'yyyyMMdd')
@@ -228,7 +238,7 @@ elsif p_funcCode = 'ChangeCardStat' then -- 换卡统计
     open p_cursor for
     select f0 "网点"      , f1 "换卡总数(张)", f2 "自然损坏数(张)",
            f3 "人为损坏数(张)", f4 "联名卡(张)", f5 "非联名卡(张)",
-           f6 "礼金卡(张)", f7 "月票卡(张)", f8 "高龄卡(张)",
+           f6 "利金卡(张)", f7 "月票卡(张)", f8 "高龄卡(张)",
            f9 "移动Simpass卡(张)", f10 "电信Simpass卡(张)"
     from   TMP_FI_STAT
     ;
@@ -257,7 +267,7 @@ elsif p_funcCode = 'ReturnCardStat' then -- 退卡统计
         AND OPERATETIME <= TO_DATE(p_var2,'yyyyMMdd') + 1
         AND OPERATEDEPARTID = v_cur.departno;
 
-        SELECT COUNT(1) INTO v4 -- 礼金卡退卡
+        SELECT COUNT(1) INTO v4 -- 利金卡退卡
         FROM TF_B_TRADE WHERE TRADETYPECODE = '05'
         AND CARDTYPECODE IN ('03','04','05') AND CANCELTAG = '0'
         AND OPERATETIME >= TO_DATE(p_var1,'yyyyMMdd')
@@ -312,7 +322,7 @@ elsif p_funcCode = 'ReturnCardStat' then -- 退卡统计
 
     open p_cursor for
     select f0 "网点"      , f1 "退卡总数(张)", f2 "联名卡(张)", f3 "非联名卡(张)",
-           f4 "礼金卡(张)", f5 "月票卡(张)", f6 "高龄卡(张)",
+           f4 "利金卡(张)", f5 "月票卡(张)", f6 "高龄卡(张)",
            f7 "移动Simpass卡(张)", f8 "电信Simpass卡(张)"
     from   TMP_FI_STAT
     ;
@@ -721,7 +731,7 @@ elsif p_funcCode = 'Cardusestate' then
                      AND USETAG = '1' AND substr(cardno,5,4) in ('0401', '0301', '0501'));
 
     INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5)
-    VALUES ('礼金卡', v1, v2, v3, v4, v5);
+    VALUES ('利金卡', v1, v2, v3, v4, v5);
 
     SELECT COUNT(1) INTO v1 -- 月票卡
     FROM TF_B_TRADE
@@ -825,7 +835,306 @@ elsif p_funcCode = 'groupcuststate' then
         from   TMP_FI_STAT
         ;
     end loop;
+elsif p_funcCode = 'CardSaleTotalStat' then -- 苏州市民卡公司经营业务指标完成表
+  DELETE FROM TMP_FI_STAT;
 
+ -- 售卡（除利金卡外和手表）本周统计
+    SELECT sum(t.weeknum) INTO v1
+    FROM TF_F_CARDSALETOTAL t
+    where t.iswatch='0' 
+    AND t.createtime=p_var2 ;
+    -- 售卡（除利金卡外和手表）本月统计
+     SELECT sum(t.monthnum) INTO v2
+    FROM TF_F_CARDSALETOTAL t
+    where t.iswatch='0' 
+    AND t.createtime=p_var2 ;
+    -- 售卡（除利金卡外和手表）本年统计
+     SELECT sum(t.yearnum) INTO v3
+    FROM TF_F_CARDSALETOTAL t
+    where t.iswatch='0' 
+    AND t.createtime=p_var2 ;
+    
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('售卡(张)', nvl(v1, 0),nvl(v2, 0), null, nvl(v3, 0), null, null);
+     -- 手表本周统计
+   SELECT sum(t.weeknum) INTO v1
+    FROM TF_F_CARDSALETOTAL t
+    where t.iswatch='1' 
+    AND t.createtime=p_var2 ;
+    -- 手表本月统计
+    SELECT sum(t.monthnum) INTO v2
+    FROM TF_F_CARDSALETOTAL t
+    where t.iswatch='1' 
+    AND t.createtime=p_var2 ;
+    -- 手表本年统计
+    SELECT sum(t.yearnum) INTO v3
+    FROM TF_F_CARDSALETOTAL t
+    where t.iswatch='1' 
+    AND t.createtime=p_var2 ;
+    
+     INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('手表(只)', nvl(v1,0), nvl(v2, 0), null, nvl(v3, 0), null, null);
+
+   INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('手环(只)',null,null ,null ,null ,null ,null );
+  
+   -- 读卡器本周统计
+    SELECT sum(t.readernumber) INTO v1
+    FROM tf_b_reader t
+    where t.operatetypecode='1A'  and t.canceltag='0'
+    AND t.OPERATETIME >= TO_DATE(p_var1,'yyyyMMdd')
+    AND t.OPERATETIME <= TO_DATE(p_var2,'yyyyMMdd') ;
+    
+     -- 读卡器本月统计
+    SELECT sum(t.readernumber) INTO v2
+    FROM tf_b_reader t
+    where t.operatetypecode='1A'  and t.canceltag='0'
+    AND t.OPERATETIME >= TO_DATE(p_var3,'yyyyMMdd')
+    AND t.OPERATETIME <= TO_DATE(p_var2,'yyyyMMdd') ;
+    -- 读卡器本年统计
+    SELECT sum(t.readernumber) INTO v3
+    FROM tf_b_reader t
+    where t.operatetypecode='1A'  and t.canceltag='0'
+    AND t.OPERATETIME >= TO_DATE(p_var4,'yyyyMMdd')
+    AND t.OPERATETIME <= TO_DATE(p_var2,'yyyyMMdd') ;
+    
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('读卡器(台)', nvl(v1, 0), nvl(v2, 0), null, nvl(v3, 0), null, null);
+    
+   -- 充值量本周统计
+    SELECT sum(t.MONEY/1000000.0) INTO v1
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金收入'
+    AND t.stattime>= p_var1
+    AND t.stattime <= p_var2;
+    
+     -- 充值量本月统计
+    SELECT sum(t.MONEY/1000000.0) INTO v2
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金收入'
+    AND   t.stattime >= p_var3
+    AND t.stattime <=p_var2 ;
+    
+    -- 充值量本年统计
+    SELECT sum(t.MONEY/1000000.0) INTO v3
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金收入'
+    AND   t.stattime >= p_var4
+    AND t.stattime <= p_var2 ;
+    
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('充值量(万元)', nvl(v1, 0), nvl(v2, 0), null, nvl(v3, 0), null, null);
+  
+  -- 刷卡额(万元)本周统计
+    SELECT sum(t.MONEY/1000000.0) INTO v4
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金支出'
+    AND t.stattime>= p_var1
+    AND t.stattime <= p_var2;
+    
+    -- 刷卡额(万元)本月统计
+    SELECT sum(t.MONEY/1000000.0) INTO v5
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金支出'
+    AND t.stattime>= p_var3
+    AND t.stattime <= p_var2;
+    
+    -- 刷卡额(万元)本年统计
+    SELECT sum(t.MONEY/1000000.0) INTO v6
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金支出'
+    AND t.stattime>= p_var4
+    AND t.stattime <= p_var2;
+    
+  INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('刷卡额(万元)', abs(nvl(v4, 0)), abs(nvl(v5, 0)), null, abs(nvl(v6, 0)), null, null);
+    
+   -- 沉淀资金增量(万元)=沉淀资金收入-沉淀资金支出
+ 
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('沉淀资金增量', nvl(v1-abs(nvl(v4, 0)), 0), nvl(v2-abs(nvl(v5, 0)), 0), null, nvl(v3-abs(nvl(v6, 0)), 0), null, null);
+    
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('POS机(台)',null,null ,null ,null ,null ,null );
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('APP(个)',null,null ,null ,null ,null ,null );
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('微粉(个)',null,null ,null ,null ,null ,null );
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('利金卡回收(张)',null,null ,null ,null ,null ,null );
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('互联网金融产品',null,null ,null ,null ,null ,null );
+    open p_cursor for
+    select  f0 " ", f1 "本周实际", f2 "月度实际", f3 "月完成率", f4 "年度实际", f5 "年度指标", f6 "年度完成率"
+    from   TMP_FI_STAT
+    ;
+    
+elsif p_funcCode = 'SwingCardStat' then -- 刷卡构成表
+   DELETE FROM TMP_FI_STAT;
+   -- 公交刷卡额和佣金本周统计
+    select  sum(RIGHTFINFEE) ,SUM(COMFEE) INTO v1,V2 from (
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE ,T.COMFEE/1000000.0 COMFEE
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where t.callingno='01'
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd')
+    union
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE ,T.COMFEE/1000000.0 COMFEE
+    FROM  TH_TRADE_OUTCOMEFIN t 
+    where t.callingno='01'
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'));
+    
+    
+    -- 公交刷卡额和佣金本月统计
+    select  sum(RIGHTFINFEE) ,SUM(COMFEE) INTO v3,V4 from (
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE,T.COMFEE/1000000.0 COMFEE
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where t.callingno='01'
+    and  to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var3,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd')
+    union
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE,T.COMFEE/1000000.0 COMFEE
+    FROM  TH_TRADE_OUTCOMEFIN t 
+    where t.callingno='01'
+    and  to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var3,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'));
+    
+    
+    -- 公交刷卡额和佣金本年统计
+    select  sum(RIGHTFINFEE) ,SUM(COMFEE) INTO v5,V6 from (
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE,T.COMFEE/1000000.0 COMFEE
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where t.callingno='01'
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var4,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd')
+    union
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE,T.COMFEE/1000000.0 COMFEE
+    FROM  TH_TRADE_OUTCOMEFIN t 
+    where t.callingno='01'
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var4,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'));
+    
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('公交', nvl(v1, 0), nvl(v2, 0), nvl(v3, 0), nvl(v4, 0), nvl(v5, 0), nvl(v6, 0));
+    
+    -- 轨交刷卡额和佣金本周统计
+    SELECT sum(t.TRANSFEE/1000000.0) ,SUM(T.COMFEE/1000000.0)INTO v7,V8
+    FROM  TF_RAIL_OUTCOMEFIN t 
+    where  to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd');
+    
+     -- 轨交刷卡额和佣金本月统计
+    SELECT sum(t.TRANSFEE/1000000.0) ,SUM(T.COMFEE/1000000.0)INTO v9,V10
+    FROM  TF_RAIL_OUTCOMEFIN t 
+    where  to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var3,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd');
+    
+     -- 轨交刷卡额和佣金本年统计
+    SELECT sum(t.TRANSFEE/1000000.0) ,SUM(T.COMFEE/1000000.0)INTO v11,V12
+    FROM  TF_RAIL_OUTCOMEFIN t 
+    where   to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var4,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd');
+    
+     INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('轨交', nvl(v7, 0), nvl(v8, 0), nvl(v9, 0), nvl(v10, 0), nvl(v11, 0), nvl(v12, 0));
+     -- 公用事业缴费刷卡额和佣金本周统计
+    select  sum(RIGHTFINFEE) ,SUM(COMFEE) INTO v13,V14 from (     
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE ,T.COMFEE/1000000.0 COMFEE
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where T.Callingno in('13','14','16','19','0C')
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd')
+    union
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE ,T.COMFEE/1000000.0 COMFEE
+    FROM  TH_TRADE_OUTCOMEFIN t 
+    where T.Callingno in('13','14','16','19','0C')
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'));
+    
+    
+     -- 公用事业缴费刷卡额和佣金本月统计
+     select  sum(RIGHTFINFEE) ,SUM(COMFEE) INTO v15,V16 from ( 
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE,T.COMFEE/1000000.0 COMFEE
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where T.Callingno in('13','14','16','19','0C')
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var3,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd')
+    union
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE,T.COMFEE/1000000.0 COMFEE
+    FROM  TH_TRADE_OUTCOMEFIN t 
+    where T.Callingno in('13','14','16','19','0C')
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var3,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'));
+    
+    
+     -- 公用事业缴费刷卡额和佣金本年统计
+     select  sum(RIGHTFINFEE) ,SUM(COMFEE) INTO v17,V18 from ( 
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE,T.COMFEE/1000000.0 COMFEE
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where T.Callingno in('13','14','16','19','0C')
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var4,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd')
+    union
+    SELECT t.RIGHTFINFEE/1000000.0 RIGHTFINFEE,T.COMFEE/1000000.0 COMFEE
+    FROM  TH_TRADE_OUTCOMEFIN t 
+    where T.Callingno in('13','14','16','19','0C')
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var4,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'));
+    
+    INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('公用事业缴费', nvl(v13, 0), nvl(v14, 0), nvl(v15, 0), nvl(v16, 0), nvl(v17, 0), nvl(v18, 0));
+   
+    -- 刷卡额(万元)本周统计
+    SELECT sum(t.MONEY/1000000.0) INTO m1
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金支出'
+    AND t.stattime>= p_var1
+    AND t.stattime <= p_var2;
+    
+    -- 刷卡额(万元)本月统计
+    SELECT sum(t.MONEY/1000000.0) INTO m2
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金支出'
+    AND t.stattime>= p_var3
+    AND t.stattime <= p_var2;
+    
+    -- 刷卡额(万元)本年统计
+    SELECT sum(t.MONEY/1000000.0) INTO m3
+    FROM tf_fundsanalysis t
+    where   t.CATEGORY='沉淀资金支出'
+    AND t.stattime>= p_var4
+    AND t.stattime <= p_var2;
+    
+     -- 小额消费佣金本周统计
+    SELECT SUM(T.COMFEE/1000000.0)INTO m4
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where t.callingno not in('01','13','14','16','19','0C') and t.BALUNITNO not in('03000001','03000002') 
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd');
+    
+    -- 小额消费佣金本月统计
+    SELECT SUM(T.COMFEE/1000000.0)INTO m5
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where t.callingno not in('01','13','14','16','19','0C') and t.BALUNITNO not in('03000001','03000002') 
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var3,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd');
+    
+    -- 小额消费佣金本年统计
+    SELECT SUM(T.COMFEE/1000000.0)INTO m6
+    FROM  TF_TRADE_OUTCOMEFIN t 
+    where t.callingno not in('01','13','14','16','19','0C') and t.BALUNITNO not in('03000001','03000002') 
+    and to_char(t.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var4,'yyyymmdd')+1),'yyyymmdd')
+    and  to_char(t.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd');
+    
+    -- 小额消费刷卡额  = 刷卡额- 公交刷卡额 –轨交刷卡额 –公共事业缴费刷卡额
+     INSERT INTO TMP_FI_STAT(f0, f1, f2, f3, f4, f5, f6)
+    VALUES ('小额消费', abs(nvl(m1,0))-nvl(v1,0)-nvl(v7,0)-nvl(v13,0), nvl(m4, 0), abs(nvl(m2,0))-nvl(v3,0)-nvl(v9,0)-nvl(v15,0), nvl(m5, 0),abs(nvl(m3,0))-nvl(v5,0)-nvl(v11,0)-nvl(v17,0), nvl(m6, 0));
+   
+    open p_cursor for
+    select  f0 " ", f1 " ", f2 " ", f3 " ", f4 " ", f5 " ", f6 " "
+    from   TMP_FI_STAT
+    ;
 end if;
 
 end;

@@ -1217,12 +1217,12 @@ public partial class ASP_PartnerShip_PS_TransferChange : Master.Master
             }
         }
 
-        //对结算单元编码的校验
-        if ((strBalUnitNo.Length == 8) && strCalling != "")
-        {
-            if (strBalUnitNo.Substring(0, 2) != strCalling)
-                context.AddError("A008107077", txtBalUnitNo);
-        }
+        ////对结算单元编码的校验
+        //if ((strBalUnitNo.Length == 8) && strCalling != "")
+        //{
+        //    if (strBalUnitNo.Substring(0, 2) != strCalling)
+        //        context.AddError("A008107077", txtBalUnitNo);
+        //}
 
         //对地区编码进行非空校验
         if (selRegionExt.SelectedValue == "")

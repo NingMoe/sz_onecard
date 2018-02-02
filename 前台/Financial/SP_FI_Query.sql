@@ -13116,6 +13116,97 @@ begin
          AND (P_VAR3 IS NULL OR P_VAR3 = '' OR P_VAR3 = T.ORDERTYPE)
          AND (P_VAR4 IS NULL OR P_VAR4 = '' OR P_VAR4 = T.PAYCANAL)     
        ORDER BY 1, 3;
+ elsif  p_funcCode='TD_EOC_DAILY_REPORT_CAFiApprovalBank' then -- 联机消费商户转账日报查询
+ open p_cursor for  
+   select ROWNUM,T.* from (
+    select 银行账号 收款帐号,商户名称 收款人户名,开户行 收款人开户行名称,BANKNUMBER 收款人行号,purposetype 收款人账户类型,
+    SUM(转帐金额) 金额,收款人是否本行,收款人是否同城,remark||'佣金'||decode(ltrim(应收佣金),'.00','0',ltrim(应收佣金)) 付款用途 from (
+        --光大，信息亭
+        select c.BANK 开户行, a.BALUNITNO 商户代码, b.BALUNIT 商户名称,b.bankaccno 银行账号, a.TRANSFEE/100.0 转帐金额, to_char(a.COMFEE/100.0,'99999999.99') 应收佣金,b.remark,DECODE(b.purposetype,'1','0','2','1') purposetype,
+        c.BANKNUMBER,decode(c.ISSZBANK,'0','否','1','是','否') 收款人是否本行,decode(c.ISLOCAL,'0','否','1','是','') 收款人是否同城
+          from TF_TRADE_OUTCOMEFIN_ONLINE a, TF_TRADE_BALUNIT b,TD_M_BANK c
+         where ( p_var1 is null or p_var1 = '' or to_char(a.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd'))
+           and ( p_var2 is null or p_var2 = '' or to_char(a.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'))
+           and a.BALUNITNO=b.BALUNITNO
+           and b.FINTYPECODE='0'
+           and substr(b.balunitno,1,2)='0C'
+           and b.balunitno not in ('0BX00011','0BX00021','0BX00022','0BX00012','03000001')
+           and b.BANKCODE=c.BANKCODE
+           and b.FINBANKCODE != '000Z'
+           and a.TRANSFEE > 0
+        union all
+        --农商行
+        select c.BANK 开户行, a.BALUNITNO 商户代码, b.BALUNIT 商户名称,b.bankaccno 银行账号, a.TRANSFEE/100.0 转帐金额, to_char(a.COMFEE/100.0,'99999999.99') 应收佣金,b.remark,DECODE(b.purposetype,'1','0','2','1') purposetype,
+         c.BANKNUMBER,decode(c.ISSZBANK,'0','否','1','是','否') 收款人是否本行,decode(c.ISLOCAL,'0','否','1','是','') 收款人是否同城
+          from TF_TRADE_OUTCOMEFIN_ONLINE a, TF_TRADE_BALUNIT b,TD_M_BANK c
+         where ( p_var1 is null or p_var1 = '' or to_char(a.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd'))
+           and ( p_var2 is null or p_var2 = '' or to_char(a.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'))
+           and a.BALUNITNO=b.BALUNITNO
+           and b.FINTYPECODE='0'
+           and substr(b.balunitno,1,2)<>'0C'
+           and substr(b.balunitno,1,2)<>'06'
+           and b.balunitno not in ('0BX00011','0BX00021','0BX00022','0BX00012','03000001')
+           and b.BANKCODE=c.BANKCODE
+           and a.FINBANKCODE = '000L'
+           and a.TRANSFEE > 0
+        union all
+        --农行
+        select c.BANK 开户行, a.BALUNITNO 商户代码, b.BALUNIT 商户名称,b.bankaccno 银行账号, a.TRANSFEE/100.0 转帐金额, to_char(a.COMFEE/100.0,'99999999.99') 应收佣金,b.remark,DECODE(b.purposetype,'1','0','2','1') purposetype,
+           c.BANKNUMBER,decode(c.ISSZBANK,'0','否','1','是','否') 收款人是否本行,decode(c.ISLOCAL,'0','否','1','是','') 收款人是否同城
+          from TF_TRADE_OUTCOMEFIN_ONLINE a, TF_TRADE_BALUNIT b,TD_M_BANK c
+         where ( p_var1 is null or p_var1 = '' or to_char(a.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd'))
+           and ( p_var2 is null or p_var2 = '' or to_char(a.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'))
+           and a.BALUNITNO=b.BALUNITNO
+           and b.FINTYPECODE='0'
+           and substr(b.balunitno,1,2)<>'06'
+           and substr(b.balunitno,1,2)<>'0C'
+           and b.balunitno not in ('0BX00011','0BX00021','0BX00022','0BX00012','03000001')
+           and b.BANKCODE=c.BANKCODE
+           and b.BANKCODE like '%A%'
+            and b.FINBANKCODE not in( '000L','000Z')
+           and a.TRANSFEE > 0
+        union all
+        select c.BANK 开户行, a.BALUNITNO 商户代码, b.BALUNIT 商户名称,b.bankaccno 银行账号, a.RENEWFINFEE/100.0 转帐金额, '重新清算' 应收佣金, b.remark,DECODE(b.purposetype,'1','0','2','1') purposetype,
+           c.BANKNUMBER,decode(c.ISSZBANK,'0','否','1','是','否') 收款人是否本行,decode(c.ISLOCAL,'0','否','1','是','') 收款人是否同城
+          from TF_TRADE_OUTCOMEFIN_ONLINE a, TF_TRADE_BALUNIT b,TD_M_BANK c
+         where ( p_var1 is null or p_var1 = '' or to_char(a.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd'))
+           and ( p_var2 is null or p_var2 = '' or to_char(a.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'))
+           and a.BALUNITNO=b.BALUNITNO
+           and b.FINTYPECODE='0'
+           and b.balunitno in ('0BX00011','0BX00021','0BX00022','0BX00012','03000001')
+           and b.BANKCODE=c.BANKCODE
+           and a.RENEWFINFEE > 0
+        union all
+        --交行
+        select c.BANK 开户行, a.BALUNITNO 商户代码, b.BALUNIT 商户名称,b.bankaccno 银行账号, a.TRANSFEE/100.0 转帐金额, to_char(a.COMFEE/100.0,'99999999.99') 应收佣金,b.remark,DECODE(b.purposetype,'1','0','2','1') purposetype,
+           c.BANKNUMBER,decode(c.ISSZBANK,'0','否','1','是','否') 收款人是否本行,decode(c.ISLOCAL,'0','否','1','是','') 收款人是否同城
+          from TF_TRADE_OUTCOMEFIN_ONLINE a, TF_TRADE_BALUNIT b,TD_M_BANK c
+         where ( p_var1 is null or p_var1 = '' or to_char(a.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd'))
+           and ( p_var2 is null or p_var2 = '' or to_char(a.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'))
+           and a.BALUNITNO=b.BALUNITNO
+           and b.FINTYPECODE='0'
+           and substr(b.balunitno,1,2)<>'06'
+           and substr(b.balunitno,1,2)<>'0C'
+           and b.balunitno not in ('0BX00011','0BX00021','0BX00022','0BX00012','03000001')
+           and b.BANKCODE=c.BANKCODE
+           and b.BANKCODE NOT like '%A%'
+           and b.FINBANKCODE not in( '000L','000Z')
+           and a.TRANSFEE > 0 
+         union all
+          --张家港
+        select c.BANK 开户行, a.BALUNITNO 商户代码, b.BALUNIT 商户名称,b.bankaccno 银行账号, a.TRANSFEE/100.0 转帐金额, to_char(a.COMFEE/100.0,'99999999.99') 应收佣金,b.remark,DECODE(b.purposetype,'1','0','2','1') purposetype,
+           c.BANKNUMBER,decode(c.ISSZBANK,'0','否','1','是','否') 收款人是否本行,decode(c.ISLOCAL,'0','否','1','是','') 收款人是否同城
+          from TF_TRADE_OUTCOMEFIN_ONLINE a, TF_TRADE_BALUNIT b,TD_M_BANK c
+         where ( p_var1 is null or p_var1 = '' or to_char(a.ENDTIME,'yyyymmdd') >= to_char((to_date(p_var1,'yyyymmdd')+1),'yyyymmdd'))
+           and ( p_var2 is null or p_var2 = '' or to_char(a.ENDTIME,'yyyymmdd') <= to_char((to_date(p_var2,'yyyymmdd')+1),'yyyymmdd'))
+           and a.BALUNITNO=b.BALUNITNO
+           and b.FINTYPECODE='0'
+           and b.BANKCODE=c.BANKCODE
+           and a.BALUNITNO <> '03000001'
+           and a.FINBANKCODE = '000Z'
+           and a.TRANSFEE > 0)
+           GROUP BY 银行账号,商户代码,商户名称,开户行,BANKNUMBER,purposetype,收款人是否本行,收款人是否同城,remark,应收佣金
+     ORDER BY 开户行,商户名称,SUM(转帐金额)) T;
   end if;
 end;
 /

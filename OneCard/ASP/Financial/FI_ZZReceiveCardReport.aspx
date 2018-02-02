@@ -40,6 +40,51 @@
                             <tr>
                                 <td>
                                     <div align="right">
+                                        行业名称:
+                                    </div>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="selCalling" CssClass="inputmidder" runat="server" AutoPostBack="true"
+                                        OnSelectedIndexChanged="selCalling_SelectedIndexChanged">
+                                        <asp:ListItem Text="---请选择---" Value=""></asp:ListItem>
+                                        <asp:ListItem Text="06:园林" Value="06"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <div align="right">
+                                        单位名称:
+                                    </div>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="selCorp" CssClass="inputmidder" runat="server" AutoPostBack="true"
+                                        OnSelectedIndexChanged="selCorp_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div align="right">
+                                        部门名称:
+                                    </div>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="selDepart" CssClass="inputmidder" runat="server" AutoPostBack="true"
+                                        OnSelectedIndexChanged="selDepart_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <div align="right">
+                                        结算单元:
+                                    </div>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="selBalUint" CssClass="inputmidder" runat="server">
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div align="right">
                                         开始日期:
                                     </div>
                                 </td>
@@ -53,11 +98,13 @@
                                         结束日期:
                                     </div>
                                 </td>
-                                <td colspan="3">
+                                <td>
                                     <asp:TextBox runat="server" ID="txtToDate" MaxLength="8" CssClass="input"></asp:TextBox>
                                     <ajaxToolkit:CalendarExtender ID="FCalendar2" runat="server" TargetControlID="txtToDate"
                                         Format="yyyyMMdd" />
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     <div align="right">
                                         操作部门:
@@ -74,12 +121,14 @@
                                 <td>
                                     <asp:DropDownList ID="selStaff" CssClass="inputmid" runat="server"></asp:DropDownList>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td align="right">
                                     <asp:Button ID="Button1" CssClass="button1" runat="server" Text="查询" OnClick="btnQuery_Click" />
                                 </td>
-                            </tr>
-                            <tr>
                             </tr>
                         </table>
                     </div>
@@ -117,6 +166,7 @@
                                     <asp:BoundField DataField="PACKAGENAME" HeaderText="套餐类型" />
                                     <asp:BoundField DataField="OPERATEDEPARTID" HeaderText="操作部门号" />
                                     <asp:BoundField DataField="OPERATESTAFFNO" HeaderText="操作员工号" />
+                                    <asp:BoundField DataField="BALUNITNAME" HeaderText="结算单元名称" />
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
@@ -134,6 +184,8 @@
                                             <td>操作部门
                                             </td>
                                             <td>操作员工
+                                            </td>
+                                            <td>结算单元名称
                                             </td>
                                         </tr>
                                     </table>

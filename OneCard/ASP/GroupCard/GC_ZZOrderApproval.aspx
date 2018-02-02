@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>休闲订单资料审核</title>
+    <title>转转卡订单资料审核</title>
     <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
     <link href="../../css/card.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../js/myext.js"></script>
@@ -53,7 +53,7 @@
 <body>
     <form id="form1" runat="server">
         <div class="tb">
-            休闲订单资料审核
+            转转卡订单资料审核
         </div>
         <ajaxToolkit:ToolkitScriptManager EnableScriptGlobalization="true" EnableScriptLocalization="true"
             ID="ScriptManager1" runat="server" />
@@ -135,6 +135,8 @@
                                         <asp:ListItem Text="支付宝" Value="01" />
                                         <asp:ListItem Text="微信" Value="02" />
                                         <asp:ListItem Text="银联" Value="03" />
+                                        <asp:ListItem Text="兑换券" Value="04" />
+                                        <asp:ListItem Text="旅游局" Value="05" />
                                     </asp:DropDownList>
                                 </td>
                                 <td>

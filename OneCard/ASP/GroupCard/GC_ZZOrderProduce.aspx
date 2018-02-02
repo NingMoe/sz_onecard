@@ -95,6 +95,8 @@
                                         <asp:ListItem Text="支付宝" Value="01" />
                                         <asp:ListItem Text="微信" Value="02" />
                                         <asp:ListItem Text="银联" Value="03" />
+                                        <asp:ListItem Text="兑换券" Value="04" />
+                                        <asp:ListItem Text="旅游局" Value="05" />
                                     </asp:DropDownList>
                                 </td>
                                 <td>

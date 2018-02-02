@@ -127,6 +127,9 @@ public partial class ASP_GroupCard_GC_ZZOrderApproval : Master.Master
                 case "2":
                     e.Row.Cells[1].Text = "已发货";
                     break;
+                case "3":
+                    e.Row.Cells[1].Text = "已领卡";
+                    break;
                 default:
                     e.Row.Cells[1].Text = "状态异常";
                     break;

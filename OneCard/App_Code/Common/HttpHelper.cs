@@ -27,6 +27,9 @@ public class HttpHelper
     private static readonly string _zzPayCanalDataQueryUrl = ConfigurationManager.AppSettings["ZZPayCanalDataQueryUrl"];
     private static readonly string _zzParkConSumerQueryUrl = ConfigurationManager.AppSettings["ZZParkConSumerQueryUrl"];
     private static readonly string _zzCardConSumerQueryUrl = ConfigurationManager.AppSettings["ZZCardConSumerQueryUrl"];
+    private static readonly string _zzPackageActivateQueryUrl = ConfigurationManager.AppSettings["ZZPackageActivateQueryUrl"];
+    private static readonly string _zzParkActivateQueryUrl = ConfigurationManager.AppSettings["ZZParkActivateQueryUrl"];
+    private static readonly string _zzTransferQueryUrl = ConfigurationManager.AppSettings["ZZTransferQueryUrl"];
     private static readonly string _zzTradeQueryUrl = ConfigurationManager.AppSettings["ZZTradeQueryUrl"];
     private static readonly string _tokenKey = ConfigurationManager.AppSettings["TokenKey"];
     private static readonly string _zzTokenKey = ConfigurationManager.AppSettings["ZZTokenKey"];
@@ -111,6 +114,18 @@ public class HttpHelper
         {
             url = _zzTradeQueryUrl;
         }
+        else if (tradeType == TradeType.ZZPackageActivateQuery)
+        {
+            url = _zzPackageActivateQueryUrl;
+        }
+        else if (tradeType == TradeType.ZZParkActivateQuery)
+        {
+            url = _zzParkActivateQueryUrl;
+        }
+        else if (tradeType == TradeType.ZZTransferQuery)
+        {
+            url = _zzTransferQueryUrl;
+        }
         //构造请求参数
         Dictionary<string, string> realPostData = postData;
         postData = SortDictionary(postData);//排序后的集合
@@ -142,6 +157,9 @@ public class HttpHelper
         ZZPayCanalDataQuery,
         ZZParkConSumerQuery,
         ZZCardConSumerQuery,
+        ZZPackageActivateQuery,
+        ZZParkActivateQuery,
+        ZZTransferQuery,
         ZZTradeQuery
     }
     public enum TokenType

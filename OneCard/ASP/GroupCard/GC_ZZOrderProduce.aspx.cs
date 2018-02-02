@@ -683,6 +683,9 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
                 case "2":
                     e.Row.Cells[4].Text = "已发货";
                     break;
+                case "3":
+                    e.Row.Cells[4].Text = "已领卡";
+                    break;
                 default:
                     e.Row.Cells[4].Text = "状态异常";
                     break;
