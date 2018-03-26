@@ -22,12 +22,10 @@ namespace Loki
         public static  DataTable QueryFormLoki(CmnContext context, SP_FI_QueryPDO pdo)
         {
             if (AllowSlowQuery())
-            {
+            { 
                 //TODO：多PDO支撑
-                //SlowQuery slowQuery = ConvertFiQueryPdoToSlowQuery(pdo, context.s_UserID);
-                //return QueryFormLoki(context, slowQuery);
-                StoreProScene storePro = new StoreProScene();
-                return storePro.Execute(context, pdo);
+                SlowQuery slowQuery = ConvertFiQueryPdoToSlowQuery(pdo, context.s_UserID);
+                return QueryFormLoki(context, slowQuery);
             }
             else
             {

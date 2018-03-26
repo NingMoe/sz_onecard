@@ -119,8 +119,11 @@
                                 <asp:BoundField DataField="PACKAGETYPE" HeaderText="套餐类型" />
                                 <asp:BoundField DataField="OPENTIMES" HeaderText="数量/张数" />
                                 <asp:BoundField DataField="SUPPLYMONEY" HeaderText="充值金额" />
-                                <asp:BoundField DataField="FUNCFEE" HeaderText="功能费" />
-                                <asp:BoundField DataField="DISCOUNT" HeaderText="兑换券优惠金额" />
+                                <asp:BoundField DataField="FUNCFEE" HeaderText="功能费合计" />
+                                <asp:BoundField DataField="CARDPRICE" HeaderText="卡费合计" />
+                                <asp:BoundField DataField="ORDERTOTAL" HeaderText="订单总额" />
+                                <asp:BoundField DataField="ACTIVITYDISCOUNT" HeaderText="直减优惠金额" />
+                                <asp:BoundField DataField="DISCOUNT" HeaderText="兑换券" />
                                 <asp:BoundField DataField="TRANSFEE" HeaderText="实际功能费" />
                             </Columns>
                             <EmptyDataTemplate>
@@ -145,10 +148,19 @@
                                             充值金额
                                         </td>
                                         <td>
-                                            功能费
+                                            功能费合计
                                         </td>
                                         <td>
-                                            兑换券优惠金额
+                                            卡费合计
+                                        </td>
+                                        <td>
+                                            订单总额
+                                        </td>
+                                        <td>
+                                            直减优惠金额
+                                        </td>
+                                        <td>
+                                            兑换券
                                         </td>
                                         <td>
                                             实际功能费

@@ -2,6 +2,9 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -70,6 +73,11 @@ public partial class ASP_PartnerShip_PS_UnitInfoChange : Master.Master
             ControlDeal.SelectBoxFill(selAppCalling.Items, ddoTD_M_APPCALLINGCODEOutArr, "APPCALLING", "APPCALLINGCODE", true);
 
             //txtSecurityValue.Text = "0";//新增商户安全值为0
+            Session["FileData1"] = null;
+            Session["FileData2"] = null;
+            Session["FileData3"] = null;
+            Session["FileData4"] = null;
+            Session["FileData5"] = null;
         }
     }
 
@@ -530,6 +538,25 @@ public partial class ASP_PartnerShip_PS_UnitInfoChange : Master.Master
             //清除输入的单位信息
 
             //ClearCorp();
+            
+            try
+            {
+                SaveFile();
+                if (!context.hasError())
+                {   
+                    context.AddMessage("附件上传成功");
+                }
+                
+                Session["FileData1"] = null;
+                Session["FileData2"] = null;
+                Session["FileData3"] = null;
+                Session["FileData4"] = null;
+                Session["FileData5"] = null;
+            }
+            catch
+            {
+                context.AddMessage("S00501B014：保存附件失败");
+            }
 
             //更新列表
             btnQuery_Click(sender, e);
@@ -654,8 +681,26 @@ public partial class ASP_PartnerShip_PS_UnitInfoChange : Master.Master
             //清除输入的单位信息
 
             // ClearCorp();
-
+            
+            try
+            {
+                SaveFile();
+                if (!context.hasError())
+                {  
+                    context.AddMessage("附件上传成功");
+                }
+                Session["FileData1"] = null;
+                Session["FileData2"] = null;
+                Session["FileData3"] = null;
+                Session["FileData4"] = null;
+                Session["FileData5"] = null;
+            }
+            catch
+            {
+                context.AddMessage("S00501B015：保存附件失败");
+            }
             btnQuery_Click(sender, e);
+           
         }
     }
 
@@ -917,5 +962,227 @@ public partial class ASP_PartnerShip_PS_UnitInfoChange : Master.Master
     protected void txtMoney_TextChanged(object sender, EventArgs e)
     {
         GetSecurityValue();
+    }
+    
+    /// <summary>
+    /// 校验上传文件的大小以及格式
+    /// </summary>
+    /// <param name="file">FileUpload控件</param>
+    /// <returns></returns>
+    private void validateForFile(FileUpload file, out Stream fileStream)
+    {
+
+        string[] strPics = { ".jpg", ".bmp", ".jpeg", ".png", ".doc", ".docx" };
+        fileStream = Stream.Null;
+        int index = Array.IndexOf(strPics,Path.GetExtension(file.FileName).ToLower());
+        if (index == -1)
+        {
+            context.AddError("A094780002:上传文件格式必须为图片格式jpg|bmp|jpeg|png或者为WORD文档");
+            
+        }
+        fileStream = file.PostedFile.InputStream;
+        int len = file.FileBytes.Length;
+        if (len > 1024 * 1024 * 2)
+        {
+            context.AddError("A094780024：上传文件不能大于2M");
+        }
+
+    }
+   
+
+    /// <summary>
+    /// 图片压缩
+    /// </summary>
+    /// <param name="sFile">图片原路径</param>
+    /// <param name="outPath">图片输出路径</param>
+    /// <param name="flag">压缩比例1-100</param>
+    /// <returns></returns>
+    private bool GetPicThumbnail(Stream fileStream, string outPath, int flag)
+    {
+
+        System.Drawing.Image iSource = System.Drawing.Image.FromStream(fileStream);
+        ImageFormat tFormat = iSource.RawFormat;
+
+        //以下代码为保存图片时，设置压缩质量  
+        EncoderParameters ep = new EncoderParameters();
+        long[] qy = new long[1];
+        qy[0] = flag;//设置压缩的比例1-100  
+        EncoderParameter eParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, qy);
+        ep.Param[0] = eParam;
+        try
+        {
+            ImageCodecInfo[] arrayICI = ImageCodecInfo.GetImageEncoders();
+            ImageCodecInfo jpgICIinfo = null;
+            for (int x = 0; x < arrayICI.Length; x++)
+            {
+                if (arrayICI[x].FormatDescription.Equals("JPEG"))
+                {
+                    jpgICIinfo = arrayICI[x];
+                    break;
+                }
+            }
+
+            if (jpgICIinfo != null)
+            {
+                Bitmap map = new Bitmap(iSource.Width, iSource.Height);
+                Graphics gra = Graphics.FromImage(map);
+                gra.DrawImage(iSource, 0, 0, iSource.Width, iSource.Height);
+                iSource.Dispose();
+                //gra.Clear(Color.Transparent);
+                gra.Dispose();
+                map.Save(outPath, jpgICIinfo, ep);
+                map.Dispose();
+            }
+            else
+            {
+                iSource.Save(outPath, tFormat);
+            }
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+        finally
+        {
+            iSource.Dispose();
+            iSource.Dispose();
+        }
+    }
+    /// <summary>
+    /// 获取图片二进制流文件
+    /// </summary>
+    /// <returns>二进制流</returns>
+    private byte[] GetFile(FileUpload file)
+    {
+      
+        System.IO.Stream fileDataStream = file.PostedFile.InputStream;
+
+        int fileLength = file.PostedFile.ContentLength;
+
+        byte[] fileData = new byte[fileLength];
+
+        fileDataStream.Read(fileData, 0, fileLength);
+        fileDataStream.Close();
+
+        return fileData;
+
+    }
+
+    private void SaveFile()
+    {
+        if (FileUpload1.PostedFile.FileName != "")
+        {
+            System.IO.Stream fileStream = Stream.Null;
+            validateForFile(FileUpload1, out fileStream);// 校验上传文件的大小以及格式
+            
+            Session["FileData1"] = GetFile(FileUpload1);
+        }
+        if (FileUpload2.PostedFile.FileName != "")
+        {
+            System.IO.Stream fileStream = Stream.Null;
+            validateForFile(FileUpload2, out fileStream);// 校验上传文件的大小以及格式
+            
+            Session["FileData2"] = GetFile(FileUpload2);
+        }
+        if (FileUpload3.PostedFile.FileName != "")
+        {
+            System.IO.Stream fileStream = Stream.Null;
+            validateForFile(FileUpload3, out fileStream);// 校验上传文件的大小以及格式
+            
+            Session["FileData3"] = GetFile(FileUpload3);
+        }
+        if (FileUpload4.PostedFile.FileName != "")
+        {
+            System.IO.Stream fileStream = Stream.Null;
+            validateForFile(FileUpload4, out fileStream);// 校验上传文件的大小以及格式
+            
+            Session["FileData4"] = GetFile(FileUpload4);
+        }
+        if (FileUpload5.PostedFile.FileName != "")
+        {
+            System.IO.Stream fileStream = Stream.Null;
+            validateForFile(FileUpload5, out fileStream);// 校验上传文件的大小以及格式
+            
+            Session["FileData5"] = GetFile(FileUpload5);
+        }
+        if (Session["FileData1"] == null && Session["FileData2"] == null && Session["FileData3"] == null && Session["FileData4"] == null && Session["FileData5"] == null)
+            context.AddError("没有附件信息");
+        if (context.hasError())
+        {
+            return;
+        }
+        context.DBOpen("Select");
+        context.AddField(":p_corpNo").Value = txtCorpNo.Text.Trim();
+        DataTable dt = context.ExecuteReader(@"
+                                        SELECT * 
+                                        From TF_F_CORPPHOTO
+                                        WHERE CORPNO = :p_corpNo
+                            ");
+
+
+        string sql = "";
+        if (dt.Rows.Count == 0)
+        {
+            context.DBOpen("Insert");
+            sql = "INSERT INTO TF_F_CORPPHOTO (CORPNO,FILE1,FILE2,FILE3,FILE4,FILE5,OPERATETIME,OPERATEDEPARTID,OPERATESTAFFNO) VALUES(:p_corpNo, :FILE1,:FILE2,:FILE3,:FILE4,:FILE5,:OPERATETIME,:OPERATEDEPARTID,:OPERATESTAFFNO)";
+        }
+        else
+        {
+            //InsertCardHistory();
+
+            context.DBOpen("Update");
+            sql = "Update TF_F_CORPPHOTO Set FILE1 = :FILE1,FILE2 = :FILE2,FILE3 = :FILE3,FILE4 = :FILE4,FILE5 = :FILE5,OPERATETIME = :OPERATETIME,OPERATEDEPARTID = :OPERATEDEPARTID,OPERATESTAFFNO = :OPERATESTAFFNO Where CORPNO = :p_corpNo";
+
+        }
+
+        context.AddField(":p_corpNo", "String").Value = txtCorpNo.Text.Trim();
+        if (Session["FileData1"] != null)
+        {
+            context.AddField(":FILE1", "Blob").Value = Session["FileData1"];
+        }
+        else
+        {
+            context.AddField(":FILE1", "Blob").Value = System.Text.Encoding.Default.GetBytes(string.Empty);
+        }
+        if (Session["FileData2"] != null)
+        {
+            context.AddField(":FILE2", "Blob").Value = Session["FileData2"];
+        }
+        else
+        {
+            context.AddField(":FILE2", "Blob").Value = System.Text.Encoding.Default.GetBytes(string.Empty);
+        }
+        if (Session["FileData3"] != null)
+        {
+            context.AddField(":FILE3", "Blob").Value = Session["FileData3"];
+        }
+        else
+        {
+            context.AddField(":FILE3", "Blob").Value = System.Text.Encoding.Default.GetBytes(string.Empty);
+        }
+        if (Session["FileData4"] != null)
+        {
+            context.AddField(":FILE4", "Blob").Value = Session["FileData4"];
+        }
+        else
+        {
+            context.AddField(":FILE4", "Blob").Value = System.Text.Encoding.Default.GetBytes(string.Empty);
+        }
+        if (Session["FileData5"] != null)
+        {
+            context.AddField(":FILE5", "Blob").Value = Session["FileData5"];
+        }
+        else
+        {
+            context.AddField(":FILE5", "Blob").Value = System.Text.Encoding.Default.GetBytes(string.Empty);
+        }
+
+        context.AddField(":OPERATETIME", "DateTime").Value = DateTime.Now;
+        context.AddField(":OPERATEDEPARTID", "String").Value = context.s_DepartID;
+        context.AddField(":OPERATESTAFFNO", "String").Value = context.s_UserID;
+
+        context.ExecuteNonQuery(sql);
+        context.DBCommit();
     }
 }

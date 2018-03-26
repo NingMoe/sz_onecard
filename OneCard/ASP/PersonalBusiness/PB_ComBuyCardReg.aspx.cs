@@ -264,6 +264,7 @@ public partial class ASP_PersonalBusiness_PB_ComBuyCardReg : Master.Master
         context.AddField("P_PHONENO").Value = txtCustphone.Text.Trim();
         context.AddField("P_ADDRESS").Value = txtCustaddr.Text.Trim();
         context.AddField("P_EMAIL").Value = txtEmail.Text.Trim();
+        context.AddField("P_PAPERENDDATE").Value = "";//身份证有效期
         context.AddField("P_OUTBANK").Value = txtOutbank.Text.Trim();
         context.AddField("P_OUTACCT").Value = txtOutacct.Text.Trim();
         context.AddField("P_STARTCARDNO").Value = txtStartcard.Text.Trim();

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PS_UnitInfoChange.aspx.cs"
-    Inherits="ASP_PartnerShip_PS_UnitInfoChange" EnableEventValidation="false" %>
+    Inherits="ASP_PartnerShip_PS_UnitInfoChange" ValidateRequest="false" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -394,6 +394,51 @@
                             <asp:HiddenField ID ="hidSecurityValue" runat="server" />
                             </td>
                             </tr>
+
+                             <tr>
+                            <td width="12%">
+                                <div align="right">
+                                    附件1:</div>
+                            </td>
+                            <td ><asp:FileUpload ID="FileUpload1" runat="server" CssClass="inputmid" /></td>
+                            <%--<td ><asp:Button ID="btnUpload1" runat="server" Text="导入文件" CssClass="button1" OnClick="btnUpload1_Click"/></td>--%>
+                            <td>
+                                <div align="right">
+                                    附件2:</div>
+                            </td>
+                            <td ><asp:FileUpload ID="FileUpload2" runat="server" CssClass="inputmid" /></td>
+                            <%--<td ><asp:Button ID="btnUpload2" runat="server" Text="导入文件" CssClass="button1" OnClick="btnUpload2_Click"/></td>--%>
+                            <td>
+                                <div align="right">
+                                    附件3:</div>
+                            </td>
+                            <td ><asp:FileUpload ID="FileUpload3" runat="server" CssClass="inputmid" /></td>
+                           <%--<td ><asp:Button ID="btnUpload3" runat="server" Text="导入文件" CssClass="button1" OnClick="btnUpload3_Click"/></td>--%>
+                            <td width="12%">
+                                <div align="right">
+                                    附件4:</div>
+                            </td>
+                            <td>
+                                <asp:FileUpload ID="FileUpload4" runat="server" CssClass="inputmid" />
+                            </td>
+                            </tr>
+                            
+                        <tr>
+                         
+                            <%--<td>
+                                <asp:Button ID="btnUpload4" runat="server" CssClass="button1" Text="导入文件" OnClick="btnUpload4_Click" />
+                            </td>--%>
+                            <td width="12%">
+                                <div align="right">
+                                    附件5:</div>
+                            </td>
+                            <td>
+                                <asp:FileUpload ID="FileUpload5" runat="server" CssClass="inputmid" />
+                            </td>
+                            <%--<td>
+                                <asp:Button ID="btnUpload5" runat="server" CssClass="button1" Text="导入文件" OnClick="btnUpload5_Click"/>
+                            </td>--%>
+                        </tr>
                         <tr>
                          <td colspan="8">
                                 <table width="200" border="0" align="right" cellpadding="0" cellspacing="0">
@@ -412,6 +457,10 @@
                 </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+                <asp:PostBackTrigger ControlID="btnAdd" />
+                <asp:PostBackTrigger ControlID="btnModify" />
+            </Triggers>
     </asp:UpdatePanel>
     </form>
 </body>

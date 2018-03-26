@@ -39979,3 +39979,161 @@ System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
    在 System.Web.UI.Control.OnLoad(EventArgs e)
    在 System.Web.UI.Control.LoadRecursive()
    在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-02-06 12:36:44,645 [11] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZPayCanalDataReport.aspx
+System.Net.WebException: 远程服务器返回错误: (500) 内部服务器错误。
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpHelper.ZZCreatePostHttpResponse(String url, String postData, String postDataKey, Boolean isHttps, Encoding charset) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 321
+   在 HttpHelper.ZZPostRequest(TradeType tradeType, Dictionary`2 postData, TokenType tokenType) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 138
+   在 HttpHelper.ZZPostRequest(TradeType tradeType, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\HttpHelper.cs:行号 39
+   在 ASP_Financial_FI_ZZPayCanalDataReport.fillDataTable(TradeType tradetype, Dictionary`2 postData) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 272
+   在 ASP_Financial_FI_ZZPayCanalDataReport.btnQuery_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZPayCanalDataReport.aspx.cs:行号 198
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-02-06 14:58:46,225 [8] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03135: connection lost contact
+Process ID: 0
+Session ID: 176 Serial number: 8014
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-02-06 17:46:29,828 [11] ERROR ExpLog [(null)] - 页面：/Logontest.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 SPHelper.callQuery(SP_QueryPDO pdo, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 153
+   在 SPHelper.callQuery(String pdoName, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 106
+   在 SSO.SSOHelper.CheckLogin(Boolean isAdmin, CmnContext context, String username, String opercardno, String pwd, String ip, HttpResponse response, HttpSessionState session, String& loginURL, String& staffTable, DataTable& sysinfos) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SSOHelper.cs:行号 82
+   在 Logontest.LogonBtn_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\Logontest.aspx.cs:行号 150
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-02-06 17:46:32,333 [11] ERROR ExpLog [(null)] - 页面：/LogonSSO.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.CmnContext.ExecuteSP(String spName) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 300
+   在 LogonSSO.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\logonSSO.aspx.cs:行号 39
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-02-06 17:50:35,479 [11] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03114: not connected to ORACLE
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-02-08 10:58:26,705 [10] ERROR ExpLog [(null)] - 页面：/ASP/Financial/FI_ZZTransferReport.aspx
+System.ArgumentException: 列“ENDTIME”不属于表 。
+   在 System.Data.DataColumnCollection.Remove(String name)
+   在 ASP_Financial_FI_ZZTransferReport.btnExportTransfer_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\ASP\Financial\FI_ZZTransferReport.aspx.cs:行号 410
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-02-08 10:58:30,045 [10] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03113: end-of-file on communication channel
+Process ID: 0
+Session ID: 163 Serial number: 410
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-03-01 10:33:19,989 [11] ERROR ExpLog [(null)] - 页面：/top.aspx
+System.Data.OracleClient.OracleException: ORA-03113: end-of-file on communication channel
+Process ID: 0
+Session ID: 305 Serial number: 36872
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 top.btnConfirm_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\top.aspx.cs:行号 236
+   在 System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-03-01 13:59:07,452 [8] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-03-01 14:21:27,596 [10] ERROR ExpLog [(null)] - 页面：/menu.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBase, String sqlCondition, Int32 countsize) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 143
+   在 Master.SelectScene.Execute(CmnContext context, DDOBase ddoBaseIn, String sqlCondition, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\SelectScene.cs:行号 161
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type, String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 65
+   在 DAO.SelectDAO.selDDOArr(CmnContext context, DDOBase a_ddoBaseIn, String SqlKey, Type type) 位置 d:\Work\SZ_Github\OneCard\App_Code\DAO\SelectDAO.cs:行号 53
+   在 TM.UserManager.TD_M_MENUTM.selByPK(CmnContext context, DDOBase a_ddoDDOBaseIn) 位置 d:\Work\SZ_Github\OneCard\App_Code\TM\UserManager\TD_M_MENUTM.cs:行号 36
+   在 menu.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\menu.aspx.cs:行号 33
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-03-01 17:22:28,767 [8] ERROR ExpLog [(null)] - 页面：/Logontest.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.StoreProScene.Execute(CmnContext context, DDOBase ddoBase) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\StoreProScene.cs:行号 121
+   在 SPHelper.callQuery(SP_QueryPDO pdo, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 153
+   在 SPHelper.callQuery(String pdoName, CmnContext context, String funcCode, String[] vars) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SPHelper.cs:行号 106
+   在 SSO.SSOHelper.CheckLogin(Boolean isAdmin, CmnContext context, String username, String opercardno, String pwd, String ip, HttpResponse response, HttpSessionState session, String& loginURL, String& staffTable, DataTable& sysinfos) 位置 d:\Work\SZ_Github\OneCard\App_Code\Common\SSOHelper.cs:行号 82
+   在 Logontest.LogonBtn_Click(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\Logontest.aspx.cs:行号 150
+   在 System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   在 System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   在 System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+2018-03-01 17:23:38,610 [9] ERROR ExpLog [(null)] - 页面：/LogonSSO.aspx
+System.Data.OracleClient.OracleException: ORA-12571: TNS:packet writer failure
+
+   在 Master.DBConnectionOracle.ExecuteReader(String sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\DBConnectionOracle.cs:行号 333
+   在 Master.CmnContext.ExecuteReader(String Sql) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 335
+   在 Master.CmnContext.ExecuteSP(String spName) 位置 d:\Work\SZ_Github\OneCard\App_Code\Master\CmnContext.cs:行号 300
+   在 LogonSSO.Page_Load(Object sender, EventArgs e) 位置 d:\Work\SZ_Github\OneCard\logonSSO.aspx.cs:行号 39
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

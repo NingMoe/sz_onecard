@@ -325,6 +325,7 @@ function SupplyAndReadCardForCheck() {
             return false;
         }
         else {
+            if (!checkMaxBalance()) return false;
             MyExtConfirm('提示', '是否确认充值:' + ($get('hidMoney').value*1.0).toFixed(2) + '元?', SupplyCheckConfirm);
         }
         return false;

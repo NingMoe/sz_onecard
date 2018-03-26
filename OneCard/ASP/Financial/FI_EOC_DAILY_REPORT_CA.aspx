@@ -17,7 +17,7 @@
     </style>
     <script language="javascript" type="text/javascript">
         function PrintInfo(ID) {
-            //清除隐藏域
+            //清除隐藏域
             var controls = document.getElementsByTagName('th');
             for (var i = 0; i < controls.length; i++) {
                 if (controls[i].className == 'Hide') {
@@ -96,6 +96,7 @@
                                     <asp:ListItem Text="4:财务交行转账" Value="4"></asp:ListItem>
                                     <asp:ListItem Text="5:财务张家港转账" Value="5"></asp:ListItem>
                                     <asp:ListItem Text="1:财务不转账" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="6:苏州银行转账" Value="6"></asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td width="150" align="center">

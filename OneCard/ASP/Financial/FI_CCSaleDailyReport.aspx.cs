@@ -160,14 +160,14 @@ public partial class ASP_Financial_FI_CCSaleDailyReport : Master.ExportMaster
     {
         if (gvResult.ShowFooter && e.Row.RowType == DataControlRowType.DataRow)
         {
-            totalCount += Convert.ToInt32(GetTableCellValue(e.Row.Cells[3]));
-            totalCharges += Convert.ToDouble(GetTableCellValue(e.Row.Cells[4]));
+            totalCount += Convert.ToInt32(GetTableCellValue(e.Row.Cells[4]));
+            totalCharges += Convert.ToDouble(GetTableCellValue(e.Row.Cells[5]));
         }
         else if (e.Row.RowType == DataControlRowType.Footer)  //页脚 
         {
             e.Row.Cells[0].Text = "总计";
-            e.Row.Cells[3].Text = totalCount.ToString();
-            e.Row.Cells[4].Text = totalCharges.ToString("n");
+            e.Row.Cells[4].Text = totalCount.ToString();
+            e.Row.Cells[5].Text = totalCharges.ToString("n");
         }
     }
 

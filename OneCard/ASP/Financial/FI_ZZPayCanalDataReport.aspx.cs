@@ -31,8 +31,11 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
     private double totalOpenTimes = 0;         //开通数量
     private double totalSupplyMoney = 0;        //充值金额
     private double totalfuncfee = 0;          //功能费
-    private double totaldiscount = 0;         //优惠金额
-    private double totalorderfee = 0;         //实际功能费
+    private double totalCardPrice = 0;         //卡费合计
+    private double totalOrderTotal = 0;         //订单总额
+    private double totalActivatyDiscount = 0;   //直减优惠金额
+    private double totaldiscount = 0;         //兑换券
+    private double totalTransfee = 0;         //实际功能费
     protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (gvResult.ShowFooter && e.Row.RowType == DataControlRowType.DataRow)
@@ -74,6 +77,9 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
             e.Row.Cells[7].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[7])) / 100.0).ToString();
             e.Row.Cells[8].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[8])) / 100.0).ToString();
             e.Row.Cells[9].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[9])) / 100.0).ToString();
+            e.Row.Cells[10].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[10])) / 100.0).ToString();
+            e.Row.Cells[11].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[11])) / 100.0).ToString();
+            e.Row.Cells[12].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[12])) / 100.0).ToString();
 
             //邮费和渠道总金额根据渠道次数汇总
             //已计算过该渠道则不再计算
@@ -88,8 +94,11 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
             totalOpenTimes += Convert.ToDouble(GetTableCellValue(e.Row.Cells[5]));
             totalSupplyMoney += Convert.ToDouble(GetTableCellValue(e.Row.Cells[6]));
             totalfuncfee += Convert.ToDouble(GetTableCellValue(e.Row.Cells[7]));
-            totaldiscount += Convert.ToDouble(GetTableCellValue(e.Row.Cells[8]));
-            totalorderfee += Convert.ToDouble(GetTableCellValue(e.Row.Cells[9]));
+            totalCardPrice += Convert.ToDouble(GetTableCellValue(e.Row.Cells[8]));
+            totalOrderTotal += Convert.ToDouble(GetTableCellValue(e.Row.Cells[9]));
+            totalActivatyDiscount += Convert.ToDouble(GetTableCellValue(e.Row.Cells[10]));
+            totaldiscount += Convert.ToDouble(GetTableCellValue(e.Row.Cells[11]));
+            totalTransfee += Convert.ToDouble(GetTableCellValue(e.Row.Cells[12]));
 
 
 
@@ -109,8 +118,11 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
             e.Row.Cells[5].Text = totalOpenTimes.ToString();
             e.Row.Cells[6].Text = totalSupplyMoney.ToString();
             e.Row.Cells[7].Text = totalfuncfee.ToString();
-            e.Row.Cells[8].Text = totaldiscount.ToString();
-            e.Row.Cells[9].Text = totalorderfee.ToString();
+            e.Row.Cells[8].Text = totalCardPrice.ToString();
+            e.Row.Cells[9].Text = totalOrderTotal.ToString();
+            e.Row.Cells[10].Text = totalActivatyDiscount.ToString();
+            e.Row.Cells[11].Text = totaldiscount.ToString();
+            e.Row.Cells[12].Text = totalTransfee.ToString();
         }
 
         if (e.Row.RowType == DataControlRowType.Header || e.Row.RowType == DataControlRowType.DataRow || e.Row.RowType == DataControlRowType.Footer)
@@ -232,6 +244,9 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
         dt.Columns.Add("FUNCFEE", typeof(string));//功能费
         dt.Columns.Add("DISCOUNT", typeof(string));//兑换券优惠金额
         dt.Columns.Add("TRANSFEE", typeof(string));//实际功能费
+        dt.Columns.Add("CARDPRICE", typeof(string));//卡费合计
+        dt.Columns.Add("ORDERTOTAL", typeof(string));//订单总额
+        dt.Columns.Add("ACTIVITYDISCOUNT", typeof(string));//直减优惠金额
 
         dt.Columns["PAYCANAL"].MaxLength = 10000;
         dt.Columns["POSTAGE"].MaxLength = 10000;
@@ -243,6 +258,9 @@ public partial class ASP_Financial_FI_ZZPayCanalDataReport : Master.ExportMaster
         dt.Columns["FUNCFEE"].MaxLength = 10000;
         dt.Columns["DISCOUNT"].MaxLength = 10000;
         dt.Columns["TRANSFEE"].MaxLength = 10000;
+        dt.Columns["CARDPRICE"].MaxLength = 10000;
+        dt.Columns["ORDERTOTAL"].MaxLength = 10000;
+        dt.Columns["ACTIVITYDISCOUNT"].MaxLength = 10000;
 
         return dt;
     }

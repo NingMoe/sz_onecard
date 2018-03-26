@@ -1,0 +1,412 @@
+/* 页面布局 */
+html,body,h1,h2,h3,h4,h5,h6,p,form,dl,dt,dd,ul,li,ol,img,input,select,div,table,tr,td,thead,tbody,p
+{
+    border: 0;
+    font-family: "方正兰亭纤黑_GBK";
+    margin: 0;
+    padding: 0;
+    font-size: 28px;
+    word-wrap: break-word;
+}
+
+
+html, body {
+    height: 100%;
+    background: #fEfEfE;
+
+}
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both;
+}
+ul ,li {
+    list-style-type: none;
+}
+a {
+    text-decoration:underline;
+    color:#333;
+
+}
+a:hover, a:focus {
+}
+
+a{ text-decoration:none;}
+a:link {
+    color: #fff;
+}
+a:visited {
+    color: #fff;
+}
+a:hover {
+    color:#fff;
+}
+a:active {
+    color: #fff;
+}
+
+.mainbox {
+    width: 100%;
+    height: 100%;
+}
+.logo_wrap{width:100%;}
+
+.about_wrap {
+    margin: 40px;
+    color: #292728; overflow: hidden;
+
+}
+
+.citizencard_name h1 {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 40px;
+
+}
+.citizencard_name h2 {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 30px;
+    color:#9F9F9F;
+
+}
+
+.about_wrap p {
+    font-size: 28px;
+    line-height: 38px;
+    text-align: justify; /*两端对齐火狐*/
+    text-justify: inter-ideograph; /*两端对齐ie*/
+    text-indent: 40px;
+    background:#f9f9f9;
+    padding:10px;
+}
+
+.appdownload {
+    width: 220px;
+    height: 56px;
+    background: #f06e4a;
+    margin:20px 0 0 0;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    text-align:center;
+}
+
+.appdownload span {
+    font-size: 24px;
+    color: #fff;
+    line-height: 56px;
+    display:block;
+}
+
+.appicon {
+    float:left;
+    width: 100px;
+    height: 100px;
+    margin:20px;
+
+}
+p{ float:left;}
+.citizencard_name{
+    float:left;
+    margin:20px 0 20px 0;
+}
+
+
+.android_versions {
+    margin-top:20px;
+    border: #C4C1C1 1px dashed;
+}
+.android_left{
+    padding:20px;
+    float:left;
+}
+
+.ios_versions {
+
+    height:150px;
+
+
+}
+
+
+
+.android_name {
+
+    margin-left:20px;
+    font-size: 40px;
+    line-height:50px;
+}
+
+.android_time {
+
+
+    font-size: 14px;
+
+}
+
+/*.qrcode {*/
+    /*float:right;*/
+    /*width: 180px;*/
+    /*height: 180px;*/
+
+/*}*/
+
+.versions_logo{width:40px;}
+
+.lvsedaren {
+    width: 100%;
+}
+
+.pop {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    position:fixed;
+    z-index:1000;
+    background:rgba(0,0,0,.5);
+    top:0;
+    left:0;
+}
+.pop_img_div {
+    position: relative;
+    left: 12.5%;
+    top: 18%;
+}
+/* 页面布局 */
+/* 移动端兼容性  */
+@media (max-width: 479px) {
+    .about_wrap {
+        margin: 20px;
+
+    }
+
+    .citizencard_name h1 {
+        font-size: 18px;
+        line-height: 20px;
+
+    }
+    .citizencard_name h2 {
+        font-size: 12px;
+        line-height: 15px;
+
+    }
+
+    .about_wrap p {
+        font-size: 14px;
+        line-height: 19px;
+        text-indent: 20px;
+        padding:5px;
+    }
+
+    .appdownload {
+        width: 110px;
+        height: 28px;
+        margin:10px 0 0 0;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .appdownload span {
+        font-size: 12px;
+        line-height: 28px;
+    }
+
+    .appicon {
+        width: 50px;
+        height: 50px;
+        margin:8px;
+
+    }
+    .citizencard_name{
+        margin:10px 0 10px 0;
+    }
+
+
+    .android_versions {
+        margin-top:10px;
+    }
+    .android_left{
+        padding:10px;
+    }
+
+    .ios_versions {
+
+        height:75px;
+
+
+    }
+
+
+
+    .android_name {
+
+        margin-left:10px;
+        font-size: 20px;
+        line-height:25px;
+    }
+
+    .android_time {
+
+
+        font-size: 7px;
+
+    }
+
+    .qrcode {
+        width: 320px;
+        height: 90px;
+    }
+    .versions_logo{width:20px;}
+}
+@media (min-width: 480px) and (max-width: 639px) {
+    .about_wrap {
+        margin: 30px;
+
+    }
+
+    .citizencard_name h1 {
+        font-size: 30px;
+        line-height: 30px;
+
+    }
+    .citizencard_name h2 {
+        font-size: 21px;
+        line-height: 22px;
+
+    }
+
+    .about_wrap p {
+        font-size: 21px;
+        line-height: 28px;
+        text-indent: 30px;
+    }
+
+    .appdownload {
+        width: 165px;
+        height: 42px;
+        margin:15px 0 0 0;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .appdownload span {
+        font-size: 18px;
+        line-height: 42px;
+    }
+
+    .appicon {
+        width: 75px;
+        height: 75px;
+        margin:12px;
+
+    }
+    .citizencard_name{
+        margin:15px 0 15px 0;
+    }
+
+
+    .android_versions {
+        margin-top:15px;
+    }
+    .android_left{
+        padding:15px;
+    }
+
+    .ios_versions {
+
+        height:112px;
+
+
+    }
+
+
+
+    .android_name {
+
+        margin-left:15px;
+        font-size: 30px;
+        line-height:37px;
+    }
+
+    .android_time {
+
+
+        font-size: 10px;
+
+    }
+
+    /*.qrcode {*/
+        /*width: 135px;*/
+        /*height: 135px;*/
+
+    /*}*/
+    .versions_logo{width:30px;}
+
+}
+/* 移动端兼容性  */
+/* 微信浏览器提醒  */
+#popweixin {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    position:fixed;
+    z-index:1000;
+    background:rgba(0,0,0,.5);
+    top:0;
+    left:0;
+    display:none;
+}
+#popweixin .tip {
+    width:100%;
+    background:#fff;
+    z-index:1001;
+}
+/* .top2bottom {
+    -webkit-animation:top2bottom 1.2s ease;
+    -moz-animation:top2bottom 1.2s ease;
+    -o-animation:top2bottom 1.2s ease;
+    animation:top2bottom 1.2s ease;
+    -webkit-animation-fill-mode:backwards;
+    -moz-animation-fill-mode:backwards;
+    -o-animation-fill-mode:backwards;
+    animation-fill-mode:backwards
+}
+.animate-delay-1 {
+    -webkit-animation-delay:1s;
+    -moz-animation-delay:1s;
+    -o-animation-delay:1s;
+    animation-delay:1s
+} */
+@-webkit-keyframes top2bottom {
+    0% {
+        -webkit-transform:translateY(-300px);
+        opacity:.6
+    }
+    100% {
+        -webkit-transform:translateY(0px);
+        opacity:1
+    }
+}
+@keyframes top2bottom {
+    0% {
+        transform: translateY(-300px);
+        opacity: .6
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1
+    }
+}
+/* 微信浏览器提醒  */

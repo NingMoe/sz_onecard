@@ -17,7 +17,7 @@ namespace TDO.BalanceChannel
           {
                tableName = "TD_M_BANK";
 
-               columns = new String[7][];
+               columns = new String[10][];
                columns[0] = new String[]{"BANKCODE", "string"};
                columns[1] = new String[]{"BANK", "String"};
                columns[2] = new String[]{"BANKADDR", "String"};
@@ -25,13 +25,16 @@ namespace TDO.BalanceChannel
                columns[4] = new String[]{"UPDATESTAFFNO", "string"};
                columns[5] = new String[]{"UPDATETIME", "DateTime"};
                columns[6] = new String[]{"REMARK", "String"};
+               columns[7] = new String[]{ "ISLOCAL", "String" };
+               columns[8] = new String[]{ "ISSZBANK", "String" };
+               columns[9] = new String[]{ "BANKNUMBER", "String" };
 
-               columnKeys = new String[]{
+            columnKeys = new String[]{
                    "BANKCODE",
                };
 
 
-               array = new String[7];
+               array = new String[10];
                hash.Add("BANKCODE", 0);
                hash.Add("BANK", 1);
                hash.Add("BANKADDR", 2);
@@ -39,7 +42,10 @@ namespace TDO.BalanceChannel
                hash.Add("UPDATESTAFFNO", 4);
                hash.Add("UPDATETIME", 5);
                hash.Add("REMARK", 6);
-          }
+               hash.Add("ISLOCAL", 7);
+               hash.Add("ISSZBANK", 8);
+               hash.Add("BANKNUMBER", 9);
+        }
 
           // 银行编号
           public string BANKCODE
@@ -90,7 +96,28 @@ namespace TDO.BalanceChannel
               set { SetString("REMARK",value); }
           }
 
-     }
+        // 收款人是否同城
+        public String ISLOCAL
+        {
+            get { return GetString("ISLOCAL"); }
+            set { SetString("ISLOCAL", value); }
+        }
+
+        // 收款人是否本行
+        public String ISSZBANK
+        {
+            get { return GetString("ISSZBANK"); }
+            set { SetString("ISSZBANK", value); }
+        }
+
+        // 收款人行号
+        public String BANKNUMBER
+        {
+            get { return GetString("BANKNUMBER"); }
+            set { SetString("BANKNUMBER", value); }
+        }
+
+    }
 }
 
 

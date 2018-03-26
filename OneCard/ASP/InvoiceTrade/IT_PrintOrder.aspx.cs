@@ -640,7 +640,7 @@ public partial class ASP_InvoiceTrade_IT_PrintOrder : Master.Master
             }
             if (labMoney.Text != "0.00" && ckTax.Checked == true)//已开过票且勾选征税的
             {
-                string sql = "select 1 from tf_f_electronicinvoice t where t.orderno = '" + getDataKeys("ORDERNO") + "'and t.usetag='1' and ((t.proj1='市民卡B卡卡费' or t.proj1='读卡器') or (t.proj2='市民卡B卡卡费' or t.proj2='读卡器')or (t.proj3='市民卡B卡卡费' or t.proj3='读卡器')or  (t.proj4='市民卡B卡卡费' or t.proj4='读卡器') or (t.proj5='市民卡B卡卡费' or t.proj5='读卡器'))";
+                string sql = "select 1 from tf_f_electronicinvoice t where t.orderno = '" + getDataKeys("ORDERNO") + "'and t.usetag='1' and ((t.proj1='市民卡B卡卡费' or t.proj1='读卡器') or (t.proj2='市民卡B卡卡费' or t.proj2='读卡器')or (t.proj3='市民卡B卡卡费' or t.proj3='读卡器')or  (t.proj4='市民卡B卡卡费' or t.proj4='读卡器') or (t.proj5='市民卡B卡卡费' or t.proj5='读卡器')) and t.tradefee>0";
                   context.DBOpen("Select");
                   DataTable data = context.ExecuteReader(sql);
                   if (data.Rows.Count > 0)

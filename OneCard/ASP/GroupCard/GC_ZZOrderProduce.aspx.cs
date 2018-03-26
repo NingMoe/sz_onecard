@@ -920,7 +920,7 @@ public partial class ASP_GroupCard_GC_ZZOrderProduce : Master.FrontMaster
             hidMoney.Value = Convert.ToInt32((Convert.ToDecimal(hidMoney.Value))).ToString();
 
             hidDetailNo.Value = gvOrderList.Rows[index].Cells[14].Text.ToString().Trim();
-
+            CommonHelper.readCardJiMingState(context, txtCardno.Text, hidIsJiMing);
             if (context.hasError())
                 return;
 

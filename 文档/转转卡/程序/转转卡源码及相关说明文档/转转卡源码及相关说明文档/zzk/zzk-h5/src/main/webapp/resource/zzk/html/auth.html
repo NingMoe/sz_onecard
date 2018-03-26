@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>身份确认</title>
+    <link rel="stylesheet" href="../dest/base.css">
+    <script src="../js/flexible.js"></script>
+</head>
+<body>
+  <section class="auth">
+    
+      <div class="auth-top">
+        <form action="./buy-card.html" method="post">
+          <div class="auth-top-info">为了保证您顺利办卡，请如实填写您的身份信息</div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="phone" maxlength="11" placeholder="请输入手机号" >
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="name" maxlength="20" placeholder="请输入姓名" >
+          </div> 
+          <div class="form-group">
+            <input class="form-control" type="text" name="idcard" id="idcard" placeholder="请输入身份证号" >
+          </div>   
+          <input type="hidden" id="avatarPath" name="avatar">
+          <input class="hide" type="submit"  id="submit" value="提交">
+        </form>               
+      </div>
+      <div class="auth-bottom">
+        <div class="auth-bottom-title">上传头像</div>
+        <div class="auth-avatar-upload">
+          <div class="auth-avatar-hold">
+            <div class="auth-avatar-pic"><img id="holder" src="../images/avatarholder.png" width="100%" height="100%"></div>
+            <!-- <div class="auth-avatar-text">上传头像</div> -->
+          </div>
+          <div class="auth-avatar-info">注：头像为持卡人入园重要凭证，为了您能够顺利通过入园认
+              证，请上传本人真实、并能予于辨认的头像。</div>
+          <div class="auth-avatar-control">
+            <input type="file" name="avatar" id="avatar" accept="image/*" >
+          </div>
+        </div>
+      </div>
+
+  </section>
+  <section class="popup transition" id="Popup">
+    <div class="popup-inner">
+      <div class="popup-content">确定要删除？</div>
+      <div class="popup-action">
+        <button class="btn btn-sm popup-cancel round"><span class="icn icn-cancel"></span>确定</button>
+      </div>
+    </div>
+  </section>
+  <section class="popup-mask"></section>
+  <footer class="footer"><a class="button btn-auth" href="./address.html">下一步 </a></footer>
+  <script src="../js/jquery.min.js"> </script>
+  <script src="../js/fastclick.js"> </script>
+  <script src="../js/base.js"></script>
+  <script>
+    jQuery(function(){
+      var isNative = false; /*是否是客户端调用*/
+      var postForm = new FormData();
+
+      //提示弹窗
+      var pop = new Popup($('#Popup'), {
+        maskClose: true
+      });
+
+
+      var reader = new FileReader();
+      reader.onload =  function(event){
+        console.log(event);
+        $('#holder').attr('src', event.target.result)
+      }
+
+      $('#avatar').on('change', function(){
+        var file = this.files[0];
+
+        if(!file){return false}
+
+        /*微信等调用*/
+        if(!isNative){
+          reader.readAsDataURL(file);
+        }
+        uploadFile(function(file){
+          postForm.set('file', file);
+          $('#avatarPath').val(file);
+        })
+        
+      });
+
+
+      function uploadFile(callback){
+        var  $this = $('#avatarPath');
+
+          if($this.data('ajax')){ return  false }
+
+          //打开一个加载器
+          APP.showLoading();
+          $this.data('ajax', true);
+          $.ajax({
+              url: '../data/response.json',
+              dataType: 'json',
+              type: 'post',
+              data: postForm,
+              processData: false,
+              contentType: false
+          }).done(function(data){
+              //关闭加载器
+              APP.closeLoading();
+
+              callback && callback.call(null, data.code);
+
+          }).always(function(){
+              $this.data('ajax', null);
+          });
+      }
+
+
+      //ajax demo
+      $('.btn-auth').on('click', function(event){
+          var  $this = $(this),
+              phone, name, idcard;
+          event.preventDefault();
+
+          if($this.data('ajax')){ return  false }
+          
+          phone = $('input[name=phone]').val();
+          if(!phone || !APP.phoneReg.test(phone)){
+              pop.updateContent('手机号不正确!').show();
+              return false;
+          }
+          // postForm.set('phone', phone);
+
+          name = $('input[name=name]').val();
+          if(!name){
+              pop.updateContent('姓名不能为空!').show();
+              return false;
+          }
+          // postForm.set('name', name);           
+
+          idcard = $('input[name=idcard]').val();
+          if(!APP.idReg.test(idcard)){
+              pop.updateContent('身份证号不正确').show();
+              return false;
+          }   
+          // postForm.set('idcard', idcard);       
+
+          if(!postForm.has('file')){
+              pop.updateContent('头像不能为空!').show();
+              return false;            
+          }
+
+          //提交form表单
+          $('#submit').trigger('click');
+      });      
+
+    });
+  </script>
+</body>
+</html>

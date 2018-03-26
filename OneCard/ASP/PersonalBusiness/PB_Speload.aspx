@@ -71,6 +71,7 @@
     <asp:HiddenField ID="hiddentradeno" runat=server />
     <asp:HiddenField ID="hiddenread" runat=server />
     <asp:HiddenField ID="hidWarning" runat=server />
+    <asp:HiddenField ID="hidIsJiMing" runat="server" />
     <asp:HiddenField runat="server" ID="hidSupplyMoney" />
     <asp:LinkButton runat="server" ID="btnConfirm" OnClick="btnConfirm_Click"/>
     <asp:HiddenField runat="server" ID="hidCardReaderToken" />

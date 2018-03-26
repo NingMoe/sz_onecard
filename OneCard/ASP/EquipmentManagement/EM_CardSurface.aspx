@@ -63,12 +63,13 @@
                     需求单详细信息</div>
                 <div class="kuang5">
                     <div id="Div1" style="height: 220px">
-                        <asp:GridView ID="gvResult" runat="server" Width="95%" CssClass="tab1" HeaderStyle-CssClass="tabbt"
+                        <asp:GridView ID="gvResult" runat="server" Width="100%" CssClass="tab1" HeaderStyle-CssClass="tabbt"
                             FooterStyle-CssClass="tabcon" AlternatingRowStyle-CssClass="tabjg" SelectedRowStyle-CssClass="tabsel"
                             PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
                             AutoGenerateColumns="true" OnRowDataBound="gvResult_RowDataBound" OnSelectedIndexChanged="gvResult_SelectedIndexChanged"
                             AllowPaging="true" PageSize="8" OnPageIndexChanging="gvResult_Page" OnRowCreated="gvResult_RowCreated"
                             >
+                            
                             <EmptyDataTemplate>
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
                                     <tr class="tabbt">
@@ -92,6 +93,12 @@
                                         </td>
                                         <td>
                                             更新时间
+                                        </td>
+                                        <td>
+                                            税率
+                                        </td>
+                                        <td>
+                                            商品编码
                                         </td>
 
                                     </tr>
@@ -135,7 +142,18 @@
                                 <asp:ListItem Text="1:有效" Value="1"></asp:ListItem>
 						        </asp:DropDownList>
 					        </td>
+                            <td><div align="right">税率:</div></td>
+				            <td>
+						         <asp:DropDownList ID="ddlTax" CssClass="input" runat="server">
+                            </asp:DropDownList>
+					        </td>
 				        </tr>
+                        <tr>
+				            <td><div align="right">商品编码:</div></td>
+				            <td>
+				                <asp:TextBox ID="txtGoods" CssClass="inputlong" MaxLength="19" runat="server"></asp:TextBox>
+				            </td>
+                            </tr>
                     </table>
                 </div>
                 <div class="jieguo" >

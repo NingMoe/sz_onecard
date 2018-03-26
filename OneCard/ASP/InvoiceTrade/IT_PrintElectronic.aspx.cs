@@ -40,7 +40,7 @@ public partial class ASP_InvoiceTrade_IT_PrintElectronic : Master.Master
             TD_M_INVOICEPROJECTTDO ddoTD_M_INVOICEPROJECTTDOIn = new TD_M_INVOICEPROJECTTDO();
             TD_M_INVOICEPROJECTTDO[] ddoTD_M_INVOICEPROJECTTDOOutArr = (TD_M_INVOICEPROJECTTDO[])tmTMTableModule.selByPKArr(context, ddoTD_M_INVOICEPROJECTTDOIn, typeof(TD_M_INVOICEPROJECTTDO), null, sqlPROJ);
             FillDropDownList(ddlProjName, ddoTD_M_INVOICEPROJECTTDOOutArr, "PROJECTNAME", "PROJECTNAME");
-           
+           // hidMessage.Value = "";
         }
     }
     public void initTable()
@@ -52,24 +52,422 @@ public partial class ASP_InvoiceTrade_IT_PrintElectronic : Master.Master
     }
     protected void btnQuery_Click(object sender, EventArgs e)
     {
-        if (!InputValidate())
-            return;
+        //if (!InputValidate())
+        //    return;
 
-        DataTable dt = SPHelper.callQuery("SP_IT_Query", context, "QueryElectronicItems", txtBeginDate.Text.Trim(), txtEndDate.Text.Trim(), txtBeginCardNo.Text.Trim(), txtEndCardNo.Text.Trim(), selDept.SelectedValue, selStaff.SelectedValue, selTradeType.SelectedValue);
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            lvwInvoice.DataSource = new DataTable();
-            lvwInvoice.DataBind();
-            context.AddError("未查出记录");
-            return;
-        }
-        lvwInvoice.DataSource = dt;
-        lvwInvoice.DataBind();
-        lvwInvoice.SelectedIndex = -1;
+        //DataTable dt = SPHelper.callQuery("SP_IT_Query", context, "QueryElectronicItems", txtBeginDate.Text.Trim(), txtEndDate.Text.Trim(), txtBeginCardNo.Text.Trim(), txtEndCardNo.Text.Trim(), selDept.SelectedValue, selStaff.SelectedValue, selTradeType.SelectedValue);
+        //if (dt == null || dt.Rows.Count < 1)
+        //{
+        //    lvwInvoice.DataSource = new DataTable();
+        //    lvwInvoice.DataBind();
+        //    context.AddError("未查出记录");
+        //    return;
+        //}
+        //lvwInvoice.DataSource = dt;
+        //lvwInvoice.DataBind();
+        //lvwInvoice.SelectedIndex = -1;
+        QueryCardOperRecord();
         ddlProjName.SelectedIndex = 0;
         selProj1.SelectedIndex = 0;
         selProj1.Enabled = true;
 
+    }
+
+    private void QueryCardOperRecord()
+    {
+        if (!InputValidate())
+            return;
+
+        string strSql = "";
+
+        TMTableModule tmTMTableModule = new TMTableModule();
+
+        if (selTradeType.SelectedValue == "1")     //普通充值
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, A.CURRENTMONEY/100.0 CURRENTMONEY ,";
+            strSql += " A.OPERATESTAFFNO, A.OPERATETIME, A.Operatedepartid DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK";
+            strSql += " From TF_B_TRADE A, TD_M_TRADETYPE C";
+            strSql += " WHERE A.TRADETYPECODE='02' AND A.CANCELTAG = '0'";
+            strSql += "AND A.TRADEID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.TRADEID and  k.usetag='1')";
+            strSql += " AND  A.TRADETYPECODE = C.TRADETYPECODE(+) ";
+            strSql += " union all";
+            strSql += " SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, A.CURRENTMONEY/100.0 CURRENTMONEY,";
+            strSql += " A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,k.VOLUMENO,k.INVOICENO,'1' ISSK";
+            strSql += " From TF_B_TRADE A, TD_M_TRADETYPE C,TF_F_INVOICEORDERDETAIL K ";
+            strSql += " WHERE A.TRADETYPECODE='02' AND A.CANCELTAG = '0'";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "2")  //充值卡售出
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK ,STARTCARDNO,ENDCARDNO FROM(";
+            strSql += "SELECT A.TRADEID, DECODE(A.STARTCARDNO, A.ENDCARDNO, A.STARTCARDNO, A.STARTCARDNO || '-' || A.ENDCARDNO) CARDNO, A.TRADETYPECODE, C.TRADETYPE,";
+            strSql += " A.MONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO, A.OPERATETIME OPERATETIME,D.DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK,A.STARTCARDNO,A.ENDCARDNO";
+            strSql += "  From TF_XFC_SELL A , TD_M_TRADETYPE C ,TD_M_INSIDESTAFF D";
+            strSql += " WHERE A.TRADETYPECODE='80' AND A.CANCELTAG = '0'  ";
+            strSql += " AND A.TRADEID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.TRADEID and  k.usetag='1') ";
+            strSql += " AND  A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.STAFFNO = D.STAFFNO(+)";
+            strSql += " union all";
+            strSql += " SELECT A.TRADEID, DECODE(A.STARTCARDNO, A.ENDCARDNO, A.STARTCARDNO, A.STARTCARDNO || '-' || A.ENDCARDNO) CARDNO, A.TRADETYPECODE, C.TRADETYPE,";
+            strSql += " A.MONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO, A.OPERATETIME OPERATETIME,D.DEPARTNO,k.VOLUMENO,k.INVOICENO,'' ISSK,A.STARTCARDNO,A.ENDCARDNO";
+            strSql += " From TF_XFC_SELL A , TD_M_TRADETYPE C ,TD_M_INSIDESTAFF D,TF_F_INVOICEORDERDETAIL K ";
+            strSql += " WHERE A.TRADETYPECODE='80' AND A.CANCELTAG = '0' ";
+            strSql += " AND  A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.STAFFNO = D.STAFFNO(+)";
+            strSql += " AND A.TRADEID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "3") //礼金卡售出
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, (D.SUPPLYMONEY + 1000)/100.0 CURRENTMONEY,";
+            strSql += "  A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK";
+            strSql += " From TF_B_TRADE A ,TF_B_TRADEFEE D ,TD_M_TRADETYPE C ";
+            strSql += "WHERE A.TRADETYPECODE IN ('50','51') AND A.CANCELTAG = '0'  ";
+            strSql += " AND A.TRADEID = D.TRADEID(+) ";
+            strSql += " AND  A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += "AND A.TRADEID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.TRADEID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, (D.SUPPLYMONEY + 1000)/100.0 CURRENTMONEY,";
+            strSql += " A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,k.VOLUMENO,k.INVOICENO,'' ISSK";
+            strSql += " From TF_B_TRADE A ,TF_B_TRADEFEE D ,TD_M_TRADETYPE C,TF_F_INVOICEORDERDETAIL K";
+            strSql += " WHERE A.TRADETYPECODE IN ('50','51') AND A.CANCELTAG = '0' ";
+            strSql += " AND A.TRADEID = D.TRADEID(+)";
+            strSql += " AND  A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "4")  //  代理充值
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "select A.ID TRADEID,A.CARDNO,A.TRADETYPECODE,C.TRADETYPE, A.TRADEMONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO ,";
+            strSql += "A.TRADEDATE OPERATETIME,A.DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK";
+            strSql += " From TQ_SUPPLY_RIGHT A, TD_M_TRADETYPE C";
+            strSql += " WHERE A.TRADETYPECODE IN ('02','1S') AND (A.RSRVCHAR in ('01','02') or A.RSRVCHAR is null)";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.ID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.ID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " select A.ID TRADEID,A.CARDNO,A.TRADETYPECODE,C.TRADETYPE, A.TRADEMONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO ,";
+            strSql += " A.TRADEDATE OPERATETIME,A.DEPARTNO,k.VOLUMENO,k.INVOICENO,'' ISSK";
+            strSql += " From TQ_SUPPLY_RIGHT A, TD_M_TRADETYPE C,TF_F_INVOICEORDERDETAIL K ";
+            strSql += " WHERE A.TRADETYPECODE IN ('02','1S') AND (A.RSRVCHAR in ('01','02') or A.RSRVCHAR is null) AND A.BALUNITNO IS NOT NULL ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.ID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }      
+        else if (selTradeType.SelectedValue == "5")  //手Q充值
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "select A.ID TRADEID,A.CARDNO,A.TRADETYPECODE,C.TRADETYPE, A.TRADEMONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO ,";
+            strSql += " A.TRADEDATE OPERATETIME,A.DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK";
+            strSql += " From TQ_SUPPLY_RIGHT A,TD_M_TRADETYPE C ";
+            strSql += " WHERE A.balunitno='36000001' AND  A.rsrvchar = '01' ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.ID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.ID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " select A.ID TRADEID,A.CARDNO,A.TRADETYPECODE,C.TRADETYPE, A.TRADEMONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO ,";
+            strSql += " A.TRADEDATE OPERATETIME,A.DEPARTNO,k.VOLUMENO,k.INVOICENO,'' ISSK";
+            strSql += " From TQ_SUPPLY_RIGHT A,TD_M_TRADETYPE C  ,TF_F_INVOICEORDERDETAIL K ";
+            strSql += " WHERE A.balunitno='36000001' AND  A.rsrvchar = '01' ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.ID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "6")  //充值补登
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "select A.ID TRADEID,A.CARDNO,A.TRADETYPECODE,C.TRADETYPE, A.TRADEMONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO ,";
+            strSql += "A.TRADEDATE OPERATETIME,A.DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK";
+            strSql += " From TQ_SUPPLY_RIGHT A ,TD_M_TRADETYPE C ";
+            strSql += " WHERE A.TRADETYPECODE='2A' ";
+            strSql += " AND  A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += "AND A.ID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.ID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " select A.ID TRADEID,A.CARDNO,A.TRADETYPECODE,C.TRADETYPE, A.TRADEMONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO ,";
+            strSql += "A.TRADEDATE OPERATETIME,A.DEPARTNO,k.VOLUMENO,k.INVOICENO,'' ISSK";
+            strSql += " From TQ_SUPPLY_RIGHT A ,TD_M_TRADETYPE C ,TF_F_INVOICEORDERDETAIL K ";
+            strSql += " WHERE A.TRADETYPECODE='2A' ";
+            strSql += " AND  A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.ID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "7")  //读卡器售出
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK,BEGINSERIALNUMBER,ENDSERIALNUMBER  FROM(";
+            strSql += " select A.TRADEID,DECODE(A.BEGINSERIALNUMBER, A.ENDSERIALNUMBER, A.BEGINSERIALNUMBER, A.BEGINSERIALNUMBER || '-' || A.ENDSERIALNUMBER) CARDNO,A.OPERATETYPECODE TRADETYPECODE,C.TRADETYPE, A.MONEY/100.0 CURRENTMONEY, A.OPERATESTAFFNO ,";
+            strSql += "A.OPERATETIME,D.DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK,A.BEGINSERIALNUMBER,A.ENDSERIALNUMBER";
+            strSql += " From TF_B_READER A ,TD_M_TRADETYPE C,TD_M_INSIDESTAFF D ";
+            strSql += " WHERE A.OPERATETYPECODE = C.TRADETYPECODE(+)  ";
+            strSql += " AND A.OPERATESTAFFNO=D.STAFFNO(+)";
+            strSql += " AND A.OPERATETYPECODE='1A' AND A.CANCELTAG = '0'  ";
+            strSql += " AND A.TRADEID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.TRADEID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " select A.TRADEID,DECODE(A.BEGINSERIALNUMBER, A.ENDSERIALNUMBER, A.BEGINSERIALNUMBER, A.BEGINSERIALNUMBER || '-' || A.ENDSERIALNUMBER) CARDNO,A.OPERATETYPECODE TRADETYPECODE,C.TRADETYPE, A.MONEY/100.0 CURRENTMONEY, A.OPERATESTAFFNO ,";
+            strSql += "A.OPERATETIME,D.DEPARTNO,k.VOLUMENO,k.INVOICENO,'' ISSK,A.BEGINSERIALNUMBER,A.ENDSERIALNUMBER";
+            strSql += " From TF_B_READER A ,TD_M_TRADETYPE C,TD_M_INSIDESTAFF D,TF_F_INVOICEORDERDETAIL K  ";
+            strSql += " WHERE A.OPERATETYPECODE = C.TRADETYPECODE(+) ";
+            strSql += " AND A.OPERATESTAFFNO=D.STAFFNO(+)";
+            strSql += " AND A.OPERATETYPECODE='1A' AND A.CANCELTAG = '0' ";
+            strSql += " AND A.TRADEID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "8")  //售卡
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, A.CURRENTMONEY/100.0 CURRENTMONEY,";
+            strSql += "A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK";
+            strSql += " From TF_B_TRADE A , TD_M_TRADETYPE C";
+            strSql += " WHERE A.TRADETYPECODE='01' AND A.CANCELTAG = '0' ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+) ";
+            strSql += "AND A.TRADEID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.TRADEID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, A.CURRENTMONEY/100.0 CURRENTMONEY,";
+            strSql += "A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,k.VOLUMENO,k.INVOICENO,'' ISSK";
+            strSql += " From TF_B_TRADE A , TD_M_TRADETYPE C ,TF_F_INVOICEORDERDETAIL K  ";
+            strSql += " WHERE A.TRADETYPECODE='01' AND A.CANCELTAG = '0'";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "9")  //休闲开卡
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, D.FUNCFEE/100.0 CURRENTMONEY,";
+            strSql += "A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,'' VOLUMENO,'' INVOICENO,'' ISSK";
+            strSql += " From TF_B_TRADE A, TF_B_TRADEFEE D ,TD_M_TRADETYPE C ";
+            strSql += " WHERE A.TRADETYPECODE='25' AND A.CANCELTAG = '0'";
+            strSql += " AND A.TRADEID = D.TRADEID(+)";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.TRADEID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, D.FUNCFEE/100.0 CURRENTMONEY,";
+            strSql += " A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,k.VOLUMENO,k.INVOICENO,'' ISSK";
+            strSql += " From TF_B_TRADE A, TF_B_TRADEFEE D ,TD_M_TRADETYPE C,TF_F_INVOICEORDERDETAIL K  ";
+            strSql += " WHERE A.TRADETYPECODE='25' AND A.CANCELTAG = '0'";
+            strSql += " AND A.TRADEID = D.TRADEID(+)";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "10")  //省卡充值
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, A.CURRENTMONEY/100.0 CURRENTMONEY,";
+            strSql += "A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,'' VOLUMENO,'' INVOICENO,'1' ISSK";
+            strSql += " From TF_B_TRADE_SK A ,TD_M_TRADETYPE C";
+            strSql += " WHERE A.TRADETYPECODE='02' AND A.CANCELTAG = '0' ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.TRADEID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, A.CURRENTMONEY/100.0 CURRENTMONEY,";
+            strSql += "A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,k.VOLUMENO,k.INVOICENO,'1' ISSK";
+            strSql += " From TF_B_TRADE_SK A,TD_M_TRADETYPE C,TF_F_INVOICEORDERDETAIL K ";
+            strSql += " WHERE A.TRADETYPECODE='02' AND A.CANCELTAG = '0' ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "11")  //省卡售卡
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, A.CURRENTMONEY/100.0 CURRENTMONEY,";
+            strSql += "A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,'' VOLUMENO,'' INVOICENO,'1' ISSK";
+            strSql += " From TF_B_TRADE_SK A ,TD_M_TRADETYPE C";
+            strSql += " WHERE A.TRADETYPECODE='01' AND A.CANCELTAG = '0' ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.TRADEID and  k.usetag='1')";
+            strSql += " union all ";
+            strSql += " SELECT A.TRADEID, A.CARDNO, A.TRADETYPECODE, C.TRADETYPE, A.CURRENTMONEY/100.0 CURRENTMONEY,";
+            strSql += " A.OPERATESTAFFNO, A.OPERATETIME,A.Operatedepartid DEPARTNO,k.VOLUMENO,k.INVOICENO,'1' ISSK ";
+            strSql += " From TF_B_TRADE_SK A,TD_M_TRADETYPE C,TF_F_INVOICEORDERDETAIL K ";
+            strSql += " WHERE A.TRADETYPECODE='01' AND A.CANCELTAG = '0' ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND A.TRADEID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+        else if (selTradeType.SelectedValue == "12")  //  省卡代理充值
+        {
+            strSql += "SELECT TRADEID,CARDNO,TRADETYPECODE,TRADETYPE,CURRENTMONEY,OPERATESTAFFNO,OPERATETIME,DEPARTNO,VOLUMENO,INVOICENO,ISSK FROM(";
+            strSql += "select A.ID TRADEID,A.CARDNO,A.TRADETYPECODE,C.TRADETYPE, A.TRADEMONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO ,";
+            strSql += "A.TRADEDATE OPERATETIME,A.DEPARTNO,'' VOLUMENO,'' INVOICENO,'1' ISSK";
+            strSql += " From TQ_SUPPLY_RIGHT_SK A, TD_M_TRADETYPE C, TF_SELSUP_BALUNIT b";
+            strSql += " WHERE A.TRADETYPECODE ='02'  ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND b.ISPRVNCARD= '1'";
+            strSql += " AND a.BALUNITNO=b.BALUNITNO";
+            strSql += " AND A.ID NOT IN(SELECT K.TRADEID FROM TF_F_INVOICEORDERDETAIL K WHERE K.TRADEID=A.ID and  k.usetag='1')";
+            strSql += " union all";
+            strSql += " select A.ID TRADEID,A.CARDNO,A.TRADETYPECODE,C.TRADETYPE, A.TRADEMONEY/100.0 CURRENTMONEY, A.STAFFNO OPERATESTAFFNO ,";
+            strSql += " A.TRADEDATE OPERATETIME,A.DEPARTNO,k.VOLUMENO,k.INVOICENO,'1' ISSK";
+            strSql += " From TQ_SUPPLY_RIGHT_SK A, TD_M_TRADETYPE C, TF_SELSUP_BALUNIT b,TF_F_INVOICEORDERDETAIL K ";
+            strSql += " WHERE A.TRADETYPECODE ='02' ";
+            strSql += " AND A.TRADETYPECODE = C.TRADETYPECODE(+)";
+            strSql += " AND b.ISPRVNCARD= '1'";
+            strSql += " AND a.BALUNITNO=b.BALUNITNO";
+            strSql += " AND A.ID=K.TRADEID";
+            strSql += " AND K.USETAG='1')P";
+        }
+
+        ArrayList list = getCondition();
+
+        string where = ListToAndStr(list);
+        strSql = strSql + where + " Order By OPERATETIME";
+
+        DataTable data = tmTMTableModule.selByPKDataTable(context, strSql, 0);
+
+        DataView dataView = new DataView(data);
+
+        lvwInvoice.DataSource = dataView;
+        lvwInvoice.DataBind();
+
+        lvwInvoice.SelectedIndex = -1;
+    }
+    private String ListToAndStr(ArrayList list)
+    {
+        String str = " ";
+        for (int i = 0; i < list.Count; i++)
+        {
+            if(i==0)
+            {
+                str += " Where (" + list[i].ToString() + ")";
+            }
+            else
+            {
+                str += " And (" + list[i].ToString() + ")";
+            }
+            
+        }
+        return str;
+    }
+    //SQL条件语句
+    private ArrayList getCondition()
+    {
+        ArrayList list = new ArrayList();
+
+        getConditionFromTime(list);
+        getConditionFromId(list);
+        getConditionFromDepartOrStaff(list);
+
+        return list;
+    }
+    private ArrayList getConditionFromId(ArrayList list)
+    {
+        string strBeginNo = txtBeginCardNo.Text.Trim();
+        string strEndNo = txtEndCardNo.Text.Trim();
+
+        if (selTradeType.SelectedValue == "1" || selTradeType.SelectedValue == "3" || selTradeType.SelectedValue == "4" || selTradeType.SelectedValue == "5" || selTradeType.SelectedValue == "6" || selTradeType.SelectedValue == "8" || selTradeType.SelectedValue == "9" || selTradeType.SelectedValue == "10" || selTradeType.SelectedValue == "11" || selTradeType.SelectedValue == "12")     //普通充值 
+        {
+            if (strBeginNo != "" && strEndNo != "")
+            {
+                list.Add("P.CARDNO between '" + strBeginNo + "' and '" + strEndNo + "'");
+            }
+            else if (strBeginNo != "")
+            {
+                list.Add("P.CARDNO= '" + strBeginNo + "'");
+            }
+            else if (strEndNo != "")
+            {
+                list.Add("P.CARDNO= '" + strEndNo + "'");
+            }
+        }
+        else if (selTradeType.SelectedValue == "2")  //充值卡售出
+        {
+            if (strBeginNo != "" && strEndNo != "")
+            {
+                list.Add("P.STARTCARDNO >= '" + strBeginNo + "' And P.ENDCARDNO <= '" + strEndNo + "'");
+            }
+            else if (strBeginNo != "")
+            {
+                list.Add("P.STARTCARDNO >= '" + strBeginNo + "'");
+            }
+            else if (strEndNo != "")
+            {
+                list.Add("P.ENDCARDNO <= '" + strEndNo + "'");
+            }
+        }
+        else if (selTradeType.SelectedValue == "7")  //读卡器售出
+        {
+            if (strBeginNo != "" && strEndNo != "")
+            {
+                list.Add("P.BEGINSERIALNUMBER >= '" + strBeginNo + "' And P.ENDSERIALNUMBER <= '" + strEndNo + "'");
+            }
+            else if (strBeginNo != "")
+            {
+                list.Add("P.BEGINSERIALNUMBER >= '" + strBeginNo + "'");
+            }
+            else if (strEndNo != "")
+            {
+                list.Add("P.ENDSERIALNUMBER <= '" + strEndNo + "'");
+            }
+        }
+
+        return list;
+    }
+
+    private ArrayList getConditionFromTime(ArrayList list)
+    {
+        string strBeginDate = txtBeginDate.Text.Trim();
+        string strEndDate = txtEndDate.Text.Trim();
+
+        if (selTradeType.SelectedValue == "4" || selTradeType.SelectedValue == "5" || selTradeType.SelectedValue == "6" || selTradeType.SelectedValue == "12")// 4:代理充值5：手Q充值 6：充值补登 12:省卡代理充值
+        {
+            if (strBeginDate != "" && strEndDate != "")
+            {
+                //DateTime endDate = DateTime.ParseExact(strEndDate, "yyyy-MM-dd", null);
+                //endDate = endDate.AddDays(1);
+                list.Add("P.OPERATETIME>= " + strBeginDate + " and P.OPERATETIME<= " + strEndDate + "");
+            }
+           
+        }
+        else
+        {
+            if (strBeginDate != "" && strEndDate != "")
+            {
+                //DateTime endDate = DateTime.ParseExact(strEndDate, "yyyyMMdd", null);
+                //endDate = endDate.AddDays(1);
+                list.Add("P.OPERATETIME >= to_date('" + strBeginDate + "','yyyyMMdd') and P.OPERATETIME <= to_date('" + strEndDate + "','yyyyMMdd')+1");
+            }
+            
+        }
+
+        return list;
+    }
+
+    private ArrayList getConditionFromDepartOrStaff(ArrayList list)
+    {
+        string departno = selDept.SelectedValue;
+        string staffno = selStaff.SelectedValue;
+
+        //if (selTradeType.SelectedValue == "1" || selTradeType.SelectedValue == "3" || selTradeType.SelectedValue == "4")
+        //{
+            if (departno != "")
+            {
+                list.Add("P.DEPARTNO = '" + departno + "'");
+            }
+
+            if (staffno != "")
+            {
+                list.Add("P.OPERATESTAFFNO = '" + staffno + "'");
+            }
+
+       // }
+        //else if (selTradeType.SelectedValue == "2")
+        //{
+        //    if (departno != "")
+        //    {
+        //        list.Add("P.DEPARTNO = '" + departno + "'");
+        //    }
+
+        //    if (staffno != "")
+        //    {
+        //        list.Add("P.OPERATESTAFFNO = '" + staffno + "'");
+        //    }
+        //}
+
+        return list;
     }
    
     private bool InputValidate()
@@ -112,6 +510,7 @@ public partial class ASP_InvoiceTrade_IT_PrintElectronic : Master.Master
         else
         {
             ddlProjName.SelectedValue = "*软件*苏州市民卡卡片业务系统软件V1.0";//征税的选这个
+            selProj1.SelectedIndex = 0;
             selProj1.Enabled = false;
         }
 
@@ -219,6 +618,18 @@ public partial class ASP_InvoiceTrade_IT_PrintElectronic : Master.Master
         ValidSubmit();
         if (context.hasError())
             return;
+        //if(hidMessage.Value!="")
+        //{
+        //    DialogResult result = MessageBox.Show("A004P03R04: 存在以下已经打印过的流水号:" + hidMessage.Value, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+        //    if (result == DialogResult.OK)
+        //    {
+                
+        //    }
+        //    else
+        //    {
+        //        return;//执行Cancel的代码
+        //    }
+        //}
         string projectName = "";
         if (selProj1.SelectedValue=="")
         {
@@ -428,16 +839,18 @@ public partial class ASP_InvoiceTrade_IT_PrintElectronic : Master.Master
         int count = 0;
         int isPint = 0;
         int isDept = 0;
-        string dept = getDataKeys("DEPARTNO");//当前选中的部门
+        string error = "";
+        string dept = getDataKeys("DEPARTNO"); //当前选中的部门
         for (int index = 0; index < lvwInvoice.Rows.Count; index++)
         {
-            CheckBox cb = (CheckBox)lvwInvoice.Rows[index].FindControl("ItemCheckBox");
+            CheckBox cb = (CheckBox) lvwInvoice.Rows[index].FindControl("ItemCheckBox");
             if (cb != null && cb.Checked)
             {
                 ++count;
-                string volumeno = lvwInvoice.Rows[index].Cells[8].Text.Trim();//发票代码
-                string selDept = lvwInvoice.Rows[index].Cells[6].Text.Trim();//部门
-                if (volumeno != "" && volumeno != "&nbsp;") 
+                string volumeno = lvwInvoice.Rows[index].Cells[8].Text.Trim(); //发票代码
+                string selDept = lvwInvoice.Rows[index].Cells[6].Text.Trim(); //部门
+                string tradeid = lvwInvoice.Rows[index].Cells[1].Text.Trim(); //流水号
+                if (volumeno != "" && volumeno != "&nbsp;")
                 {
                     isPint++;
                 }
@@ -445,15 +858,23 @@ public partial class ASP_InvoiceTrade_IT_PrintElectronic : Master.Master
                 {
                     isDept++;
                 }
-            }
+                //string sql = "select 1 from tf_f_invoicetmp  t where t.tradeid= '" + tradeid + "' ";
+                //context.DBOpen("Select");
+                //DataTable data = context.ExecuteReader(sql);
+                //if (data.Rows.Count > 0)
+                //{
+                //    error += tradeid + ",";
+                //}
 
+            }
+           
         }
         // 没有选中任何行，则返回错误
         if (count <= 0)
         {
             context.AddError("A004P03R01: 没有选中订单记录");
         }
-        if (isPint>0)
+        if (isPint > 0)
         {
             context.AddError("A004P03R02: 不可选中已开过票的记录");
         }
@@ -461,8 +882,14 @@ public partial class ASP_InvoiceTrade_IT_PrintElectronic : Master.Master
         {
             context.AddError("A004P03R03: 不可选中不同部门的记录");
         }
+        //if (error != "")
+        //{
+        //    hidMessage.Value = error.Substring(0, error.Length - 1);
+           
+        //}
 
     }
+
     private void FillTempTable(string sessionID)
     {
 
@@ -500,6 +927,7 @@ public partial class ASP_InvoiceTrade_IT_PrintElectronic : Master.Master
             CheckBox ch = (CheckBox)gvr.FindControl("ItemCheckBox");
             ch.Checked = false;
         }
+        //hidMessage.Value = "";
     }
    
    

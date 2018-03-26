@@ -142,7 +142,7 @@
                                 AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="false">
                                 <Columns>
                                     <asp:BoundField DataField="TRADEDATE" HeaderText="消费时间" />
-                                    <asp:BoundField DataField="BALUNITNAME" HeaderText="结算单元" />
+                                    <asp:BoundField DataField="BALUNITNAME" HeaderText="结算单元名称" />
                                     <asp:BoundField DataField="CONSUMERTIMES" HeaderText="消费次数" />
                                 </Columns>
                                 <EmptyDataTemplate>
@@ -150,7 +150,7 @@
                                         <tr class="tabbt">
                                             <td>消费时间
                                             </td>
-                                            <td>结算单元
+                                            <td>结算单元名称
                                             </td>
                                             <td>消费次数
                                             </td>

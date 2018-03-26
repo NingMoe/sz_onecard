@@ -22,11 +22,13 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
         if (!Page.IsPostBack)
         {
             showNonDataGridView();
-            //初始化卡片类型
+            //初始化卡片类型
             UserCardHelper.selectCardType(context, selCardType, true);
 
-            //初始化卡面类型
+            //初始化卡面类型
             UserCardHelper.selectCardFace(context, selCardFaceType, true);
+            //初始化税率
+            UserCardHelper.selectCardTax(context, ddlTax, true);
         }
     }
     private void showNonDataGridView()
@@ -50,6 +52,8 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
         txtName.Text = "";
         txtNote.Text = "";
         selUseTag.SelectedIndex = 0;
+        //ddlTax.SelectedIndex = 0;
+        txtGoods.Text = "";
         Img.Src = "../../Images/cardface.jpg";
     }
 
@@ -104,17 +108,19 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
     }
 
     /// <summary>
-    /// 添加卡面及卡样
+    /// 添加卡面及卡样
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
 
-        if (!ValidateInputData())   //校验卡片类型编码、卡面类型名称
+        if (!ValidateInputData())   //校验卡片类型编码、卡面类型名称
             return;
+       
+        
 
-        //判断卡面类型编码是否已存在
+        //判断卡面类型编码是否已存在
 
         TD_M_CARDSURFACETDO ddoTD_M_CARDSURFACETDOIn = new TD_M_CARDSURFACETDO();
         TD_M_CARDSURFACETM tmTD_M_CARDSURFACETM = new TD_M_CARDSURFACETM();
@@ -131,9 +137,11 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
         context.AddField("p_cardsurfacename").Value = txtName.Text.Trim();
         context.AddField("p_cardsurfacenote").Value = txtNote.Text.Trim();
         context.AddField("p_usetag").Value = selUseTag.SelectedValue;
+        context.AddField("p_cardtax").Value = ddlTax.SelectedValue;
+        context.AddField("p_goodsno").Value = txtGoods.Text.Trim();
         if (FileUpload1.FileName != "") //上传文件路径不为空，同时添加卡样
             context.AddField("p_hascardsample").Value = "1";
-        else //不添加卡样
+        else //不添加卡样
             context.AddField("p_hascardsample").Value = "0";
         context.AddField("p_outcardsamplecode", "String", "output", "6", null);
         bool ok = context.ExecuteSP("SP_EM_CARDFACEADD");
@@ -141,9 +149,9 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
         {
             string p_outcardsamplecode = context.GetFieldValue("p_outcardsamplecode").ToString();
 
-            if (FileUpload1.FileName != "")     //上传文件路径不为空
+            if (FileUpload1.FileName != "")     //上传文件路径不为空
             {
-                UpdateCardSample(p_outcardsamplecode, GetPicture(FileUpload1));    //更新卡样编码表卡样
+                UpdateCardSample(p_outcardsamplecode, GetPicture(FileUpload1));    //更新卡样编码表卡样
             }
 
             AddMessage("添加卡面编码成功");
@@ -185,7 +193,7 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
             context.AddError("A094780001");
             return;
         }
-        if (!ValidateInputData())   //校验卡片类型编码、卡面类型名称
+        if (!ValidateInputData())   //校验卡片类型编码、卡面类型名称
             return;
 
         if (txtCode.Text.Trim() != gvResult.SelectedRow.Cells[1].Text.Split(':')[0].ToString())
@@ -204,13 +212,15 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
         context.AddField("p_cardsurfacename").Value = txtName.Text.Trim();
         context.AddField("p_cardsurfacenote").Value = txtNote.Text.Trim();
         context.AddField("p_usetag").Value = selUseTag.SelectedValue;
+        context.AddField("p_cardtax").Value = ddlTax.SelectedValue;
+        context.AddField("p_goodsno").Value = txtGoods.Text.Trim();
         string p_exchange = string.Empty;
-        if (oldByte == newByte)     //旧卡样与新卡样文件相同
+        if (oldByte == newByte)     //旧卡样与新卡样文件相同
         {
             p_exchange = "1";
 
         }
-        else if (oldByte == null && newByte != null)    //旧卡样为空，新卡样
+        else if (oldByte == null && newByte != null)    //旧卡样为空，新卡样
         {
             p_exchange = "2";
         }
@@ -232,7 +242,7 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
             {
                 string p_outcardsamplecode = context.GetFieldValue("p_outcardsamplecode").ToString();
 
-                UpdateCardSample(p_outcardsamplecode, newByte);    //更新卡样编码表卡样
+                UpdateCardSample(p_outcardsamplecode, newByte);    //更新卡样编码表卡样
             }
 
             AddMessage("修改卡面信息成功");
@@ -245,7 +255,14 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
     }
     protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if(e.Row.Cells[7].Text==":")
+            {
+                e.Row.Cells[7].Text = "";
+            }
+            
+        }
     }
 
     //分页
@@ -267,6 +284,8 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
             DateTime d = new DateTime();
 
             Img.Src = "../ResourceManage/RM_GetPicture.aspx?CardSampleCode=" + row.Cells[3].Text.ToString() + "&d=" + d.ToString();
+            ddlTax.SelectedValue = row.Cells[7].Text.Trim() == "" ? "" : row.Cells[7].Text.Trim().Substring(0, 8);
+            txtGoods.Text = row.Cells[8].Text.ToString() == "&nbsp;" ? "" : row.Cells[8].Text.ToString();
         }
     }
 
@@ -274,7 +293,7 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            //注册行单击事件
+            //注册行单击事件
             e.Row.Attributes.Add("onclick", "javascirpt:__doPostBack('gvResult','Select$" + e.Row.RowIndex + "')");
         }
     }
@@ -282,7 +301,7 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
     //输入判断处理
     private bool ValidateInputData()
     {
-        //卡面编码非空、数字、长度判断
+        //卡面编码非空、数字、长度判断
 
         string strCode = txtCode.Text.Trim();
         if (strCode == "")
@@ -302,7 +321,7 @@ public partial class ASP_EquipmentManagement_EM_CardSurface : Master.Master
 
         }
 
-        //卡面编码名称非空、长度判断
+        //卡面编码名称非空、长度判断
 
         string strName = txtName.Text.Trim();
         if (strName == "")

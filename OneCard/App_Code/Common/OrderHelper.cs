@@ -36,7 +36,7 @@ public class OrderHelper
 
     public static void WriteInfoIntoTempTable(CmnContext context, GridView gvCashGift,
         GridView gvChargeCard, GridView gvSZTCard, GridView gvLvYou, GridView gvInvoice,
-        CheckBoxList chkPayTypeList, string sessionId)
+        CheckBoxList chkPayTypeList,CheckBoxList chkPrintType,string sessionId)
     {
         clearTempInfo(context);
         context.DBOpen("Insert");
@@ -77,16 +77,18 @@ public class OrderHelper
             TextBox txtCardNum = (TextBox)gvSZTCard.Rows[i].FindControl("txtSZTCardNum");
             TextBox txtCardPrice = (TextBox)gvSZTCard.Rows[i].FindControl("txtSZTCardPrice");
             TextBox txtChargeMoney = (TextBox)gvSZTCard.Rows[i].FindControl("txtSZTCardChargeMoney");
+            CheckBox chkTax = (CheckBox)gvSZTCard.Rows[i].FindControl("chkTax");
+            string tax = (chkTax.Checked == false) ? "0" : "1";
 
             if (selCardtype.SelectedValue != null && txtCardNum.Text.Trim().Length > 0
                 && txtCardPrice.Text.Trim().Length > 0 && txtChargeMoney.Text.Trim().Length > 0)
             {
-                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3, F4, F5, F6) values('"
+                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3, F4, F5, F6,F7) values('"
                         + sessionId + "', '2','" + selCardtype.SelectedValue + "','"
                         + txtCardNum.Text.Trim() + "','"
                         + Convert.ToDecimal(txtCardPrice.Text.Trim()) * 100 + "','"
                         + Convert.ToDecimal(txtChargeMoney.Text.Trim()) * 100 + "','"
-                        + (Convert.ToDecimal(txtCardPrice.Text.Trim()) * 100 * Convert.ToInt32(txtCardNum.Text.Trim()) + Convert.ToDecimal(txtChargeMoney.Text.Trim()) * 100) + "')");
+                        + (Convert.ToDecimal(txtCardPrice.Text.Trim()) * 100 * Convert.ToInt32(txtCardNum.Text.Trim()) + Convert.ToDecimal(txtChargeMoney.Text.Trim()) * 100) + "','" + tax  +"')");
             }
         }
 
@@ -142,6 +144,138 @@ public class OrderHelper
                                                       + "','" + chkPayTypeList.Items[i].Text + "')");
             }
         }
+        for (int i = 0; i < chkPrintType.Items.Count; i++)
+        {
+            if (chkPrintType.Items[i].Selected)
+            {
+                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3) values('"
+                                                      + sessionId + "', '6','" + chkPrintType.Items[i].Value
+                                                      + "','" + chkPrintType.Items[i].Text + "')");
+            }
+        }
+
+        if (!context.hasError())
+        {
+            context.DBCommit();
+        }
+        else
+        {
+            context.RollBack();
+        }
+    }
+
+    public static void WriteInfoIntoTempTable(CmnContext context, GridView gvCashGift,
+        GridView gvChargeCard, GridView gvSZTCard, GridView gvLvYou, GridView gvInvoice,
+        CheckBoxList chkPayTypeList, string sessionId)
+    {
+        clearTempInfo(context);
+        context.DBOpen("Insert");
+        //利金卡数据入临时表
+
+        for (int i = 0; i < gvCashGift.Rows.Count; i++)
+        {
+            TextBox txtValue = (TextBox)gvCashGift.Rows[i].FindControl("txtCashGiftValue");
+            TextBox txtNum = (TextBox)gvCashGift.Rows[i].FindControl("txtCashGiftNum");
+            if (txtNum.Text.Trim().Length > 0 && txtValue.Text.Trim().Length > 0)
+            {
+                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3, F4) values('"
+                        + sessionId + "', '0','" + Convert.ToDecimal(txtValue.Text.Trim()) * 100 + "','"
+                        + txtNum.Text.Trim()
+                        + "','" + Convert.ToDecimal(txtValue.Text.Trim()) * 100 * Convert.ToInt32(txtNum.Text.Trim())
+                        + "')");
+            }
+        }
+        //充值卡数据入临时表
+        for (int i = 0; i < gvChargeCard.Rows.Count; i++)
+        {
+            DropDownList selChargeCardValue = (DropDownList)gvChargeCard.Rows[i].FindControl("selChargeCardValue");
+            TextBox txtNum = (TextBox)gvChargeCard.Rows[i].FindControl("txtChargeCardNum");
+            //TextBox txtFromCardNo = (TextBox)gvChargeCard.Rows[i].FindControl("txtFromCardNo");
+            //TextBox txtToCardNo = (TextBox)gvChargeCard.Rows[i].FindControl("txtToCardNo");
+            if (selChargeCardValue.SelectedValue != null && txtNum.Text.Trim().Length > 0)
+            {
+                string ChargeCardValue = selChargeCardValue.SelectedItem.ToString();
+                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3, F4) values('"
+                        + sessionId + "', '1','" + selChargeCardValue.SelectedValue
+                        + "','" + txtNum.Text.Trim() + "','"
+                        + Convert.ToDecimal(ChargeCardValue.Substring(2, ChargeCardValue.Length - 2)) * 100 * Convert.ToInt32(txtNum.Text.Trim()) + "')");
+            }
+        }
+        //市民卡B卡数据入临时表
+
+        for (int i = 0; i < gvSZTCard.Rows.Count; i++)
+        {
+            DropDownList selCardtype = (DropDownList)gvSZTCard.Rows[i].FindControl("selSZTCardtype");
+            TextBox txtCardNum = (TextBox)gvSZTCard.Rows[i].FindControl("txtSZTCardNum");
+            TextBox txtCardPrice = (TextBox)gvSZTCard.Rows[i].FindControl("txtSZTCardPrice");
+            TextBox txtChargeMoney = (TextBox)gvSZTCard.Rows[i].FindControl("txtSZTCardChargeMoney");
+
+            if (selCardtype.SelectedValue != null && txtCardNum.Text.Trim().Length > 0
+                && txtCardPrice.Text.Trim().Length > 0 && txtChargeMoney.Text.Trim().Length > 0)
+            {
+                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3, F4, F5, F6) values('"
+                        + sessionId + "', '2','" + selCardtype.SelectedValue + "','"
+                        + txtCardNum.Text.Trim() + "','"
+                        + Convert.ToDecimal(txtCardPrice.Text.Trim()) * 100 + "','"
+                        + Convert.ToDecimal(txtChargeMoney.Text.Trim()) * 100 + "','"
+                        + (Convert.ToDecimal(txtCardPrice.Text.Trim()) * 100 * Convert.ToInt32(txtCardNum.Text.Trim()) + Convert.ToDecimal(txtChargeMoney.Text.Trim()) * 100) + "')");
+            }
+        }
+
+        //旅游卡数据入临时表
+
+        for (int i = 0; i < gvLvYou.Rows.Count; i++)
+        {
+            TextBox txtCardNum = (TextBox)gvLvYou.Rows[i].FindControl("txtLvYouNum");
+            TextBox txtCardPrice = (TextBox)gvLvYou.Rows[i].FindControl("txtLvYouPrice");
+            TextBox txtChargeMoney = (TextBox)gvLvYou.Rows[i].FindControl("txtLvYouChargeMoney");
+
+            if (txtCardNum.Text.Trim().Length > 0
+                && txtCardPrice.Text.Trim().Length > 0 && txtChargeMoney.Text.Trim().Length > 0)
+            {
+                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3, F4, F5, F6) values('"
+                        + sessionId + "', '5','5101','"
+                        + txtCardNum.Text.Trim() + "','"
+                        + Convert.ToDecimal(txtCardPrice.Text.Trim()) * 100 + "','"
+                        + Convert.ToDecimal(txtChargeMoney.Text.Trim()) * 100 + "','"
+                        + (Convert.ToDecimal(txtCardPrice.Text.Trim()) * 100 * Convert.ToInt32(txtCardNum.Text.Trim()) + Convert.ToDecimal(txtChargeMoney.Text.Trim()) * 100) + "')");
+            }
+        }
+
+        //发票数据入临时表
+        for (int i = 0; i < gvInvoice.Rows.Count; i++)
+        {
+            DropDownList selInvoicetype = (DropDownList)gvInvoice.Rows[i].FindControl("selInvoicetype");
+            //TextBox txtInvoiceNum = (TextBox)gvInvoice.Rows[i].FindControl("txtInvoiceNum");
+            TextBox txtInvoiceMoney = (TextBox)gvInvoice.Rows[i].FindControl("txtInvoiceMoney");
+
+            if (selInvoicetype.SelectedValue != null && txtInvoiceMoney.Text.Trim().Length > 0)
+            {
+                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3 ) values('"
+                        + sessionId + "', '3','" + selInvoicetype.SelectedValue
+                        + "','" + Convert.ToDecimal(txtInvoiceMoney.Text.Trim()) * 100 + "')");
+            }
+        }
+        //for (int i = 0; i < chkInvoiceList.Items.Count; i++)
+        //{
+        //    if (chkInvoiceList.Items[i].Selected)
+        //    {
+        //        context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3) values('"
+        //                                              + sessionId + "', '3','" + chkInvoiceList.Items[i].Value
+        //                                              + "','" + chkInvoiceList.Items[i].Text + "')");
+        //    }
+        //}
+
+        for (int i = 0; i < chkPayTypeList.Items.Count; i++)
+        {
+            if (chkPayTypeList.Items[i].Selected)
+            {
+                context.ExecuteNonQuery("insert into TMP_ORDER(F0, F1, F2, F3) values('"
+                                                      + sessionId + "', '4','" + chkPayTypeList.Items[i].Value
+                                                      + "','" + chkPayTypeList.Items[i].Text + "')");
+            }
+        }
+       
 
         if (!context.hasError())
         {

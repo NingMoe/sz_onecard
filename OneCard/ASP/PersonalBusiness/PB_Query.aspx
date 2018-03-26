@@ -208,7 +208,6 @@
                     PagerStyle-HorizontalAlign="left"
                     PagerStyle-VerticalAlign="Top"
                     AutoGenerateColumns="true"
-                    OnRowDataBound="lvwQuery_RowDataBound"
                     EmptyDataText="没有数据记录!" >
     </asp:GridView>
  </div>       

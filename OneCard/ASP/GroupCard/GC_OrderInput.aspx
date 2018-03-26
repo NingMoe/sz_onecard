@@ -454,8 +454,18 @@
                                 <div align="right">
                                     联系地址:</div>
                             </td>
-                            <td colspan="3">
-                                <asp:TextBox ID="txtCustaddr" CssClass="inputlong" MaxLength="100" runat="server" Width="324"></asp:TextBox>
+                            <td >
+                                <asp:TextBox ID="txtCustaddr" CssClass="inputlong" MaxLength="100" runat="server" Width="200"></asp:TextBox>
+                            </td>
+                            <td>
+                                <div align="right">
+                                    身份证有效期:</div>
+                            </td>
+                            <td width="10%" style="white-space: nowrap">
+                                <asp:TextBox ID="txtPaperEndDate" CssClass="input" runat="server" MaxLength="8"></asp:TextBox>
+                                <span class="red" runat="server" id="Span1">*</span>
+                                <ajaxToolkit:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="txtPaperEndDate"
+                                    Format="yyyyMMdd" />
                             </td>
                         </tr>
                         <tr>
@@ -725,6 +735,11 @@
                                     <asp:TextBox ID="txtSZTCardChargeMoney" Style="text-align: center" runat="server"
                                         MaxLength="10" Text='<%# Bind("SZTCardChargeMoney") %>' onblur='SumSztCard();'></asp:TextBox>&nbsp;元&nbsp;
                                 </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="卡费是否开具增值税专票">
+                                <ItemTemplate>
+                                     <asp:CheckBox ID="chkTax" runat="server" Text="是"/>
+                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <ItemTemplate>
@@ -1003,6 +1018,21 @@
                                     <asp:ListItem Value="2">现金&nbsp;&nbsp;&nbsp;&nbsp;</asp:ListItem>
                                     <asp:ListItem Value="3">刷卡&nbsp;&nbsp;&nbsp;&nbsp;</asp:ListItem>
                                     <asp:ListItem Value="4">呈批单</asp:ListItem>
+                                </asp:CheckBoxList>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card">
+                    开票方式</div>
+                <div class="kuang5">
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:CheckBoxList ID="chkPrintType" runat="server" RepeatDirection="Horizontal">
+                                    <asp:ListItem Value="0">纸质开票</asp:ListItem>
+                                    <asp:ListItem Value="1">电子开票</asp:ListItem>
+                                   
                                 </asp:CheckBoxList>
                             </td>
                         </tr>

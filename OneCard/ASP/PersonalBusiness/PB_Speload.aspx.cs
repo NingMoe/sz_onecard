@@ -225,6 +225,8 @@ public partial class ASP_PersonalBusiness_PB_Speload : Master.FrontMaster
                 Custphone.Text = CommonHelper.GetCustPhone(Custphone.Text);
                 Custaddr.Text = CommonHelper.GetCustAddress(Custaddr.Text);
             }
+            
+            CommonHelper.readCardJiMingState(context, txtCardno.Text, hidIsJiMing);
 
             //查询特殊圈存信息
             lvwSpeloadQuery.DataSource = CreateSpeloadQueryDataSource();
@@ -276,6 +278,10 @@ public partial class ASP_PersonalBusiness_PB_Speload : Master.FrontMaster
             context.AddError("A001019103");
             return;
         }
+
+        CommonHelper.CheckMaxBalance(context, Convert.ToInt32(hiddencMoney.Value), Convert.ToInt32((Convert.ToDecimal(labSpeload.Text)) * 100), hidIsJiMing);
+
+        if (context.hasError()) return;
 
         //存储过程赋值
 

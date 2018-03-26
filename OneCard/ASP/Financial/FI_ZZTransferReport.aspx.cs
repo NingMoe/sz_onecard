@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TDO.BalanceChannel;
@@ -27,7 +28,7 @@ public partial class ASP_Financial_FI_ZZTransferReport : Master.ExportMaster
 
             gvResult.DataSource = new DataTable();
             gvResult.DataBind();
-            
+
         }
     }
 
@@ -151,6 +152,7 @@ public partial class ASP_Financial_FI_ZZTransferReport : Master.ExportMaster
         dt.Columns.Add("BANKCODE", typeof(string));//银行编码
         dt.Columns.Add("BALUNITNO", typeof(string));//结算单元编码
         dt.Columns.Add("BALUNITNAME", typeof(string));//结算单元名称
+        dt.Columns.Add("PURPOSETYPE", typeof(string));//收款人账户类型
         dt.Columns.Add("BANKACCNO", typeof(string));//银行账号
         dt.Columns.Add("TRANSFEE", typeof(string));//转账金额
         dt.Columns.Add("ENDTIME", typeof(string));//结算时间
@@ -158,6 +160,7 @@ public partial class ASP_Financial_FI_ZZTransferReport : Master.ExportMaster
         dt.Columns["BANKCODE"].MaxLength = 100;
         dt.Columns["BALUNITNO"].MaxLength = 100;
         dt.Columns["BALUNITNAME"].MaxLength = 100;
+        dt.Columns["PURPOSETYPE"].MaxLength = 100;
         dt.Columns["BANKACCNO"].MaxLength = 100;
         dt.Columns["TRANSFEE"].MaxLength = 100;
         dt.Columns["ENDTIME"].MaxLength = 100;
@@ -298,7 +301,20 @@ public partial class ASP_Financial_FI_ZZTransferReport : Master.ExportMaster
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            e.Row.Cells[4].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[4])) / 100.0).ToString();
+            e.Row.Cells[5].Text = (Convert.ToDouble(GetTableCellValue(e.Row.Cells[5])) / 100.0).ToString();
+
+            switch (e.Row.Cells[3].Text)
+            {
+                case "1":
+                    e.Row.Cells[3].Text = "对公";
+                    break;
+                case "2":
+                    e.Row.Cells[3].Text = "对私";
+                    break;
+                default:
+                    e.Row.Cells[3].Text = "账户类型异常";
+                    break;
+            }
         }
     }
 
@@ -314,7 +330,22 @@ public partial class ASP_Financial_FI_ZZTransferReport : Master.ExportMaster
             AddMessage("N005030001: 查询结果为空");
         }
 
-        UserCardHelper.resetData(gvResult, data);
+        //查询银行信息
+        TMTableModule tmTMTableModule = new TMTableModule();
+        TD_M_BANKTDO ddoTD_M_BANKIn = new TD_M_BANKTDO();
+        DataTable dataBank = tmTMTableModule.selByPKDataTable(context, ddoTD_M_BANKIn, null, "", null, 0);
+
+        for (int i = 0; i < data.Rows.Count; i++)
+        {
+            string bankNo = data.Rows[i][0].ToString();
+            DataRow[] dr = dataBank.Select("BANKCODE='" + bankNo.ToString() + "'");
+            if (dr.Length == 1)
+            {
+
+                data.Rows[i][0] = dr[0]["BANK"].ToString();
+            }
+        }
+            UserCardHelper.resetData(gvResult, data);
     }
 
 
@@ -328,6 +359,134 @@ public partial class ASP_Financial_FI_ZZTransferReport : Master.ExportMaster
         {
             context.AddMessage("查询结果为空，不能导出");
         }
+    }
+
+
+    protected void btnExportTransfer_Click(object sender, EventArgs e)
+    {
+        validate();
+        if (context.hasError()) return;
+
+        DataTable data = fillDataTable(HttpHelper.TradeType.ZZTransferQuery, DeclarePost());
+
+        if (data == null || data.Rows.Count == 0)
+        {
+            AddMessage("N005030001: 查询结果为空");
+        }
+        data.Columns.Add(new DataColumn("serialNumber", typeof(string)));
+        data.Columns.Add(new DataColumn("BANKNAME", typeof(string)));
+        data.Columns.Add(new DataColumn("BANKNUMBER", typeof(string)));
+        data.Columns.Add(new DataColumn("ISSZBANK", typeof(string)));
+        data.Columns.Add(new DataColumn("ISLOCAL", typeof(string)));
+        data.Columns.Add(new DataColumn("paymentMark", typeof(string)));
+
+        //查询银行信息
+        TMTableModule tmTMTableModule = new TMTableModule();
+        TD_M_BANKTDO ddoTD_M_BANKIn = new TD_M_BANKTDO();
+        DataTable dataBank = tmTMTableModule.selByPKDataTable(context, ddoTD_M_BANKIn, null, "", null, 0);
+
+        for (int i = 0; i < data.Rows.Count; i++)
+        {
+            //收款人账户类型
+            if (data.Rows[i][3].ToString() == "1")
+            {
+                data.Rows[i][3] = "0";
+            }
+            else if (data.Rows[i][3].ToString() == "2")
+            {
+                data.Rows[i][3] = "1";
+            }
+            else
+            {
+                data.Rows[i][3] = "";
+            }
+            //转账金额
+            data.Rows[i][5] = (Convert.ToDouble(data.Rows[i][5].ToString()) / 100.0).ToString();
+            //编号
+            data.Rows[i][7] = i + 1;
+            string bankNo = data.Rows[i][0].ToString();
+            DataRow[] dr = dataBank.Select("BANKCODE='" + bankNo.ToString() + "'");
+            if (dr.Length == 1)
+            {
+                //收款人开户行名称-收款人行号-收款人是否本行-收款人是否同城-付款用途
+                data.Rows[i][8] = dr[0]["BANK"].ToString();
+                data.Rows[i][9] = dr[0]["BANKNUMBER"].ToString();
+                data.Rows[i][10] = dr[0]["ISSZBANK"].ToString() == "1" ? "是" : "否";
+                data.Rows[i][11] = dr[0]["ISLOCAL"].ToString() == "1" ? "是" : "否";
+                data.Rows[i][12] = "";
+            }
+        }
+
+
+
+        data.Columns.Remove("ENDTIME");
+        data.Columns.Remove("BANKCODE");
+        data.Columns.Remove("BALUNITNO");
+        data.Columns["serialNumber"].SetOrdinal(0);
+        data.Columns["BANKACCNO"].SetOrdinal(1);
+        data.Columns["BALUNITNAME"].SetOrdinal(2);
+        data.Columns["BANKNAME"].SetOrdinal(3);
+        data.Columns["BANKNUMBER"].SetOrdinal(4);
+        data.Columns["PURPOSETYPE"].SetOrdinal(5);
+        data.Columns["TRANSFEE"].SetOrdinal(6);
+        data.Columns["ISSZBANK"].SetOrdinal(7);
+        data.Columns["ISLOCAL"].SetOrdinal(8);
+        data.Columns["paymentMark"].SetOrdinal(9);
+
+        ExportToExcel(data);
+    }
+
+
+    protected void ExportToExcel(DataTable dt)
+    {
+        string path = HttpContext.Current.Server.MapPath("../../") + "Tools\\网银转出模板.xls";
+
+        FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+
+        HSSFWorkbook workbook = new HSSFWorkbook(fs);
+
+        HSSFSheet sheet = (HSSFSheet)workbook.GetSheetAt(0);
+
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (sheet.GetRow(2 + i) == null)
+            {
+                sheet.CreateRow(2 + i);
+            }
+            for (int j = 0; j < dt.Columns.Count; j++)
+            {
+                if (sheet.GetRow(2 + i).GetCell(j) == null)
+                {
+                    sheet.GetRow(2 + i).CreateCell(j);
+                }
+
+                sheet.GetRow(2 + i).GetCell(j).SetCellValue(dt.Rows[i][j].ToString());
+            }
+        }
+
+        //增加“结束”行
+        sheet.CreateRow(2 + dt.Rows.Count);
+        sheet.GetRow(2 + dt.Rows.Count).CreateCell(0);
+
+        sheet.GetRow(2 + dt.Rows.Count).GetCell(0).SetCellValue("结束");
+
+        MemoryStream ms = new MemoryStream();
+        using (ms)
+        {
+            workbook.Write(ms);
+            byte[] data = ms.ToArray();
+            #region 客户端保存
+            HttpResponse response = System.Web.HttpContext.Current.Response;
+            response.Clear();
+            //Encoding pageEncode = Encoding.GetEncoding(PageEncode);
+            response.Charset = "UTF-8";
+            response.ContentType = "application/vnd-excel";//"application/vnd.ms-excel";
+            System.Web.HttpContext.Current.Response.AddHeader("Content-Disposition", string.Format("attachment; filename=batchTransfer.xls"));
+            System.Web.HttpContext.Current.Response.BinaryWrite(data);
+            #endregion
+        }
+
+        //excel.WriteToFile();
     }
     #endregion
 

@@ -114,6 +114,7 @@
                                     <asp:ListItem Text="休闲开卡" Value="9"></asp:ListItem>
                                     <asp:ListItem Text="省卡充值" Value="10"></asp:ListItem>
                                     <asp:ListItem Text="省卡售卡" Value="11"></asp:ListItem>
+                                    <asp:ListItem Text="省卡代理充值" Value="12"></asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td>

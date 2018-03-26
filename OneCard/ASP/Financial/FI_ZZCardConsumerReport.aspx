@@ -149,7 +149,7 @@
                                     <asp:BoundField DataField="psamno" HeaderText="PSAM编号" />
                                     <asp:BoundField DataField="tradedate" HeaderText="消费日期" />
                                     <asp:BoundField DataField="tradetime" HeaderText="消费时间" />
-                                    <asp:BoundField DataField="balunitname" HeaderText="结算单元" />
+                                    <asp:BoundField DataField="balunitname" HeaderText="结算单元名称" />
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
@@ -164,7 +164,7 @@
                                             </td>
                                             <td>消费时间
                                             </td>
-                                            <td>结算单元
+                                            <td>结算单元名称
                                             </td>
                                         </tr>
                                     </table>

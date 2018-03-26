@@ -243,7 +243,7 @@ public partial class ASP_PersonalBusiness_PB_PerBuyCardReg : Master.Master
         context.AddField("P_EMAIL").Value = txtEmail.Text.Trim();
         context.AddField("P_STARTCARDNO").Value = txtStartCardNo.Text.Trim();
         context.AddField("P_ENDCARDNO").Value = txtEndCardNo.Text.Trim();
-
+        context.AddField("P_PAPERENDDATE").Value = "";//身份证有效期
         if (txtBuyCardDate.Text.Trim() != "")
         {
             String[] arr = (txtBuyCardDate.Text.Trim()).Split('-');

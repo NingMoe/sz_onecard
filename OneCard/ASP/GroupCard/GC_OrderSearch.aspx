@@ -308,22 +308,28 @@
                                 <asp:BoundField HeaderText="付款方式" />
                                 <asp:BoundField DataField="financeapproverno" HeaderText="审批人" />
                                 <asp:BoundField DataField="financeapprovertime" HeaderText="审批时间" />
-                                 
+                                <asp:BoundField DataField="MANAGERNAME" HeaderText="客户经理" />
+                                 <asp:BoundField DataField="GETDEPARTMENT" HeaderText="领卡网点" />
+                                 <asp:BoundField DataField="CASHGIFTMONEY" HeaderText="利金卡" />
+                                 <asp:BoundField DataField="CHARGECARDMONEY" HeaderText="充值卡" />
+                                 <asp:BoundField DataField="CUSTOMERACCMONEY" HeaderText="专有账户" />
+                                 <asp:BoundField DataField="SZTCARDMONEY" HeaderText="市民卡B卡" />
+                                 <asp:BoundField DataField="updatetime" HeaderText="订单确认完成时间" />
                             </Columns>
                             <EmptyDataTemplate>
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
                                     <tr class="tabbt">
                                         <td>
-                                            订单号
+                                            订单号
                                         </td>
                                         <td>
                                             单位名称
                                         </td>
                                         <td>
-                                            联系人
+                                            联系人
                                         </td>
                                         <td>
-                                            身份证号码
+                                            身份证号码
                                         </td>
                                         <td>
                                             联系电话
@@ -332,22 +338,43 @@
                                             购卡总金额(元)
                                         </td>
                                         <td>
-                                            经办人
+                                            经办人
                                         </td>
                                         <td>
                                             录入时间
                                         </td>
                                         <td>
-                                            订单状态
+                                            订单状态
                                         </td>
                                         <td>
                                             付款方式
                                         </td>
                                         <td>
-                                            审批人
+                                            审批人
                                         </td>
                                         <td>
                                             审批时间
+                                        </td>
+                                        <td>
+                                            客户经理
+                                        </td>
+                                        <td>
+                                            领卡网点
+                                        </td>
+                                        <td>
+                                            利金卡
+                                        </td>
+                                        <td>
+                                            充值卡
+                                        </td>
+                                        <td>
+                                            专有账户
+                                        </td>
+                                        <td>
+                                            市民卡B卡
+                                        </td>
+                                        <td>
+                                            订单确认完成时间
                                         </td>
                                     </tr>
                                 </table>
@@ -367,7 +394,7 @@
                     <tr>
                     <td width = "8%"></td>
                         <td align="left"  style="color:red">  
-                                提示：订单未制卡！
+                                提示：订单未制卡！
                         </td>
                         </tr>
                     </table>
@@ -404,7 +431,7 @@
                     <tr>
                     <td width = "2%"></td>
                         <td align="left" width="8%" style="margin-left:10px;">  
-                                苏州通卡：
+                                苏州通卡：
                         </td>
                         <td width="30%">
                             <asp:Button ID="btnSZT" CssClass="button1" runat="server" Text="卡号段" OnClick="btnSZT_Click" />
@@ -418,7 +445,7 @@
                     <tr>
                     <td width = "2%"></td>
                         <td align="left" width="8%" style="margin-left:10px;">  
-                                充值卡：
+                                充值卡：
                         </td>
                         <td width="30%">
                             <asp:Button ID="btnCharge" CssClass="button1" runat="server" Text="卡号段" OnClick="btnCharge_Click" />
@@ -473,7 +500,7 @@
                     <tr>
                     <td width = "8%"></td>
                         <td align="left"  style="color:red">  
-                                提示：订单无到账信息！
+                                提示：订单无到账信息！
                         </td>
                         </tr>
                     </table>

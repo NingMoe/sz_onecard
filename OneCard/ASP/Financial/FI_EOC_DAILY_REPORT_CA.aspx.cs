@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Data;
+using System.IO;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using NPOI.HSSF.UserModel;
 using PDO.Financial;
 using Master;
 using Common;
@@ -187,7 +190,33 @@ public partial class ASP_FI_EOC_DAILY_REPORT_CA : Master.ExportMaster
     {
         if (gvResult.Rows.Count > 0)
         {
-            ExportToXML(gvResult, hidNo.Value + ".txt");
+            if (selTrans.SelectedValue == "6")//苏州银行转账表格用xls格式
+            {
+                SP_FI_QueryPDO pdo = new SP_FI_QueryPDO();
+                pdo.funcCode = "TD_EOC_DAILY_REPORT_CAFiApprovalBank";
+                pdo.var1 = txtFromDate.Text;
+                pdo.var2 = txtToDate.Text;
+                pdo.var3 = selTrans.SelectedValue;
+                StoreProScene storePro = new StoreProScene();
+
+                DataTable data = storePro.Execute(context, pdo);
+
+                if (data != null && data.Rows.Count != 0)
+                {
+                    ExportToExcel(data);
+                }
+
+                
+            }
+            else
+            {
+                ExportToXML(gvResult, hidNo.Value + ".txt");
+            }
+            
+        }
+        else
+        {
+            context.AddMessage("查询结果为空，不能导出");
         }
     }
 
@@ -371,5 +400,59 @@ public partial class ASP_FI_EOC_DAILY_REPORT_CA : Master.ExportMaster
         Response.Flush();
         Response.End();
     }
+    /// <summary>
+    /// 转账表格xls格式
+    /// </summary>
+    /// <param name="dt"></param>
+    protected void ExportToExcel(DataTable dt)
+    {
+        string path = HttpContext.Current.Server.MapPath("../../") + "Tools\\网银转出模板.xls";
 
+        FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+
+        HSSFWorkbook workbook = new HSSFWorkbook(fs);
+
+        HSSFSheet sheet = (HSSFSheet)workbook.GetSheetAt(0);
+
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (sheet.GetRow(2 + i) == null)
+            {
+                sheet.CreateRow(2 + i);
+            }
+            for (int j = 0; j < dt.Columns.Count; j++)
+            {
+                if (sheet.GetRow(2 + i).GetCell(j) == null)
+                {
+                    sheet.GetRow(2 + i).CreateCell(j);
+                }
+
+                sheet.GetRow(2 + i).GetCell(j).SetCellValue(dt.Rows[i][j].ToString());
+            }
+        }
+
+        //增加“结束”行
+        sheet.CreateRow(2 + dt.Rows.Count);
+        sheet.GetRow(2 + dt.Rows.Count).CreateCell(0);
+
+        sheet.GetRow(2 + dt.Rows.Count).GetCell(0).SetCellValue("结束");
+
+        MemoryStream ms = new MemoryStream();
+        using (ms)
+        {
+            workbook.Write(ms);
+            byte[] data = ms.ToArray();
+            #region 客户端保存
+            HttpResponse response = System.Web.HttpContext.Current.Response;
+            response.Clear();
+            //Encoding pageEncode = Encoding.GetEncoding(PageEncode);
+            response.Charset = "UTF-8";
+            response.ContentType = "application/vnd-excel";//"application/vnd.ms-excel";
+            System.Web.HttpContext.Current.Response.AddHeader("Content-Disposition", string.Format("attachment; filename=batchTransfer.xls"));
+            System.Web.HttpContext.Current.Response.BinaryWrite(data);
+            #endregion
+        }
+
+        //excel.WriteToFile();
+    }
 }

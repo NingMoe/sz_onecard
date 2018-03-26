@@ -203,6 +203,8 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
 
         //付款方式校验
         ValidPayType();
+        //开票方式校验
+        ValidPrintType();
         if (context.hasError())
         {
             return false;
@@ -296,6 +298,7 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
         {
             context.AddError("部门经理不能为空",selStaff);
         }
+        
         //对个人信息进行校验
         perBuyCardRegValid();
     }
@@ -353,7 +356,15 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
         if (txtOutacct.Text.Trim() != "")
             if (Validation.strLen(txtOutacct.Text.Trim()) > 30)
                 context.AddError("转出账户字符长度不能超过30位", txtOutacct);
-
+        //身份证有效期
+        if (string.IsNullOrEmpty(txtPaperEndDate.Text.Trim()))
+        {
+            context.AddError("A094781021:身份证有效期不能为空", txtPaperEndDate);
+        }
+        else if (!Validation.isDate(txtPaperEndDate.Text.Trim(), "yyyyMMdd"))
+        {
+            context.AddError("A094781022:身份证有效期格式不正确", txtPaperEndDate);
+        }
        
     }
     #region 验证各卡类型输入信息是否为空
@@ -911,6 +922,33 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
         }
         context.AddError("请选择付款方式", chkListPayType);
     }
+    /// <summary>
+    /// 校验开票方式 add by youyue20171113
+    /// </summary>
+    private void ValidPrintType()
+    {
+        int j = 0;
+        for (int i = 0; i < chkPrintType.Items.Count; i++)
+        {
+            if (chkPrintType.Items[i].Selected)
+            {
+                j = j + 1;
+               
+            }
+        }
+        if(j<1)
+        {
+            context.AddError("请选择开票方式", chkPrintType);
+
+        }
+        else if (j > 1)
+        {
+            context.AddError("开票方式只能二选一", chkPrintType);
+
+        }
+
+
+    }
 
     #endregion
     // 页面装载
@@ -983,15 +1021,18 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
             DataColumn col2 = new DataColumn("SZTCardNum");
             DataColumn col3 = new DataColumn("SZTCardPrice");
             DataColumn col4 = new DataColumn("SZTCardChargeMoney");
+            DataColumn col5 = new DataColumn("SZTTax");
             SZTCardTable.Columns.Add(col1);
             SZTCardTable.Columns.Add(col2);
             SZTCardTable.Columns.Add(col3);
             SZTCardTable.Columns.Add(col4);
+            SZTCardTable.Columns.Add(col5);
             DataRow row = SZTCardTable.NewRow();
             row["SZTCardType"] = null;
             row["SZTCardNum"] = null;
             row["SZTCardPrice"] = null;
             row["SZTCardChargeMoney"] = null;
+            row["SZTTax"] = null;
             SZTCardTable.Rows.Add(row);
             gvSZTCard.DataSource = SZTCardTable;
             gvSZTCard.DataBind();
@@ -1101,9 +1142,9 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
         selDept.SelectedValue = context.s_DepartID;
         //初始化客户经理
         InitStaffList(selStaff, context.s_DepartID);
-        selStaff.SelectedValue = context.s_UserID;//客户经理默认为当前操作员工
-       
-       
+        selStaff.SelectedValue = context.s_UserID;//客户经理默认为当前操作员工
+
+
     }
     /// <summary>
     /// 点击修改按钮事件
@@ -1203,7 +1244,7 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
 
         //数据插入临时表
         //DONE: 修改旅游卡相关
-        OrderHelper.WriteInfoIntoTempTable(context, gvCashGift, gvChargeCard, gvSZTCard, gvLvYou, gvInvoice, chkListPayType, Session.SessionID);
+        OrderHelper.WriteInfoIntoTempTable(context, gvCashGift, gvChargeCard, gvSZTCard, gvLvYou, gvInvoice, chkListPayType, chkPrintType,Session.SessionID);
 
         context.SPOpen();
         if ((!string.IsNullOrEmpty(labOrderState.Text)) && labOrderState.Text.Substring(0, 2) == "00" && btnStockIn.Text == "修改") //如果是修改中状态
@@ -1273,6 +1314,7 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
         context.AddField("P_ORDERDATE").Value = DateTime.Now.ToString("yyyyMMdd");
         context.AddField("P_ORDERSEQ").Value = "";
         context.AddField("P_OUTORDERNO", "String", "output", "16", null);
+        context.AddField("P_PAPERENDDATE").Value = txtPaperEndDate.Text.Trim();
         bool ok = context.ExecuteSP("SP_GC_ORDERINPUTSUBMIT");
         if (ok)
         {
@@ -1740,9 +1782,23 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
         row["SZTCardNum"] = null;
         row["SZTCardPrice"] = null;
         row["SZTCardChargeMoney"] = null;
+        row["SZTTax"] = null;
         SZTCardTable.Rows.Add(row);
         gvSZTCard.DataSource = SZTCardTable;
         gvSZTCard.DataBind();
+        //绑定是否开具专有发票选项
+        for (int i = 0; i < gvSZTCard.Rows.Count; i++)
+        {
+            CheckBox txtTax = (CheckBox)gvSZTCard.Rows[i].FindControl("chkTax");
+            if (SZTCardTable.Rows[i]["SZTTax"].ToString() == "0" ||SZTCardTable.Rows[i]["SZTTax"].ToString() =="")
+            {
+                txtTax.Checked = false;
+            }
+            else
+            {
+                txtTax.Checked = true;
+            }
+        }
 
         ////计算总金额 重新显示
         ShowTotalMoney();
@@ -1760,6 +1816,8 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
             SZTCardTable.Rows[i]["SZTCardPrice"] = txtCardPrice.Text;
             TextBox txtChargeMoney = (TextBox)gvSZTCard.Rows[i].FindControl("txtSZTCardChargeMoney");
             SZTCardTable.Rows[i]["SZTCardChargeMoney"] = txtChargeMoney.Text;
+            CheckBox txtTax = (CheckBox)gvSZTCard.Rows[i].FindControl("chkTax");
+            SZTCardTable.Rows[i]["SZTTax"] = (txtTax.Checked==false)?"0":"1";
         }
     }
 
@@ -1777,6 +1835,19 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
     {
         gvSZTCard.DataSource = SZTCardTable;
         gvSZTCard.DataBind();
+        //绑定是否开具专有发票选项
+        for (int i = 0; i < gvSZTCard.Rows.Count; i++)
+        {
+            CheckBox txtTax = (CheckBox)gvSZTCard.Rows[i].FindControl("chkTax");
+            if (SZTCardTable.Rows[i]["SZTTax"].ToString() == "0" || SZTCardTable.Rows[i]["SZTTax"].ToString() == "")
+            {
+                txtTax.Checked = false;
+            }
+            else
+            {
+                txtTax.Checked = true;
+            }
+        }
         ShowTotalMoney();
     }
     /// <summary>
@@ -2147,7 +2218,7 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
             {
                 selPapertype.Enabled = true;
                 txtIDCardNo.Enabled = true;
-                queryCustInfo = @"Select a.COMPANYPAPERTYPE,a.COMPANYPAPERNO,a.PAPERTYPE,a.ADDRESS,a.EMAIL,b.OUTBANK,b.OUTACCT,a.COMPANYMANAGERNO,a.COMPANYENDTIME,a.COMPANYNO,nvl2(a.COMPANYPAPERMSG,'1','0') COMPANYPAPERMSG,nvl2(a.MANAGERMSG,'1','0') MANAGERMSG,a.securityvalue/100.0  securityvalue
+                queryCustInfo = @"Select a.COMPANYPAPERTYPE,a.COMPANYPAPERNO,a.PAPERTYPE,a.ADDRESS,a.EMAIL,b.OUTBANK,b.OUTACCT,a.COMPANYMANAGERNO,a.COMPANYENDTIME,a.COMPANYNO,nvl2(a.COMPANYPAPERMSG,'1','0') COMPANYPAPERMSG,nvl2(a.MANAGERMSG,'1','0') MANAGERMSG,a.securityvalue/100.0  securityvalue,a.PAPERENDDATE
                               From TD_M_BUYCARDCOMINFO a,TF_F_COMBUYCARDREG b
                               Where a.COMPANYNO=b.COMPANYNO And b.REMARK = '" + selOrderNo.SelectedValue + "'";
 
@@ -2171,6 +2242,7 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
                     }
                     txtCustaddr.Text = queryCustInfodata.Rows[0]["ADDRESS"].ToString();
                     txtEmail.Text = queryCustInfodata.Rows[0]["EMAIL"].ToString();
+                    txtPaperEndDate.Text = queryCustInfodata.Rows[0]["PAPERENDDATE"].ToString();//身份证有效期
                     txtOutbank.Text = queryCustInfodata.Rows[0]["OUTBANK"].ToString();
                     txtOutacct.Text = queryCustInfodata.Rows[0]["OUTACCT"].ToString();
                     txtSecurityValue.Text = queryCustInfodata.Rows[0]["securityvalue"].ToString();//显示安全值
@@ -2229,7 +2301,7 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
                 txtCustbirth.Enabled = true;
                 selPapertype.Enabled = false;//不允许修改经办人证件类型
                 txtIDCardNo.Enabled = false;//不允许修改经办人证件号码
-                queryCustInfo = @"Select a.PAPERTYPE,a.BIRTHDAY,a.SEX,a.PHONENO,a.ADDRESS, a.EMAIL,a.securityvalue/100.0 securityvalue,nvl2(a.MANAGERMSG,'1','0') MANAGERMSG
+                queryCustInfo = @"Select a.PAPERTYPE,a.BIRTHDAY,a.SEX,a.PHONENO,a.ADDRESS, a.EMAIL,a.securityvalue/100.0 securityvalue,nvl2(a.MANAGERMSG,'1','0') MANAGERMSG,a.PAPERENDDATE
                                   From TD_M_BUYCARDPERINFO a,tf_f_perbuycardreg b
                                   Where a.PAPERTYPE = b.PAPERTYPE
                                   And a.PAPERNO = b.PAPERNO
@@ -2245,7 +2317,7 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
                     txtCustaddr.Text = queryCustInfodata.Rows[0]["ADDRESS"].ToString();
                     txtEmail.Text = queryCustInfodata.Rows[0]["EMAIL"].ToString();
                     txtSecurityValue.Text = queryCustInfodata.Rows[0]["securityvalue"].ToString();//显示安全值
-
+                    txtPaperEndDate.Text = queryCustInfodata.Rows[0]["PAPERENDDATE"].ToString();//身份证有效期
                     tdFileUpload2.Attributes.Add("colspan", "2");
                     //个人订单存在经办人信息图片
                     if (queryCustInfodata.Rows[0]["MANAGERMSG"].ToString() == "1")
@@ -2358,10 +2430,24 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
                 dr["SZTCardNum"] = data.Rows[i]["COUNT"].ToString();
                 dr["SZTCardPrice"] = (Convert.ToInt32(data.Rows[i]["UNITPRICE"].ToString()) / 100.0).ToString();
                 dr["SZTCardChargeMoney"] = (Convert.ToInt32(data.Rows[i]["TOTALCHARGEMONEY"].ToString()) / 100.0).ToString();
+                dr["SZTTax"] = data.Rows[i]["ISTAX"].ToString();
                 SZTCardTable.Rows.Add(dr);
+                
             }
             gvSZTCard.DataSource = SZTCardTable;
             gvSZTCard.DataBind();
+            for (int i = 0; i < gvSZTCard.Rows.Count; i++)
+            {
+                CheckBox txtTax = (CheckBox)gvSZTCard.Rows[i].FindControl("chkTax");
+                if (data.Rows[i]["ISTAX"].ToString() == "0")
+                {
+                    txtTax.Checked = false;
+                }
+                else
+                {
+                    txtTax.Checked = true;
+                }
+            }
         }
 
         //获取旅游卡信息
@@ -2431,9 +2517,24 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
                 chkListPayType.Items[Convert.ToInt32(data.Rows[i]["PAYTYPECODE"])].Selected = true;
             }
         }
+        //获取开票方式
+        data = GroupCardHelper.callOrderQuery(context, "InvoiceTypeOrderInfo", selOrderNo.SelectedValue);
+        if (data != null && data.Rows.Count > 0)
+        {
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                chkPrintType.Items[Convert.ToInt32(data.Rows[i]["INVOICETYPECODE"])].Selected = true;
+            }
+        }
+        else
+        {
+            chkPrintType.Items[0].Selected = false;
+            chkPrintType.Items[1].Selected = false;
+        }
         ShowTotalMoney();
         //ViewState["orderno"] = GetOrderNo();
         //lblOrderNo.Text = ViewState["orderno"].ToString();
+     
     }
     /// <summary>
     /// 清除信息
@@ -2566,6 +2667,7 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
                 txtName.Text = data.Rows[0]["NAME"].ToString();
                 txtPhone.Text = data.Rows[0]["PHONE"].ToString();
                 txtIDCardNo.Text = data.Rows[0]["IDCARDNO"].ToString();
+                txtPaperEndDate.Text = data.Rows[0]["PAPERENDDATE"].ToString();
                 try
                 {
                     selPapertype.SelectedValue = data.Rows[0]["PAPERTYPE"].ToString();
@@ -2735,7 +2837,6 @@ public partial class ASP_GroupCard_SZ_OrderInput : Master.Master
         tdShowPicture.Visible = false;
         tdMsg.Visible = false;
         tdFileUpload.Attributes.Add("colspan", "3");
-       
     }
     #endregion
     private void InitStaffList(DropDownList selStaffno, string deptNo)

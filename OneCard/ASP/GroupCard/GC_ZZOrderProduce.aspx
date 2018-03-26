@@ -191,6 +191,7 @@
                     <asp:HiddenField ID="hidcustEmail" runat="server" />
                     <asp:HiddenField runat="server" ID="hidCardnoForCheck" />
                     <asp:HiddenField runat="server" ID="hidSupplyMoney" />
+                    <asp:HiddenField ID="hidIsJiMing" runat="server" />
                     <asp:HiddenField runat="server" ID="hiddenSupply" />
                     <asp:HiddenField ID="hidLockBlackCardFlag" runat="server" />
                     <asp:HiddenField ID="hidWarning" runat="server" />

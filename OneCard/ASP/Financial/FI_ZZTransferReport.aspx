@@ -122,6 +122,7 @@
                         </td>
                         <td align="right">
                             <asp:Button ID="btnExport" CssClass="button1" runat="server" Text="导出Excel" OnClick="btnExport_Click" />
+                            <asp:Button ID="btnExportTransfer" CssClass="button1" runat="server" Text="导出转账表格" OnClick="btnExportTransfer_Click" />
                             <asp:Button ID="btnPrint" CssClass="button1" runat="server" Text="打印" OnClientClick="return printGridView('printarea');" />
                         </td>
                     </tr>
@@ -140,10 +141,11 @@
                             PagerSettings-Mode="NumericFirstLast" PagerStyle-HorizontalAlign="left" PagerStyle-VerticalAlign="Top"
                             AutoGenerateColumns="false" OnRowDataBound="gvResult_RowDataBound" ShowFooter="false">
                             <Columns>
-                                <asp:BoundField DataField="BANKCODE" HeaderText="银行编码" />
+                                <asp:BoundField DataField="BANKCODE" HeaderText="转账银行" />
                                 <asp:BoundField DataField="BALUNITNO" HeaderText="结算单元编码" />
                                 <asp:BoundField DataField="BALUNITNAME" HeaderText="结算单元名称" />
-                                <asp:BoundField DataField="BANKACCNO" HeaderText="银行账号" />
+                                <asp:BoundField DataField="PURPOSETYPE" HeaderText="收款人账户类型" />
+                                <asp:BoundField DataField="BANKACCNO" HeaderText="收款账号" />
                                 <asp:BoundField DataField="TRANSFEE" HeaderText="转账金额" />
                                 <asp:BoundField DataField="ENDTIME" HeaderText="结算时间" />
                             </Columns>
@@ -160,7 +162,10 @@
                                             结算单元名称
                                         </td>
                                         <td>
-                                            银行账号
+                                            收款人账户类型
+                                        </td>
+                                        <td>
+                                            收款账号
                                         </td>
                                         <td>
                                             转账金额
@@ -178,6 +183,7 @@
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="btnExport" />
+            <asp:PostBackTrigger ControlID="btnExportTransfer" />
         </Triggers>
     </asp:UpdatePanel>
     </form>

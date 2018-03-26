@@ -580,4 +580,17 @@ public class UserCardHelper
 
         
     }
+
+
+    public static void selectCardTax(CmnContext context, DropDownList ddl, bool empty)
+    {
+        if (empty)
+            ddl.Items.Add(new ListItem("---请选择---", ""));
+
+        select(context, ddl, "TD_M_CARDTAX");
+        if (!empty && ddl.Items.Count == 0)
+        {
+            context.AddError("S002P01I02: 初始化卡片税率列表失败");
+        }
+    }
 }

@@ -22,30 +22,23 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
         if (Page.IsPostBack) return;
 
         //初始化审核状态
-
         OrderHelper.selOrderState(context, selApprovalStatus, true);
         //初始化部门
-
         TMTableModule tmTMTableModule = new TMTableModule();
         TD_M_INSIDEDEPARTTDO tdoTD_M_INSIDEDEPARTIn = new TD_M_INSIDEDEPARTTDO();
         TD_M_INSIDEDEPARTTDO[] tdoTD_M_INSIDEDEPARTOutArr = (TD_M_INSIDEDEPARTTDO[])tmTMTableModule.selByPKArr(context, tdoTD_M_INSIDEDEPARTIn, typeof(TD_M_INSIDEDEPARTTDO), null, " WHERE USETAG = '1' ORDER BY DEPARTNO");
         ControlDeal.SelectBoxFill(selDept.Items, tdoTD_M_INSIDEDEPARTOutArr, "DEPARTNAME", "DEPARTNO", true);
         selDept.SelectedValue = context.s_DepartID;
         ControlDeal.SelectBoxFill(selManagerDept.Items, tdoTD_M_INSIDEDEPARTOutArr, "DEPARTNAME", "DEPARTNO", true);//初始化客户经理部门
-
         selManagerDept.SelectedValue = context.s_DepartID;
         InitStaffList(selStaff,context.s_DepartID);//初始化录入员工
-
         selStaff.SelectedValue = context.s_UserID;
         InitStaffList(selManager, context.s_DepartID);//初始化客户经理
-
         selManager.SelectedValue = context.s_UserID;
         gvOrderList.DataKeyNames = new string[] { "ORDERNO", "GROUPNAME", "NAME", "PHONE", "IDCARDNO", "TOTALMONEY","cashgiftmoney",
             "TRANSACTOR", "INPUTTIME","REMARK","financeremark","financeapproverno","getdepartment","getdate","ORDERSTATE","CHARGECARDMONEY","SZTCARDMONEY","CUSTOMERACCMONEY","CUSTOMERACCHASMONEY","readermoney","ISRELATED" };
         InitStaffList(ddlApprover, "0001");//初始化审核员工
-
         //初始化日期
-
         DateTime date = new DateTime();
         date = DateTime.Today;
         txtFromDate.Text = date.AddMonths(-1).ToString("yyyyMMdd");
@@ -53,13 +46,11 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
         if (HasOperPower("201012")) //如果是部门主管，add by shil,20120604
         {
             //可以查看本部门员工
-
             selStaff.Enabled = true;
         }
         if (HasOperPower("201013")) //如果是公司主管，add by shil,20120604
         {
             //可以查看所有记录
-
             selStaff.Enabled = true;
             selDept.Enabled = true;
         }
@@ -71,13 +62,11 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
         divAll.Visible = false;
         divGridView.Visible = false;
         ControlDeal.SelectBoxFill(selMakeDept.Items, tdoTD_M_INSIDEDEPARTOutArr, "DEPARTNAME", "DEPARTNO", true);//初始化制卡部门
-
         InitStaffList(selMakeOperator,"");//初始化制卡员工
-
         divCheckInfo.Visible = false;//隐藏到账信息
         divCheckInfoWarm.Visible = false;
     }
-
+    //权限
     private bool HasOperPower(string powerCode)
     {
         TMTableModule tmTMTableModule = new TMTableModule();
@@ -91,7 +80,7 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
             return false;
     }
     
-
+    //初始化员工选项
     private void InitStaffList(DropDownList ddl,string deptNo)
     {
         if (deptNo == "")
@@ -124,22 +113,23 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
     }
     /// <summary>
     /// 初始化列表
-
     /// </summary>
     private void ShowNonDataGridView()
     {
         gvOrderList.DataSource = new DataTable();
         gvOrderList.DataBind();
     }
+    //录入部门
     protected void selDept_Changed(object sender, EventArgs e)
     {
         InitStaffList(selStaff,selDept.SelectedValue);
     }
+    //制卡部门
     protected void selMakeDept_Changed(object sender, EventArgs e)
     {
         InitStaffList(selMakeOperator, selMakeDept.SelectedValue);
     }
-
+    //客户经理
     protected void managerDept_Changed(object sender, EventArgs e)
     {
         InitStaffList(selManager,selManagerDept.SelectedValue);
@@ -150,6 +140,7 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
         return gvOrderList.DataKeys[selectindex][keysname].ToString();
     }
 
+    //查询
     protected void btnQuery_Click(object sender, EventArgs e)
     {
         divDetail.Visible = false;
@@ -164,7 +155,6 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
         string groupName = ""; //单位名称
         groupName = txtGroupName.Text.Trim();
         string name = txtName.Text.Trim();//联系人
-
         string staff = "";
         if (selStaff.SelectedIndex > 0)
         {
@@ -181,7 +171,6 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
             mstaff = selManager.SelectedValue;
         }
         string mdept = "";//客户经理所属部门
-
         if(selManagerDept.SelectedIndex>0)
         {
             mdept = selManagerDept.SelectedValue;
@@ -256,7 +245,6 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
             }
         }
         //校验联系人长度
-
         if (!string.IsNullOrEmpty(txtName.Text.Trim()))
         {
             if (txtName.Text.Trim().Length > 50)
@@ -277,13 +265,11 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
             }
         }
         //对开始日期和结束日期的判断
-
         UserCardHelper.validateDateRange(context, txtFromDate, txtToDate, false);
         return !(context.hasError());
     }
     /// <summary>
     /// 查询公司名
-
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -303,23 +289,22 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
     //    txtGroupName.Text = selCompany.SelectedItem.ToString();
     //}
 
+    //注册行单击事件
     protected void gvOrderList_RowCreated(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             //注册行单击事件
-
             e.Row.Attributes.Add("onclick", "javascirpt:__doPostBack('gvOrderList','Select$" + e.Row.RowIndex + "')");
         }
     }
-   
+    //GRIDVIEW行绑定事件
     protected void gvOrderList_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             
             //选择员工GRIDVIEW中的一行记录
-
             string orderno = gvOrderList.DataKeys[e.Row.RowIndex]["ORDERNO"].ToString();
             ViewState["orderno"] = orderno;
             Button btnPrint = (Button)e.Row.FindControl("btnPrint");
@@ -342,9 +327,14 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
             }
            
             e.Row.Cells[10].Text = payType;
-            
+            if( e.Row.Cells[14].Text ==":")
+            {
+                e.Row.Cells[14].Text = "";
+            }
+
         }     
     }
+    //支付方式
     private string Paytype(string paytypecode)
     {
         string paytype = "";
@@ -401,7 +391,6 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
         string isrelated = getDataKeys2("ISRELATED", index);
         string orderstate = getDataKeys2("ORDERSTATE", index).Substring(0,2);
         if (isrelated.Equals("1"))//制卡关联时
-
         {
             if (orderstate == "04" || orderstate == "05" || orderstate == "06" || orderstate == "07" || orderstate == "08" )
             {
@@ -411,7 +400,6 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
             {
                 divAll.Visible = false;
                 divMakeCardWarn.Visible = true;//显示订单未制卡提示信息
-
                 divMakeCardWarn2.Visible = false;
             }
         }
@@ -425,7 +413,6 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
             { 
                 divAll.Visible = false;
                 divMakeCardWarn2.Visible = true;//显示订单未完成领卡关联提示信息
-
             }
         }
         
@@ -620,7 +607,6 @@ public partial class ASP_GroupCard_GC_OrderSearch : Master.ExportMaster
     }
     /// <summary>
     /// 显示充值卡卡号段
-
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>

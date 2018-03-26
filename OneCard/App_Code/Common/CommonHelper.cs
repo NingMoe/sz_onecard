@@ -45,25 +45,55 @@ public class CommonHelper
 
         //从持卡人资料表(TF_F_CUSTOMERREC)中读取数据
 
+        //去掉持卡人资料的判断，2018-02-28 小额需求变更单_20180118-001修改.doc
+        //TF_F_CUSTOMERRECTDO ddoTF_F_CUSTOMERRECIn = new TF_F_CUSTOMERRECTDO();
+        //ddoTF_F_CUSTOMERRECIn.CARDNO = cardNo;
 
-        TF_F_CUSTOMERRECTDO ddoTF_F_CUSTOMERRECIn = new TF_F_CUSTOMERRECTDO();
-        ddoTF_F_CUSTOMERRECIn.CARDNO = cardNo;
+        //DDOBase ddoBase = (DDOBase)tmTMTableModule.selByPK(context, ddoTF_F_CUSTOMERRECIn, typeof(TF_F_CUSTOMERRECTDO), null);
 
-        DDOBase ddoBase = (DDOBase)tmTMTableModule.selByPK(context, ddoTF_F_CUSTOMERRECIn, typeof(TF_F_CUSTOMERRECTDO), null);
-
-        //UPDATE BY JIANGBB 2012-04-19解密
-        ddoBase = CommonHelper.AESDeEncrypt(ddoBase);
-        TF_F_CUSTOMERRECTDO ddoTF_F_CUSTOMERRECOut = (TF_F_CUSTOMERRECTDO)ddoBase;
-        //TF_F_CUSTOMERRECTDO ddoTF_F_CUSTOMERRECOut = (TF_F_CUSTOMERRECTDO)tmTMTableModule.selByPK(context, ddoTF_F_CUSTOMERRECIn, typeof(TF_F_CUSTOMERRECTDO), null);
-        if (!string.IsNullOrEmpty(ddoTF_F_CUSTOMERRECOut.CUSTNAME) && !string.IsNullOrEmpty(ddoTF_F_CUSTOMERRECOut.PAPERNO))
-        {
-            hidIsJiMing.Value = "1";
-            return;
-        }
+        ////UPDATE BY JIANGBB 2012-04-19解密
+        //ddoBase = CommonHelper.AESDeEncrypt(ddoBase);
+        //TF_F_CUSTOMERRECTDO ddoTF_F_CUSTOMERRECOut = (TF_F_CUSTOMERRECTDO)ddoBase;
+        ////TF_F_CUSTOMERRECTDO ddoTF_F_CUSTOMERRECOut = (TF_F_CUSTOMERRECTDO)tmTMTableModule.selByPK(context, ddoTF_F_CUSTOMERRECIn, typeof(TF_F_CUSTOMERRECTDO), null);
+        //if (!string.IsNullOrEmpty(ddoTF_F_CUSTOMERRECOut.CUSTNAME) && !string.IsNullOrEmpty(ddoTF_F_CUSTOMERRECOut.PAPERNO))
+        //{
+        //    hidIsJiMing.Value = "1";
+        //    return;
+        //}
         hidIsJiMing.Value = "0";
     }
 
-    //是否网点负责人
+    /// <summary>
+    /// 验证余额是否超过上限
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="cardMoney">卡片余额</param>
+    /// <param name="chargeMoney">充值金额</param>
+    /// <param name="hidIsJiMing">是否记名标识 1记名 0不记名</param>
+    /// <returns></returns>
+    public static bool CheckMaxBalance(CmnContext context,Int32 cardMoney, Int32 chargeMoney, HiddenField hidIsJiMing)
+    {
+        if (hidIsJiMing.Value == "1")
+        {
+            if (cardMoney + chargeMoney > 500000)
+            {
+                context.AddError("苏州通卡余额上限5千元，此次充值不能完成，请您消费后再充值");
+                return false;
+            }
+        }
+        else
+        {
+            if (cardMoney + chargeMoney > 100000)
+            {
+                context.AddError("苏州通卡余额上限1千元，此次充值不能完成，请您消费后再充值");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //是否网点负责人
+
 
 
 

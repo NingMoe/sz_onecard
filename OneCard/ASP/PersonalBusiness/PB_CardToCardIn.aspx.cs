@@ -316,7 +316,13 @@ public partial class ASP_PersonalBusiness_PB_CardToCardIn : Master.Master
         {
             return;
         }
+        //圈存提交时增加判断条件，原卡余额+本次圈存金额 <= 5000元。如超过5000元则提示：超过5000元限额无法圈存 add by youyue20171023
+        if (Convert.ToDouble(cMoney.Text.ToString()) + Convert.ToDouble(SupplyFee.Text.ToString()) > 5000)
+        {
+            context.AddError("A001019113:超过5000元限额无法圈存");
+            return;
 
+        }
         //调用圈存存储过程
         SP_PB_CardToCardInPDO pdo = new SP_PB_CardToCardInPDO();
         if (hidisReadDBCard.Value.Equals("1"))

@@ -53,6 +53,8 @@ public class ASHelper
         lst.Items.Add(new ListItem("07:献血卡", "07"));
         //20170904增加优抚卡
         lst.Items.Add(new ListItem("08:优抚卡", "08"));
+        //20171206增加公交职工卡
+        lst.Items.Add(new ListItem("09:公交职工卡", "09"));
     }
 
     public static void initSexList(DropDownList lst)
@@ -115,7 +117,7 @@ public class ASHelper
     // 读取亲子卡可用次数
     public static String readAffectParkTimes(CmnContext context)
     {
-        // 从全局参数表中读取休闲年卡的次数设置
+        // 从全局参数表中读取休闲年卡的次数设置
 
         DataTable data = ASHelper.callQuery(context, "AffectParkNum");
         if (data.Rows.Count == 0)
