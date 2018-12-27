@@ -1,1 +1,0 @@
-select * from order_prepay_to_mp_fail where order_no = '251170531010422150S';

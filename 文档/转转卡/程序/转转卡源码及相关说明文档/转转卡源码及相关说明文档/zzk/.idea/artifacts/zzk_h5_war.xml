@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="zzk-h5:war">
-    <output-path>$PROJECT_DIR$/zzk-h5/target</output-path>
-    <root id="archive" name="zzk-h5.war">
-      <element id="artifact" artifact-name="zzk-h5:war exploded" />
-    </root>
-  </artifact>
-</component>

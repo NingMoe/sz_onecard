@@ -1,1 +1,0 @@
-select * from user_card_no where card_no = 'A42708130';
