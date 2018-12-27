@@ -1,1 +1,0 @@
-select * from order_card_topup_transaction where created_by = '请求小额MAC2' and topup_status = 4 and created > '2017-06-26';
